@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap');
+
+@import "./sweetalert.css";
+
+@import "./button.css";
+
+@import "./mantine-datatable.css";
+
+@import "./animate.css";
+
+body {
+  font-family: 'Nunito', sans-serif;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer components {
+  .toggle-sidebar .navbarside {
+    left: -260px !important;
+  }
+
+  .vertical .sidebar {
+    left: 0;
+  }
+
+  .main-content {
+    @apply bg-[#060818]
+  }
+
+  input.form-input-custom,
+  input.form-textarea-custom,
+  input.form-select-custom,
+  input.form-multiselect-custom {
+    @apply w-full rounded-md border border-gray-400 bg-white px-4 py-2 text-sm font-semibold text-black !outline-none focus:border-primary focus:ring-transparent dark:border-[#17263c] dark:bg-[#121e32] dark:text-white-dark dark:focus:border-primary;
+  }
+
+  .has-error input.form-input-custom,
+  .has-error input.form-textarea-custom,
+  .has-error input.form-select-custom,
+  .has-error input.form-multiselect-custom,
+  .has-error input.multiselect__tags {
+    @apply border-danger bg-danger/[0.08] text-danger placeholder-danger/70 focus:border-danger;
+  }
+
+  .has-success input.form-input-custom,
+  .has-success input.form-textarea-custom,
+  .has-success input.form-select-custom,
+  .has-success input.form-multiselect-custom,
+  .has-success input.multiselect__tags {
+    @apply border-success bg-success/[0.08] text-success placeholder-success/70 focus:border-success;
+  }
+
+  .form-input-lg,
+  .form-textarea-lg,
+  .form-select-lg,
+  .form-multiselect-lg {
+    @apply py-2.5 text-base;
+  }
+
+  .form-input-sm,
+  .form-textarea-sm,
+  .form-select-sm,
+  .form-multiselect-sm {
+    @apply py-1.5 text-xs;
+  }
+
+  input.form-radio,
+  input.form-checkbox {
+    @apply mr-2 h-5 w-5 cursor-pointer rounded border-2 border-[#e0e6ed] bg-transparent text-primary-dark !shadow-none !outline-none !ring-0 !ring-offset-0 aria-checked:text-primary-dark disabled:cursor-not-allowed disabled:bg-[#eee] dark:border-[#253b5c] dark:checked:border-transparent dark:disabled:bg-[#1b2e4b];
+  }
+
+  input.form-radio {
+    @apply rounded-full;
+  }
+
+  .sidebar .nav-item>a {
+    @apply mb-1 flex w-full items-center justify-between overflow-hidden whitespace-nowrap rounded-md p-2.5 text-[#506690] text-white dark:text-[#506690] hover:bg-[#000]/[0.08] hover:text-white;
+  }
+
+  .panel {
+    @apply relative rounded-md p-5 shadow-custom dark:shadow-[#060818] bg-black;
+  }
+
+  .navbar-sticky header {
+    @apply sticky top-0 z-20
+  }
+
+  label {
+    @apply mb-1.5 block font-semibold;
+  }
+
+  .leftbar {
+    @apply bg-black;
+    padding: 25px;
+    width: 245px;
+    top: 72px;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 6;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-right: 1px solid #323b45;
+    transition: width .5s ease;
+    scrollbar-width: none;
+  }
+
+  .page-container {
+    left: 245px;
+    right: 0px;
+    bottom: 0;
+    top: 72px;
+    position: absolute;
+    text-align: center;
+    margin-right: 0;
+    transition: all .5s ease;
+  }
+
+  .scrollable {
+    overflow-y: auto !important;
+  }
+
+  
+}

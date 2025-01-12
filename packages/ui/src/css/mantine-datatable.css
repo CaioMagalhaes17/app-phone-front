@@ -1,0 +1,40 @@
+table > thead > tr > th,
+table > tbody > tr > td {
+    @apply !py-3 !px-4 text-sm;
+}
+
+.datatables table tbody tr {
+    @apply bg-white dark:!border-[#191e3a] dark:bg-black;
+}
+
+
+.datatables table tbody tr td {
+    @apply !border-0 !border-none;
+}
+
+.datatables table thead tr th {
+    @apply !border-b-0 !bg-primary  text-dark dark:!bg-[#1a2941] dark:!text-white-dark;
+}
+
+.datatables .table-bordered table thead tr th,
+.datatables .table-bordered table tbody tr td {
+    @apply !border !border-solid !border-[#f6f7fa] dark:!border-[#191e3a];
+}
+
+.datatables .table-compact table thead tr th,
+.datatables .table-compact table tbody tr td {
+    @apply !py-2 !px-3;
+}
+/* .datatables table thead tr th.text-center > div {
+    @apply text-center;
+} */
+
+
+.datatables table {
+    @apply font-nunito !text-black dark:!text-white-dark;
+}
+
+
+.table-hover.invoice-table > div:nth-child(2) {
+    @apply !px-5;
+}
