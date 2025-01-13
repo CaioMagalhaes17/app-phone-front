@@ -7,6 +7,7 @@ import StoreSignUp from "../pages/Authentication/store/StoreSignup";
 
 const DefaultLayout = React.lazy(() => import("../components/DefaultLayout"))
 const ClientSignUp = React.lazy(() => import("../pages/Authentication/client/ClientSignUp"))
+const StoreProfilePicker = React.lazy(() => import("../pages/Authentication/store/profile/ProfilePicker"))
 
 const routes: RouteObject[] = [
   {
@@ -33,6 +34,10 @@ const routes: RouteObject[] = [
   {
     path: '/store/signup',
     element: <StoreSignUp />
+  },
+  {
+    path: '/store/profile/picker',
+    element: <StoreProfilePicker />
   }
 ]
 
