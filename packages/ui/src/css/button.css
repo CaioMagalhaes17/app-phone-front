@@ -26,13 +26,9 @@
   .btn-twitch {
     @apply border-[#9147ff] bg-[#9147ff] text-white shadow-[000];
   }
-  
-  .btn-primary {
-    @apply border-primary bg-primary text-dark shadow-[000];
-  }
 
   .btn-primary {
-    @apply border-primary bg-primary text-dark shadow-[000] hover:border-primary-dark hover:bg-primary-dark hover:text-white;
+    @apply border-primary bg-primary text-white shadow-[000];
   }
 
   .btn-primary-dark {

@@ -1,6 +1,5 @@
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Button, Text } from "@app/ui"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Text } from "@app/ui"
 import useStore from "../../state"
-import { Link } from "react-router-dom"
 
 export function SidebarController() {
   const { userInfos } = useStore()

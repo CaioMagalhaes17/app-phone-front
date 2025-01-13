@@ -95,7 +95,7 @@ body {
   .leftbar {
     @apply bg-black;
     padding: 25px;
-    width: 245px;
+    width: 305px;
     top: 72px;
     position: fixed;
     left: 0;
@@ -109,10 +109,10 @@ body {
   }
 
   .page-container {
-    left: 245px;
+    left: 305px;
     right: 0px;
     bottom: 0;
-    top: 72px;
+    top: 100px;
     position: absolute;
     text-align: center;
     margin-right: 0;
@@ -123,5 +123,5 @@ body {
     overflow-y: auto !important;
   }
 
-  
+
 }

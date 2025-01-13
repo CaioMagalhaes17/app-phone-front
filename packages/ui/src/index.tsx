@@ -14,6 +14,11 @@ export { IconUser } from './Icons/IconUser'
 export { IconLogout } from './Icons/IconLogout'
 export { IconPlus } from './Icons/IconPlus'
 export { IconMinus } from './Icons/IconMinus'
+export { IconLockDots } from './Icons/IconLockDots'
+export { IconMail } from './Icons/IconEmail'
+export { IconMap } from './Icons/IconMap'
+export { IconPhone } from './Icons/IconPhone'
+
 
 
 export {
@@ -33,6 +38,6 @@ export {
   DropdownMenuSubTrigger,
   DropdownMenuRadioGroup,
 }
-from './components/Dropdown'
+  from './components/Dropdown'
 
 import './css/index.css'
