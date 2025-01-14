@@ -18,6 +18,17 @@ type StateManager = {
   clientInfos: ClientInfos
   accessToken: string
   userInfos: UserInfos
+  storeInfos: StoreInfos
+}
+
+type StoreInfos = {
+  profileId: string
+  name: string,
+  profileImg: string,
+  location: {
+    latitude: number,
+    longitude: number
+  }
 }
 
 const useStore = create<StateManager>((set) => {
@@ -42,6 +53,20 @@ const useStore = create<StateManager>((set) => {
     setClientInfos: (clientInfos: ClientInfos) => {
       set({
         clientInfos
+      })
+    },
+    storeInfos: {
+      profileId: '',
+      name: '',
+      profileImg: '',
+      location: {
+        latitude: 0,
+        longitude: 0,
+      }
+    },
+    setStoreInfos: (storeInfos: StoreInfos) => {
+      set({
+        storeInfos
       })
     },
     accessToken: localStorage.getItem('access_token') ?? '',

@@ -1,16 +1,18 @@
 import { Button } from "@app/ui";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import useStore from "../../../../state";
 
 export default function StoreProfilePicker() {
-  const [selectedProfile, setSelectedProfile] = useState<number>(0);
-
+  const [selectedProfile, setSelectedProfile] = useState<string>('');
+  const { setStoreInfos } = useStore()
   const profiles = [
-    { id: 1, name: "Perfil 1" },
-    { id: 2, name: "Perfil 2" },
-    { id: 3, name: "Perfil 3" },
+    { id: '1', name: "Perfil 1" },
+    { id: '2', name: "Perfil 2" },
+    { id: '3', name: "Perfil 3" },
   ];
 
-  const handleProfileSelect = (id: number) => {
+  const handleProfileSelect = (id: string) => {
     setSelectedProfile(id);
   };
 
@@ -23,13 +25,13 @@ export default function StoreProfilePicker() {
             <div
               key={profile.id}
               onClick={() => handleProfileSelect(profile.id)}
-              className={`flex flex-col items-center cursor-pointer p-4 rounded-lg shadow-md transition ${selectedProfile === profile.id
+              className={`flex flex-col items-center cursor-pointer p-4 rounded-lg hover:bg-white-dark hover:text-white shadow-md transition ${selectedProfile === profile.id
                 ? "bg-white-dark text-white"
                 : "bg-white text-gray-700"
                 } hover:shadow-lg`}
             >
               <div
-                className={`w-[10rem] h-[10rem] flex items-center justify-center rounded-full border-2 ${selectedProfile === profile.id
+                className={`w-[10rem] h-[10rem] flex hover:bg-gray-200 hover:border-white items-center justify-center rounded-full border-2 ${selectedProfile === profile.id
                   ? "bg-gray-200 border-white"
                   : "border-gray-300"
                   }`}
@@ -50,13 +52,15 @@ export default function StoreProfilePicker() {
                 </svg>
               </div>
               <p className={`mt-4 font-extrabold text-lg ${selectedProfile === profile.id
-                ? "text-black"
+                ? "text-gray-700"
                 : "border-gray-300"
                 }`}>{profile.name}</p>
             </div>
           ))}
         </div>
-        <Button className="text-lg btn-primary">Continuar</Button>
+        <Link to="/">
+          <Button disabled={selectedProfile === ''} className="text-lg btn-primary">Continuar</Button>
+        </Link>
       </div>
     </>
   );
