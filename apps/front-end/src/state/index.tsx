@@ -16,13 +16,14 @@ type UserInfos = {
 
 type StateManager = {
   clientInfos: ClientInfos
+  setClientInfos: (clientInfos: ClientInfos) => void
+  setStoreInfos: (storeInfos: StoreInfos) => void
   accessToken: string
   userInfos: UserInfos
   storeInfos: StoreInfos
 }
 
 type StoreInfos = {
-  profileId: string
   name: string,
   profileImg: string,
   location: {

@@ -4,6 +4,7 @@ import React from "react";
 import ClientLogin from "../pages/Authentication/client/ClientLogin";
 import StoreLogin from "../pages/Authentication/store/StoreLogin";
 import StoreSignUp from "../pages/Authentication/store/StoreSignup";
+import { ProtectedRoute } from "./ProtectedRoutes";
 
 const DefaultLayout = React.lazy(() => import("../components/DefaultLayout"))
 const ClientSignUp = React.lazy(() => import("../pages/Authentication/client/ClientSignUp"))
@@ -11,7 +12,11 @@ const StoreProfilePicker = React.lazy(() => import("../pages/Authentication/stor
 
 const routes: RouteObject[] = [
   {
-    element: <DefaultLayout />,
+    element: (
+      <ProtectedRoute>
+        <DefaultLayout />
+      </ProtectedRoute>
+    ),
     children: [
       {
         path: '/',

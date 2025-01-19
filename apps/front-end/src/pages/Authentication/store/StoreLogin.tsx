@@ -1,7 +1,33 @@
 import { Button, IconLockDots, IconMail, Input } from "@app/ui";
 import { Link } from "react-router-dom";
+import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
+import { useMutation } from "@tanstack/react-query";
+import { login } from "../../../api/user/login";
+
+interface LoginForm {
+  login: string;
+  password: string;
+}
+
 
 export default function ClientLogin() {
+  const { register, formState: { errors }, handleSubmit } = useForm()
+
+  const { mutateAsync } = useMutation({
+    mutationFn: (data: LoginForm) => login(data),
+    mutationKey: ['login']
+  })
+
+
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    localStorage.removeItem('accessToken')
+    localStorage.removeItem('isStore')
+    const response = await mutateAsync(data as LoginForm);
+    localStorage.setItem('accessToken', response.token)
+    localStorage.setItem('isStore', 'true')
+    window.location.replace('/')
+  };
+
   return (
     <>
       <div className="absolute inset-0 bg-black">
@@ -13,29 +39,31 @@ export default function ClientLogin() {
           <div className="relative flex flex-col justify-center rounded-md bg-dark px-6 py-10">
             <div className="mx-auto w-full">
               <div className="mb-10">
-                <h1 className="text-3xl font-extrabold text-white">Entrar em sua conta loja</h1>
+                <h1 className="text-3xl font-extrabold text-white">Acessar sua Loja</h1>
                 <div className="w-full border-black/60 border mt-2" />
               </div>
 
-              <form className="space-y-5 text-white">
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 text-white">
                 <div>
                   <label htmlFor="Name">Email</label>
                   <div className="relative text-white-dark">
-                    <Input id="Name" type="text" placeholder="Digite o email de sua loja" className="form-input !ps-10 placeholder:text-white-dark" />
+                    <Input id="Name" type="text" placeholder="Digite o email de sua loja" {...register('login', { required: true })} className="form-input !ps-10 placeholder:text-white-dark" />
                     <span className="absolute start-4 top-1/2 -translate-y-1/2">
                       <IconMail />
                     </span>
                   </div>
+                  {errors.login && (<p className="font-bold text-danger">Campo Obrigatório</p>)}
                 </div>
 
                 <div>
                   <label htmlFor="Name">Senha</label>
                   <div className="relative text-white-dark">
-                    <Input id="Name" type="text" placeholder="Senha" className="form-input !ps-10 placeholder:text-white-dark" />
+                    <Input id="Name" type="password" placeholder="Senha" {...register('password', { required: true })} className="form-input !ps-10 placeholder:text-white-dark" />
                     <span className="absolute start-4 top-1/2 -translate-y-1/2">
                       <IconLockDots />
                     </span>
                   </div>
+                  {errors.password && (<p className="font-bold text-danger">Campo Obrigatório</p>)}
                 </div>
 
                 <Button type="submit" className="btn btn-primary !mt-6 w-full border-0 uppercase ">

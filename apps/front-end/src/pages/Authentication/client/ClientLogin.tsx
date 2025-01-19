@@ -1,9 +1,32 @@
-import { Button, IconMail, IconPhone, Input } from "@app/ui";
+import { Button, IconLockDots, IconMail, IconPhone, Input } from "@app/ui";
+import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { login } from "../../../api/user/login";
+
+interface LoginForm {
+  login: string;
+  password: string;
+}
 
 export default function ClientLogin() {
   const [useEmail, setUseEmail] = useState<boolean>(true)
+  const { register, formState: { errors }, handleSubmit } = useForm()
+
+  const { mutateAsync } = useMutation({
+    mutationFn: (data: LoginForm) => login(data),
+    mutationKey: ['login']
+  })
+
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    localStorage.removeItem('accessToken')
+    localStorage.removeItem('isStore')
+    const response = await mutateAsync(data as LoginForm);
+    localStorage.setItem('accessToken', response.token)
+    localStorage.setItem('isStore', 'false')
+    window.location.replace('/')
+  };
   return (
     <>
       <div className="absolute inset-0 bg-black">
@@ -19,7 +42,7 @@ export default function ClientLogin() {
                 <div className="w-full border-black/60 border mt-2" />
 
               </div>
-              <form className="space-y-5 text-white">
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 text-white">
                 <div className="flex items-center space-x-4 mb-4">
                   <label className="flex items-center">
                     <input type="radio" onClick={() => setUseEmail(true)} className="mr-2" checked={useEmail} />
@@ -34,10 +57,20 @@ export default function ClientLogin() {
                 {useEmail ? (<div>
                   <label htmlFor="Name">Email</label>
                   <div className="relative text-white-dark">
-                    <Input id="Name" type="text" placeholder="Digite seu email" className="form-input !ps-10 placeholder:text-white-dark" />
+                    <Input id="Name" type="text" placeholder="Digite seu email" {...register('login', { required: true })} className="form-input !ps-10 placeholder:text-white-dark" />
                     <span className="absolute start-4 top-1/2 -translate-y-1/2">
                       <IconMail fill={true} />
                     </span>
+                  </div>
+                  <div>
+                    <label htmlFor="Name">Senha</label>
+                    <div className="relative text-white-dark">
+                      <Input id="Name" type="password" placeholder="Senha" {...register('password', { required: true })} className="form-input !ps-10 placeholder:text-white-dark" />
+                      <span className="absolute start-4 top-1/2 -translate-y-1/2">
+                        <IconLockDots />
+                      </span>
+                    </div>
+                    {errors.password && (<p className="font-bold text-danger">Campo Obrigatório</p>)}
                   </div>
                 </div>) : (<div>
                   <label htmlFor="Name">Telefone</label>
