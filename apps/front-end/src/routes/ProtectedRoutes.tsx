@@ -39,7 +39,6 @@ export const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
     const response = await getStoreProfile()
     setStoreInfos(response)
     setIsLoading(false)
-    console.log('dsadas31232')
   }
 
   if (isLoading) {
