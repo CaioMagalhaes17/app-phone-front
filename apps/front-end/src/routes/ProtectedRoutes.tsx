@@ -6,13 +6,14 @@ import { useEffect, useState } from "react";
 import { getClientProfile } from "../api/user/client/getProfile";
 import useStore from "../state";
 import { getStoreProfile } from "../api/user/store/getProfile";
+import { LoadGoogleApi } from "../adapters/Map/lib/ApiLoader";
 
 export const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const accessToken = localStorage.getItem("accessToken");
   const isStore: string | null = localStorage.getItem('isStore')
   const [isLoading, setIsLoading] = useState(true)
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const { setClientInfos, setStoreInfos } = useStore()
+  const { setClientInfos, setStoreInfos, setIsMapLoaded } = useStore()
+  const isLoaded = LoadGoogleApi()
 
   if (!accessToken) {
     return <Navigate to={isStore && isStore === 'true' ? "/store/login" : "/login"} replace />;
@@ -26,8 +27,9 @@ export const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
         await loadStore()
       }
     }
+    setIsMapLoaded(isLoaded)
     checkAuth()
-  }, [location])
+  }, [location, isLoaded])
 
   async function loadClient() {
     const response = await getClientProfile()

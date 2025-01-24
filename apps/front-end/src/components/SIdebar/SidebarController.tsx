@@ -1,5 +1,6 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Text } from "@app/ui"
 import useStore from "../../state"
+import { useNavigate } from "react-router-dom"
 
 export function SidebarController() {
   const { userInfos } = useStore()
@@ -8,10 +9,12 @@ export function SidebarController() {
     if (userInfos.isStore === false) return getClientItems()
   }
 
+  const navigate = useNavigate()
+
   function getClientItems() {
     return (
       <>
-        <Text as="span" className="font-bold hover:underline text-lg text-white"> Início (Mapa) </Text>
+        <Text as="span" onClick={() => navigate('/')} className="font-bold hover:underline text-lg cursor-pointer text-white"> Início (Mapa) </Text>
         <div className="border-b border-b-[#323b45] mt-5" />
         <Accordion type="single" collapsible className="">
           <AccordionItem value="item-1">

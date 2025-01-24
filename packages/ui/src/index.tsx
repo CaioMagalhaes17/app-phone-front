@@ -18,6 +18,8 @@ export { IconLockDots } from './Icons/IconLockDots'
 export { IconMail } from './Icons/IconEmail'
 export { IconMap } from './Icons/IconMap'
 export { IconPhone } from './Icons/IconPhone'
+export { IconSave } from './Icons/IconSave'
+export { IconSearch } from './Icons/IconSearch'
 
 
 

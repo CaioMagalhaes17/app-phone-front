@@ -1,11 +1,12 @@
 import { createBrowserRouter, RouteObject } from "react-router-dom";
-import { Home } from "../pages/Home";
+import { Home } from "../pages/Home/client";
 import React from "react";
 import ClientLogin from "../pages/Authentication/client/ClientLogin";
 import StoreLogin from "../pages/Authentication/store/StoreLogin";
 import StoreSignUp from "../pages/Authentication/store/StoreSignup";
 import { ProtectedRoute } from "./ProtectedRoutes";
 
+const ClientMapEdit = React.lazy(() => import("../pages/Map/Edit/client"))
 const DefaultLayout = React.lazy(() => import("../components/DefaultLayout"))
 const ClientSignUp = React.lazy(() => import("../pages/Authentication/client/ClientSignUp"))
 const StoreProfilePicker = React.lazy(() => import("../pages/Authentication/store/profile/ProfilePicker"))
@@ -22,6 +23,10 @@ const routes: RouteObject[] = [
         path: '/',
         element: <Home />
       },
+      {
+        path: '/map/edit',
+        element: <ClientMapEdit />
+      }
     ]
   },
   {

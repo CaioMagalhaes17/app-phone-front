@@ -14,7 +14,7 @@ export default function DefaultLayout() {
               <Header />
               <Sidebar />
               <Suspense>
-                <Box data-overlap="false" className="animate__fadeIn animate__animated page-container scrollable">
+                <Box data-overlap="false" className="animate__fadeIn animate__animated page-container p-6 scrollable">
                   <Outlet />
                 </Box>
               </Suspense>

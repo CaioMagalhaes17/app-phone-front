@@ -21,6 +21,8 @@ type StateManager = {
   accessToken: string
   userInfos: UserInfos
   storeInfos: StoreInfos
+  isMapLoaded: boolean
+  setIsMapLoaded: (isMapLoaded: boolean) => void
 }
 
 type StoreInfos = {
@@ -74,6 +76,12 @@ const useStore = create<StateManager>((set) => {
     setToken: (token: string) => {
       set({
         accessToken: token
+      })
+    },
+    isMapLoaded: false,
+    setIsMapLoaded: (isMapLoaded: boolean) => {
+      set({
+        isMapLoaded
       })
     },
   }
