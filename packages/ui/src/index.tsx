@@ -21,7 +21,13 @@ export { IconPhone } from './Icons/IconPhone'
 export { IconSave } from './Icons/IconSave'
 export { IconSearch } from './Icons/IconSearch'
 
-
+export {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "./components/Carousel"
 
 export {
   DropdownMenu,
