@@ -55,7 +55,7 @@ export function Home() {
                     <MarkAdapter onClick={() => setSelectedStore(item)} position={{ lat: item.GeoLocation.props.latitude, lng: item.GeoLocation.props.longitude }} key={item._id} />
                   )
                 })) : ''}
-                <RadiusAdapter center={{ lat: clientInitialPosition.lat, lng: clientInitialPosition.lng }} radius={clientInitialPosition.radius * 100} />
+                <RadiusAdapter center={{ lat: clientInitialPosition.lat, lng: clientInitialPosition.lng }} radius={clientInitialPosition.radius} />
                 {selectedStore && (
                   <InfoWindowAdapter onClose={() => setSelectedStore(null)} position={{ lat: selectedStore.GeoLocation.props.latitude, lng: selectedStore.GeoLocation.props.longitude }} options={{ pixelOffset: new window.google.maps.Size(0, -40) }}>
                     <>

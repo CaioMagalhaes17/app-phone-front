@@ -17,9 +17,15 @@ export { IconMinus } from './Icons/IconMinus'
 export { IconLockDots } from './Icons/IconLockDots'
 export { IconMail } from './Icons/IconEmail'
 export { IconMap } from './Icons/IconMap'
-export { IconPhone } from './Icons/IconPhone'
 export { IconSave } from './Icons/IconSave'
 export { IconSearch } from './Icons/IconSearch'
+export { IconPencil } from './Icons/IconPencil'
+export { IconPhone } from './Icons/Bold/IconPhone'
+export { IconStreetMap } from './Icons/IconStreetMap'
+export { IconSmartphone } from './Icons/IconSmartphone'
+export { IconHome } from './Icons/IconHome'
+export { IconBill } from './Icons/IconBill'
+export { IconSend } from './Icons/IconSend'
 
 export {
   Carousel,

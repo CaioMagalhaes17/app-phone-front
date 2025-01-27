@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { Button, Input, Text } from "@app/ui";
+import { Button, IconPencil, Input, Text } from "@app/ui";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useStore from "../../../state";
@@ -56,8 +56,6 @@ export default function ClientMapSearch() {
     <>
       <div className="flex relative h-full gap-5">
         <div style={{ borderRadius: '10px' }} className="max-w-xs flex flex-col  p-4 gap-2 items-center bg-black w-[420px]">
-          <h1 className="text-[#c4c4c4] mt-2 font-extrabold text-3xl text-left">Lojas mais próximas</h1>
-          <div className="border-b border-b-[#323b45] mt-5 w-[90%]" />
           <div className="w-full mt-5 flex flex-col">
             <div className="items-center flex justify-center">
               <Carousel className="">
@@ -85,7 +83,13 @@ export default function ClientMapSearch() {
             <textarea className="placeholder:text-white-dark w-full rounded-md border px-4 py-2 text-sm font-semibold !outline-none focus:border-primary focus:ring-transparent border-[#17263c] bg-[#121e32] text-white-dark focus:border-primary"></textarea>
           </div>
           <div className="border-b border-b-[#323b45] mt-5 w-[90%]" />
-          <Button onClick={() => navigate('/map/edit')} className="btn-primary flex flex-row w-full">Editar localização de pesquisa</Button>
+          <Button onClick={() => navigate('/map/edit')} className="btn-primary flex flex-row w-full gap-5 mb-5 mt-2">
+            Solicitar orçamento direto para loja
+          </Button>
+          <Button onClick={() => navigate('/map/edit')} className="btn-primary flex flex-row w-full gap-5">
+            <IconPencil />
+            Editar localização de pesquisa
+          </Button>
         </div>
         {clintLocation && isMapLoaded ? (
           <MapAdapter mapStyle={mapStyle} initialPosition={clintLocation}>
