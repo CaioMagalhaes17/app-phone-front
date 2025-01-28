@@ -26,6 +26,7 @@ export { IconSmartphone } from './Icons/IconSmartphone'
 export { IconHome } from './Icons/IconHome'
 export { IconBill } from './Icons/IconBill'
 export { IconSend } from './Icons/IconSend'
+export { Steps } from './components/Steps'
 
 export {
   Carousel,

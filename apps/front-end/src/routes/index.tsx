@@ -6,6 +6,7 @@ import StoreLogin from "../pages/Authentication/store/StoreLogin";
 import StoreSignUp from "../pages/Authentication/store/StoreSignup";
 import { ProtectedRoute } from "./ProtectedRoutes";
 import ClientMapSearch from "../pages/Map/Search";
+import { SolicitationsCreate } from "../pages/Solicitations/client/Create";
 
 const ClientMapEdit = React.lazy(() => import("../pages/Map/Edit/client"))
 const DefaultLayout = React.lazy(() => import("../components/DefaultLayout"))
@@ -31,6 +32,10 @@ const routes: RouteObject[] = [
       {
         path: '/map',
         element: <ClientMapSearch />
+      },
+      {
+        path: '/solicitations/create',
+        element: <SolicitationsCreate />
       }
     ]
   },

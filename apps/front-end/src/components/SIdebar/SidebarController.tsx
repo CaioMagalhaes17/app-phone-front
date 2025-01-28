@@ -28,7 +28,7 @@ export function SidebarController() {
               </div>
             </AccordionTrigger>
             <AccordionContent className="hover:text-white">
-              <button className="ml-5 font-bold hover:text-white hover:underline text-lg text-[#c4c4c4] flex flex-row gap-2">
+              <button onClick={() => navigate('/solicitations/create')} className="ml-5 font-bold hover:text-white hover:underline text-lg text-[#c4c4c4] flex flex-row gap-2">
                 <IconSend />
                 Solicitar Orçamento
               </button>
