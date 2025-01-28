@@ -156,7 +156,7 @@ export const displayQuestions = [
   },
   {
     questionId: 'display-C',
-    question: 'A tela do celular já foi trocada anteriormente?',
+    question: 'A tela tem algum problema no brilho ou cor?',
     options: [
       {
         optionId: 'display-C-1',
@@ -174,7 +174,7 @@ export const displayQuestions = [
   },
   {
     questionId: 'display-D',
-    question: 'Se sim, a nova tela é original?',
+    question: 'A tela está ligando?',
     options: [
       {
         optionId: 'display-D-1',
@@ -183,16 +183,12 @@ export const displayQuestions = [
       {
         optionId: 'display-D-2',
         text: 'Não'
-      },
-      {
-        optionId: 'display-D-3',
-        text: 'Não sei'
       }
     ]
   },
   {
     questionId: 'display-E',
-    question: 'A tela tem algum problema no brilho ou cor?',
+    question: 'A tela do celular já foi trocada anteriormente?',
     options: [
       {
         optionId: 'display-E-1',
@@ -210,7 +206,7 @@ export const displayQuestions = [
   },
   {
     questionId: 'display-F',
-    question: 'O problema na tela afeta outras funções do celular?',
+    question: 'Se sim, a nova tela é original?',
     options: [
       {
         optionId: 'display-F-1',
@@ -225,7 +221,7 @@ export const displayQuestions = [
         text: 'Não sei'
       }
     ]
-  }
+  },
 ]
 
 export const phoneQuestions = [
@@ -343,7 +339,7 @@ export const xiaomiModels = [
   "Redmi K70", "Redmi K70 Pro", "Redmi K70E", "Redmi Note 12 4G", "Redmi Note 12 Pro 4G", "Redmi Note 12 Pro 5G"
 ]
 
-export function getQuestionsByKosky(topic: string) {
+export function getQuestionsByTopic(topic: string) {
   if (topic === 'battery') return batteryQuestions
   if (topic === 'display') return displayQuestions
 }

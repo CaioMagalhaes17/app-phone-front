@@ -19,8 +19,6 @@ export const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
     return <Navigate to={isStore && isStore === 'true' ? "/store/login" : "/login"} replace />;
   }
 
-  console.log('321321')
-
   useEffect(() => {
     const checkAuth = async () => {
       if (isStore === 'false') {
