@@ -206,7 +206,7 @@ export const displayQuestions = [
   },
   {
     questionId: 'display-F',
-    question: 'Se sim, a nova tela é original?',
+    question: 'Se houve troca, a nova tela é original?',
     options: [
       {
         optionId: 'display-F-1',
@@ -247,6 +247,110 @@ export const phoneQuestions = [
       },
     ]
   },
+  {
+    questionId: 'phone-B',
+    question: 'Modelo',
+    options: []
+  },
+  {
+    questionId: 'phone-C',
+    question: 'O aparelho já teve algum tipo de conserto?',
+    options: [
+      {
+        optionId: 'phone-C-1',
+        text: 'Sim'
+      },
+      {
+        optionId: 'phone-C-2',
+        text: 'Não'
+      },
+      {
+        optionId: 'phone-C-3',
+        text: 'Não sei'
+      }
+    ]
+  },
+  {
+    questionId: 'phone-D',
+    question: 'O aparelho possui apenas peças originais?',
+    options: [
+      {
+        optionId: 'phone-D-1',
+        text: 'Sim'
+      },
+      {
+        optionId: 'phone-D-2',
+        text: 'Não'
+      },
+      {
+        optionId: 'phone-D-3',
+        text: 'Não sei'
+      }
+    ]
+  },
+  {
+    questionId: 'phone-E',
+    question: 'Tempo de uso do aparelho',
+    options: [
+      {
+        optionId: 'phone-E-1',
+        text: 'Menos de 1 mês'
+      },
+      {
+        optionId: 'phone-E-2',
+        text: 'Entre 1 a 11 meses'
+      },
+      {
+        optionId: 'phone-E-3',
+        text: 'Entre 1 a 2 anos'
+      },
+      {
+        optionId: 'phone-e-4',
+        text: 'Mais de 2 anos'
+      }
+    ]
+  },
+]
+
+export const finalQuestions = [
+  {
+    questionId: 'final-A',
+    question: 'Qual a preferência para o prazo de entrega do serviço?',
+    options: [
+      {
+        optionId: 'final-A-1',
+        text: 'Urgente'
+      },
+      {
+        optionId: 'final-A-2',
+        text: 'Moderado'
+      },
+      {
+        optionId: 'final-A-3',
+        text: 'Sem pressa'
+      }
+    ]
+  },
+  {
+    questionId: 'final-B',
+    question: 'Possui preferência por lojas que buscam o aparelho em seu local?',
+    options: [
+      {
+        optionId: 'final-B-1',
+        text: 'Sim'
+      },
+      {
+        optionId: 'final-B-2',
+        text: 'Não é prioridade'
+      },
+
+    ]
+  },
+  {
+    questionId: 'final-C',
+    question: 'Detalhes ou considerações importantes',
+    options: []
+  }
 ]
 
 export const appleModels = [
@@ -342,9 +446,56 @@ export const xiaomiModels = [
 export function getQuestionsByTopic(topic: string) {
   if (topic === 'battery') return batteryQuestions
   if (topic === 'display') return displayQuestions
+  return displayQuestions
 }
 
 export function getTopicFormatted(topic: string) {
   if (topic === 'battery') return 'Bateria'
   if (topic === 'display') return 'Tela'
+}
+
+type DisplayFormType = {
+  'display-A': 'display-A-1' | 'display-A-2' | 'display-A-3' | 'display-A-4'
+  'display-B': 'display-B-1' | 'display-B-2' | 'display-B-3'
+  'display-C': 'display-C-1' | 'display-C-2' | 'display-C-3'
+  'display-D': 'display-D-1' | 'display-D-2' | 'display-D-3'
+  'display-E': 'display-E-1' | 'display-E-2' | 'display-E-3'
+  'display-F': 'display-F-1' | 'display-F-2' | 'display-F-3'
+
+}
+
+export function getStepTwoAnswersByForm(topic: string, questionsObj: any) {
+  if (questionsObj) {
+    if (topic === 'battery') {
+      const answersFormated = [
+        {
+          question: batteryQuestions[0].question,
+          answer: (batteryQuestions[0].options.filter((option) => option.optionId === questionsObj['battery-A']))[0].text
+        },
+        {
+          question: batteryQuestions[1].question,
+          answer: (batteryQuestions[1].options.filter((option) => option.optionId === questionsObj['battery-B']))[0].text
+        },
+        {
+          question: batteryQuestions[2].question,
+          answer: (batteryQuestions[2].options.filter((option) => option.optionId === questionsObj['battery-C']))[0].text
+        },
+        {
+          question: batteryQuestions[3].question,
+          answer: (batteryQuestions[3].options.filter((option) => option.optionId === questionsObj['battery-D']))[0].text
+        },
+        {
+          question: batteryQuestions[4].question,
+          answer: (batteryQuestions[4].options.filter((option) => option.optionId === questionsObj['battery-E']))[0].text
+        },
+        {
+          question: batteryQuestions[5].question,
+          answer: (batteryQuestions[5].options.filter((option) => option.optionId === questionsObj['battery-F']))[0].text
+        }
+      ]
+      return answersFormated
+    }
+  }
+  return []
+
 }

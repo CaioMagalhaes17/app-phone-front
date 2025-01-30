@@ -1,7 +1,11 @@
-import { Text } from "@app/ui";
+import { Button, Text } from "@app/ui";
 import React from "react";
 
-export function StepOne({ topic, setTopic }: { topic: string, setTopic: React.Dispatch<React.SetStateAction<string>> }) {
+export function StepOne({ topic, setTopic, setActiveTab }: {
+  topic: string,
+  setTopic: React.Dispatch<React.SetStateAction<string>>,
+  setActiveTab: React.Dispatch<React.SetStateAction<number>>
+}) {
   return (
     <>
       <div className="items-center flex flex-col justify-center">
@@ -15,6 +19,10 @@ export function StepOne({ topic, setTopic }: { topic: string, setTopic: React.Di
           </button>
           <div className="bg-blue-500 flex items-center justify-center">3</div>
           <div className="bg-yellow-500 flex items-center justify-center">4</div>
+        </div>
+        <div className="flex p-6 relative justify-between w-full">
+          <Button disabled className="btn-primary">Voltar</Button>
+          <Button disabled={!topic ? true : false} onClick={() => setActiveTab(2)} className="btn-primary">Próximo</Button>
         </div>
       </div>
     </>

@@ -13,10 +13,10 @@ export function Steps({ steps, activeTab, handleChangeTab }: StepsProps) {
       return `${widthPercentage - 25}%`
     }
     if (steps.length >= 3 && steps.length < 5) {
-      return `${widthPercentage - 15}%`
+      return `${widthPercentage - 7}%`
     }
     if (steps.length >= 5 && steps.length < 9) {
-      return `${widthPercentage - 10}%`
+      return `${widthPercentage - 8}%`
     }
     if (steps.length >= 9) {
       return `${widthPercentage - 5}%`
