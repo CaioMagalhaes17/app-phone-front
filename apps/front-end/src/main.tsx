@@ -10,6 +10,8 @@ const queryClient = new QueryClient({
   },
 })
 
+document.querySelector('body')?.classList.add('dark')
+
 createRoot(document.getElementById('root')!).render(
   <QueryClientProvider client={queryClient}>
     <App />

@@ -5,7 +5,7 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form"
 export function StepFor({ stepFourInfos, setActiveTab, onSubmit }: { stepFourInfos?: FieldValues, onSubmit: (data: FieldValues) => void, setActiveTab: React.Dispatch<React.SetStateAction<number>> }) {
   const { register, handleSubmit, formState: { errors }, setError } = useForm()
 
-  const handleFormSubmit: SubmitHandler<FieldValues> = (data) => {
+  const handleFormSubmit: SubmitHandler<FieldValues> = async (data) => {
     let hasError: boolean = false
     console.log(data)
     Object.entries(data).forEach(([key, value]) => {
@@ -18,7 +18,7 @@ export function StepFor({ stepFourInfos, setActiveTab, onSubmit }: { stepFourInf
       }
     });
     if (hasError) return
-    onSubmit(data);
+    await onSubmit(data);
   };
 
   return (

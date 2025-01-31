@@ -3,5 +3,8 @@
     {
       "mode": "auto"
     }
-  ]
+  ],
+  "[css]": {
+    "editor.formatOnSave": false
+  }
 }

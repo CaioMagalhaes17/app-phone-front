@@ -226,86 +226,86 @@ export const displayQuestions = [
 
 export const phoneQuestions = [
   {
-    questionId: 'phone-A',
+    questionId: 'brand',
     question: 'Qual a marca do celular?',
     options: [
       {
-        optionId: 'phone-A-1',
+        optionId: 'apple',
         text: 'Apple'
       },
       {
-        optionId: 'phone-A-2',
+        optionId: 'samsung',
         text: 'Samsung'
       },
       {
-        optionId: 'phone-A-3',
+        optionId: 'xiaomi',
         text: 'Xiaomi'
       },
       {
-        optionId: 'phone-A-4',
+        optionId: 'motorola',
         text: 'Motorola'
       },
     ]
   },
   {
-    questionId: 'phone-B',
+    questionId: 'model',
     question: 'Modelo',
     options: []
   },
   {
-    questionId: 'phone-C',
+    questionId: 'previousRepair',
     question: 'O aparelho já teve algum tipo de conserto?',
     options: [
       {
-        optionId: 'phone-C-1',
+        optionId: 'yes',
         text: 'Sim'
       },
       {
-        optionId: 'phone-C-2',
+        optionId: 'no',
         text: 'Não'
       },
       {
-        optionId: 'phone-C-3',
+        optionId: 'dontknow',
         text: 'Não sei'
       }
     ]
   },
   {
-    questionId: 'phone-D',
+    questionId: 'originalHardware',
     question: 'O aparelho possui apenas peças originais?',
     options: [
       {
-        optionId: 'phone-D-1',
+        optionId: 'yes',
         text: 'Sim'
       },
       {
-        optionId: 'phone-D-2',
+        optionId: 'no',
         text: 'Não'
       },
       {
-        optionId: 'phone-D-3',
+        optionId: 'dontknow',
         text: 'Não sei'
       }
     ]
   },
   {
-    questionId: 'phone-E',
+    questionId: 'usageTime',
     question: 'Tempo de uso do aparelho',
     options: [
       {
-        optionId: 'phone-E-1',
+        optionId: 'lessThanOneMounth',
         text: 'Menos de 1 mês'
       },
       {
-        optionId: 'phone-E-2',
+        optionId: 'betweenOneAndElevenMounths',
         text: 'Entre 1 a 11 meses'
       },
       {
-        optionId: 'phone-E-3',
+        optionId: 'betweenOneAndTwoYears',
         text: 'Entre 1 a 2 anos'
       },
       {
-        optionId: 'phone-e-4',
+        optionId: 'moreThanTwoYears',
         text: 'Mais de 2 anos'
       }
     ]
@@ -314,40 +314,40 @@ export const phoneQuestions = [
 
 export const finalQuestions = [
   {
-    questionId: 'final-A',
+    questionId: 'deliveryPreference',
     question: 'Qual a preferência para o prazo de entrega do serviço?',
     options: [
       {
-        optionId: 'final-A-1',
+        optionId: 'urgent',
         text: 'Urgente'
       },
       {
-        optionId: 'final-A-2',
+        optionId: 'moderate',
         text: 'Moderado'
       },
       {
-        optionId: 'final-A-3',
+        optionId: 'any',
         text: 'Sem pressa'
       }
     ]
   },
   {
-    questionId: 'final-B',
+    questionId: 'timePreference',
     question: 'Possui preferência por lojas que buscam o aparelho em seu local?',
     options: [
       {
-        optionId: 'final-B-1',
+        optionId: 'yes',
         text: 'Sim'
       },
       {
-        optionId: 'final-B-2',
+        optionId: 'noPriority',
         text: 'Não é prioridade'
       },
 
     ]
   },
   {
-    questionId: 'final-C',
+    questionId: 'details',
     question: 'Detalhes ou considerações importantes',
     options: []
   }
@@ -461,7 +461,6 @@ type DisplayFormType = {
   'display-D': 'display-D-1' | 'display-D-2' | 'display-D-3'
   'display-E': 'display-E-1' | 'display-E-2' | 'display-E-3'
   'display-F': 'display-F-1' | 'display-F-2' | 'display-F-3'
-
 }
 
 export function getStepTwoAnswersByForm(topic: string, questionsObj: any) {

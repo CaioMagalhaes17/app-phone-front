@@ -1,33 +1,102 @@
-import { Steps, Text } from "@app/ui";
+import { Steps } from "@app/ui";
 import { useState } from "react";
 import { StepOne } from "./Steps/StepOne";
 import { StepTwo } from "./Steps/StepTwo";
-import { getStepTwoAnswersByForm, getTopicFormatted } from "../../../../constants/solicitation-form-questions";
 import { StepThree } from "./Steps/StepThree";
 import { StepFor } from "./Steps/StepFor";
 import { FieldValues } from "react-hook-form";
 import { StepFive } from "./Steps/StepFive";
+import { useMutation } from "@tanstack/react-query";
+import { CreateSolicitation } from "../../../../api/repair/solicitation/create-solicitation";
+import { BatteryFormType, DisplayFormType, PhoneFormType, SolicitationFormProps } from "../../../../types/solicitation";
+import Swal from "sweetalert2";
 
 export function SolicitationsCreate() {
   const [activeTab, setActiveTab] = useState(1)
-  const [topic, setTopic] = useState('')
-  const [stepTwoInfos, setStepTwoInfos] = useState<FieldValues>()
-  const [stepThreeInfos, setStepThreeInfos] = useState<FieldValues>()
-  const [stepFourInfos, setStepFourInfos] = useState<FieldValues>()
+  const [topic, setTopic] = useState<'battery' | 'display'>('battery')
+  const [stepTwoInfos, setStepTwoInfos] = useState<DisplayFormType | BatteryFormType>()
+  const [stepThreeInfos, setStepThreeInfos] = useState<PhoneFormType>()
+  const [stepFourInfos, setStepFourInfos] = useState<Pick<SolicitationFormProps, 'deliveryPreference' | 'timePreference' | 'details'>>()
 
-  const stepTwoAnswersFormatted = getStepTwoAnswersByForm('battery', stepTwoInfos)
 
+  const { mutateAsync } = useMutation({
+    mutationFn: CreateSolicitation,
+    mutationKey: ['create-solicitation']
+  })
   const handleStepTwoSubmit = (data: FieldValues) => {
-    setStepTwoInfos(data);
+    if (topic === 'display') {
+      setStepTwoInfos({
+        "display-A": data['display-A'],
+        "display-B": data['display-B'],
+        "display-C": data['display-C'],
+        "display-D": data['display-D'],
+        "display-E": data['display-E'],
+        "display-F": data['display-F'],
+      });
+    }
+    if (topic === 'battery') {
+      setStepTwoInfos({
+        "battery-A": data['battery-A'],
+        "battery-B": data['battery-B'],
+        "battery-C": data['battery-C'],
+        "battery-D": data['battery-D'],
+        "battery-E": data['battery-E'],
+        "battery-F": data['battery-F'],
+      });
+    }
+
   };
 
   const handleStepThreeSubmit = (data: FieldValues) => {
-    setStepThreeInfos(data);
+    console.log(data)
+    setStepThreeInfos({
+      brand: data.brand,
+      model: data.model,
+      originalHardware: data.originalHardware,
+      previousRepair: data.previousRepair,
+      usageTime: data.usageTime
+    });
   };
 
-  const handleStepFourSubmit = (data: FieldValues) => {
-    setStepFourInfos(data);
+  const handleStepFourSubmit = async (data: FieldValues) => {
+    setStepFourInfos({
+      deliveryPreference: data.deliveryPreference,
+      details: data.details,
+      timePreference: data.timePreference
+    });
+    await handleSendForm({
+      deliveryPreference: data.deliveryPreference,
+      details: data.details,
+      timePreference: data.timePreference
+    })
   };
+
+  async function handleSendForm(data: Pick<SolicitationFormProps, 'deliveryPreference' | 'timePreference' | 'details'>) {
+    Swal.fire({
+      titleText: 'Enviar formulário?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Sim',
+      cancelButtonText: 'Cancelar',
+      padding: '2em',
+      customClass: {
+        confirmButton: 'btn btn-primary btn-lg m-1',
+        cancelButton: 'btn btn-danger btn-lg m-1',
+      },
+      buttonsStyling: false,
+    }).then(async (result) => {
+      if (result.isConfirmed && stepThreeInfos && stepTwoInfos && topic) {
+        await mutateAsync({
+          problemForm: stepTwoInfos,
+          phoneForm: stepThreeInfos,
+          problemTopic: topic,
+          deliveryPreference: data.deliveryPreference,
+          details: data.details,
+          timePreference: data.timePreference
+        })
+      }
+    })
+  }
 
   const steps = [
     'Reconhecendo o defeito',

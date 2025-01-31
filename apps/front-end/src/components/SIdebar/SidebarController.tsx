@@ -1,4 +1,4 @@
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, IconBill, IconHelpCircle, IconHome, IconPencil, IconSearch, IconSend, IconSmartphone, IconStreetMap, Text } from "@app/ui"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, IconBill, IconHelpCircle, IconHome, IconPencil, IconSearch, IconSend, IconSmartphone, IconStreetMap, IconUser, Text } from "@app/ui"
 import useStore from "../../state"
 import { useNavigate } from "react-router-dom"
 
@@ -40,7 +40,8 @@ export function SidebarController() {
               </button>
             </AccordionContent>
             <AccordionContent className="hover:text-white">
-              <button className="ml-5 font-bold hover:text-white hover:underline text-lg text-[#c4c4c4]">
+              <button onClick={() => navigate('/solicitations')} className="ml-5 font-bold hover:text-white hover:underline text-lg text-[#c4c4c4] flex flex-row gap-2 items-center">
+                <IconUser />
                 Minhas Solicitações
               </button>
             </AccordionContent>

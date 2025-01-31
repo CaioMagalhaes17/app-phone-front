@@ -169,7 +169,7 @@ export function DisplayForm({ onSubmit, setActiveTab, stepTwoInfos }: { stepTwoI
           </div>
           <div className="flex p-6 relative justify-between w-full">
             <Button onClick={() => setActiveTab(1)} className="btn-primary">Voltar</Button>
-            <Button type="submit" className="btn-primary">Salvar</Button>
+            <Button type="submit" className="btn-primary">Próximo</Button>
           </div>
         </form>
       )}

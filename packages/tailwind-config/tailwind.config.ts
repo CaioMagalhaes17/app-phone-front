@@ -4,6 +4,7 @@ import forms from '@tailwindcss/forms'
 import { Config } from 'tailwindcss';
 const config: Omit<Config, 'content'> = {
   content: ["./src/**/*.{js,ts,jsx,tsx}", "./public/index.html"],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {

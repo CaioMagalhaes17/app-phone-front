@@ -1,15 +1,29 @@
 import { Button, Text } from "@app/ui"
-import { phoneQuestions, samsungModels, xiaomiModels } from "../../../../../constants/solicitation-form-questions"
+import { phoneQuestions, samsungModels } from "../../../../../constants/solicitation-form-questions"
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form"
 import { AppleModelsSelect } from "../Phone-Details/AppleModelsSelect"
 import { SearchModelsInput } from "../Phone-Details/SearchModelsInput"
+import { useState } from "react"
 
 export function StepThree({ setActiveTab, onSubmit, stepThreeInfos }: { stepThreeInfos?: FieldValues, onSubmit: (data: FieldValues) => void, setActiveTab: React.Dispatch<React.SetStateAction<number>> }) {
   const questions = phoneQuestions
   const { register, watch, handleSubmit, formState: { errors }, setError } = useForm()
+  const [searchModel, setSearchModel] = useState("");
+  const [searchInputError, setSearchInputError] = useState(false)
 
   const handleFormSubmit: SubmitHandler<FieldValues> = (data) => {
     let hasError: boolean = false
+
+    if (searchModel === '') {
+      if (stepThreeInfos?.brand && stepThreeInfos?.brand !== 'apple') {
+        setSearchInputError(true)
+        hasError = true
+      } else if (watch('brand') && watch('brand') !== 'apple') {
+        setSearchInputError(true)
+        hasError = true
+      }
+    }
+
     Object.entries(data).forEach(([key, value]) => {
       if (value === "default") {
         setError(key as keyof FieldValues, {
@@ -19,8 +33,18 @@ export function StepThree({ setActiveTab, onSubmit, stepThreeInfos }: { stepThre
         hasError = true
       }
     });
+
     if (hasError) return
-    onSubmit(data);
+    setSearchInputError(false)
+    if (searchModel && watch('brand') && watch('brand') !== 'apple') {
+      onSubmit({
+        ...data,
+        'model': searchModel,
+      });
+    } else {
+      onSubmit(data)
+    }
+
     setActiveTab(4)
   };
 
@@ -59,18 +83,30 @@ export function StepThree({ setActiveTab, onSubmit, stepThreeInfos }: { stepThre
                 >
                   {questions[1].question}
                 </Text>
-                {watch('phone-A') === 'phone-A-1' && (<AppleModelsSelect />)}
-                {watch('phone-A') === 'phone-A-2' && (<SearchModelsInput brand={'Samsung'} phoneModels={samsungModels} />)}
-                {watch('phone-A') === 'phone-A-3' && (<SearchModelsInput brand={'Xiaomi'} phoneModels={xiaomiModels} />)}
-                {watch('phone-A') === 'phone-A-4' && (<SearchModelsInput brand={'Motorola'} phoneModels={samsungModels} />)}
-                {watch('phone-A') === 'default' || !watch('phone-A') ? (
+
+                {watch('brand') ? (
                   <>
-                    <select className="form-select rounded bg-black form-select-lg text-white w-full mt-1">
-                      <option value="default">Selecione</option>
-                    </select>
-                    {errors[questions[1].questionId] && (<span className="text-danger">Campo Obrigatório</span>)}
+                    {watch('brand') === 'apple' ? (<AppleModelsSelect errors={errors} register={register} questionId={questions[1].questionId} />) : ''}
+                    {watch('brand') === 'samsung' ? (<SearchModelsInput searchInputError={searchInputError} searchModel={searchModel} setSearchModel={setSearchModel} brand={'Samsung'} phoneModels={samsungModels} />) : ''}
                   </>
-                ) : ''}
+                ) : (
+                  <>
+                    {stepThreeInfos?.['brand'] === 'apple' ? (<AppleModelsSelect modelInputValue={stepThreeInfos[questions[1].questionId]} errors={errors} register={register} questionId={questions[1].questionId} />) : ''}
+                    {stepThreeInfos?.['brand'] === 'samsung' ? (<SearchModelsInput searchInputError={searchInputError} searchedValue={stepThreeInfos[questions[1].questionId]} searchModel={searchModel} setSearchModel={setSearchModel} brand={'Samsung'} phoneModels={samsungModels} />) : ''}
+                  </>
+                )}
+
+                {
+                  watch('brand') === 'default' && (
+                    <>
+                      <select className="form-select rounded bg-black form-select-lg text-white w-full mt-1">
+                        <option value="default">Selecione</option>
+                      </select>
+                      {errors[questions[0].questionId] && (<span className="text-danger">Campo Obrigatório</span>)}
+                    </>
+                  )
+                }
+
               </div>
             </div>
             <div className="flex items-center !mb-10">

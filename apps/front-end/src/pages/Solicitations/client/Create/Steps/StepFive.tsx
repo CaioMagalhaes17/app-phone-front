@@ -135,7 +135,7 @@ export function StepFive({ setActiveTab }: { setActiveTab: React.Dispatch<React.
       </div>
       <div className="flex p-6 relative justify-between w-full">
         <Button type="button" onClick={() => setActiveTab(3)} className="btn-primary">Voltar</Button>
-        <Button type="submit" onClick={() => setActiveTab(5)} className="btn-primary">Salvar</Button>
+        <Button type="submit" onClick={() => setActiveTab(5)} className="btn-primary">Próximo</Button>
       </div>
     </>
   )

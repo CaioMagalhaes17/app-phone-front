@@ -3,7 +3,7 @@ import React from "react";
 
 export function StepOne({ topic, setTopic, setActiveTab }: {
   topic: string,
-  setTopic: React.Dispatch<React.SetStateAction<string>>,
+  setTopic: React.Dispatch<React.SetStateAction<'battery' | 'display'>>,
   setActiveTab: React.Dispatch<React.SetStateAction<number>>
 }) {
   return (
