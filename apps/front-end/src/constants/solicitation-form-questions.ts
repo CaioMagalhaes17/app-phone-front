@@ -1,3 +1,5 @@
+import { ProblemTopicType } from "../types/solicitation"
+
 export const batteryQuestions = [
   {
     questionId: 'battery-A',
@@ -312,9 +314,11 @@ export const phoneQuestions = [
   },
 ]
 
+export const avaliableTopics: ProblemTopicType[] = ['battery', 'display']
+
 export const finalQuestions = [
   {
-    questionId: 'deliveryPreference',
+    questionId: 'timePreference',
     question: 'Qual a preferência para o prazo de entrega do serviço?',
     options: [
       {
@@ -322,8 +326,8 @@ export const finalQuestions = [
         text: 'Urgente'
       },
       {
-        optionId: 'moderate',
-        text: 'Moderado'
+        optionId: 'normal',
+        text: 'Normal'
       },
       {
         optionId: 'any',
@@ -332,8 +336,8 @@ export const finalQuestions = [
     ]
   },
   {
-    questionId: 'timePreference',
-    question: 'Possui preferência por lojas que buscam o aparelho em seu local?',
+    questionId: 'deliveryPreference',
+    question: 'Possui prioridade por lojas que buscam o aparelho em seu local?',
     options: [
       {
         optionId: 'yes',
@@ -463,9 +467,19 @@ type DisplayFormType = {
   'display-F': 'display-F-1' | 'display-F-2' | 'display-F-3'
 }
 
-export function getStepTwoAnswersByForm(topic: string, questionsObj: any) {
+export type BatteryFormType = {
+  "battery-A": "battery-A-1" | "battery-A-2" | "battery-A-3" | "battery-A-4"
+  "battery-B": "battery-B-1" | "battery-B-2" | "battery-B-3"
+  "battery-C": "battery-C-1" | "battery-C-2" | "battery-C-3"
+  "battery-D": "battery-D-1" | "battery-D-2" | "battery-D-3"
+  "battery-E": "battery-E-1" | "battery-E-2" | "battery-E-3"
+  "battery-F": "battery-F-1" | "battery-F-2" | "battery-F-3"
+}
+
+export function getStepTwoAnswersByForm(topic: string, questionsObj: DisplayFormType | BatteryFormType) {
   if (questionsObj) {
-    if (topic === 'battery') {
+    if (topic === 'battery' && 'battery-A' in questionsObj) {
+      console.log('3131232')
       const answersFormated = [
         {
           question: batteryQuestions[0].question,
@@ -494,7 +508,36 @@ export function getStepTwoAnswersByForm(topic: string, questionsObj: any) {
       ]
       return answersFormated
     }
+    if (topic === 'display' && 'display-A' in questionsObj) {
+      const answersFormated = [
+        {
+          question: displayQuestions[0].question,
+          answer: (displayQuestions[0].options.filter((option) => option.optionId === questionsObj['display-A']))[0].text
+        },
+        {
+          question: displayQuestions[1].question,
+          answer: (displayQuestions[1].options.filter((option) => option.optionId === questionsObj['display-B']))[0].text
+        },
+        {
+          question: displayQuestions[2].question,
+          answer: (displayQuestions[2].options.filter((option) => option.optionId === questionsObj['display-C']))[0].text
+        },
+        {
+          question: displayQuestions[3].question,
+          answer: (displayQuestions[3].options.filter((option) => option.optionId === questionsObj['display-D']))[0].text
+        },
+        {
+          question: displayQuestions[4].question,
+          answer: (displayQuestions[4].options.filter((option) => option.optionId === questionsObj['display-E']))[0].text
+        },
+        {
+          question: displayQuestions[5].question,
+          answer: questionsObj['display-F'] ? (displayQuestions[5].options.filter((option) => option.optionId === questionsObj['display-F']))[0].text : ''
+        }
+      ]
+      console.log(answersFormated)
+      return answersFormated
+    }
   }
   return []
-
 }

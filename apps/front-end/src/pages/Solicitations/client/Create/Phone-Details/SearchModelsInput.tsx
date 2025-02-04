@@ -1,7 +1,7 @@
 import { Input } from "@app/ui";
 import { useEffect, useState } from "react";
 
-export function SearchModelsInput({ phoneModels, searchInputError, brand, searchModel, setSearchModel, searchedValue }: { searchedValue?: string, searchModel: string, setSearchModel: React.Dispatch<React.SetStateAction<string>>, searchInputError: boolean, brand: string, phoneModels: string[] }) {
+export function SearchModelsInput({ phoneModels, searchInputError, brand, searchModel, setSearchModel, searchedValue }: { searchedValue?: string, searchModel: string, setSearchModel: React.Dispatch<React.SetStateAction<string>>, searchInputError?: boolean, brand: string, phoneModels: string[] }) {
   const [finishSearch, setFinishSearch] = useState(false)
   const [filteredModels, setFilteredModels] = useState<string[]>([]);
 

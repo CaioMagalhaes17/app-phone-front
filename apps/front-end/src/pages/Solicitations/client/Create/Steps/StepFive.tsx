@@ -2,7 +2,6 @@ import { Button, IconMap, IconSave, Input, Text } from "@app/ui";
 import { useEffect, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { EditGeolocation } from "../../../../../api/geolocation/edit-geolocation";
-import { useNavigate } from "react-router-dom";
 import useStore from "../../../../../state";
 import { AutoCompleteAdapter, MapAdapter, MarkAdapter, RadiusAdapter } from "../../../../../adapters/Map";
 import Swal from "sweetalert2";

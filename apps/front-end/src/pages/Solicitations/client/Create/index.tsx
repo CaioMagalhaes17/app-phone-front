@@ -6,10 +6,11 @@ import { StepThree } from "./Steps/StepThree";
 import { StepFor } from "./Steps/StepFor";
 import { FieldValues } from "react-hook-form";
 import { StepFive } from "./Steps/StepFive";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { CreateSolicitation } from "../../../../api/repair/solicitation/create-solicitation";
 import { BatteryFormType, DisplayFormType, PhoneFormType, SolicitationFormProps } from "../../../../types/solicitation";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 export function SolicitationsCreate() {
   const [activeTab, setActiveTab] = useState(1)
@@ -17,8 +18,8 @@ export function SolicitationsCreate() {
   const [stepTwoInfos, setStepTwoInfos] = useState<DisplayFormType | BatteryFormType>()
   const [stepThreeInfos, setStepThreeInfos] = useState<PhoneFormType>()
   const [stepFourInfos, setStepFourInfos] = useState<Pick<SolicitationFormProps, 'deliveryPreference' | 'timePreference' | 'details'>>()
-
-
+  const client = useQueryClient()
+  const navigate = useNavigate()
   const { mutateAsync } = useMutation({
     mutationFn: CreateSolicitation,
     mutationKey: ['create-solicitation']
@@ -86,7 +87,7 @@ export function SolicitationsCreate() {
       buttonsStyling: false,
     }).then(async (result) => {
       if (result.isConfirmed && stepThreeInfos && stepTwoInfos && topic) {
-        await mutateAsync({
+        const response = await mutateAsync({
           problemForm: stepTwoInfos,
           phoneForm: stepThreeInfos,
           problemTopic: topic,
@@ -94,6 +95,24 @@ export function SolicitationsCreate() {
           details: data.details,
           timePreference: data.timePreference
         })
+        if (response && response.status === 201 || response && response.status === 200) {
+          client.refetchQueries({ queryKey: ['get-solicitations'] })
+          Swal.fire({
+            titleText: 'Solicitação de orçamento criado com sucesso!',
+            icon: 'success',
+            showCancelButton: false,
+            confirmButtonText: 'Sim',
+            padding: '2em',
+            customClass: {
+              confirmButton: 'btn btn-primary btn-lg m-1',
+            },
+            buttonsStyling: false,
+          }).then((result) => {
+            if (result.isConfirmed) {
+              navigate('/solicitations')
+            }
+          })
+        }
       }
     })
   }
@@ -112,8 +131,8 @@ export function SolicitationsCreate() {
 
   return (
     <>
-      <div className="flex relative h-full gap-5">
-        <div style={{ borderRadius: '10px' }} className="flex flex-col  gap-2 bg-black w-full h-full">
+      <div className="flex relative h-full gap-5 max-w-[1200px] mx-auto">
+        <div style={{ borderRadius: '10px' }} className="flex flex-col gap-2 bg-black w-full h-full">
           <div className="w-full p-2 h-full">
             <Steps handleChangeTab={handleChangeTab} activeTab={activeTab} steps={steps} />
             <div className="border-b border-b-[#323b45] mt-2 w-full" />

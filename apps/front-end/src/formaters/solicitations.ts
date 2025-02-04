@@ -1,4 +1,4 @@
-import { ProblemTopicType, Solicitation, SolicitationFormProps, SolicitationsFromApi } from "../types/solicitation";
+import { CANCELED_SOLICITATION_STATUS, OPEN_TO_BUDGETS_SOLICITATION_STATUS, PhoneBrandType, ProblemTopicType, Solicitation, SolicitationFormProps, SolicitationsFromApi } from "../types/solicitation";
 import { formatClientProfile } from "./client-profile";
 
 export function formatSolicitations(solicitations: SolicitationsFromApi[]): Solicitation[] {
@@ -29,9 +29,10 @@ export function formatSolicitationForm(form: {
   }
 }
 
-export function formatPhoneBrand(brand: string) {
+export function formatPhoneBrand(brand: PhoneBrandType) {
   if (brand === 'samsung') return 'Samsung'
   if (brand === 'apple') return 'Apple'
+  if (brand === 'xiaomi') return 'Xiaomi'
 }
 
 export function formatTopic(topic: ProblemTopicType) {
@@ -40,5 +41,58 @@ export function formatTopic(topic: ProblemTopicType) {
 }
 
 export function getStatusColor(status: string) {
-  if (status === 'EM ANÁLISE PELA LOJA') return 'warning'
+  if (status === OPEN_TO_BUDGETS_SOLICITATION_STATUS) return 'success'
+  if (status === CANCELED_SOLICITATION_STATUS) return 'danger'
+}
+
+export function formatOriginalHardwareAnswer(originalHardware: string) {
+  if (originalHardware === 'yes') return 'Sim'
+  if (originalHardware === 'no') return 'Não'
+  if (originalHardware === 'dontknow') return 'Não sei'
+}
+
+export function formatPreviousRepair(previousRepair: string) {
+  console.log(previousRepair)
+  if (previousRepair === 'yes') return 'Sim'
+  if (previousRepair === 'no') return 'Não'
+  if (previousRepair === 'dontknow') return 'Não sei'
+
+}
+
+export function formatUsageTime(usageTime: string) {
+  if (usageTime === 'betweenOneAndTwoYears') return 'Entre 1 a 2 anos'
+  if (usageTime === 'moreThanTwoYears') return 'Mais de 2 anos'
+  if (usageTime === 'lessThanOneMounth') return 'Menos de 1 mês'
+  if (usageTime === 'betweenOneAndElevenMounths') return 'Entre 1 a 11 meses'
+}
+
+export function getAnswerColor(answer: string) {
+  if (answer === 'yes' || answer === 'Sim') return 'success'
+  if (answer === 'no' || answer === 'Não') return 'danger'
+  if (answer === 'dontknow' || answer === 'Não sei') return 'warning'
+  return 'white'
+}
+
+export function getTimePreferenceColor(timePreference: string) {
+  if (timePreference === 'urgent') return 'danger'
+  if (timePreference === 'normal') return 'warning'
+  if (timePreference === 'any') return 'success'
+}
+
+export function formatTimePreference(timePreference: string) {
+  if (timePreference === 'urgent') return 'Urgente'
+  if (timePreference === 'normal') return 'Normal'
+  if (timePreference === 'any') return 'Sem pressa'
+
+
+}
+
+export function formatDeliveryPreference(deliveryPreference: string) {
+  if (deliveryPreference === 'yes') return 'Sim'
+  if (deliveryPreference === 'noPriority') return 'Não é prioridade'
+}
+
+export function getDeliveryPreferenceColor(deliveryPreference: string) {
+  if (deliveryPreference === 'yes') return 'success'
+  if (deliveryPreference === 'noPriority') return 'warning'
 }

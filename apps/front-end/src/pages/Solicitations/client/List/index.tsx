@@ -44,9 +44,8 @@ export function SolicitationsList() {
       title: 'Ações',
       render: ({ id }) => {
         return (
-          <div className="flex justify-center items-center flex-row gap-2">
-            <Button onClick={() => navigate('/solicitation/' + id)} className="btn-primary">Acessar</Button>
-            <Button className="btn-outline-danger">Excluir</Button>
+          <div className="flex justify-center items-center">
+            <Button onClick={() => navigate('/solicitation/' + id)} className="btn-outline-primary text-lg">Acessar</Button>
           </div>
         )
       }

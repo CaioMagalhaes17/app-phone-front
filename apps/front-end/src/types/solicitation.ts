@@ -13,7 +13,7 @@ export type SolicitationFormProps = {
 }
 
 export type PhoneFormType = {
-  brand: string
+  brand: PhoneBrandType
   model: string
   previousRepair: string
   originalHardware: string
@@ -39,6 +39,8 @@ export type DisplayFormType = {
 }
 
 export type ProblemTopicType = "battery" | "display"
+
+export type PhoneBrandType = 'samsung' | 'apple'
 
 export type SolicitationsFromApi = {
   props: {
@@ -66,3 +68,7 @@ export type Solicitation = {
   form: SolicitationFormProps,
   clientProfile: ClientProfileType,
 }
+
+export const OPEN_TO_BUDGETS_SOLICITATION_STATUS = "ABERTO PARA ORÇAMENTOS"
+export const ACCEPTED_BUDGET_SOLICITATION_STATUS = "ORÇAMENTO ACEITO"
+export const CANCELED_SOLICITATION_STATUS = "ORÇAMENTO CANCELADO"
