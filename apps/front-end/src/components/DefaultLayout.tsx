@@ -2,7 +2,7 @@ import { Box } from "@app/ui"
 import { Suspense } from "react"
 import { Outlet } from "react-router-dom"
 import { Header } from "./Header"
-import { Sidebar } from "./SIdebar/Sidebar"
+import { Sidebar } from "./SIdebar"
 
 export default function DefaultLayout() {
   return (

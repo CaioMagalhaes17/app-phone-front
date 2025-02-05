@@ -9,6 +9,9 @@ import ClientMapSearch from "../pages/Map/Search";
 import { SolicitationsCreate } from "../pages/Solicitations/client/Create";
 import { SolicitationsList } from "../pages/Solicitations/client/List";
 import { SolicitationDetails } from "../pages/Solicitations/client/Details";
+import Error404 from "../pages/404Page";
+import { StoreHome } from "../pages/Home/store";
+import StoreMapEdit from "../pages/Map/Edit/store";
 
 const ClientMapEdit = React.lazy(() => import("../pages/Map/Edit/client"))
 const DefaultLayout = React.lazy(() => import("../components/DefaultLayout"))
@@ -25,7 +28,7 @@ const routes: RouteObject[] = [
     children: [
       {
         path: '/',
-        element: <Home />
+        element: <Home />,
       },
       {
         path: '/map/edit',
@@ -46,7 +49,15 @@ const routes: RouteObject[] = [
       {
         path: '/solicitation/:id',
         element: <SolicitationDetails />
-      }
+      },
+      {
+        path: '/store',
+        element: <StoreHome />,
+      },
+      {
+        path: '/store/map/edit',
+        element: <StoreMapEdit />,
+      },
     ]
   },
   {
@@ -68,6 +79,10 @@ const routes: RouteObject[] = [
   {
     path: '/store/profile/picker',
     element: <StoreProfilePicker />
+  },
+  {
+    path: "*",
+    element: <Error404 />
   }
 ]
 
