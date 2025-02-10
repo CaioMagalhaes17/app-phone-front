@@ -39,6 +39,10 @@
     @apply border-primary text-primary shadow-none hover:bg-primary hover:text-white;
   }
 
+  .btn-outline-warning {
+    @apply border-warning text-warning shadow-none hover:bg-warning hover:text-white;
+  }
+
   .btn-outline-primary-dark {
     @apply border-primary-dark text-primary-dark shadow-none hover:bg-primary-dark hover:text-white;
   }

@@ -28,6 +28,8 @@ export { IconBill } from './Icons/IconBill'
 export { IconSend } from './Icons/IconSend'
 export { Steps } from './components/Steps'
 export { IconStore } from './Icons/IconStore'
+export { DateField } from './components/DateField'
+export { IconChat } from './Icons/IconChat'
 
 export {
   Carousel,

@@ -1,4 +1,4 @@
-import { Button, IconPencil, Panel, Text } from "@app/ui";
+import { Button, IconPlus, Panel, Text } from "@app/ui";
 import { useEffect, useState } from "react";
 import useStore from "../../../state";
 import { MapAdapter, MarkAdapter } from "../../../adapters/Map";
@@ -11,9 +11,8 @@ import { batteryQuestions, displayQuestions } from "../../../constants/solicitat
 export function StoreProfileComponent({ name, rating, budgets }: { name: string, rating: number, budgets: BudgetType[] }) {
   const { storeInfos, isMapLoaded } = useStore()
   const totalStars = 5;
-  const filledStars = 4;
+  const filledStars = 2;
   const [clintLocation, setLocation] = useState<{ lat: number; lng: number } | null>(null);
-  const [solicitationMainAnswer, setSolicitationMainQuestion] = useState('')
 
   useEffect(() => {
     setLocation({
@@ -46,21 +45,6 @@ export function StoreProfileComponent({ name, rating, budgets }: { name: string,
 
   return (
     <>
-      {/*Botões De Cima*/}
-      <div className="">
-        <ul className="flex font-semibold border-b border-[#191e3a] flex-row mb-5 whitespace-nowrap overflow-y-auto">
-          <li className="inline-block p-4">
-            <Button className="btn-outline-primary">Contato/Endereço</Button>
-          </li>
-          <li className="inline-block p-4">
-            <Button className="btn-outline-primary">Feedbacks</Button>
-          </li>
-          <div className="ml-auto" />
-          <li className="inline-block p-4">
-            <Button className="btn-primary flex flex-row gap-2"><IconPencil />Editar Perfil</Button>
-          </li>
-        </ul>
-      </div>
       {/*Painel Principal*/}
       <Panel>
         <div className="max-w-[1200px] mr-auto ml-auto flex flex-row gap-5">
@@ -131,7 +115,10 @@ export function StoreProfileComponent({ name, rating, budgets }: { name: string,
       {/*Feedback e orçamentos*/}
       <div className="gap-5 flex mt-5 font-extrabold flex-row">
         <Panel className="w-full">
-          <Text className="text-3xl text-white" as="h1">Feedbacks</Text>
+          <div className="flex flex-row">
+            <Text className="text-3xl text-white" as="h1">Avaliações</Text>
+            <Button className="ml-auto btn-primary flex flex-row gap-2"><IconPlus /> Ver todas</Button>
+          </div>
           <div className="border-b border-b-[#323b45] mt-5 mt-10" />
           <div className="flex flex-row items-center gap-5">
             <div className="flex flex-col gap-2 mt-5 ">
@@ -186,7 +173,10 @@ export function StoreProfileComponent({ name, rating, budgets }: { name: string,
 
         </Panel>
         <Panel className="w-full">
-          <Text className="text-3xl text-white" as="h1">Últimos orçamentos</Text>
+          <div className="flex flex-row">
+            <Text className="text-3xl text-white" as="h1">Ultimos Orçamentos</Text>
+            <Button className="ml-auto btn-primary flex flex-row gap-2"><IconPlus /> Ver todas</Button>
+          </div>
           <div className="border-b border-b-[#323b45] mt-5 mt-10" />
           {budgets.map((budget) => {
             return (
@@ -210,7 +200,7 @@ export function StoreProfileComponent({ name, rating, budgets }: { name: string,
       </div>
       {/*Localização Loja*/}
       <Panel className="mt-5 font-extrabold">
-        <Text className="text-3xl text-white" as="h1">Localização</Text>
+        <Text className="text-3xl text-white" as="h1">Localização e Contato</Text>
         <div className="border-b border-b-[#323b45] mt-5 mt-10" />
         <div className="flex flex-row relative h-full gap-5">
 

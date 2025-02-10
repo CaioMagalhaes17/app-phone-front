@@ -3,7 +3,6 @@ import 'flatpickr/dist/flatpickr.css'
 import { Portuguese } from 'flatpickr/dist/l10n/pt.js'
 import { cva, VariantProps } from 'class-variance-authority'
 import { cn } from '@/utils'
-import React from 'react'
 
 interface BasicCalendarInterface extends DateTimePickerProps {
   minDate?: string

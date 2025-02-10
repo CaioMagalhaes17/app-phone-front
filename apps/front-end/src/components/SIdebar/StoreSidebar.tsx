@@ -1,14 +1,13 @@
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, IconBill, IconDollarSignCircle, IconHelpCircle, IconHome, IconPencil, IconSmartphone, IconStore, IconStreetMap, Text } from "@app/ui"
-import { useNavigate } from "react-router-dom"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, IconBill, IconChat, IconDollarSignCircle, IconHelpCircle, IconHome, IconPencil, IconSmartphone, IconStore, IconStreetMap } from "@app/ui"
+import { Link } from "react-router-dom"
 
 export function StoreSidebar() {
-  const navigate = useNavigate()
   return (
     <>
-      <Text as="span" onClick={() => navigate('/store')} className="font-bold hover:underline text-lg cursor-pointer text-white flex flex-row gap-5">
+      <Link to='/store' className="font-bold hover:underline text-lg cursor-pointer text-white flex flex-row gap-5">
         <IconHome />
         Início
-      </Text>
+      </Link>
       <div className="border-b border-b-[#323b45] mt-5" />
       <Accordion type="single" collapsible className="">
         <AccordionItem value="item-1">
@@ -19,16 +18,16 @@ export function StoreSidebar() {
             </div>
           </AccordionTrigger>
           <AccordionContent className="hover:text-white">
-            <button onClick={() => navigate('/store/avaliable/solicitations')} className="ml-5 items-center font-bold hover:text-white hover:underline text-lg text-[#c4c4c4] flex flex-row gap-2">
+            <Link to='/store/avaliable/solicitations' className="ml-5 items-center font-bold hover:text-white hover:underline text-lg text-[#c4c4c4] flex flex-row gap-2">
               <IconBill />
               Lista de defeitos
-            </button>
+            </Link>
           </AccordionContent>
           <AccordionContent className="hover:text-white">
-            <button onClick={() => navigate('/store/budget/list')} className="ml-5 items-center font-bold hover:text-white hover:underline text-lg text-[#c4c4c4] flex flex-row gap-2">
+            <Link to='/store/budget/list' className="ml-5 items-center font-bold hover:text-white hover:underline text-lg text-[#c4c4c4] flex flex-row gap-2">
               <IconDollarSignCircle />
               Orçamentos Enviados
-            </button>
+            </Link>
           </AccordionContent>
 
         </AccordionItem>
@@ -42,16 +41,22 @@ export function StoreSidebar() {
           </AccordionTrigger>
 
           <AccordionContent className="hover:text-white">
-            <button onClick={() => navigate('/store/profile')} className="flex flex-row gap-2 items-center font-bold hover:text-white hover:underline text-lg ml-5 text-[#c4c4c4]">
+            <Link to='/store/profile' className="flex flex-row gap-2 items-center font-bold hover:text-white hover:underline text-lg ml-5 text-[#c4c4c4]">
               <IconStore />
               Detalhes perfil
-            </button>
+            </Link>
           </AccordionContent>
           <AccordionContent className="hover:text-white">
-            <button onClick={() => navigate('/map')} className="flex flex-row gap-2 items-center font-bold hover:text-white hover:underline text-lg ml-5 text-[#c4c4c4]">
+            <Link to='/store/profile/edit' className="flex flex-row gap-2 items-center font-bold hover:text-white hover:underline text-lg ml-5 text-[#c4c4c4]">
               <IconPencil />
               Editar perfil
-            </button>
+            </Link>
+          </AccordionContent>
+          <AccordionContent className="hover:text-white">
+            <Link to='/store/feedbacks/123' className="flex flex-row gap-2 items-center font-bold hover:text-white hover:underline text-lg ml-5 text-[#c4c4c4]">
+              <IconChat />
+              Avaliações
+            </Link>
           </AccordionContent>
         </AccordionItem>
       </Accordion>
@@ -64,10 +69,10 @@ export function StoreSidebar() {
           </AccordionTrigger>
 
           <AccordionContent className="hover:text-white">
-            <button onClick={() => navigate('/store/map/edit')} className="flex flex-row gap-2 items-center font-bold hover:text-white hover:underline text-lg ml-5 text-[#c4c4c4]">
+            <Link to='/store/map/edit' className="flex flex-row gap-2 items-center font-bold hover:text-white hover:underline text-lg ml-5 text-[#c4c4c4]">
               <IconPencil />
               Editar localização da loja
-            </button>
+            </Link>
           </AccordionContent>
         </AccordionItem>
       </Accordion>

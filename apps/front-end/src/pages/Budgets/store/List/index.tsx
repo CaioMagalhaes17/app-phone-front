@@ -15,7 +15,7 @@ export function StoreBudgetList() {
   const navigate = useNavigate()
   const { data, isLoading } = useQuery({
     queryKey: ['get-budgets'],
-    queryFn: GetBudgets
+    queryFn: () => GetBudgets({ page: '1', limit: '10' })
   })
   useEffect(() => {
     if (!isLoading) {

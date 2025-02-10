@@ -16,6 +16,8 @@ import { AvaliableSolicitations } from "../pages/Solicitations/store/List/Avalia
 import { StoreSolicitationDetails } from "../pages/Solicitations/store/Details";
 import { StoreBudgetList } from "../pages/Budgets/store/List";
 import { StoreProfile } from "../pages/Profile/store";
+import { EditStoreProfile } from "../pages/Profile/store/Edit";
+import { StoreFeedbacks } from "../pages/Profile/store/Feedbacks";
 
 const ClientMapEdit = React.lazy(() => import("../pages/Map/Edit/client"))
 const DefaultLayout = React.lazy(() => import("../components/DefaultLayout"))
@@ -77,6 +79,14 @@ const routes: RouteObject[] = [
       {
         path: '/store/profile',
         element: <StoreProfile />,
+      },
+      {
+        path: '/store/profile/edit',
+        element: <EditStoreProfile />,
+      },
+      {
+        path: '/store/feedbacks/:id',
+        element: <StoreFeedbacks />,
       },
     ]
   },
