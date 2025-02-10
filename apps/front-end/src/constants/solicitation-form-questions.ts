@@ -535,7 +535,6 @@ export function getStepTwoAnswersByForm(topic: string, questionsObj: DisplayForm
           answer: questionsObj['display-F'] ? (displayQuestions[5].options.filter((option) => option.optionId === questionsObj['display-F']))[0].text : ''
         }
       ]
-      console.log(answersFormated)
       return answersFormated
     }
   }

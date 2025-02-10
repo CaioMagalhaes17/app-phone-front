@@ -104,7 +104,6 @@ export function ProblemForm({ problemForm, topic, solicitationId }: { solicitati
       }
     })
   }
-  console.log(problemQuestions)
   return (
     <>
       {formattedProblem.length > 0 && (

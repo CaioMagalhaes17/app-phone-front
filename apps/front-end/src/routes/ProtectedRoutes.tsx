@@ -16,13 +16,7 @@ export const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const isLoaded = LoadGoogleApi()
   const isStoreRoute = location.pathname.startsWith("/store")
 
-  if (isStoreRoute && isStore === 'false') {
-    return <Navigate to={"/404"} replace />;
-  }
 
-  if (!isStoreRoute && isStore === 'true') {
-    return <Navigate to={"/404"} replace />;
-  }
 
   if (!accessToken) {
     return <Navigate to={isStore && isStore === 'true' ? "/store/login" : "/login"} replace />;
@@ -38,6 +32,8 @@ export const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
     }
     setIsMapLoaded(isLoaded)
     checkAuth()
+    checkRoute()
+
   }, [location, isLoaded])
 
   async function loadClient() {
@@ -51,6 +47,16 @@ export const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
     console.log('111', response)
     setStoreInfos(response)
     setIsLoading(false)
+  }
+
+  function checkRoute() {
+    if (isStoreRoute && isStore === 'false') {
+      return <Navigate to={"/404"} replace />;
+    }
+
+    if (!isStoreRoute && isStore === 'true') {
+      return <Navigate to={"/404"} replace />;
+    }
   }
 
   if (isLoading) {

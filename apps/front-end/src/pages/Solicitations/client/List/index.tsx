@@ -16,19 +16,20 @@ export function SolicitationsList() {
 
   const columns: DataTableColumn<Solicitation>[] = [
     {
-      accessor: 'topic',
-      title: 'Raiz do problema',
-      render: ({ form }) => {
-        return <span className="text-white text-lg font-extrabold">{formatTopic(form.problemTopic)}</span>
-      }
-    },
-    {
       accessor: 'phone',
       title: 'Celular',
       render: ({ form }) => {
         return <span className="text-white text-lg font-extrabold">{formatPhoneBrand(form.phoneForm.brand)} - {form.phoneForm.model}</span>
       }
     },
+    {
+      accessor: 'topic',
+      title: 'Raiz do problema',
+      render: ({ form }) => {
+        return <span className="text-white text-lg font-extrabold">{formatTopic(form.problemTopic)}</span>
+      }
+    },
+
     {
       accessor: 'status',
       title: 'Status da solicitação',

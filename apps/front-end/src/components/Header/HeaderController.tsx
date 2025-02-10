@@ -58,8 +58,13 @@ export function HeaderController() {
   function getStoreHeader() {
     function handleLogout() {
       setStoreInfos({
+        profileId: '',
         name: '',
         profileImg: '',
+        address: '',
+        email: '',
+        telNum: '',
+        rating: 0,
         location: {
           latitude: 0,
           longitude: 0,

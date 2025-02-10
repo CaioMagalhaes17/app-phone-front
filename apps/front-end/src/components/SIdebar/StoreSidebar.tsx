@@ -1,4 +1,4 @@
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, IconBill, IconHelpCircle, IconHome, IconPencil, IconSend, IconSmartphone, IconStore, IconStreetMap, Text } from "@app/ui"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, IconBill, IconDollarSignCircle, IconHelpCircle, IconHome, IconPencil, IconSmartphone, IconStore, IconStreetMap, Text } from "@app/ui"
 import { useNavigate } from "react-router-dom"
 
 export function StoreSidebar() {
@@ -19,14 +19,14 @@ export function StoreSidebar() {
             </div>
           </AccordionTrigger>
           <AccordionContent className="hover:text-white">
-            <button onClick={() => navigate('/solicitations/create')} className="ml-5 font-bold hover:text-white hover:underline text-lg text-[#c4c4c4] flex flex-row gap-2">
-              <IconSend />
+            <button onClick={() => navigate('/store/avaliable/solicitations')} className="ml-5 items-center font-bold hover:text-white hover:underline text-lg text-[#c4c4c4] flex flex-row gap-2">
+              <IconBill />
               Lista de defeitos
             </button>
           </AccordionContent>
           <AccordionContent className="hover:text-white">
-            <button className="ml-5 font-bold hover:text-white hover:underline text-lg text-[#c4c4c4] flex flex-row gap-2">
-              <IconBill />
+            <button onClick={() => navigate('/store/budget/list')} className="ml-5 items-center font-bold hover:text-white hover:underline text-lg text-[#c4c4c4] flex flex-row gap-2">
+              <IconDollarSignCircle />
               Orçamentos Enviados
             </button>
           </AccordionContent>
@@ -42,7 +42,7 @@ export function StoreSidebar() {
           </AccordionTrigger>
 
           <AccordionContent className="hover:text-white">
-            <button onClick={() => navigate('/map')} className="flex flex-row gap-2 items-center font-bold hover:text-white hover:underline text-lg ml-5 text-[#c4c4c4]">
+            <button onClick={() => navigate('/store/profile')} className="flex flex-row gap-2 items-center font-bold hover:text-white hover:underline text-lg ml-5 text-[#c4c4c4]">
               <IconStore />
               Detalhes perfil
             </button>

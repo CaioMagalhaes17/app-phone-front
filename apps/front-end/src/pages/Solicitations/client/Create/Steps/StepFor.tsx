@@ -7,7 +7,6 @@ export function StepFor({ stepFourInfos, setActiveTab, onSubmit }: { stepFourInf
 
   const handleFormSubmit: SubmitHandler<FieldValues> = async (data) => {
     let hasError: boolean = false
-    console.log(data)
     Object.entries(data).forEach(([key, value]) => {
       if (value === "default") {
         setError(key as keyof FieldValues, {

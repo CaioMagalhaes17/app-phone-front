@@ -37,6 +37,18 @@ export {
   CarouselPrevious,
 } from "./components/Carousel"
 
+export {
+  Dialog,
+  DialogPortal,
+  DialogOverlay,
+  DialogTrigger,
+  DialogClose,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+  DialogTitle,
+  DialogDescription,
+} from './components/Dialog'
 
 export {
   DropdownMenu,
@@ -54,7 +66,6 @@ export {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuRadioGroup,
-}
-  from './components/Dropdown'
+} from './components/Dropdown'
 
 import './css/index.css'

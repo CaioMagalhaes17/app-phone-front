@@ -49,7 +49,6 @@ export function SolicitationsCreate() {
   };
 
   const handleStepThreeSubmit = (data: FieldValues) => {
-    console.log(data)
     setStepThreeInfos({
       brand: data.brand,
       model: data.model,

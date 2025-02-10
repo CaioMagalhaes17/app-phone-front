@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useStore from "../../../../state";
 import { AutoCompleteAdapter, MapAdapter, RadiusAdapter } from "../../../../adapters/Map";
 import { Button, IconMap, IconSave, Input, Text } from "@app/ui";
@@ -12,7 +12,7 @@ export default function ClientMapEdit() {
   const [clintLocation, setLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [radius, setRadius] = useState<number>(0)
   const navigate = useNavigate()
-
+  const client = useQueryClient()
   const { mutateAsync } = useMutation({
     mutationFn: EditGeolocation
   })
@@ -63,6 +63,9 @@ export default function ClientMapEdit() {
                 radius: radius
               },
             })
+            client.refetchQueries({ queryKey: ['fetch-stores-inside-client-radius'] })
+            client.refetchQueries({ queryKey: ['get-solicitation'] })
+            client.refetchQueries({ queryKey: ['get-solicitations'] })
           }
           , onError: () => Swal.fire({
             icon: 'error',

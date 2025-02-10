@@ -12,6 +12,10 @@ import { SolicitationDetails } from "../pages/Solicitations/client/Details";
 import Error404 from "../pages/404Page";
 import { StoreHome } from "../pages/Home/store";
 import StoreMapEdit from "../pages/Map/Edit/store";
+import { AvaliableSolicitations } from "../pages/Solicitations/store/List/Avaliable";
+import { StoreSolicitationDetails } from "../pages/Solicitations/store/Details";
+import { StoreBudgetList } from "../pages/Budgets/store/List";
+import { StoreProfile } from "../pages/Profile/store";
 
 const ClientMapEdit = React.lazy(() => import("../pages/Map/Edit/client"))
 const DefaultLayout = React.lazy(() => import("../components/DefaultLayout"))
@@ -57,6 +61,22 @@ const routes: RouteObject[] = [
       {
         path: '/store/map/edit',
         element: <StoreMapEdit />,
+      },
+      {
+        path: '/store/avaliable/solicitations',
+        element: <AvaliableSolicitations />,
+      },
+      {
+        path: '/store/solicitation/:id',
+        element: <StoreSolicitationDetails />,
+      },
+      {
+        path: '/store/budget/list',
+        element: <StoreBudgetList />,
+      },
+      {
+        path: '/store/profile',
+        element: <StoreProfile />,
       },
     ]
   },

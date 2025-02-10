@@ -2,14 +2,18 @@ import { CANCELED_SOLICITATION_STATUS, OPEN_TO_BUDGETS_SOLICITATION_STATUS, Phon
 import { formatClientProfile } from "./client-profile";
 
 export function formatSolicitations(solicitations: SolicitationsFromApi[]): Solicitation[] {
-  return solicitations.map(({ _id, props }) => ({
-    id: _id,
-    createdAt: props.createdAt,
-    updatedAt: props.updatedAt,
-    status: props.status,
-    form: formatSolicitationForm(props.form),
-    clientProfile: formatClientProfile(props.clientProfile),
-  }));
+  return solicitations.map((solicitation) => formatSolicitation(solicitation));
+}
+
+export function formatSolicitation(solicitation: SolicitationsFromApi): Solicitation {
+  return {
+    id: solicitation._id,
+    createdAt: solicitation.props.createdAt,
+    updatedAt: solicitation.props.updatedAt,
+    status: solicitation.props.status,
+    form: formatSolicitationForm(solicitation.props.form),
+    clientProfile: formatClientProfile(solicitation.props.clientProfile),
+  }
 }
 
 export function formatSolicitationForm(form: {

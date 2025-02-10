@@ -69,6 +69,8 @@ export function StepFive({ setActiveTab }: { setActiveTab: React.Dispatch<React.
               },
             })
             client.refetchQueries({ queryKey: ['fetch-stores-inside-client-radius'] })
+            client.refetchQueries({ queryKey: ['get-solicitation'] })
+            client.refetchQueries({ queryKey: ['get-solicitations'] })
           }
           , onError: () => Swal.fire({
             icon: 'error',
@@ -85,7 +87,6 @@ export function StepFive({ setActiveTab }: { setActiveTab: React.Dispatch<React.
     queryFn: FetchStoresInsideClientRadius
   })
 
-  console.log(data)
   return (
     <>
       <div className="flex relative w-full h-full mt-5">

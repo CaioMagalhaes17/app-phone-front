@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import useStore from "../../../../state";
-import { AutoCompleteAdapter, MapAdapter } from "../../../../adapters/Map";
+import { AutoCompleteAdapter, MapAdapter, MarkAdapter } from "../../../../adapters/Map";
 import { Button, IconMap, IconSave, Input, Text } from "@app/ui";
 import { useEffect, useState } from "react";
 import { EditGeolocation } from "../../../../api/geolocation/edit-geolocation";
@@ -11,7 +11,7 @@ export default function StoreMapEdit() {
   const { storeInfos, setStoreInfos, isMapLoaded } = useStore()
   const [clintLocation, setLocation] = useState<{ lat: number; lng: number } | null>(null);
   const navigate = useNavigate()
-  console.log(storeInfos)
+  console.log('3231231312132312', storeInfos)
   const { mutateAsync } = useMutation({
     mutationFn: EditGeolocation
   })
@@ -73,7 +73,7 @@ export default function StoreMapEdit() {
     <>
       <div className="flex relative h-full gap-5">
         <div style={{ borderRadius: '10px' }} className="max-w-xs flex flex-col  gap-2 items-center bg-black w-[420px]">
-          <h1 className="text-[#c4c4c4] font-extrabold text-xl mt-5">Definir localização de pesquisa</h1>
+          <h1 className="text-[#c4c4c4] font-extrabold text-xl mt-5">Definir localização da loja</h1>
           <div className="border-b border-b-[#323b45] mt-5 w-[90%]" />
           <div className="text-left p-4">
             <Button onClick={() => getBrowserLocation()} className="btn-primary w-full"><IconMap />Usar localização exata do dispositivo</Button>
@@ -96,15 +96,11 @@ export default function StoreMapEdit() {
             </Button>
           </div>
           <div className="border-b border-b-[#323b45] mt-5 w-[90%]" />
-          <div className="mt-5">
-            <Button onClick={() => navigate('/map')} className="btn-primary w-full flex gap-5 flex-row">
-              <IconMap />
-              <span>Procurar por lojas próximas</span>
-            </Button>
-          </div>
+
         </div>
         {clintLocation && isMapLoaded ? (
           <MapAdapter mapStyle={mapStyle} initialPosition={clintLocation}>
+            <MarkAdapter position={clintLocation} />
           </MapAdapter>
         ) : ''}
       </div>

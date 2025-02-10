@@ -28,6 +28,11 @@ type StateManager = {
 type StoreInfos = {
   name: string,
   profileImg: string,
+  profileId: string,
+  rating: number,
+  email: string,
+  telNum: string,
+  address: string,
   location: {
     latitude: number,
     longitude: number
@@ -62,6 +67,10 @@ const useStore = create<StateManager>((set) => {
       profileId: '',
       name: '',
       profileImg: '',
+      address: '',
+      email: '',
+      telNum: '',
+      rating: 0,
       location: {
         latitude: 0,
         longitude: 0,
