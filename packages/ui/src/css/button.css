@@ -48,7 +48,7 @@
   }
 
   .btn-success {
-    @apply border-success bg-success text-white shadow-success/60;
+    @apply border-success bg-success text-white shadow-[000];
   }
 
   .btn-outline-success {

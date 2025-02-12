@@ -17,7 +17,8 @@ import { StoreSolicitationDetails } from "../pages/Solicitations/store/Details";
 import { StoreBudgetList } from "../pages/Budgets/store/List";
 import { StoreProfile } from "../pages/Profile/store";
 import { EditStoreProfile } from "../pages/Profile/store/Edit";
-import { StoreFeedbacks } from "../pages/Profile/store/Feedbacks";
+import { StoreFeedbacksList } from "../pages/Profile/store/Feedbacks";
+import { ClientBudgetsList } from "../pages/Budgets/client/List";
 
 const ClientMapEdit = React.lazy(() => import("../pages/Map/Edit/client"))
 const DefaultLayout = React.lazy(() => import("../components/DefaultLayout"))
@@ -57,6 +58,10 @@ const routes: RouteObject[] = [
         element: <SolicitationDetails />
       },
       {
+        path: '/budgets/list',
+        element: <ClientBudgetsList />,
+      },
+      {
         path: '/store',
         element: <StoreHome />,
       },
@@ -86,7 +91,7 @@ const routes: RouteObject[] = [
       },
       {
         path: '/store/feedbacks/:id',
-        element: <StoreFeedbacks />,
+        element: <StoreFeedbacksList />,
       },
     ]
   },

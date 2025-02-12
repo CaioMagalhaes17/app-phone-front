@@ -26,9 +26,9 @@ type StateManager = {
 }
 
 type StoreInfos = {
+  id: string
   name: string,
   profileImg: string,
-  profileId: string,
   rating: number,
   email: string,
   telNum: string,
@@ -64,6 +64,7 @@ const useStore = create<StateManager>((set) => {
       })
     },
     storeInfos: {
+      id: '',
       profileId: '',
       name: '',
       profileImg: '',

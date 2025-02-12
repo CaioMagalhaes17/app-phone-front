@@ -7,3 +7,8 @@ export type ClientProfileType = {
   telNum: string,
   userId: string
 }
+
+export type ClientProfileFromApi = {
+  props: ClientProfileType,
+  _id: string
+}

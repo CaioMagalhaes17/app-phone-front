@@ -1,7 +1,9 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, IconBill, IconChat, IconDollarSignCircle, IconHelpCircle, IconHome, IconPencil, IconSmartphone, IconStore, IconStreetMap } from "@app/ui"
 import { Link } from "react-router-dom"
+import useStore from "../../state"
 
 export function StoreSidebar() {
+  const { storeInfos } = useStore()
   return (
     <>
       <Link to='/store' className="font-bold hover:underline text-lg cursor-pointer text-white flex flex-row gap-5">
@@ -53,7 +55,7 @@ export function StoreSidebar() {
             </Link>
           </AccordionContent>
           <AccordionContent className="hover:text-white">
-            <Link to='/store/feedbacks/123' className="flex flex-row gap-2 items-center font-bold hover:text-white hover:underline text-lg ml-5 text-[#c4c4c4]">
+            <Link to={`/store/feedbacks/${storeInfos.id}`} className="flex flex-row gap-2 items-center font-bold hover:text-white hover:underline text-lg ml-5 text-[#c4c4c4]">
               <IconChat />
               Avaliações
             </Link>

@@ -1,5 +1,5 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, IconBill, IconHelpCircle, IconHome, IconPencil, IconSearch, IconSend, IconSmartphone, IconStreetMap, IconUser, Text } from "@app/ui"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 export function ClientSidebar() {
   const navigate = useNavigate()
@@ -25,10 +25,10 @@ export function ClientSidebar() {
             </button>
           </AccordionContent>
           <AccordionContent className="hover:text-white">
-            <button className="ml-5 font-bold hover:text-white hover:underline text-lg text-[#c4c4c4] flex flex-row gap-2">
+            <Link to="/budgets/list" className="ml-5 font-bold hover:text-white hover:underline text-lg text-[#c4c4c4] flex flex-row gap-2">
               <IconBill />
               Orçamentos Recebidos
-            </button>
+            </Link>
           </AccordionContent>
           <AccordionContent className="hover:text-white">
             <button onClick={() => navigate('/solicitations')} className="ml-5 font-bold hover:text-white hover:underline text-lg text-[#c4c4c4] flex flex-row gap-2 items-center">

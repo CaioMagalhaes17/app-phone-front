@@ -44,7 +44,6 @@ export const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
 
   async function loadStore() {
     const response = await getStoreProfile()
-    console.log('111', response)
     setStoreInfos(response)
     setIsLoading(false)
   }

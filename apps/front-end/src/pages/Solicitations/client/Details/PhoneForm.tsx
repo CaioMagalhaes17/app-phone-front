@@ -9,7 +9,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { EditSolicitation } from "../../../../api/repair/solicitation/edit-solicitation";
 import Swal from "sweetalert2";
 
-export function PhoneForm({ phoneForm, solicitationId }: { solicitationId: string, phoneForm: PhoneFormType }) {
+export function PhoneForm({ phoneForm, solicitationId, canEdit }: { canEdit: boolean, solicitationId: string, phoneForm: PhoneFormType }) {
   const [editMode, setEditMode] = useState(false)
   const { register, handleSubmit, watch } = useForm()
   const [brand, setBrand] = useState('')
@@ -107,7 +107,7 @@ export function PhoneForm({ phoneForm, solicitationId }: { solicitationId: strin
           <div className="flex flex-row">
             <Text className="text-white font-extrabold text-2xl" as="h1">Questionário do celular:</Text>
             <div className="mr-auto" />
-            <Button onClick={() => setEditMode(true)} className="btn-primary"><IconPencil /></Button>
+            {canEdit && (<Button onClick={() => setEditMode(true)} className="btn-primary"><IconPencil /></Button>)}
           </div>
           <div className="flex flex-col mt-6 gap-1 mb-5">
             <Text className="font-extrabold text-lg" as="h1">Marca - <span className="text-white">{formatPhoneBrand(phoneForm.brand)}</span></Text>

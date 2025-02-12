@@ -56,7 +56,6 @@ export function formatOriginalHardwareAnswer(originalHardware: string) {
 }
 
 export function formatPreviousRepair(previousRepair: string) {
-  console.log(previousRepair)
   if (previousRepair === 'yes') return 'Sim'
   if (previousRepair === 'no') return 'Não'
   if (previousRepair === 'dontknow') return 'Não sei'

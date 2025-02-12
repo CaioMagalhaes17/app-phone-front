@@ -16,6 +16,24 @@ body {
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .scrollable::-webkit-scrollbar {
+    width: 8px; /* Largura da barra */
+  }
+
+  .scrollable::-webkit-scrollbar-track {
+    background: black; /* Fundo da barra */
+  }
+
+  .scrollable::-webkit-scrollbar-thumb {
+    background: #333; /* Cor da barra de rolagem */
+    border-radius: 4px;
+  }
+
+  .scrollable::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Cor ao passar o mouse */
+  }
+}
 
 @layer components {
   .toggle-sidebar .navbarside {
@@ -122,6 +140,5 @@ body {
   .scrollable {
     overflow-y: auto !important;
   }
-
-
 }
+  

@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { EditSolicitation } from "../../../../api/repair/solicitation/edit-solicitation";
 
-export function ProblemForm({ problemForm, topic, solicitationId }: { solicitationId: string, topic: string, problemForm: BatteryFormType | DisplayFormType }) {
+export function ProblemForm({ problemForm, topic, solicitationId, canEdit }: { canEdit: boolean, solicitationId: string, topic: string, problemForm: BatteryFormType | DisplayFormType }) {
   const client = useQueryClient()
   const [editMode, setEditMode] = useState(false)
   const { register, watch, handleSubmit } = useForm()
@@ -112,7 +112,7 @@ export function ProblemForm({ problemForm, topic, solicitationId }: { solicitati
             <div className="flex flex-row">
               <Text className="text-white font-extrabold text-2xl" as="h1">Questionário do problema:</Text>
               <div className="mr-auto" />
-              <Button onClick={() => setEditMode(true)} className="btn-primary"><IconPencil /></Button>
+              {canEdit && (<Button onClick={() => setEditMode(true)} className="btn-primary"><IconPencil /></Button>)}
             </div>
             <div className="flex flex-col mt-6 gap-1 mb-5 mt-10">
               <Text className="font-extrabold text-lg" as="h1">Defeito - <span className="text-white">{formattedProblem[0].answer}</span></Text>

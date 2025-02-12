@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { StoreProfileComponent } from "../../../components/Repair/store"
+import { StoreProfileComponent } from "../../../components/Profiles/store"
 import useStore from "../../../state"
 import { GetBudgets } from "../../../api/repair/budget/get-budgets"
 import { useEffect, useState } from "react"
@@ -7,6 +7,9 @@ import { BudgetType } from "../../../types/budget"
 import { formatBudgetsFromApi } from "../../../formaters/budget"
 import { Button, IconPencil } from "@app/ui"
 import { useNavigate } from "react-router-dom"
+import { FeedbackType } from "../../../types/feedback"
+import { formatFeedbacks } from "../../../formaters/feedback"
+import { GetFeedbacksFromStore } from "../../../api/feedback/get-from-store"
 
 export function StoreProfile() {
   const navigate = useNavigate()
@@ -21,6 +24,18 @@ export function StoreProfile() {
       setBudgets(formatBudgetsFromApi(data))
     }
   }, [isLoading, data])
+
+  const [feedbacks, setFeedbacks] = useState<FeedbackType[] | null>()
+
+  const { data: feedbacksData } = useQuery({
+    queryKey: ['get-feedbacks'],
+    queryFn: () => GetFeedbacksFromStore(storeInfos.id, { limit: '3', page: '1' })
+  })
+
+  useEffect(() => {
+    if (!isLoading && data) return setFeedbacks(formatFeedbacks(feedbacksData))
+  }, [isLoading, data])
+
   return (
     <>
       <div className="">
@@ -37,9 +52,9 @@ export function StoreProfile() {
           </li>
         </ul>
       </div>
-      {!isLoading && (
-        <StoreProfileComponent name={storeInfos.name} rating={storeInfos.rating} budgets={budgets} />
-      )}
+      {!isLoading && feedbacks ? (
+        <StoreProfileComponent feedbacks={feedbacks} name={storeInfos.name} rating={storeInfos.rating} budgets={budgets} />
+      ) : ''}
     </>
   )
 }

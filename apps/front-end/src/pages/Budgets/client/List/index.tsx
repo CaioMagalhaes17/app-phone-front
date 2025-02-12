@@ -1,27 +1,23 @@
-import { Button } from "@app/ui"
-import { DataTableColumn } from "mantine-datatable"
-import { useNavigate } from "react-router-dom"
-import { formatPhoneBrand } from "../../../../formaters/solicitations"
-import { batteryQuestions, displayQuestions } from "../../../../constants/solicitation-form-questions"
 import { useQuery } from "@tanstack/react-query"
-import { GetBudgets } from "../../../../api/repair/budget/get-budgets"
+import { GetBudgetsToClient } from "../../../../api/repair/budget/get-budgets-to-client"
 import { useEffect, useState } from "react"
 import { formatBudgetsFromApi } from "../../../../formaters/budget"
+import { DataTableColumn } from "mantine-datatable"
 import { BudgetType } from "../../../../types/budget"
+import { formatPhoneBrand } from "../../../../formaters/solicitations"
+import { batteryQuestions, displayQuestions } from "../../../../constants/solicitation-form-questions"
+import { Button } from "@app/ui"
+import { useNavigate } from "react-router-dom"
 import { BasicTable } from "../../../../components/Datatable"
 
-export function StoreBudgetList() {
-  const [budgets, setBudgets] = useState<BudgetType[] | []>([])
+export function ClientBudgetsList() {
   const navigate = useNavigate()
+  const [budgets, setBudgets] = useState<BudgetType[] | []>([])
   const { data, isLoading } = useQuery({
     queryKey: ['get-budgets'],
-    queryFn: () => GetBudgets({ page: '1', limit: '10' })
+    queryFn: () => GetBudgetsToClient()
   })
-  useEffect(() => {
-    if (!isLoading) {
-      setBudgets(formatBudgetsFromApi(data))
-    }
-  }, [isLoading, data])
+
   const columns: DataTableColumn<BudgetType>[] = [
     {
       accessor: 'phone',
@@ -43,7 +39,7 @@ export function StoreBudgetList() {
           const questionOne = solicitation.form.problemForm['display-A']
           answer = displayQuestions[0].options.filter((item) => item.optionId === questionOne)[0]
         }
-        return <span className="text-white text-lg font-extrabold">{answer.text}</span>
+        return <span className="text-white text-md font-extrabold">{answer.text}</span>
       }
     },
 
@@ -58,46 +54,38 @@ export function StoreBudgetList() {
       }
     },
     {
-      accessor: 'details',
-      title: 'Detalhes do orçamento',
+      accessor: 'storeName',
+      title: 'Nome da loja',
       cellsClassName: 'break-all whitespace-normal max-w-[350px]',
-      render: ({ details }) => {
-        return <span className="text-white w-full font-extrabold">{details}</span>
+      render: ({ storeProfile }) => {
+        return <span className="text-white w-full font-extrabold">{storeProfile.name}</span>
       }
     },
-    // {
-    //   accessor: 'createdAt',
-    //   title: 'Criado em',
-    //   cellsClassName: 'text-white font-extrabold',
-    //   sortable: true,
-    //   render: ({ createdAt }) => {
-    //     return (
-    //       <span className={`text-white`}>{dayjs(createdAt).format("DD/MM/YYYY")}</span>
-    //     )
-    //   }
-    // },
     {
       accessor: 'actions',
       title: 'Ações',
       render: ({ solicitation }) => {
         return (
           <div className="flex justify-center items-center">
-            <Button onClick={() => navigate('/store/solicitation/' + solicitation.id)} className="btn-outline-primary text-lg">Acessar</Button>
+            <Button onClick={() => navigate('/solicitation/' + solicitation.id)} className="btn-outline-primary text-lg">Acessar</Button>
           </div>
         )
       }
     }
   ]
 
-  return (
-    <>
-      {!isLoading ? (
-        <>
-          <BasicTable columns={columns} records={budgets} title="Problemas para retorno de orçamento">
+  useEffect(() => {
+    if (!isLoading) {
+      return setBudgets(formatBudgetsFromApi(data))
+    }
+  }, [isLoading, data])
+  return <>
+    {!isLoading ? (
+      <>
+        <BasicTable columns={columns} records={budgets} title="Orçamentos recebidos">
 
-          </BasicTable>
-        </>
-      ) : ''}
-    </>
-  )
+        </BasicTable>
+      </>
+    ) : ''}
+  </>
 }

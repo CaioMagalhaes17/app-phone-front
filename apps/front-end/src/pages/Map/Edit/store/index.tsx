@@ -6,14 +6,15 @@ import { useEffect, useState } from "react";
 import { EditGeolocation } from "../../../../api/geolocation/edit-geolocation";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { CreateGeolocation } from "../../../../api/geolocation/create-geolocation";
 
 export default function StoreMapEdit() {
   const { storeInfos, setStoreInfos, isMapLoaded } = useStore()
   const [clintLocation, setLocation] = useState<{ lat: number; lng: number } | null>(null);
   const navigate = useNavigate()
-  console.log('3231231312132312', storeInfos)
+
   const { mutateAsync } = useMutation({
-    mutationFn: EditGeolocation
+    mutationFn: !storeInfos.location.latitude ? CreateGeolocation : EditGeolocation
   })
 
   useEffect(() => {

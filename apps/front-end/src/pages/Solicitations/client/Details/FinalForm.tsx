@@ -7,11 +7,12 @@ import { EditSolicitation } from "../../../../api/repair/solicitation/edit-solic
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import Swal from "sweetalert2";
 
-export function FinalForm({ deliveryPreference, timePreference, details, solicitationId }: {
+export function FinalForm({ deliveryPreference, timePreference, details, solicitationId, canEdit }: {
   deliveryPreference: string
   timePreference: string
   details: string
   solicitationId: string
+  canEdit: boolean
 }) {
   const [editMode, setEditMode] = useState(false)
   const { register, handleSubmit } = useForm()
@@ -70,7 +71,8 @@ export function FinalForm({ deliveryPreference, timePreference, details, solicit
           <div className="flex flex-row">
             <Text className="text-white font-extrabold text-2xl" as="h1">Considerações finais:</Text>
             <div className="mr-auto" />
-            <Button onClick={() => setEditMode(true)} className="btn-primary"><IconPencil /></Button>
+            {canEdit && (<Button onClick={() => setEditMode(true)} className="btn-primary"><IconPencil /></Button>)}
+
           </div>
           <div className="flex flex-col mt-6 gap-1 mb-5">
             <Text className="font-extrabold text-lg" as="h1">{finalQuestions[0].question} - <span className={`text-${getTimePreferenceColor(timePreference)}`}>{formatTimePreference(timePreference)}</span></Text>
