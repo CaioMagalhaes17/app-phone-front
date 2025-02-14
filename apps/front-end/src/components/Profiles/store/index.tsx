@@ -1,21 +1,33 @@
-import { BudgetType } from "../../../types/budget";
 import { FeedbackType } from "../../../types/feedback";
-import { MainPainel } from "./components/MainPanel";
+import { MainPainel, StoreMainPainelProps } from "./components/MainPanel";
 import { StoreFeedbacks } from "./components/Feedbacks";
-import { StoreProfileBudgets } from "./components/Budgets";
+import { StoreProfileBudgetProps, StoreProfileBudgets } from "./components/Budgets";
 import { StoreProfileLocation } from "./components/Location";
 
+export interface StoreProfileComponent {
+  mainPanelProps: StoreMainPainelProps
+  storeProfileBudgets: StoreProfileBudgetProps
+  storeFeedbacksProps: {
+    feedbacks: FeedbackType[]
+    canShowRateStore: boolean
+  }
+  storeProfileLocation: {
+    lat: number,
+    lng: number
+  }
+  storeId: string
+}
 
-export function StoreProfileComponent({ feedbacks, name, rating, budgets }: { feedbacks: FeedbackType[], name: string, rating: number, budgets: BudgetType[] }) {
+export function StoreProfileComponent({ storeId, mainPanelProps, storeProfileLocation, storeProfileBudgets, storeFeedbacksProps }: StoreProfileComponent) {
   return (
     <>
-      <MainPainel rating={rating} name={name} />
+      <MainPainel rating={mainPanelProps.rating} name={mainPanelProps.name} />
       <div className="gap-5 flex mt-5 font-extrabold flex-row">
-        <StoreFeedbacks feedbacks={feedbacks} />
-        <StoreProfileBudgets budgets={budgets} />
+        <StoreFeedbacks storeId={storeId} feedbacks={storeFeedbacksProps.feedbacks} canShowRateStore={storeFeedbacksProps.canShowRateStore} />
+        <StoreProfileBudgets budgets={storeProfileBudgets.budgets} isOwner={storeProfileBudgets?.isOwner} />
       </div>
       {/*Localização Loja*/}
-      <StoreProfileLocation />
+      <StoreProfileLocation lat={storeProfileLocation.lat} lng={storeProfileLocation.lng} />
     </>
   )
 }

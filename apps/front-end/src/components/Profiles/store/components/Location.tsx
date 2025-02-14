@@ -1,17 +1,10 @@
 import { Button, Panel, Text } from "@app/ui";
 import { MapAdapter, MarkAdapter } from "../../../../adapters/Map";
 import useStore from "../../../../state";
-import { useEffect, useState } from "react";
 
-export function StoreProfileLocation() {
-  const { isMapLoaded, storeInfos } = useStore()
-  const [clintLocation, setLocation] = useState<{ lat: number; lng: number } | null>(null);
-  useEffect(() => {
-    setLocation({
-      lat: storeInfos?.location.latitude,
-      lng: storeInfos?.location.longitude,
-    })
-  }, [storeInfos])
+export function StoreProfileLocation({ lat, lng }: { lat: number, lng: number }) {
+  const { isMapLoaded } = useStore()
+
 
   const mapStyle = {
     width: '100%',
@@ -39,9 +32,9 @@ export function StoreProfileLocation() {
               <Button className="btn-outline-primary">FCB</Button>
             </div>
           </div>
-          <div className="h-[500px] w-full p-4">{clintLocation && isMapLoaded ? (
-            <MapAdapter mapStyle={mapStyle} initialPosition={clintLocation}>
-              <MarkAdapter position={clintLocation} />
+          <div className="h-[500px] w-full p-4">{isMapLoaded ? (
+            <MapAdapter mapStyle={mapStyle} initialPosition={{ lat, lng }}>
+              <MarkAdapter position={{ lat, lng }} />
             </MapAdapter>
           ) : (<>'Carregando...'</>)}</div>
         </div>

@@ -15,10 +15,11 @@ import StoreMapEdit from "../pages/Map/Edit/store";
 import { AvaliableSolicitations } from "../pages/Solicitations/store/List/Avaliable";
 import { StoreSolicitationDetails } from "../pages/Solicitations/store/Details";
 import { StoreBudgetList } from "../pages/Budgets/store/List";
-import { StoreProfile } from "../pages/Profile/store";
+import { StoreProfileOwner } from "../pages/Profile/store/Owner";
 import { EditStoreProfile } from "../pages/Profile/store/Edit";
 import { StoreFeedbacksList } from "../pages/Profile/store/Feedbacks";
 import { ClientBudgetsList } from "../pages/Budgets/client/List";
+import { StoreProfile } from "../pages/Profile/store";
 
 const ClientMapEdit = React.lazy(() => import("../pages/Map/Edit/client"))
 const DefaultLayout = React.lazy(() => import("../components/DefaultLayout"))
@@ -66,6 +67,10 @@ const routes: RouteObject[] = [
         element: <StoreHome />,
       },
       {
+        path: '/store-profile/:id',
+        element: <StoreProfile />,
+      },
+      {
         path: '/store/map/edit',
         element: <StoreMapEdit />,
       },
@@ -83,7 +88,7 @@ const routes: RouteObject[] = [
       },
       {
         path: '/store/profile',
-        element: <StoreProfile />,
+        element: <StoreProfileOwner />,
       },
       {
         path: '/store/profile/edit',

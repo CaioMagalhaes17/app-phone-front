@@ -1,59 +1,64 @@
 import { useQuery } from "@tanstack/react-query"
-import { StoreProfileComponent } from "../../../components/Profiles/store"
-import useStore from "../../../state"
-import { GetBudgets } from "../../../api/repair/budget/get-budgets"
+import { useParams } from "react-router-dom"
+import { getStoreProfileById } from "../../../api/user/store/get-profile-by-id"
+import { GetBudgetsByStoreId } from "../../../api/repair/budget/get-budgets-by-store-id"
 import { useEffect, useState } from "react"
 import { BudgetType } from "../../../types/budget"
-import { formatBudgetsFromApi } from "../../../formaters/budget"
-import { Button, IconPencil } from "@app/ui"
-import { useNavigate } from "react-router-dom"
 import { FeedbackType } from "../../../types/feedback"
-import { formatFeedbacks } from "../../../formaters/feedback"
+import { formatBudgetsFromApi } from "../../../formaters/budget"
 import { GetFeedbacksFromStore } from "../../../api/feedback/get-from-store"
+import { formatFeedbacks } from "../../../formaters/feedback"
+import { StoreProfileComponent } from "../../../components/Profiles/store"
 
 export function StoreProfile() {
-  const navigate = useNavigate()
-  const [budgets, setBudgets] = useState<BudgetType[] | []>([])
-  const { storeInfos } = useStore()
-  const { data, isLoading } = useQuery({
-    queryKey: ['get-budgets'],
-    queryFn: () => GetBudgets({ page: '1', limit: '3' })
-  })
-  useEffect(() => {
-    if (!isLoading) {
-      setBudgets(formatBudgetsFromApi(data))
-    }
-  }, [isLoading, data])
 
+  const [budgets, setBudgets] = useState<BudgetType[] | null>()
   const [feedbacks, setFeedbacks] = useState<FeedbackType[] | null>()
+  const { id } = useParams() as { id: string }
+  const { data: profileData, isLoading } = useQuery({
+    queryKey: ['get-profile'],
+    queryFn: () => getStoreProfileById(id)
+  })
 
-  const { data: feedbacksData } = useQuery({
+  const { data: budgetsData, isLoading: isLoadingBudgets } = useQuery({
+    queryKey: ['get-budgets'],
+    queryFn: () => GetBudgetsByStoreId(id, { limit: '3', page: '1' })
+  })
+
+
+  useEffect(() => {
+    if (!isLoadingBudgets) {
+      setBudgets(formatBudgetsFromApi(budgetsData))
+    }
+  }, [isLoadingBudgets, budgetsData])
+
+  const [clintLocation, setLocation] = useState<{ lat: number; lng: number }>({ lat: 0, lng: 0 });
+  useEffect(() => {
+    setLocation({
+      lat: profileData.location.latitude,
+      lng: profileData.location.longitude,
+    })
+  }, [budgets])
+
+
+  const { data: feedbacksData, isLoading: isLoadingFeedback } = useQuery({
     queryKey: ['get-feedbacks'],
-    queryFn: () => GetFeedbacksFromStore(storeInfos.id, { limit: '3', page: '1' })
+    queryFn: () => GetFeedbacksFromStore(id, { limit: '3', page: '1' })
   })
 
   useEffect(() => {
-    if (!isLoading && data) return setFeedbacks(formatFeedbacks(feedbacksData))
-  }, [isLoading, data])
-
+    if (!isLoadingFeedback && feedbacksData) return setFeedbacks(formatFeedbacks(feedbacksData))
+  }, [isLoadingFeedback, feedbacksData])
   return (
     <>
-      <div className="">
-        <ul className="flex font-semibold border-b border-[#191e3a] flex-row mb-5 whitespace-nowrap overflow-y-auto">
-          <li className="inline-block p-4">
-            <Button className="btn-outline-primary">Contato/Endereço</Button>
-          </li>
-          <li className="inline-block p-4">
-            <Button className="btn-outline-primary">Feedbacks</Button>
-          </li>
-          <div className="ml-auto" />
-          <li className="inline-block p-4">
-            <Button className="btn-primary flex flex-row gap-2" onClick={() => navigate('/store/profile/edit')}><IconPencil />Editar Perfil</Button>
-          </li>
-        </ul>
-      </div>
-      {!isLoading && feedbacks ? (
-        <StoreProfileComponent feedbacks={feedbacks} name={storeInfos.name} rating={storeInfos.rating} budgets={budgets} />
+      {!isLoading && feedbacks && budgets ? (
+        <StoreProfileComponent
+          storeFeedbacksProps={{ feedbacks, canShowRateStore: true }}
+          mainPanelProps={{ name: profileData.name, rating: profileData.rating }}
+          storeProfileLocation={{ lat: clintLocation.lat, lng: clintLocation.lng }}
+          storeProfileBudgets={{ budgets }}
+          storeId={id}
+        />
       ) : ''}
     </>
   )

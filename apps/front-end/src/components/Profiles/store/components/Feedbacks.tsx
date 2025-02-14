@@ -1,13 +1,17 @@
-import { Button, IconPlus, Panel, Text } from "@app/ui";
+import { IconChat, IconPlus, Panel, Text } from "@app/ui";
 import { FeedbackRow } from "../../../Feedbacks/row";
 import { FeedbackType } from "../../../../types/feedback";
+import { Link } from "react-router-dom";
 
-export function StoreFeedbacks({ feedbacks }: { feedbacks: FeedbackType[] }) {
+export function StoreFeedbacks({ feedbacks, storeId, canShowRateStore }: { canShowRateStore?: boolean, storeId: string, feedbacks: FeedbackType[] }) {
   return (
     <Panel className="w-full">
       <div className="flex flex-row">
         <Text className="text-3xl text-white" as="h1">Avaliações</Text>
-        <Button className="ml-auto btn-primary flex flex-row gap-2"><IconPlus /> Ver todas</Button>
+        <div className="ml-auto" />
+        <Link to={`/store/feedbacks/${storeId}`} className="btn mr-5 btn-primary flex flex-row gap-2"><IconPlus /> Ver todas</Link>
+        {canShowRateStore && (<Link to={`/store/feedbacks/${storeId}`} className="btn btn-primary flex flex-row gap-2"><IconChat /> Avaliar loja</Link>)}
+
       </div>
       <div className="border-b border-b-[#323b45] mt-5 mt-10" />
       {feedbacks.length > 0 ?

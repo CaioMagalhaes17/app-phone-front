@@ -1,7 +1,12 @@
 import { Panel, Text } from "@app/ui";
 import { Star } from "lucide-react";
 
-export function MainPainel({ rating, name }: { rating: number, name: string }) {
+export interface StoreMainPainelProps {
+  rating: number,
+  name: string
+}
+
+export function MainPainel({ rating, name }: StoreMainPainelProps) {
   return (
     <>
       <Panel>

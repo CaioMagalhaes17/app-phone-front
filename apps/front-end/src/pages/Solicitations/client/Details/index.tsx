@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Link, useParams } from "react-router-dom";
 import { GetSolicitation } from "../../../../api/repair/solicitation/get-solicitation";
-import { Button, IconDollarSignCircle, Panel, Text } from "@app/ui";
+import { Button, IconDollarSignCircle, IconStore, IconX, Panel, Text } from "@app/ui";
 import { CANCELED_SOLICITATION_STATUS, Solicitation } from "../../../../types/solicitation";
 import { formatPhoneBrand, formatTopic, getStatusColor } from "../../../../formaters/solicitations";
 import Swal from "sweetalert2";
@@ -98,11 +98,11 @@ export function SolicitationDetails() {
       {!isLoading && solicitationData ? (
         <>
           <div className="max-w-[1200px] mx-auto">
-            <div className="flex flex-row">
+            <div className="flex gap-5 flex-row">
               <Text className="text-white font-extrabold text-5xl" as="h1">Defeito em <span className="underline">{formatTopic(solicitationData?.form.problemTopic)}</span></Text>
               <div className="mr-auto" />
               {canCancelSolicitation() && (
-                <Button onClick={() => handleDeleteSolicitation()} className="btn-danger">Cancelar solicitação de conserto</Button>
+                <Button onClick={() => handleDeleteSolicitation()} className="btn-danger flex flex-row gap-2"><IconX />Cancelar solicitação de conserto</Button>
               )}
             </div>
             <Text className="font-extrabold text-xl" as="h1">{formatPhoneBrand(solicitationData.form.phoneForm.brand)} - {solicitationData.form.phoneForm.model}</Text>
@@ -132,7 +132,7 @@ export function SolicitationDetails() {
                             <Text className="text-success" as="span">{budget.startValue} - {budget.endValue}</Text>
                           </div>
                           <div className="ml-auto">
-                            <Link to={`/store/profile/${budget.storeProfile.id}`} className="btn-outline-primary btn">Acessar perfil da loja</Link>
+                            <Link to={`/store-profile/${budget.storeProfile.id}`} className="btn-primary btn flex flex-row gap-2"><IconStore />Acessar perfil da loja</Link>
                           </div>
                           <div className="">
                             <Button className="btn-outline-success flex flex-row gap-2"><IconDollarSignCircle />Escolher orçamento</Button>

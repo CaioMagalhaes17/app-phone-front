@@ -1,10 +1,15 @@
-import { IconPlus, Panel, Text } from "@app/ui"
+import { IconPlus, IconSend, Panel, Text } from "@app/ui"
 import { Link } from "react-router-dom"
 import { BudgetType } from "../../../../types/budget"
 import { formatPhoneBrand, formatTopic } from "../../../../formaters/solicitations"
 import { batteryQuestions, displayQuestions } from "../../../../constants/solicitation-form-questions";
 
-export function StoreProfileBudgets({ budgets }: { budgets: BudgetType[] }) {
+export interface StoreProfileBudgetProps {
+  budgets: [] | BudgetType[]
+  isOwner?: boolean
+}
+export function StoreProfileBudgets({ budgets, isOwner }: StoreProfileBudgetProps) {
+  console.log(budgets)
   function getMainQuestion(problemForm: { [x: string]: string; }) {
     if (budgets.length > 0) {
       if ('display-A' in problemForm) {
@@ -23,7 +28,9 @@ export function StoreProfileBudgets({ budgets }: { budgets: BudgetType[] }) {
       <Panel className="w-full">
         <div className="flex flex-row">
           <Text className="text-3xl text-white" as="h1">Ultimos Orçamentos</Text>
-          <Link to="/store/budget/list" className="btn ml-auto btn-primary flex flex-row gap-2"><IconPlus /> Ver todas</Link>
+          {isOwner ? <Link to="/store/budget/list" className="btn ml-auto btn-primary flex flex-row gap-2"><IconPlus /> Ver todas</Link>
+            : <Link to="/store/budget/list" className="btn ml-auto btn-primary flex flex-row gap-2"><IconSend /> Pedir orçamento de conserto direto para loja</Link>}
+
         </div>
         <div className="border-b border-b-[#323b45] mt-5 " />
         {budgets.length > 0 ? budgets.map((budget) => {

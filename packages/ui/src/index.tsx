@@ -30,7 +30,8 @@ export { Steps } from './components/Steps'
 export { IconStore } from './Icons/IconStore'
 export { DateField } from './components/DateField'
 export { IconChat } from './Icons/IconChat'
-
+export { IconX } from './Icons/IconX'
+export { IconTrash } from './Icons/IconTrash'
 export {
   Carousel,
   CarouselContent,
