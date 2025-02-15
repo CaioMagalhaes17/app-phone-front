@@ -25,7 +25,7 @@ export default function ClientLogin() {
     const response = await mutateAsync(data as LoginForm);
     localStorage.setItem('accessToken', response.token)
     localStorage.setItem('isStore', 'true')
-    window.location.replace('/store')
+    window.location.replace('/store/home')
   };
 
   return (

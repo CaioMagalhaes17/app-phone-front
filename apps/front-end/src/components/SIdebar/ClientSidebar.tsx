@@ -47,10 +47,10 @@ export function ClientSidebar() {
           </AccordionTrigger>
 
           <AccordionContent className="hover:text-white">
-            <button onClick={() => navigate('/map')} className="flex flex-row gap-2 items-center font-bold hover:text-white hover:underline text-lg ml-5 text-[#c4c4c4]">
+            <Link to='/map' className="flex flex-row gap-2 items-center font-bold hover:text-white hover:underline text-lg ml-5 text-[#c4c4c4]">
               <IconSearch />
               Lojas Próximas
-            </button>
+            </Link>
           </AccordionContent>
           <AccordionContent className="">
             <button onClick={() => navigate('/map/edit')} className="flex flex-row gap-2 items-center font-bold hover:text-white hover:underline ml-5 text-lg text-[#c4c4c4]">

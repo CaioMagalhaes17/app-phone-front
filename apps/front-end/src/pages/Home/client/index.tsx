@@ -34,7 +34,6 @@ export function Home() {
 
   const [selectedStore, setSelectedStore] = useState<StoresInsideRadius | null>()
   const navigate = useNavigate()
-
   return (
     <>
       <div className="flex flex-col">

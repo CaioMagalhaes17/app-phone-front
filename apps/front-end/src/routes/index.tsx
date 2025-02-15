@@ -26,7 +26,7 @@ const DefaultLayout = React.lazy(() => import("../components/DefaultLayout"))
 const ClientSignUp = React.lazy(() => import("../pages/Authentication/client/ClientSignUp"))
 const StoreProfilePicker = React.lazy(() => import("../pages/Authentication/store/profile/ProfilePicker"))
 
-const routes: RouteObject[] = [
+export const routes: RouteObject[] = [
   {
     element: (
       <ProtectedRoute>
@@ -63,7 +63,7 @@ const routes: RouteObject[] = [
         element: <ClientBudgetsList />,
       },
       {
-        path: '/store',
+        path: '/store/home',
         element: <StoreHome />,
       },
       {
@@ -95,7 +95,7 @@ const routes: RouteObject[] = [
         element: <EditStoreProfile />,
       },
       {
-        path: '/store/feedbacks/:id',
+        path: '/store-feedbacks/:id',
         element: <StoreFeedbacksList />,
       },
     ]

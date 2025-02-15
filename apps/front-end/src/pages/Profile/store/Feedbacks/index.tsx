@@ -1,11 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import { Link, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { GetFeedbacksFromStore } from "../../../../api/feedback/get-from-store";
 import { useEffect, useState } from "react";
 import { FeedbackType } from "../../../../types/feedback";
 import { formatFeedbacks } from "../../../../formaters/feedback";
 import { FeedbackRow } from "../../../../components/Feedbacks/row";
-import { Button, IconChat, Panel, Text } from "@app/ui";
+import { Button, Panel, Text } from "@app/ui";
+import { CreateFeedback } from "../../../../components/Feedbacks/create-modal";
 
 export function StoreFeedbacksList() {
   const { id } = useParams() as { id: string }
@@ -25,7 +26,7 @@ export function StoreFeedbacksList() {
           <div className="flex flex-row">
             <Text className="text-3xl text-white" as="h1">Avaliações</Text>
             <div className="ml-auto" />
-            <Link to={`/store/feedbacks/${id}`} className="btn btn-primary mr-5 flex flex-row gap-2"><IconChat /> Avaliar loja</Link>
+            <CreateFeedback storeName="teste" storeId={id} />
             <Button className="btn-outline-primary mr-5">Filtrar</Button>
           </div>
           <div className="border-b border-b-[#323b45] mt-5 mt-10" />

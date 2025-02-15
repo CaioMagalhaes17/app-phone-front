@@ -35,8 +35,8 @@ export function StoreProfile() {
   const [clintLocation, setLocation] = useState<{ lat: number; lng: number }>({ lat: 0, lng: 0 });
   useEffect(() => {
     setLocation({
-      lat: profileData.location.latitude,
-      lng: profileData.location.longitude,
+      lat: profileData?.location.latitude,
+      lng: profileData?.location.longitude,
     })
   }, [budgets])
 

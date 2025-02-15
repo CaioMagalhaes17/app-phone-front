@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 import { getClientProfile } from "../api/user/client/getProfile";
@@ -14,9 +14,8 @@ export const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const [isLoading, setIsLoading] = useState(true)
   const { setClientInfos, setStoreInfos, setIsMapLoaded } = useStore()
   const isLoaded = LoadGoogleApi()
+  const location = useLocation()
   const isStoreRoute = location.pathname.startsWith("/store")
-
-
 
   if (!accessToken) {
     return <Navigate to={isStore && isStore === 'true' ? "/store/login" : "/login"} replace />;
@@ -44,17 +43,20 @@ export const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
 
   async function loadStore() {
     const response = await getStoreProfile()
+    console.log('dasdas', response)
     setStoreInfos(response)
     setIsLoading(false)
   }
 
   function checkRoute() {
+    console.log(isStoreRoute, isStore)
     if (isStoreRoute && isStore === 'false') {
       return <Navigate to={"/404"} replace />;
     }
 
     if (!isStoreRoute && isStore === 'true') {
-      return <Navigate to={"/404"} replace />;
+      if (location.pathname.startsWith('/store-feedbacks') && location.pathname.startsWith('/store/home')) return
+      return window.location.href = '/404'
     }
   }
 

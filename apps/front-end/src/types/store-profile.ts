@@ -9,6 +9,7 @@ export type StoreProfileFromApi = {
     createdAt: string
     updatedAt: string
     userId: string
+    rating: number
   },
   _id: string
 }
@@ -24,4 +25,5 @@ export type StoreProfileType = {
   createdAt: string
   updatedAt: string
   userId: string
+  rating: number
 }
