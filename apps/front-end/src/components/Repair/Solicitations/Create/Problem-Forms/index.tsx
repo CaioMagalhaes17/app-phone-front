@@ -162,7 +162,7 @@ export function DefaultForm({ topicSelected, onSubmit, setActiveTab, stepTwoInfo
             )}
           </div>
         )}
-        <div className="flex p-6 relative justify-between w-full">
+        <div className="flex p-6 relative justify-between w-full mt-[100px]">
           <Button onClick={() => setActiveTab(1)} className="btn-primary">Voltar</Button>
           <Button type="submit" className="btn-primary">Próximo</Button>
         </div>

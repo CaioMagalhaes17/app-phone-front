@@ -5,7 +5,7 @@ import { AppleModelsSelect } from "../Phone-Details/AppleModelsSelect"
 import { SearchModelsInput } from "../Phone-Details/SearchModelsInput"
 import { useState } from "react"
 
-export function StepThree({ setActiveTab, onSubmit, stepThreeInfos }: { stepThreeInfos?: FieldValues, onSubmit: (data: FieldValues) => void, setActiveTab: React.Dispatch<React.SetStateAction<number>> }) {
+export function PhoneFormStep({ setActiveTab, onSubmit, stepThreeInfos }: { stepThreeInfos?: FieldValues, onSubmit: (data: FieldValues) => void, setActiveTab: React.Dispatch<React.SetStateAction<number>> }) {
   const questions = phoneQuestions
   const { register, watch, handleSubmit, formState: { errors }, setError } = useForm()
   const [searchModel, setSearchModel] = useState("");

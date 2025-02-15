@@ -20,6 +20,7 @@ import { EditStoreProfile } from "../pages/Profile/store/Edit";
 import { StoreFeedbacksList } from "../pages/Profile/store/Feedbacks";
 import { ClientBudgetsList } from "../pages/Budgets/client/List";
 import { StoreProfile } from "../pages/Profile/store";
+import { DirectSolicitationsCreate } from "../pages/Solicitations/client/Create/direct-solicitation";
 
 const ClientMapEdit = React.lazy(() => import("../pages/Map/Edit/client"))
 const DefaultLayout = React.lazy(() => import("../components/DefaultLayout"))
@@ -49,6 +50,10 @@ export const routes: RouteObject[] = [
       {
         path: '/solicitations/create',
         element: <SolicitationsCreate />
+      },
+      {
+        path: '/solicitations/create/:id',
+        element: <DirectSolicitationsCreate />
       },
       {
         path: '/solicitations',

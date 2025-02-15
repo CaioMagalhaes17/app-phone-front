@@ -7,7 +7,7 @@ import { AutoCompleteAdapter, MapAdapter, MarkAdapter, RadiusAdapter } from "../
 import Swal from "sweetalert2";
 import { FetchStoresInsideClientRadius } from "../../../../../api/geolocation/fetch-stores-inside-client-radius";
 
-export function StepFive({ setActiveTab }: { setActiveTab: React.Dispatch<React.SetStateAction<number>> }) {
+export function MapStep({ setActiveTab }: { setActiveTab: React.Dispatch<React.SetStateAction<number>> }) {
   const { clientInfos, setClientInfos, isMapLoaded } = useStore()
   const [clintLocation, setLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [radius, setRadius] = useState<number>(0)
@@ -89,7 +89,7 @@ export function StepFive({ setActiveTab }: { setActiveTab: React.Dispatch<React.
 
   return (
     <>
-      <div className="flex relative w-full h-full mt-5">
+      <div className="flex relative w-full h-[500px] mt-5">
         <div className="flex flex-col items-center w-[530px]">
           <h1 className="text-[#c4c4c4] font-extrabold text-white text-xl">Definir Localização para envio de orçamento</h1>
           <div className="border-b border-b-[#323b45] mt-5 w-[90%]" />
@@ -107,20 +107,20 @@ export function StepFive({ setActiveTab }: { setActiveTab: React.Dispatch<React.
               )}
             </div>
           </div>
-          <div className="text-left p-6 mt-10 w-full">
+          <div className="text-left p-6 w-full">
             <Text className="font-extrabold" as="span">Alterar tamanho do raio de pesquisa</Text>
             <div className="flex gap-2 flex-row">
               <input type="range" className="w-full" value={radius} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setRadius(Number(event.target.value))} min="600" max="3500" placeholder="Endereço" />
             </div>
           </div>
-          <div className="p-4 w-full mt-10">
+          <div className="p-4 w-full">
             <Button onClick={() => onSaveClick()} className="btn-primary flex flex-row gap-5 w-full">
               <IconSave />
               <span>Salvar Localização</span>
             </Button>
           </div>
-          <div className="border-b border-b-[#323b45] mt-5 w-[90%]" />
-          <Text className="mt-10 p-1" as="span">Obs: É possível editar a localização após o envio da solicitação</Text>
+          <div className="border-b border-b-[#323b45] w-[100%]" />
+          <Text className=" p-1" as="span">Obs: É possível editar a localização após o envio da solicitação</Text>
         </div>
         {clintLocation && isMapLoaded ? (
           <MapAdapter mapStyle={mapStyle} initialPosition={clintLocation}>

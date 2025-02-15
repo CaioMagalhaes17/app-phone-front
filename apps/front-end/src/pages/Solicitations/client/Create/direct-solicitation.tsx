@@ -1,18 +1,33 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { CreateSolicitation } from "../../../../api/repair/solicitation/create-solicitation";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { BatteryFormType, DisplayFormType, PhoneFormType, ProblemTopicType, SolicitationFormProps } from "../../../../types/solicitation";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { SolicitationForm } from "../../../../components/Repair/Solicitations/Create";
+import { CreateDirectSolicitation } from "../../../../api/repair/solicitation/create-direct-solicitation";
+import { getStoreProfileById } from "../../../../api/user/store/get-profile-by-id";
+import { useEffect, useState } from "react";
+import { StoreProfileType } from "../../../../types/store-profile";
 
-export function SolicitationsCreate() {
-
+export function DirectSolicitationsCreate() {
+  const { id } = useParams() as { id: string }
   const client = useQueryClient()
   const navigate = useNavigate()
+  const [storeInfos, setStoreInfos] = useState<StoreProfileType & { location: { latitude: number, longitude: number } }>()
   const { mutateAsync } = useMutation({
-    mutationFn: CreateSolicitation,
+    mutationFn: ({ id, props }: { id: string, props: SolicitationFormProps }) => CreateDirectSolicitation(id, props),
     mutationKey: ['create-solicitation']
   })
+
+  console.log('NIGGERNIGGER',)
+
+  const { data: profileData, isLoading } = useQuery({
+    queryKey: ['get-profile'],
+    queryFn: () => getStoreProfileById(id)
+  })
+  console.log(profileData)
+  useEffect(() => {
+    if (!isLoading) return setStoreInfos(profileData)
+  }, [isLoading, profileData])
 
 
   async function handleSendForm(data: Pick<SolicitationFormProps, 'deliveryPreference' | 'timePreference' | 'details'> & {
@@ -20,6 +35,7 @@ export function SolicitationsCreate() {
     topic: ProblemTopicType,
     phoneForm: PhoneFormType
   }) {
+
     Swal.fire({
       titleText: 'Enviar formulário?',
       icon: 'question',
@@ -35,13 +51,17 @@ export function SolicitationsCreate() {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const response = await mutateAsync({
-          problemForm: data.problemForm,
-          phoneForm: data.phoneForm,
-          problemTopic: data.topic,
-          deliveryPreference: data.deliveryPreference,
-          details: data.details,
-          timePreference: data.timePreference
-        })
+          id,
+          props: {
+            problemForm: data.problemForm,
+            phoneForm: data.phoneForm,
+            problemTopic: data.topic,
+            deliveryPreference: data.deliveryPreference,
+            details: data.details,
+            timePreference: data.timePreference
+          }
+        }
+        )
         if (response && response.status === 201 || response && response.status === 200) {
           client.refetchQueries({ queryKey: ['get-solicitations'] })
           Swal.fire({
@@ -74,7 +94,9 @@ export function SolicitationsCreate() {
 
   return (
     <>
-      <SolicitationForm steps={steps} handleSendForm={handleSendForm} />
+      {!isLoading && storeInfos ? (
+        <SolicitationForm steps={steps} handleSendForm={handleSendForm} customMap={true} storeProfile={storeInfos} />
+      ) : ''}
     </>
   )
 }

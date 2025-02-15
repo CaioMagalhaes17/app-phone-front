@@ -4,10 +4,10 @@ import { appleModels, phoneQuestions, samsungModels, xiaomiModels } from "../../
 import { PhoneFormType } from "../../../../types/solicitation";
 import { useEffect, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
-import { SearchModelsInput } from "../Create/Phone-Details/SearchModelsInput";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { EditSolicitation } from "../../../../api/repair/solicitation/edit-solicitation";
 import Swal from "sweetalert2";
+import { SearchModelsInput } from "../../../../components/Repair/Solicitations/Create/Phone-Details/SearchModelsInput";
 
 export function PhoneForm({ phoneForm, solicitationId, canEdit }: { canEdit: boolean, solicitationId: string, phoneForm: PhoneFormType }) {
   const [editMode, setEditMode] = useState(false)

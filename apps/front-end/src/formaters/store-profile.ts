@@ -12,6 +12,6 @@ export function formatStoreProfile(storeProfile: StoreProfileFromApi): StoreProf
     userId: storeProfile.props.userId,
     createdAt: storeProfile.props.createdAt,
     updatedAt: storeProfile.props.updatedAt,
-    rating: storeProfile.props.rating
+    rating: storeProfile.props.rating,
   }
 }

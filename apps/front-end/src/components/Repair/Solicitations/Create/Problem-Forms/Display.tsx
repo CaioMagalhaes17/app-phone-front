@@ -167,7 +167,7 @@ export function DisplayForm({ onSubmit, setActiveTab, stepTwoInfos }: { stepTwoI
               </div>
             )}
           </div>
-          <div className="flex p-6 relative justify-between w-full">
+          <div className="flex p-6 relative justify-between mt-[100px] w-full">
             <Button onClick={() => setActiveTab(1)} className="btn-primary">Voltar</Button>
             <Button type="submit" className="btn-primary">Próximo</Button>
           </div>

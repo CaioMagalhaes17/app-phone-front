@@ -1,8 +1,8 @@
-import { Button, Text } from "@app/ui"
+import { Button, IconSend, Text } from "@app/ui"
 import { finalQuestions } from "../../../../../constants/solicitation-form-questions"
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form"
 
-export function StepFor({ stepFourInfos, setActiveTab, onSubmit }: { stepFourInfos?: FieldValues, onSubmit: (data: FieldValues) => void, setActiveTab: React.Dispatch<React.SetStateAction<number>> }) {
+export function FinalsQuestions({ stepFourInfos, setActiveTab, onSubmit }: { stepFourInfos?: FieldValues, onSubmit: (data: FieldValues) => void, setActiveTab: React.Dispatch<React.SetStateAction<number>> }) {
   const { register, handleSubmit, formState: { errors }, setError } = useForm()
 
   const handleFormSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -75,14 +75,15 @@ export function StepFor({ stepFourInfos, setActiveTab, onSubmit }: { stepFourInf
                 >
                   {finalQuestions[2].question}
                 </Text>
-                <textarea defaultValue={stepFourInfos?.[finalQuestions[2].questionId] ? stepFourInfos[finalQuestions[2].questionId] : ''} {...register(finalQuestions[2].questionId, { required: true })} placeholder="Sobrou algo para especificar? Conta pra gente!" className="placeholder:text-white-dark w-full rounded-md border px-4 py-2 text-sm font-semibold !outline-none focus:border-primary focus:ring-transparent border-[#17263c] bg-[#121e32] text-white-dark focus:border-primary" />
+                <textarea defaultValue={stepFourInfos?.[finalQuestions[2].questionId] ? stepFourInfos[finalQuestions[2].questionId] : ''} {...register(finalQuestions[2].questionId, { required: true })} placeholder="Sobrou algo para especificar? Conta pra gente!" className="placeholder:text-white-dark w-full mt-5 rounded-md border px-4 py-2 text-sm font-semibold !outline-none focus:border-primary focus:ring-transparent border-[#17263c] bg-[#121e32] text-white-dark focus:border-primary" />
               </div>
 
             </div>
             {errors[finalQuestions[2].questionId] && (<span className="text-danger">Campo Obrigatório</span>)}
-            <div className="flex p-6 relative justify-between w-full">
+            <div className="mt-auto" />
+            <div className="flex p-6 mt-[200px] justify-between w-full">
               <Button type="button" onClick={() => setActiveTab(4)} className="btn-primary">Voltar</Button>
-              <Button type="submit" className="btn-primary">Enviar orçamento</Button>
+              <Button type="submit" className="btn-primary flex flex-row gap-2"><IconSend /> Enviar orçamento</Button>
             </div>
           </div>
         </form>

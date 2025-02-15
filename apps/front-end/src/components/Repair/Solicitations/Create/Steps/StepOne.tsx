@@ -1,7 +1,7 @@
 import { Button, Text } from "@app/ui";
 import React from "react";
 
-export function StepOne({ topic, setTopic, setActiveTab }: {
+export function TopicFormStep({ topic, setTopic, setActiveTab }: {
   topic: string,
   setTopic: React.Dispatch<React.SetStateAction<'battery' | 'display'>>,
   setActiveTab: React.Dispatch<React.SetStateAction<number>>
@@ -20,7 +20,7 @@ export function StepOne({ topic, setTopic, setActiveTab }: {
           <div className="bg-blue-500 flex items-center justify-center">3</div>
           <div className="bg-yellow-500 flex items-center justify-center">4</div>
         </div>
-        <div className="flex p-6 relative justify-between w-full">
+        <div className="flex p-6 mt-[100px] relative justify-between w-full ">
           <Button disabled className="btn-primary">Voltar</Button>
           <Button disabled={!topic ? true : false} onClick={() => setActiveTab(2)} className="btn-primary">Próximo</Button>
         </div>
