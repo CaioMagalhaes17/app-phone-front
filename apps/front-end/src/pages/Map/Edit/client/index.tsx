@@ -1,11 +1,12 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useStore from "../../../../state";
-import { AutoCompleteAdapter, MapAdapter, RadiusAdapter } from "../../../../adapters/Map";
+import { AutoCompleteAdapter, MapAdapter, MarkAdapter, RadiusAdapter } from "../../../../adapters/Map";
 import { Button, IconMap, IconSave, Input, Text } from "@app/ui";
 import { useEffect, useState } from "react";
 import { EditGeolocation } from "../../../../api/geolocation/edit-geolocation";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { MapPinSvg } from "../../../../constants/svg-icons";
 
 export default function ClientMapEdit() {
   const { clientInfos, setClientInfos, isMapLoaded } = useStore()
@@ -100,7 +101,7 @@ export default function ClientMapEdit() {
           <div className="text-left p-6 w-full">
             <Text className="font-extrabold" as="span">Alterar tamanho do raio de pesquisa</Text>
             <div className="flex gap-2 flex-row">
-              <input type="range" className="w-full" value={radius} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setRadius(Number(event.target.value))} min="600" max="3500" placeholder="Endereço" />
+              <input type="range" className="w-full" value={radius} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setRadius(Number(event.target.value))} min="600" max="6000" placeholder="Endereço" />
             </div>
           </div>
           <div className="p-4 w-full">
@@ -119,6 +120,10 @@ export default function ClientMapEdit() {
         </div>
         {clintLocation && isMapLoaded ? (
           <MapAdapter mapStyle={mapStyle} initialPosition={clintLocation}>
+            <MarkAdapter
+              position={clintLocation}
+              icon={MapPinSvg}
+            />
             <RadiusAdapter center={{ lat: clintLocation.lat, lng: clintLocation.lng }} radius={radius} />
           </MapAdapter>
         ) : ''}

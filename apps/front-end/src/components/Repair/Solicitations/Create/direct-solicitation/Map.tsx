@@ -13,6 +13,7 @@ import { Star } from "lucide-react";
 import useStore from "../../../../../state";
 import { InfoWindowAdapter, MapAdapter, MarkAdapter } from "../../../../../adapters/Map";
 import { StoreProfileType } from "../../../../../types/store-profile";
+import { MapPinSvg } from "../../../../../constants/svg-icons";
 
 export default function DirectSolicitationMap({ storeProfile, setActiveTab }: {
   storeProfile: StoreProfileType & { location: { latitude: number, longitude: number } }
@@ -120,8 +121,8 @@ export default function DirectSolicitationMap({ storeProfile, setActiveTab }: {
         </div>
         {clintLocation && isMapLoaded ? (
           <MapAdapter mapStyle={mapStyle} initialPosition={clintLocation}>
-            <MarkAdapter position={{ lat: storeProfile.location.latitude, lng: storeProfile.location.longitude }} />
-            <MarkAdapter position={{ lat: clintLocation.lat, lng: clintLocation.lng }} />
+            <MarkAdapter icon={MapPinSvg} position={{ lat: storeProfile.location.latitude, lng: storeProfile.location.longitude }} />
+            <MarkAdapter icon="default" position={{ lat: clintLocation.lat, lng: clintLocation.lng }} />
 
             <InfoWindowAdapter onClose={() => console.log('nigger')} position={{ lat: storeProfile.location.latitude, lng: storeProfile.location.longitude }} options={{ pixelOffset: new window.google.maps.Size(0, -40) }}>
               <>

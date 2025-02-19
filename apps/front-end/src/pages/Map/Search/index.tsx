@@ -15,6 +15,7 @@ import {
 import { formatStoreProfile } from "../../../formaters/store-profile";
 import { StoreProfileFromApi, StoreProfileType } from "../../../types/store-profile";
 import { Star } from "lucide-react";
+import { MapPinSvg, StoreSvg } from "../../../constants/svg-icons";
 
 type StoresInsideRadius = {
   GeoLocation: { props: { latitude: number; longitude: number; } }
@@ -158,11 +159,18 @@ export default function ClientMapSearch() {
                   <Text className="text-white-dark text-md " as="span">caiomagalhaesdefaria@hotmail.com</Text>
                 </div>
               </div>
+              <div className="border-b border-b-[#323b45] w-[100%]" />
             </>
-          ) : <Text as="span" className="text-3xl font-extrabold mt-10 mb-10">Selecione uma Loja</Text>}
+          ) :
+            (
+              <div className="mt-[300px]">
+                <Text as="span" className="text-3xl font-extrabold mt-10 mb-10">Selecione uma Loja</Text>
+              </div>
+            )
+          }
 
 
-          <div className="border-b border-b-[#323b45] w-[100%]" />
+
           <div className="mt-auto" />
           <Button onClick={() => navigate('/map/edit')} className="btn-primary flex flex-row w-full gap-5">
             <IconPencil />
@@ -173,9 +181,18 @@ export default function ClientMapSearch() {
           <MapAdapter mapStyle={mapStyle} initialPosition={clintLocation}>
             {!storesLoading && data.length > 0 ? (data.map((item: StoresInsideRadius) => {
               return (
-                <MarkAdapter onClick={() => onStorePinClick(item)} position={{ lat: item.GeoLocation.props.latitude, lng: item.GeoLocation.props.longitude }} key={item._id} />
+                <MarkAdapter
+                  onClick={() => onStorePinClick(item)}
+                  position={{ lat: item.GeoLocation.props.latitude, lng: item.GeoLocation.props.longitude }}
+                  key={item._id}
+                  icon={StoreSvg}
+                />
               )
             })) : ''}
+            <MarkAdapter
+              position={clintLocation}
+              icon={MapPinSvg}
+            />
             <RadiusAdapter center={{ lat: clintLocation.lat, lng: clintLocation.lng }} radius={radius} />
             {selectedStore && (
               <InfoWindowAdapter onClose={() => setSelectedStore(null)} position={{ lat: selectedStore.geoLocation.props.latitude, lng: selectedStore.geoLocation.props.longitude }} options={{ pixelOffset: new window.google.maps.Size(0, -40) }}>

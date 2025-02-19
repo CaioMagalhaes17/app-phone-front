@@ -6,6 +6,7 @@ import useStore from "../../../../../state";
 import { AutoCompleteAdapter, MapAdapter, MarkAdapter, RadiusAdapter } from "../../../../../adapters/Map";
 import Swal from "sweetalert2";
 import { FetchStoresInsideClientRadius } from "../../../../../api/geolocation/fetch-stores-inside-client-radius";
+import { StoreSvg } from "../../../../../constants/svg-icons";
 
 export function MapStep({ setActiveTab }: { setActiveTab: React.Dispatch<React.SetStateAction<number>> }) {
   const { clientInfos, setClientInfos, isMapLoaded } = useStore()
@@ -110,7 +111,7 @@ export function MapStep({ setActiveTab }: { setActiveTab: React.Dispatch<React.S
           <div className="text-left p-6 w-full">
             <Text className="font-extrabold" as="span">Alterar tamanho do raio de pesquisa</Text>
             <div className="flex gap-2 flex-row">
-              <input type="range" className="w-full" value={radius} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setRadius(Number(event.target.value))} min="600" max="3500" placeholder="Endereço" />
+              <input type="range" className="w-full" value={radius} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setRadius(Number(event.target.value))} min="600" max="6000" placeholder="Endereço" />
             </div>
           </div>
           <div className="p-4 w-full">
@@ -126,7 +127,7 @@ export function MapStep({ setActiveTab }: { setActiveTab: React.Dispatch<React.S
           <MapAdapter mapStyle={mapStyle} initialPosition={clintLocation}>
             {!storesLoading && data.length > 0 ? (data.map((item: StoresInsideRadius) => {
               return (
-                <MarkAdapter position={{ lat: item.GeoLocation.props.latitude, lng: item.GeoLocation.props.longitude }} key={item._id} />
+                <MarkAdapter icon={StoreSvg} position={{ lat: item.GeoLocation.props.latitude, lng: item.GeoLocation.props.longitude }} key={item._id} />
               )
             })) : ''}
             <RadiusAdapter center={{ lat: clintLocation.lat, lng: clintLocation.lng }} radius={radius} />

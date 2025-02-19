@@ -4,8 +4,8 @@ export function MapAdapter({ initialPosition, children, mapStyle }: GoogleMapsPr
   return <GoogleMaps mapStyle={mapStyle} initialPosition={initialPosition}>{children}</GoogleMaps>
 }
 
-export function MarkAdapter({ position, onClick }: GoogleMarkerProps) {
-  return <GoogleMarker position={position} onClick={onClick} />
+export function MarkAdapter({ position, onClick, icon }: GoogleMarkerProps) {
+  return <GoogleMarker position={position} icon={icon} onClick={onClick} />
 }
 
 export function InfoWindowAdapter({ position, options, children, onClose }: GoogleInfoWindowProps) {

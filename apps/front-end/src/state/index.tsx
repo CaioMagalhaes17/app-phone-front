@@ -22,6 +22,8 @@ type StateManager = {
   userInfos: UserInfos
   storeInfos: StoreInfos
   isMapLoaded: boolean
+  closeSidebar: boolean
+  setCloseSidebar: (closeSidebar: boolean) => void
   setIsMapLoaded: (isMapLoaded: boolean) => void
 }
 
@@ -41,6 +43,12 @@ type StoreInfos = {
 
 const useStore = create<StateManager>((set) => {
   return {
+    closeSidebar: false,
+    setCloseSidebar: (closeSidebar: boolean) => {
+      set({
+        closeSidebar
+      })
+    },
     userInfos: {
       isStore: false
     },

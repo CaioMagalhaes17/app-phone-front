@@ -32,6 +32,7 @@ export { DateField } from './components/DateField'
 export { IconChat } from './Icons/IconChat'
 export { IconX } from './Icons/IconX'
 export { IconTrash } from './Icons/IconTrash'
+export { IconMenu } from './Icons/IconMenu'
 export {
   Carousel,
   CarouselContent,

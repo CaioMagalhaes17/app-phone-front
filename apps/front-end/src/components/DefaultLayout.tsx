@@ -3,8 +3,10 @@ import { Suspense } from "react"
 import { Outlet } from "react-router-dom"
 import { Header } from "./Header"
 import { Sidebar } from "./SIdebar"
+import useStore from "../state"
 
 export default function DefaultLayout() {
+  const { closeSidebar } = useStore()
   return (
     <>
       <Box className={` leftbar-game-icon vertical font-extrabold full main-section antialiased relative font-nunito text-sm font-normal`}>
@@ -15,7 +17,7 @@ export default function DefaultLayout() {
               <Sidebar />
               <Suspense>
                 <Box className="hidden bg-success bg-warning bg-danger text-warning text-success text-danger text-primary" />
-                <Box data-overlap="false" className="animate__fadeIn animate__animated page-container p-4 scrollable">
+                <Box data-overlap="false" id="page-container" style={{ left: closeSidebar ? '0px' : '305px' }} className="animate__fadeIn animate__animated page-container p-4 scrollable">
                   <Outlet />
                 </Box>
               </Suspense>

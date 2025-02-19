@@ -5,13 +5,12 @@ import { Button, IconMap, IconSave, Input, Text } from "@app/ui";
 import { useEffect, useState } from "react";
 import { EditGeolocation } from "../../../../api/geolocation/edit-geolocation";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
 import { CreateGeolocation } from "../../../../api/geolocation/create-geolocation";
+import { StoreSvg } from "../../../../constants/svg-icons";
 
 export default function StoreMapEdit() {
   const { storeInfos, setStoreInfos, isMapLoaded } = useStore()
   const [clintLocation, setLocation] = useState<{ lat: number; lng: number } | null>(null);
-  const navigate = useNavigate()
 
   const { mutateAsync } = useMutation({
     mutationFn: !storeInfos.location.latitude ? CreateGeolocation : EditGeolocation
@@ -101,7 +100,10 @@ export default function StoreMapEdit() {
         </div>
         {clintLocation && isMapLoaded ? (
           <MapAdapter mapStyle={mapStyle} initialPosition={clintLocation}>
-            <MarkAdapter position={clintLocation} />
+            <MarkAdapter
+              position={clintLocation}
+              icon={StoreSvg}
+            />
           </MapAdapter>
         ) : ''}
       </div>

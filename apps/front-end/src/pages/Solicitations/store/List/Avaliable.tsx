@@ -19,8 +19,8 @@ export function AvaliableSolicitations() {
     queryFn: GetAvaliableSolicitationsForStore
   })
   const [sortStatus, setSortStatus] = useState<DataTableSortStatus>({
-    columnAccessor: 'initialDate',
-    direction: 'asc',
+    columnAccessor: 'createdAt',
+    direction: 'desc',
   })
 
   useEffect(() => {
@@ -115,8 +115,12 @@ export function AvaliableSolicitations() {
     <>
       {!isLoading && avaliableSolicitations ? (
         <>
-          <BasicTable sortStatus={sortStatus} onSortStatusChange={onSortChange()} columns={columns} records={avaliableSolicitations} title="Problemas para retorno de orçamento">
-
+          <BasicTable
+            sortStatus={sortStatus}
+            onSortStatusChange={onSortChange()}
+            columns={columns}
+            records={avaliableSolicitations}
+            title="Problemas para retorno de orçamento">
           </BasicTable>
         </>
       ) : ''}

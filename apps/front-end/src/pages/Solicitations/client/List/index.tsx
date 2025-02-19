@@ -23,10 +23,9 @@ export function SolicitationsList() {
     if (!isLoading && data) return setSolicitations(formatSolicitations(data))
   }, [data, isLoading])
   const [sortStatus, setSortStatus] = useState<DataTableSortStatus>({
-    columnAccessor: 'initialDate',
-    direction: 'asc',
+    columnAccessor: 'createdAt',
+    direction: 'desc',
   })
-
   function onSortChange() {
     if (solicitations.length > 0) {
       if (sortStatus.direction === 'asc') {

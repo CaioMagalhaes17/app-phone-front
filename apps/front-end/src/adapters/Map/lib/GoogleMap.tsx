@@ -40,7 +40,7 @@ export function GoogleMaps({ initialPosition, children, mapStyle }: GoogleMapsPr
     <GoogleMap
       mapContainerStyle={mapStyle}
       center={initialPosition}
-      zoom={15}
+      zoom={13}
       options={{ styles: mapStyles, disableDefaultUI: true }}
     >
       {children}
@@ -51,10 +51,11 @@ export function GoogleMaps({ initialPosition, children, mapStyle }: GoogleMapsPr
 export type GoogleMarkerProps = {
   position: { lat: number, lng: number }
   onClick?: () => void
+  icon: string
 }
 
-export function GoogleMarker({ position, onClick }: GoogleMarkerProps) {
-  return <Marker position={position} onClick={onClick} />
+export function GoogleMarker({ position, onClick, icon }: GoogleMarkerProps) {
+  return <Marker icon={icon} position={position} onClick={onClick} />
 }
 
 export type GoogleInfoWindowProps = {

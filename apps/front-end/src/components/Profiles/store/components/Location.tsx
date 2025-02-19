@@ -1,6 +1,7 @@
 import { Button, Panel, Text } from "@app/ui";
 import { MapAdapter, MarkAdapter } from "../../../../adapters/Map";
 import useStore from "../../../../state";
+import { StoreSvg } from "../../../../constants/svg-icons";
 
 export function StoreProfileLocation({ lat, lng }: { lat: number, lng: number }) {
   const { isMapLoaded } = useStore()
@@ -34,7 +35,9 @@ export function StoreProfileLocation({ lat, lng }: { lat: number, lng: number })
           </div>
           <div className="h-[500px] w-full p-4">{isMapLoaded ? (
             <MapAdapter mapStyle={mapStyle} initialPosition={{ lat, lng }}>
-              <MarkAdapter position={{ lat, lng }} />
+              <MarkAdapter icon={StoreSvg}
+                position={{ lat, lng }}
+              />
             </MapAdapter>
           ) : (<>'Carregando...'</>)}</div>
         </div>

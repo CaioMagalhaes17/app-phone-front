@@ -1,4 +1,4 @@
-import { CANCELED_SOLICITATION_STATUS, OPEN_TO_BUDGETS_SOLICITATION_STATUS, PhoneBrandType, ProblemTopicType, Solicitation, SolicitationFormProps, SolicitationsFromApi } from "../types/solicitation";
+import { CANCELED_SOLICITATION_STATUS, DIRECT_SOLICITATION, OPEN_TO_BUDGETS_SOLICITATION_STATUS, PhoneBrandType, ProblemTopicType, Solicitation, SolicitationFormProps, SolicitationsFromApi } from "../types/solicitation";
 import { formatClientProfile } from "./client-profile";
 
 export function formatSolicitations(solicitations: SolicitationsFromApi[]): Solicitation[] {
@@ -47,6 +47,7 @@ export function formatTopic(topic: ProblemTopicType) {
 export function getStatusColor(status: string) {
   if (status === OPEN_TO_BUDGETS_SOLICITATION_STATUS) return 'success'
   if (status === CANCELED_SOLICITATION_STATUS) return 'danger'
+  if (status === DIRECT_SOLICITATION) return 'warning'
 }
 
 export function formatOriginalHardwareAnswer(originalHardware: string) {

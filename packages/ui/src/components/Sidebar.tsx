@@ -1,6 +1,6 @@
-export function Sidebar({ children }: {children: React.ReactNode}) {
+export function Sidebar({ children, style }: { style?: React.CSSProperties, children: React.ReactNode }) {
   return (
-    <nav className="leftbar">
+    <nav style={style ? style : {}} className="leftbar">
       {children}
     </nav>
   )

@@ -19,8 +19,8 @@ export function ClientBudgetsList() {
     queryFn: () => GetBudgetsToClient()
   })
   const [sortStatus, setSortStatus] = useState<DataTableSortStatus>({
-    columnAccessor: 'initialDate',
-    direction: 'asc',
+    columnAccessor: 'createdAt',
+    direction: 'desc',
   })
 
   const columns: DataTableColumn<BudgetType>[] = [
