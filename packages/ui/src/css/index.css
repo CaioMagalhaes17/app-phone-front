@@ -85,10 +85,11 @@ body {
     @apply py-1.5 text-xs;
   }
 
-  input.form-radio,
-  input.form-checkbox {
-    @apply mr-2 h-5 w-5 cursor-pointer rounded border-2 border-[#e0e6ed] bg-transparent text-primary-dark !shadow-none !outline-none !ring-0 !ring-offset-0 aria-checked:text-primary-dark disabled:cursor-not-allowed disabled:bg-[#eee] dark:border-[#253b5c] dark:checked:border-transparent dark:disabled:bg-[#1b2e4b];
-  }
+  .form-radio,
+    .form-checkbox {
+        @apply h-5 w-5 cursor-pointer rounded border-2 border-white-light bg-transparent text-primary !shadow-none !outline-none !ring-0 !ring-offset-0 checked:bg-[length:90%_90%] disabled:cursor-not-allowed disabled:bg-[#eee] 
+      dark:border-[#253b5c] dark:checked:border-transparent dark:disabled:bg-[#1b2e4b];
+    }
 
   input.form-radio {
     @apply rounded-full;

@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { useNavigate, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { Solicitation } from "../../../../types/solicitation"
 import { GetSolicitation } from "../../../../api/repair/solicitation/get-solicitation"
 import { Button, Panel, Text } from "@app/ui"
@@ -16,7 +16,6 @@ import { DeleteBudgets } from "../../../../api/repair/budget/delete-budget"
 export function StoreSolicitationDetails() {
   const { id } = useParams() as { id: string }
   const client = useQueryClient()
-  const navigate = useNavigate()
   const { data: solicitationData, isLoading } = useQuery<Solicitation>({
     queryKey: ['get-solicitation'],
     queryFn: () => GetSolicitation(id)

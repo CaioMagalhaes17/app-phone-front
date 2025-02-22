@@ -1,4 +1,6 @@
 import { Button, IconSave, Input, Panel, Text, IconPencil } from "@app/ui";
+import { StoreContact } from "./components/Contact";
+import { StoreSocials } from "./components/Socials";
 
 export function EditStoreProfile() {
   return (
@@ -11,8 +13,8 @@ export function EditStoreProfile() {
           <Button className="btn-outline-primary">Alterar login/senha</Button>
         </li>
       </ul>
-      <div className="flex justify-center ">
-        <Panel className="font-extrabold max-w-[1200px] w-full">
+      <div className=" flex justify-center ">
+        <Panel className="!shadow-lg !shadow-black font-extrabold max-w-[1200px] w-full">
           <div className="flex flex-row justify-center items-center">
             <Text className="text-3xl text-white" as="h1">Editar perfil</Text>
             <div className="mr-auto" />
@@ -49,58 +51,9 @@ export function EditStoreProfile() {
             </div>
 
             <div className="border-b border-b-[#323b45] mt-10 mb-5" />
-            <Text className="text-white text-3xl" as="span">Contato</Text>
-            <div className="flex flex-col text-lg">
-              <div className="flex items-center flex-row gap-5">
-                <div className="w-full">
-                  <Text as="span">Email</Text>
-                  <Input />
-                </div>
-                <div className="w-full">
-                  <Text as="span">Observação</Text>
-                  <Input />
-                </div>
-                <Button className="btn-outline-danger">Excluir</Button>
-              </div>
-              <div className="flex mt-10 items-center flex-row gap-5">
-                <div className="w-full">
-                  <Text as="span">Email</Text>
-                  <Input />
-                </div>
-                <div className="w-full">
-                  <Text as="span">Observação</Text>
-                  <Input />
-                </div>
-                <Button className="btn-outline-primary">Adicionar</Button>
-              </div>
-              <div className="flex mt-10 items-center flex-row gap-5">
-                <div className="w-full">
-                  <Text as="span">Telefone</Text>
-                  <Input placeholder="(99) 99999-9999" />
-                </div>
-                <div className="w-full">
-                  <Text as="span">Observação</Text>
-                  <Input placeholder="Principal" />
-                </div>
-                <Button className="btn-outline-primary">Adicionar</Button>
-              </div>
-            </div>
+            <StoreContact />
             <div className="border-b border-b-[#323b45] mt-10 mb-5" />
-            <Text className="text-white text-3xl" as="span">Redes sociais</Text>
-            <div className="flex flex-col text-lg">
-              <div className="flex items-center flex-row gap-5">
-                <select className="form-select rounded bg-black form-select-lg text-white w-full mt-6">
-                  <option>
-                    Facebook
-                  </option>
-                </select>
-                <div className="w-full">
-                  <Text as="span">Link do perfil</Text>
-                  <Input />
-                </div>
-                <Button className="btn-outline-danger">Excluir</Button>
-              </div>
-            </div>
+            <StoreSocials />
           </div>
         </Panel >
       </div >

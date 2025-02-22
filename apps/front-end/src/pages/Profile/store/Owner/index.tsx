@@ -10,31 +10,46 @@ import { useNavigate } from "react-router-dom"
 import { FeedbackType } from "../../../../types/feedback"
 import { formatFeedbacks } from "../../../../formaters/feedback"
 import { GetFeedbacksFromStore } from "../../../../api/feedback/get-from-store"
+import { StoreSocialsType } from "../../../../types/store-profile"
+import { getStoreSocials } from "../../../../api/user/store/get-socials"
+import { formatStoreSocials } from "../../../../formaters/store-profile"
 
 export function StoreProfileOwner() {
   const navigate = useNavigate()
   const [budgets, setBudgets] = useState<BudgetType[] | []>([])
+  const [socials, setSocials] = useState<StoreSocialsType[] | null>(null)
   const { storeInfos } = useStore()
   const { data, isLoading } = useQuery({
     queryKey: ['get-budgets'],
     queryFn: () => GetBudgets({ page: '1', limit: '3' })
   })
+  const { data: socialsData, isLoading: isSocialsLoading } = useQuery({
+    queryKey: ['get-socials'],
+    queryFn: () => getStoreSocials()
+  })
+
+  useEffect(() => {
+    if (!isSocialsLoading && socialsData) {
+      setSocials(formatStoreSocials(socialsData))
+    }
+  }, [socialsData, isSocialsLoading])
+
   useEffect(() => {
     if (!isLoading) {
       setBudgets(formatBudgetsFromApi(data))
     }
   }, [isLoading, data])
 
-  const [feedbacks, setFeedbacks] = useState<FeedbackType[] | null>()
+  const [feedbacks, setFeedbacks] = useState<FeedbackType[] | null>(null)
 
-  const { data: feedbacksData } = useQuery({
+  const { data: feedbacksData, isLoading: isLoadingFeedback } = useQuery({
     queryKey: ['get-feedbacks'],
     queryFn: () => GetFeedbacksFromStore(storeInfos.id, { limit: '3', page: '1' })
   })
 
   useEffect(() => {
-    if (!isLoading && data) return setFeedbacks(formatFeedbacks(feedbacksData))
-  }, [isLoading, data])
+    if (!isLoadingFeedback && feedbacksData) return setFeedbacks(formatFeedbacks(feedbacksData))
+  }, [isLoadingFeedback, feedbacksData])
 
   const [clintLocation, setLocation] = useState<{ lat: number; lng: number }>({ lat: 0, lng: 0 });
   useEffect(() => {
@@ -64,11 +79,10 @@ export function StoreProfileOwner() {
         <StoreProfileComponent
           storeId={storeInfos.id}
           storeFeedbacksProps={{ feedbacks, canShowRateStore: false }}
-          mainPanelProps={{ name: storeInfos.name, rating: storeInfos.rating }}
+          mainPanelProps={{ name: storeInfos.name, rating: storeInfos.rating, storeSocials: socials }}
           storeProfileBudgets={{ budgets, isOwner: true }}
           storeProfileLocation={{ lat: clintLocation.lat, lng: clintLocation.lng }}
         />
-
       ) : ''}
     </>
   )

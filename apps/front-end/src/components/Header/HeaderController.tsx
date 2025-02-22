@@ -58,7 +58,7 @@ export function HeaderController() {
   function getStoreHeader() {
     function handleLogout() {
       setStoreInfos({
-        profileId: '',
+        id: '',
         name: '',
         profileImg: '',
         address: '',

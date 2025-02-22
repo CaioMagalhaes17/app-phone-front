@@ -17,16 +17,14 @@ export interface StoreProfileComponent {
   }
   storeId: string
 }
-
 export function StoreProfileComponent({ storeId, mainPanelProps, storeProfileLocation, storeProfileBudgets, storeFeedbacksProps }: StoreProfileComponent) {
   return (
     <>
-      <MainPainel rating={mainPanelProps.rating} name={mainPanelProps.name} />
+      <MainPainel rating={mainPanelProps.rating} name={mainPanelProps.name} storeSocials={mainPanelProps.storeSocials} />
       <div className="gap-5 flex mt-5 font-extrabold flex-row">
         <StoreFeedbacks storeId={storeId} feedbacks={storeFeedbacksProps.feedbacks} canShowRateStore={storeFeedbacksProps.canShowRateStore} />
         <StoreProfileBudgets budgets={storeProfileBudgets.budgets} isOwner={storeProfileBudgets?.isOwner} />
       </div>
-      {/*Localização Loja*/}
       <StoreProfileLocation lat={storeProfileLocation.lat} lng={storeProfileLocation.lng} />
     </>
   )

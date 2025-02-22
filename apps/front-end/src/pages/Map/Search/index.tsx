@@ -146,7 +146,7 @@ export default function ClientMapSearch() {
                 </div>
                 <div className="border-b border-b-[#323b45] mt-5 w-[100%]" />
 
-                <Link to={`/store-profile/${selectedStore.storeProfile.id}`} className="btn btn-primary flex flex-row w-full gap-5 mt-5">
+                <Link target="_blank" rel="noopener noreferrer" to={`/store-profile/${selectedStore.storeProfile.id}`} className="btn btn-primary flex flex-row w-full gap-5 mt-5">
                   <IconStore />
                   Ir para o perfil da loja
                 </Link>
@@ -178,7 +178,7 @@ export default function ClientMapSearch() {
           </Button>
         </div>
         {clintLocation && isMapLoaded ? (
-          <MapAdapter mapStyle={mapStyle} initialPosition={clintLocation}>
+          <MapAdapter onClick={() => setSelectedStore(null)} mapStyle={mapStyle} initialPosition={clintLocation}>
             {!storesLoading && data.length > 0 ? (data.map((item: StoresInsideRadius) => {
               return (
                 <MarkAdapter
@@ -193,7 +193,7 @@ export default function ClientMapSearch() {
               position={clintLocation}
               icon={MapPinSvg}
             />
-            <RadiusAdapter center={{ lat: clintLocation.lat, lng: clintLocation.lng }} radius={radius} />
+            <RadiusAdapter onClick={() => setSelectedStore(null)} center={{ lat: clintLocation.lat, lng: clintLocation.lng }} radius={radius} />
             {selectedStore && (
               <InfoWindowAdapter onClose={() => setSelectedStore(null)} position={{ lat: selectedStore.geoLocation.props.latitude, lng: selectedStore.geoLocation.props.longitude }} options={{ pixelOffset: new window.google.maps.Size(0, -40) }}>
                 <>

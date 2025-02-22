@@ -2,7 +2,6 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Link, useParams } from "react-router-dom";
 import { GetSolicitation } from "../../../../api/repair/solicitation/get-solicitation";
 import { Button, IconDollarSignCircle, IconStore, IconX, Panel, Text } from "@app/ui";
-import { CANCELED_SOLICITATION_STATUS, Solicitation } from "../../../../types/solicitation";
 import { formatPhoneBrand, formatTopic, getStatusColor } from "../../../../formaters/solicitations";
 import Swal from "sweetalert2";
 import { EditSolicitation } from "../../../../api/repair/solicitation/edit-solicitation";
@@ -13,6 +12,8 @@ import { GetBudgetsbySolicitation } from "../../../../api/repair/budget/get-budg
 import { useEffect, useState } from "react";
 import { BudgetType } from "../../../../types/budget";
 import { formatBudgetsFromApi } from "../../../../formaters/budget";
+import { CANCELED_SOLICITATION_STATUS } from "../../../../constants/solicitation-status";
+import { Solicitation } from "../../../../types/solicitation";
 
 export function SolicitationDetails() {
   const [budgets, setBudgets] = useState<BudgetType[] | []>([])
@@ -132,7 +133,7 @@ export function SolicitationDetails() {
                             <Text className="text-success" as="span">{budget.startValue} - {budget.endValue}</Text>
                           </div>
                           <div className="ml-auto">
-                            <Link to={`/store-profile/${budget.storeProfile.id}`} className="btn-primary btn flex flex-row gap-2"><IconStore />Acessar perfil da loja</Link>
+                            <Link target="_blank" rel="noopener noreferrer" to={`/store-profile/${budget.storeProfile.id}`} className="btn-primary btn flex flex-row gap-2"><IconStore />Acessar perfil da loja</Link>
                           </div>
                           <div className="">
                             <Button className="btn-outline-success flex flex-row gap-2"><IconDollarSignCircle />Escolher orçamento</Button>

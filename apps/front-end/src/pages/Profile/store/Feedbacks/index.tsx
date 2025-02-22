@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { GetFeedbacksFromStore } from "../../../../api/feedback/get-from-store";
 import { useEffect, useState } from "react";
 import { FeedbackType } from "../../../../types/feedback";
 import { formatFeedbacks } from "../../../../formaters/feedback";
 import { FeedbackRow } from "../../../../components/Feedbacks/row";
-import { Button, Panel, Text } from "@app/ui";
+import { Button, IconArrowBackward, Panel, Text } from "@app/ui";
 import { CreateFeedback } from "../../../../components/Feedbacks/create-modal";
 
 export function StoreFeedbacksList() {
@@ -19,8 +19,12 @@ export function StoreFeedbacksList() {
   useEffect(() => {
     if (!isLoading && data) return setFeedbacks(formatFeedbacks(data))
   }, [isLoading, data])
+
+  const navigate = useNavigate()
   return (
     <>
+      <Button onClick={() => navigate(-1)} className="btn-outline-primary flex flex-row gap-2"><IconArrowBackward /> Voltar</Button>
+
       {!isLoading && feedbacks ? (<div className="flex justify-center">
         <Panel className="font-extrabold  max-w-[1200px] w-full">
           <div className="flex flex-row">

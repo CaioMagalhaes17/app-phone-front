@@ -1,12 +1,15 @@
-import { Panel, Text } from "@app/ui";
+import { Button, IconFacebook, IconInstagram, IconWhatsApp, Panel, Text } from "@app/ui";
 import { Star } from "lucide-react";
+import { StoreSocialsType } from "../../../../types/store-profile";
 
 export interface StoreMainPainelProps {
   rating: number,
-  name: string
+  name: string,
+  storeSocials: StoreSocialsType[] | null
+
 }
 
-export function MainPainel({ rating, name }: StoreMainPainelProps) {
+export function MainPainel({ rating, name, storeSocials }: StoreMainPainelProps) {
   return (
     <>
       <Panel>
@@ -15,7 +18,25 @@ export function MainPainel({ rating, name }: StoreMainPainelProps) {
             <img width={'260px'} height={'260px'} src="https://avatars.githubusercontent.com/u/73131798?v=4" className="rounded-3xl" />
           </div>
           <div className="p-2 flex w-full text-left text-lg font-extrabold text-white gap-5 flex-col">
-            <Text className="text-white font-extrabold text-3xl" as="span">{name}</Text>
+            <div className="flex flex-row gap-5">
+              <Text className="text-white font-extrabold text-3xl" as="span">{name}</Text>
+              <div className="flex flex-row gap-2">
+                {
+                  storeSocials?.map((item) => {
+                    return (
+                      <>
+                        <Button onClick={() => console.log(item.link)} className="btn-outline-primary rounded-full">
+                          {item.type === 'whatsapp' && <IconWhatsApp />}
+                          {item.type === 'instagram' && <IconInstagram />}
+                          {item.type === 'facebook' && <IconFacebook />}
+                        </Button>
+                      </>
+                    )
+                  })
+                }
+              </div>
+
+            </div>
             <div className="border-b border-b-[#323b45] " />
             <Text className="text-white-dark font-extrabold text-xl" as="span">Aberta/Fechada</Text>
             <div className="flex flex-row">{[...Array(5)].map((_, index) => (

@@ -9,10 +9,11 @@ export type GoogleMapsProps = {
   }
   children?: React.ReactNode
   mapStyle: React.CSSProperties
+  onClick?: () => void
 }
 
 
-export function GoogleMaps({ initialPosition, children, mapStyle }: GoogleMapsProps) {
+export function GoogleMaps({ initialPosition, children, mapStyle, onClick }: GoogleMapsProps) {
   const mapStyles = [
     {
       featureType: "poi", // Points of Interest
@@ -38,6 +39,7 @@ export function GoogleMaps({ initialPosition, children, mapStyle }: GoogleMapsPr
 
   return (
     <GoogleMap
+      onClick={onClick}
       mapContainerStyle={mapStyle}
       center={initialPosition}
       zoom={13}
@@ -79,11 +81,12 @@ export type GoogleCirceProps = {
     lng: number
   }
   radius: number
+  onClick?: () => void
 }
 
-export function GoogleCircle({ center, radius }: GoogleCirceProps) {
+export function GoogleCircle({ center, radius, onClick }: GoogleCirceProps) {
   return (
-    <Circle center={center} radius={radius} options={{ draggable: false, editable: false }} />
+    <Circle onClick={onClick} center={center} radius={radius} options={{ draggable: false, editable: false }} />
   )
 }
 

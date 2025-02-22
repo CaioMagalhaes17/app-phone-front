@@ -329,10 +329,6 @@ export const finalQuestions = [
         optionId: 'normal',
         text: 'Normal'
       },
-      {
-        optionId: 'any',
-        text: 'Sem pressa'
-      }
     ]
   },
   {

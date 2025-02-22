@@ -5,11 +5,10 @@ export function ClientSidebar() {
   const navigate = useNavigate()
   return (
     <>
-      <Text as="span" onClick={() => navigate('/')} className="font-bold hover:underline text-lg cursor-pointer text-white flex flex-row gap-5">
+      <Text as="span" onClick={() => navigate('/')} className="font-bold hover:underline text-lg cursor-pointer text-white flex flex-row gap-5 mb-5">
         <IconHome />
         Início
       </Text>
-      <div className="border-b border-b-[#323b45] mt-5" />
       <Accordion type="single" collapsible className="">
         <AccordionItem value="item-1">
           <AccordionTrigger className="mb-2 text-white text-lg font-extrabold">

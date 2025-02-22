@@ -93,7 +93,7 @@ export function StoreBudgetList() {
     <>
       {!isLoading ? (
         <>
-          <BasicTable columns={columns} records={budgets} title="Problemas para retorno de orçamento">
+          <BasicTable columns={columns} records={budgets} title="Histórico de orçamentos">
 
           </BasicTable>
         </>

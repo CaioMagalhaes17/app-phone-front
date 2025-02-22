@@ -20,7 +20,7 @@ export { IconMap } from './Icons/IconMap'
 export { IconSave } from './Icons/IconSave'
 export { IconSearch } from './Icons/IconSearch'
 export { IconPencil } from './Icons/IconPencil'
-export { IconPhone } from './Icons/Bold/IconPhone'
+export { IconPhone } from './Icons/IconPhone'
 export { IconStreetMap } from './Icons/IconStreetMap'
 export { IconSmartphone } from './Icons/IconSmartphone'
 export { IconHome } from './Icons/IconHome'
@@ -33,6 +33,10 @@ export { IconChat } from './Icons/IconChat'
 export { IconX } from './Icons/IconX'
 export { IconTrash } from './Icons/IconTrash'
 export { IconMenu } from './Icons/IconMenu'
+export { IconFacebook } from './Icons/IconFacebook'
+export { IconFacebookCircle } from './Icons/IconFacebookCircle'
+export { IconInstagram } from './Icons/IconInstagram'
+export { IconWhatsApp } from './Icons/IconWhatsapp'
 export {
   Carousel,
   CarouselContent,
@@ -40,6 +44,8 @@ export {
   CarouselNext,
   CarouselPrevious,
 } from "./components/Carousel"
+
+export { IconArrowBackward } from './Icons/IconArrowBack'
 
 export {
   Dialog,

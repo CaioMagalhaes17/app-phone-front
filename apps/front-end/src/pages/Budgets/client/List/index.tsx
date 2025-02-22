@@ -2,120 +2,93 @@ import { useQuery } from "@tanstack/react-query"
 import { GetBudgetsToClient } from "../../../../api/repair/budget/get-budgets-to-client"
 import { useEffect, useState } from "react"
 import { formatBudgetsFromApi } from "../../../../formaters/budget"
-import { DataTableColumn, DataTableSortStatus } from "mantine-datatable"
 import { BudgetType } from "../../../../types/budget"
-import { formatPhoneBrand } from "../../../../formaters/solicitations"
-import { batteryQuestions, displayQuestions } from "../../../../constants/solicitation-form-questions"
-import { Button } from "@app/ui"
-import { useNavigate } from "react-router-dom"
-import { BasicTable } from "../../../../components/Datatable"
-import dayjs from "dayjs"
+import { Panel, Text } from "@app/ui"
+import { BudgetRow } from "./components/BudgetRow"
 
 export function ClientBudgetsList() {
-  const navigate = useNavigate()
   const [budgets, setBudgets] = useState<BudgetType[] | []>([])
-  const { data, isLoading } = useQuery({
+  // const [uniqueModels, setUniqueModels] = useState<string[]>()
+  const { data, isLoading, isFetching } = useQuery({
     queryKey: ['get-budgets'],
     queryFn: () => GetBudgetsToClient()
   })
-  const [sortStatus, setSortStatus] = useState<DataTableSortStatus>({
-    columnAccessor: 'createdAt',
-    direction: 'desc',
-  })
-
-  const columns: DataTableColumn<BudgetType>[] = [
-    {
-      accessor: 'phone',
-      title: 'Celular',
-      render: ({ solicitation }) => {
-        return <span className="text-white text-lg font-extrabold">{formatPhoneBrand(solicitation.form.phoneForm.brand)} - {solicitation.form.phoneForm.model}</span>
-      }
-    },
-    {
-      accessor: 'problem',
-      title: 'Defeito',
-      render: ({ solicitation }) => {
-        let answer: { text: string } = { text: '' }
-        if ('battery-A' in solicitation.form.problemForm) {
-          const questionOne = solicitation.form.problemForm['battery-A']
-          answer = batteryQuestions[0].options.filter((item) => item.optionId === questionOne)[0]
-        }
-        if ('display-A' in solicitation.form.problemForm) {
-          const questionOne = solicitation.form.problemForm['display-A']
-          answer = displayQuestions[0].options.filter((item) => item.optionId === questionOne)[0]
-        }
-        return <span className="text-white text-md font-extrabold">{answer.text}</span>
-      }
-    },
-    {
-      accessor: 'storeName',
-      title: 'Nome da loja',
-      cellsClassName: 'break-all whitespace-normal max-w-[350px]',
-      render: ({ storeProfile }) => {
-        return <span className="text-white w-full font-extrabold">{storeProfile.name}</span>
-      }
-    },
-    {
-      accessor: 'price',
-      title: 'Valor estimado',
-      render: ({ startValue, endValue }) => {
-        return (
-          <span className="text-lg text-success font-extrabold">{startValue} - {endValue}</span>
-        )
-
-      }
-    },
-    {
-      accessor: 'createdAt',
-      title: 'Criado em',
-      cellsClassName: 'text-white font-extrabold',
-      sortable: true,
-      render: ({ createdAt }) => {
-        return (
-          <span className={`text-white`}>{dayjs(createdAt).format("DD/MM/YYYY")}</span>
-        )
-      }
-    },
-    {
-      accessor: 'actions',
-      title: 'Ações',
-      render: ({ solicitation }) => {
-        return (
-          <div className="flex justify-center items-center">
-            <Button onClick={() => navigate('/solicitation/' + solicitation.id)} className="btn-outline-primary text-lg">Acessar</Button>
-          </div>
-        )
-      }
-    },
-  ]
-
-  function onSortChange() {
-    if (budgets.length > 0) {
-      if (sortStatus.direction === 'asc') {
-        budgets.sort(
-          (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-        )
-      }
-      if (sortStatus.direction === 'desc') {
-        budgets.sort(
-          (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-        )
-      }
-    }
-    return setSortStatus
-  }
 
   useEffect(() => {
-    if (!isLoading) {
-      return setBudgets(formatBudgetsFromApi(data))
+    if (!isFetching && data) {
+      const budgetsFormatted = formatBudgetsFromApi(data)
+      setBudgets([...budgetsFormatted].sort((a, b) => b.storeProfile.rating - a.storeProfile.rating));
+      // const uniqueModelsD = [...new Set(data.map((item: any) => item.props.solicitation.props.form.props.phoneForm.model).filter((model: any) => typeof model === "string")
+      // )] as string[];
+      // setUniqueModels(uniqueModelsD)
     }
-  }, [isLoading, data])
+  }, [isFetching, data])
+
+  function onOrderChange(orderStatus: string) {
+    switch (orderStatus) {
+      case 'rating':
+        setBudgets([...budgets].sort((a, b) => b.storeProfile.rating - a.storeProfile.rating));
+        break
+      case 'distance':
+
+        break
+      case 'descPrice':
+        setBudgets([...budgets].sort((a, b) => Number(b.startValue.replace('R$', '').replace(',', '.').replace(/\./g, "")) - Number(a.startValue.replace('R$', '').replace(',', '.').replace(/\./g, ""))))
+        break
+      case 'ascPrice':
+        setBudgets([...budgets].sort((a, b) => Number(a.startValue.replace('R$', '').replace(',', '.').replace(/\./g, "")) - Number(b.startValue.replace('R$', '').replace(',', '.').replace(/\./g, ""))))
+        break
+      default:
+        console.log('nothing')
+    }
+  }
+
+  // function onFilterChange(filter: string) {
+  //   if (filter !== 'default') return setBudgets([...budgets].filter((item) => item.solicitation.form.phoneForm.model === filter));
+  //   return refetch()
+  // }
   return <>
     {!isLoading ? (
       <>
-        <BasicTable sortStatus={sortStatus} onSortStatusChange={onSortChange()} columns={columns} records={budgets} title="Orçamentos recebidos">
-
-        </BasicTable>
+        <div className="flex justify-center">
+          <Panel className="font-extrabold  max-w-[1200px] w-full">
+            <div className="flex flex-row">
+              <Text className="text-3xl text-white" as="h1">Orçamentos recebidos</Text>
+              <div className="ml-auto" />
+              {/* <select onClick={(e) => onFilterChange(e.currentTarget.value)} className="form-select !border-none bg-black form-select-lg text-white mr-5">
+                <option value="default">
+                  Filtrar por celular
+                </option>
+                {uniqueModels && uniqueModels.length > 0 ? uniqueModels.map((item) => {
+                  return (
+                    <option value={item}>
+                      {item}
+                    </option>
+                  )
+                }) : ''}
+              </select> */}
+              <select onClick={(e) => onOrderChange(e.currentTarget.value)} className="form-select !border-none bg-black form-select-lg text-white">
+                <option value="rating">
+                  Loja com mais notas
+                </option>
+                <option value="distance">
+                  Loja mais próxima
+                </option>
+                <option value='descPrice'>
+                  Maior preço
+                </option>
+                <option value='ascPrice'>
+                  Menor preço
+                </option>
+              </select>
+            </div>
+            <div className="border-b border-b-[#323b45] mt-5 mt-10" />
+            {budgets.length > 0 ?
+              budgets.map((budget) => <BudgetRow budget={budget} />) :
+              (<div className="mt-10 h-[200px] "><Text className="text-3xl" as="span">Não foram encontrados registros</Text></div>)
+            }
+          </Panel>
+        </div>
       </>
     ) : ''}
   </>

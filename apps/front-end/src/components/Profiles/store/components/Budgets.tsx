@@ -26,33 +26,48 @@ export function StoreProfileBudgets({ budgets, isOwner }: StoreProfileBudgetProp
   return (
     <>
       <Panel className="w-full">
-        <div className="flex flex-row">
-          <Text className="text-3xl text-white" as="h1">Ultimos Orçamentos</Text>
-          {isOwner ? <Link to="/store/budget/list" className="btn ml-auto btn-primary flex flex-row gap-2"><IconPlus /> Ver todas</Link>
-            : <Link to={`/solicitations/create/${budgets[0].storeProfile.id}`} className="btn ml-auto btn-primary flex flex-row gap-2"><IconSend /> Pedir orçamento de conserto direto para loja</Link>}
+        {budgets.length > 0 ? (
+          <>
+            <div className="flex flex-row">
+              <Text className="text-3xl text-white" as="h1">Ultimos Orçamentos</Text>
+              {isOwner ? <Link to="/store/budget/list" className="btn ml-auto btn-primary flex flex-row gap-2"><IconPlus /> Ver todas</Link>
+                : <Link to={`/solicitations/create/${budgets[0].storeProfile.id}`} className="btn ml-auto btn-primary flex flex-row gap-2"><IconSend /> Pedir orçamento de conserto direto para loja</Link>}
 
-        </div>
-        <div className="border-b border-b-[#323b45] mt-5 " />
-        {budgets.length > 0 ? budgets.map((budget) => {
-          return (
-            <>
-              <div className="flex flex-row items-center gap-5">
-                <div className="flex flex-col gap-2 mt-5 ">
-                  <img width={'100px'} height={'100px'} src="https://avatars.githubusercontent.com/u/73131798?v=4" className="rounded-3xl" />
-                </div>
-                <div className="flex flex-col">
-                  <Text className="text-white text-lg" as="span">{formatTopic(budget.solicitation.form.problemTopic)} - {formatPhoneBrand(budget.solicitation.form.phoneForm.brand)} {budget.solicitation.form.phoneForm.model}</Text>
-                  <Text className="text-success text-lg" as="span">{budget.startValue} - {budget.endValue} </Text>
-                  <Text className="text-white-dark" as="span">{getMainQuestion(budget.solicitation.form.problemForm)}</Text>
-                </div>
-              </div>
-              <div className="border-b border-b-[#323b45] mt-5 " />
-            </>
+            </div>
+            <div className="border-b border-b-[#323b45] mt-5 " />
+            {budgets.map((budget) => {
+              return (
+                <>
+                  <div className="flex flex-row items-center gap-5">
+                    <div className="flex flex-col gap-2 mt-5 ">
+                      <img width={'100px'} height={'100px'} src="https://avatars.githubusercontent.com/u/73131798?v=4" className="rounded-3xl" />
+                    </div>
+                    <div className="flex flex-col">
+                      <Text className="text-white text-lg" as="span">{formatTopic(budget.solicitation.form.problemTopic)} - {formatPhoneBrand(budget.solicitation.form.phoneForm.brand)} {budget.solicitation.form.phoneForm.model}</Text>
+                      <Text className="text-success text-lg" as="span">{budget.startValue} - {budget.endValue} </Text>
+                      <Text className="text-white-dark" as="span">{getMainQuestion(budget.solicitation.form.problemForm)}</Text>
+                    </div>
+                  </div>
+                  <div className="border-b border-b-[#323b45] mt-5 " />
+                </>
 
-          )
-        }) : (<div className="mt-10 h-[200px]"><Text className="text-3xl" as="span">Não foram encontrados registros</Text></div>)}
+              )
 
+            })}
+          </>
+        ) : (
+          <>
+            <div className="flex flex-row">
+              <Text className="text-3xl text-white" as="h1">Ultimos Orçamentos</Text>
+            </div>
+            <div className="border-b border-b-[#323b45] mt-5 " />
+            <div className="mt-10 h-[200px]">
+              <Text className="text-3xl" as="span">Não foram encontrados registros</Text>
+            </div>
+          </>
+        )}
       </Panel>
+
     </>
   )
 }

@@ -1,7 +1,7 @@
 import { GoogleAutoComplete, GoogleAutoCompleteProps, GoogleCirceProps, GoogleCircle, GoogleInfoWindow, GoogleInfoWindowProps, GoogleMaps, GoogleMapsProps, GoogleMarker, GoogleMarkerProps } from "./lib/GoogleMap";
 
-export function MapAdapter({ initialPosition, children, mapStyle }: GoogleMapsProps) {
-  return <GoogleMaps mapStyle={mapStyle} initialPosition={initialPosition}>{children}</GoogleMaps>
+export function MapAdapter({ onClick, initialPosition, children, mapStyle }: GoogleMapsProps) {
+  return <GoogleMaps onClick={onClick} mapStyle={mapStyle} initialPosition={initialPosition}>{children}</GoogleMaps>
 }
 
 export function MarkAdapter({ position, onClick, icon }: GoogleMarkerProps) {
@@ -18,9 +18,9 @@ export function InfoWindowAdapter({ position, options, children, onClose }: Goog
   )
 }
 
-export function RadiusAdapter({ center, radius }: GoogleCirceProps) {
+export function RadiusAdapter({ center, radius, onClick }: GoogleCirceProps) {
   return (
-    <GoogleCircle center={center} radius={radius} />
+    <GoogleCircle onClick={onClick} center={center} radius={radius} />
   )
 }
 

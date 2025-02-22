@@ -9,6 +9,9 @@ import { formatBudgetsFromApi } from "../../../formaters/budget"
 import { GetFeedbacksFromStore } from "../../../api/feedback/get-from-store"
 import { formatFeedbacks } from "../../../formaters/feedback"
 import { StoreProfileComponent } from "../../../components/Profiles/store"
+import { getStoreSocials } from "../../../api/user/store/get-socials"
+import { formatStoreSocials } from "../../../formaters/store-profile"
+import { StoreSocialsType } from "../../../types/store-profile"
 
 export function StoreProfile() {
 
@@ -24,6 +27,19 @@ export function StoreProfile() {
     queryKey: ['get-budgets'],
     queryFn: () => GetBudgetsByStoreId(id, { limit: '3', page: '1' })
   })
+
+  const [socials, setSocials] = useState<StoreSocialsType[] | null>(null)
+
+  const { data: socialsData, isLoading: isSocialsLoading } = useQuery({
+    queryKey: ['get-socials'],
+    queryFn: () => getStoreSocials(id)
+  })
+
+  useEffect(() => {
+    if (!isSocialsLoading && socialsData) {
+      setSocials(formatStoreSocials(socialsData))
+    }
+  }, [socialsData, isSocialsLoading])
 
 
   useEffect(() => {
@@ -54,7 +70,7 @@ export function StoreProfile() {
       {!isLoading && feedbacks && budgets ? (
         <StoreProfileComponent
           storeFeedbacksProps={{ feedbacks, canShowRateStore: true }}
-          mainPanelProps={{ name: profileData.name, rating: profileData.rating }}
+          mainPanelProps={{ name: profileData.name, rating: profileData.rating, storeSocials: socials }}
           storeProfileLocation={{ lat: clintLocation.lat, lng: clintLocation.lng }}
           storeProfileBudgets={{ budgets }}
           storeId={id}

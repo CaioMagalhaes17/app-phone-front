@@ -6,11 +6,10 @@ export function StoreSidebar() {
   const { storeInfos } = useStore()
   return (
     <>
-      <Link to='/store/home' className="font-bold hover:underline text-lg cursor-pointer text-white flex flex-row gap-5">
+      <Link to='/store/home' className="font-bold hover:underline text-lg cursor-pointer text-white flex flex-row gap-5 mb-4">
         <IconHome />
         Início
       </Link>
-      <div className="border-b border-b-[#323b45] mt-5" />
       <Accordion type="single" collapsible className="">
         <AccordionItem value="item-1">
           <AccordionTrigger className="mb-2 text-white text-lg font-extrabold">
@@ -28,7 +27,7 @@ export function StoreSidebar() {
           <AccordionContent className="hover:text-white">
             <Link to='/store/budget/list' className="ml-5 items-center font-bold hover:text-white hover:underline text-lg text-[#c4c4c4] flex flex-row gap-2">
               <IconDollarSignCircle />
-              Orçamentos Enviados
+              Histórico de orçamentos
             </Link>
           </AccordionContent>
 

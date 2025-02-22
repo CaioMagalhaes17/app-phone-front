@@ -1,4 +1,5 @@
-import { CANCELED_SOLICITATION_STATUS, DIRECT_SOLICITATION, OPEN_TO_BUDGETS_SOLICITATION_STATUS, PhoneBrandType, ProblemTopicType, Solicitation, SolicitationFormProps, SolicitationsFromApi } from "../types/solicitation";
+import { CANCELED_SOLICITATION_STATUS, DIRECT_SOLICITATION, OPEN_TO_BUDGETS_SOLICITATION_STATUS } from "../constants/solicitation-status";
+import { PhoneBrandType, ProblemTopicType, Solicitation, SolicitationFormProps, SolicitationsFromApi } from "../types/solicitation";
 import { formatClientProfile } from "./client-profile";
 
 export function formatSolicitations(solicitations: SolicitationsFromApi[]): Solicitation[] {
@@ -79,15 +80,12 @@ export function getAnswerColor(answer: string) {
 
 export function getTimePreferenceColor(timePreference: string) {
   if (timePreference === 'urgent') return 'danger'
-  if (timePreference === 'normal') return 'warning'
-  if (timePreference === 'any') return 'success'
+  if (timePreference === 'normal') return 'success'
 }
 
 export function formatTimePreference(timePreference: string) {
   if (timePreference === 'urgent') return 'Urgente'
   if (timePreference === 'normal') return 'Normal'
-  if (timePreference === 'any') return 'Sem pressa'
-
 
 }
 
