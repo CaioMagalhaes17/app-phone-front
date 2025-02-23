@@ -1,7 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { GetSolicitation } from "../../../../api/repair/solicitation/get-solicitation";
-import { Button, IconDollarSignCircle, IconStore, IconX, Panel, Text } from "@app/ui";
+import { Button, IconArrowBackward, IconDollarSignCircle, IconStore, IconX, Panel, Text } from "@app/ui";
 import { formatPhoneBrand, formatTopic, getStatusColor } from "../../../../formaters/solicitations";
 import Swal from "sweetalert2";
 import { EditSolicitation } from "../../../../api/repair/solicitation/edit-solicitation";
@@ -94,10 +94,13 @@ export function SolicitationDetails() {
     }
     return false
   }
+
+  const navigate = useNavigate()
   return (
     <>
       {!isLoading && solicitationData ? (
         <>
+          <Button onClick={() => navigate(-1)} className="btn-outline-primary flex flex-row gap-2"><IconArrowBackward /> Voltar</Button>
           <div className="max-w-[1200px] mx-auto">
             <div className="flex gap-5 flex-row">
               <Text className="text-white font-extrabold text-5xl" as="h1">Defeito em <span className="underline">{formatTopic(solicitationData?.form.problemTopic)}</span></Text>
@@ -126,7 +129,7 @@ export function SolicitationDetails() {
                       <>
                         <div className="flex flex-row items-center gap-5">
                           <div className="flex flex-col gap-2 mt-5 ">
-                            <img width={'100px'} height={'100px'} src="https://avatars.githubusercontent.com/u/73131798?v=4" className="rounded-3xl" />
+                            <img width={'100px'} height={'100px'} src={budget.storeProfile.profileImg} className="rounded-3xl" />
                           </div>
                           <div className="flex flex-col">
                             <Text className="text-white text-lg" as="span">{budget.storeProfile.name}</Text>

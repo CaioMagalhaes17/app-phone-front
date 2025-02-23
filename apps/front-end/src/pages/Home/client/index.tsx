@@ -5,7 +5,6 @@ import { FetchStoresInsideClientRadius } from "../../../api/geolocation/fetch-st
 import { Button, IconPencil, IconSearch, IconSend, Input, Text } from "@app/ui";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { StoreSvg } from "../../../constants/svg-icons";
 
 type StoresInsideRadius = {
   GeoLocation: { props: { latitude: number; longitude: number; } }
@@ -119,7 +118,7 @@ export function Home() {
                 <MapAdapter mapStyle={mapStyle} initialPosition={clientInitialPosition}>
                   {!storesLoading && data.length > 0 ? (data.map((item: StoresInsideRadius) => {
                     return (
-                      <MarkAdapter icon={StoreSvg} onClick={() => setSelectedStore(item)} position={{ lat: item.GeoLocation.props.latitude, lng: item.GeoLocation.props.longitude }} key={item._id} />
+                      <MarkAdapter icon={item.Profile.props.profileImg} onClick={() => setSelectedStore(item)} position={{ lat: item.GeoLocation.props.latitude, lng: item.GeoLocation.props.longitude }} key={item._id} />
                     )
                   })) : ''}
                   <RadiusAdapter center={{ lat: clientInitialPosition.lat, lng: clientInitialPosition.lng }} radius={clientInitialPosition.radius} />

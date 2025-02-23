@@ -1,5 +1,6 @@
 import { Autocomplete, Circle, GoogleMap, InfoWindow, Marker } from "@react-google-maps/api"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { createRoundedIcon } from "../../../formaters/map"
 
 
 export type GoogleMapsProps = {
@@ -57,7 +58,23 @@ export type GoogleMarkerProps = {
 }
 
 export function GoogleMarker({ position, onClick, icon }: GoogleMarkerProps) {
-  return <Marker icon={icon} position={position} onClick={onClick} />
+  const [roundedIcon, setRoundedIcon] = useState<string | null>(null);
+
+  useEffect(() => {
+    createRoundedIcon(icon, 50).then(setRoundedIcon)
+
+  }, [icon]);
+  if (roundedIcon) {
+    return <Marker
+      icon={{
+        url: roundedIcon,
+        scaledSize: new window.google.maps.Size(40, 40),
+      }}
+      position={position}
+      onClick={onClick}
+    />
+  }
+
 }
 
 export type GoogleInfoWindowProps = {

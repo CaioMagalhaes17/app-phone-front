@@ -12,7 +12,7 @@ export function SolicitationRow({ solicitation }: { solicitation: Solicitation }
     <>
       <div className="hover:bg-[#5f577426] max-h-[140px] mt-5 flex flex-row items-start gap-5">
         <div className="w-[100px]">
-          <img width="100" height="100" src="https://avatars.githubusercontent.com/u/73131798?v=4" className="rounded-3xl" />
+          <img width="100" height="100" src={'https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/390.png'} className="rounded-3xl" />
         </div>
         <div className="flex w-full flex-col max-w-[80%]">
           <Text className="flex flex-row gap-5 items-center text-center text-white text-lg" as="span">
@@ -29,7 +29,7 @@ export function SolicitationRow({ solicitation }: { solicitation: Solicitation }
 
             </div>
             <div className="flex flex-row w-[30%] gap-5 items-center">
-              <Link target="_blank" rel="noopener noreferrer" to={`/store/solicitation/${solicitation.id}`} className="btn-outline-primary btn w-full flex flex-row gap-2">
+              <Link rel="noopener noreferrer" to={`/store/solicitation/${solicitation.id}`} className="btn-outline-primary btn w-full flex flex-row gap-2">
                 <IconSmartphone />
                 Detalhes do defeito
               </Link>

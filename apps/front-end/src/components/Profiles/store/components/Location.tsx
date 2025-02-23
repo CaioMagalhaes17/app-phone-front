@@ -1,11 +1,18 @@
-import { Button, Panel, Text } from "@app/ui";
+import { IconFacebook, IconInstagram, IconWhatsApp, Panel, Text } from "@app/ui";
 import { MapAdapter, MarkAdapter } from "../../../../adapters/Map";
 import useStore from "../../../../state";
-import { StoreSvg } from "../../../../constants/svg-icons";
+import { StoreContacts, StoreSocialsType } from "../../../../types/store-profile";
+import { Link } from "react-router-dom";
 
-export function StoreProfileLocation({ lat, lng }: { lat: number, lng: number }) {
+export type StoreProfileLocationProps = {
+  lat: number,
+  lng: number,
+  storeSocials: StoreSocialsType[] | null
+  contacts: StoreContacts[] | null
+  storeProfileImg: string
+}
+export function StoreProfileLocation({ lat, lng, storeSocials, contacts, storeProfileImg }: StoreProfileLocationProps) {
   const { isMapLoaded } = useStore()
-
 
   const mapStyle = {
     width: '100%',
@@ -23,19 +30,37 @@ export function StoreProfileLocation({ lat, lng }: { lat: number, lng: number })
             <Text className="text-white text-lg " as="span">Rua Resedá 248 - Santa Efigênia</Text>
             <Text className="text-white text-lg " as="span">Belo Horizonte</Text>
             <div className="border-b border-b-[#323b45] mt-5 mt-10 w-full" />
-            <div className="mt-auto" />
-            <Text className="text-white-dark text-md mt-10" as="span">(31) 9 99585-3806 - (descrição)</Text>
-            <Text className="text-white-dark text-md " as="span">caiomagalhaesdefaria@hotmail.com</Text>
+            <div className="mt-auto mt-10" />
+            {contacts && contacts.length > 0 ? (
+              contacts.map((item) => {
+                return (
+                  <>
+                    <Text className="text-white-dark text-md" as="span">{item.email || item.telNum} - {item.description}</Text>
+                  </>
+                )
+              })
+
+            ) : ''}
             <div className="border-b border-b-[#323b45] mt-5 mt-10 w-full" />
             <div className="flex flex-row mt-5 gap-2">
-              <Button className="btn-outline-primary">WPP</Button>
-              <Button className="btn-outline-primary">INSTA</Button>
-              <Button className="btn-outline-primary">FCB</Button>
+              {
+                storeSocials?.map((item) => {
+                  return (
+                    <>
+                      <Link to={item.link} target="_blank" className="btn btn-outline-primary rounded-full">
+                        {item.type === 'whatsapp' && <IconWhatsApp />}
+                        {item.type === 'instagram' && <IconInstagram />}
+                        {item.type === 'facebook' && <IconFacebook />}
+                      </Link>
+                    </>
+                  )
+                })
+              }
             </div>
           </div>
           <div className="h-[500px] w-full p-4">{isMapLoaded ? (
             <MapAdapter mapStyle={mapStyle} initialPosition={{ lat, lng }}>
-              <MarkAdapter icon={StoreSvg}
+              <MarkAdapter icon={storeProfileImg}
                 position={{ lat, lng }}
               />
             </MapAdapter>

@@ -2,15 +2,16 @@ import { Text } from "@app/ui";
 import { Star } from "lucide-react";
 import { FeedbackType } from "../../types/feedback";
 import dayjs from "dayjs";
+import { userImg } from "../../constants/images";
 
 export function FeedbackRow({ feedback }: { feedback: FeedbackType }) {
   const totalStars = 5;
-  console.log(feedback)
+  console.log(feedback.clientProfile.name)
   return (
     <>
       <div className="max-h-[140px] mt-5 flex flex-row items-start gap-5">
         <div className="w-[100px]">
-          <img width="100" height="100" src="https://avatars.githubusercontent.com/u/73131798?v=4" className="rounded-3xl" />
+          <img width="100" height="100" src={userImg} className="rounded-3xl" />
         </div>
         <div className="flex flex-col max-w-[80%]">
           <Text className="flex flex-row gap-5 items-center text-center text-white text-lg" as="span">

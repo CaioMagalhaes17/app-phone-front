@@ -121,8 +121,8 @@ export default function DirectSolicitationMap({ storeProfile, setActiveTab }: {
         </div>
         {clintLocation && isMapLoaded ? (
           <MapAdapter mapStyle={mapStyle} initialPosition={clintLocation}>
-            <MarkAdapter icon={MapPinSvg} position={{ lat: storeProfile.location.latitude, lng: storeProfile.location.longitude }} />
-            <MarkAdapter icon="default" position={{ lat: clintLocation.lat, lng: clintLocation.lng }} />
+            <MarkAdapter icon={storeProfile.profileImg} position={{ lat: storeProfile.location.latitude, lng: storeProfile.location.longitude }} />
+            <MarkAdapter icon={MapPinSvg} position={{ lat: clintLocation.lat, lng: clintLocation.lng }} />
 
             <InfoWindowAdapter onClose={() => console.log('nigger')} position={{ lat: storeProfile.location.latitude, lng: storeProfile.location.longitude }} options={{ pixelOffset: new window.google.maps.Size(0, -40) }}>
               <>

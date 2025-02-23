@@ -6,7 +6,7 @@ import useStore from "../../../../../state";
 import { AutoCompleteAdapter, InfoWindowAdapter, MapAdapter, MarkAdapter, RadiusAdapter } from "../../../../../adapters/Map";
 import Swal from "sweetalert2";
 import { FetchStoresInsideClientRadius } from "../../../../../api/geolocation/fetch-stores-inside-client-radius";
-import { MapPinSvg, StoreSvg } from "../../../../../constants/svg-icons";
+import { MapPinSvg } from "../../../../../constants/svg-icons";
 import { formatStoreProfile } from "../../../../../formaters/store-profile";
 import { StoreProfileFromApi, StoreProfileType } from "../../../../../types/store-profile";
 
@@ -148,7 +148,7 @@ export function MapStep({ setActiveTab }: { setActiveTab: React.Dispatch<React.S
               return (
                 <MarkAdapter
                   onClick={() => onStorePinClick(item)}
-                  icon={StoreSvg}
+                  icon={item.Profile.props.profileImg}
                   position={{ lat: item.GeoLocation.props.latitude, lng: item.GeoLocation.props.longitude }}
                   key={item._id}
                 />

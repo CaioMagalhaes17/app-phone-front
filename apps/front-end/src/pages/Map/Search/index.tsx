@@ -15,7 +15,7 @@ import {
 import { formatStoreProfile } from "../../../formaters/store-profile";
 import { StoreProfileFromApi, StoreProfileType } from "../../../types/store-profile";
 import { Star } from "lucide-react";
-import { MapPinSvg, StoreSvg } from "../../../constants/svg-icons";
+import { MapPinSvg } from "../../../constants/svg-icons";
 
 type StoresInsideRadius = {
   GeoLocation: { props: { latitude: number; longitude: number; } }
@@ -185,7 +185,7 @@ export default function ClientMapSearch() {
                   onClick={() => onStorePinClick(item)}
                   position={{ lat: item.GeoLocation.props.latitude, lng: item.GeoLocation.props.longitude }}
                   key={item._id}
-                  icon={StoreSvg}
+                  icon={item.Profile.props.profileImg}
                 />
               )
             })) : ''}

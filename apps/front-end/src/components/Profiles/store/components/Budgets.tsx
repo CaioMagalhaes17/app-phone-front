@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import { BudgetType } from "../../../../types/budget"
 import { formatPhoneBrand, formatTopic } from "../../../../formaters/solicitations"
 import { batteryQuestions, displayQuestions } from "../../../../constants/solicitation-form-questions";
+import { userImg } from "../../../../constants/images";
 
 export interface StoreProfileBudgetProps {
   budgets: [] | BudgetType[]
@@ -40,7 +41,7 @@ export function StoreProfileBudgets({ budgets, isOwner }: StoreProfileBudgetProp
                 <>
                   <div className="flex flex-row items-center gap-5">
                     <div className="flex flex-col gap-2 mt-5 ">
-                      <img width={'100px'} height={'100px'} src="https://avatars.githubusercontent.com/u/73131798?v=4" className="rounded-3xl" />
+                      <img width={'100px'} height={'100px'} src={'https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/390.png'} className="rounded-3xl" />
                     </div>
                     <div className="flex flex-col">
                       <Text className="text-white text-lg" as="span">{formatTopic(budget.solicitation.form.problemTopic)} - {formatPhoneBrand(budget.solicitation.form.phoneForm.brand)} {budget.solicitation.form.phoneForm.model}</Text>

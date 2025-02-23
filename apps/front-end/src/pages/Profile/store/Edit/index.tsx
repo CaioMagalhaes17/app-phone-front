@@ -1,8 +1,10 @@
 import { Button, IconSave, Input, Panel, Text, IconPencil } from "@app/ui";
 import { StoreContact } from "./components/Contact";
 import { StoreSocials } from "./components/Socials";
+import useStore from "../../../../state";
 
 export function EditStoreProfile() {
+  const { storeInfos } = useStore()
   return (
     <>
       <ul className="flex font-semibold p-2 border-b border-[#191e3a] flex-row mb-5 whitespace-nowrap overflow-y-auto">
@@ -24,7 +26,7 @@ export function EditStoreProfile() {
           <div className="flex flex-col mt-10">
             <div className="flex flex-row gap-5">
               <div>
-                <img width={'500px'} height={'300px'} src="https://avatars.githubusercontent.com/u/73131798?v=4" className="rounded-3xl" />
+                <img width={'500px'} height={'300px'} src={storeInfos.profileImg} className="rounded-3xl" />
               </div>
               <div className="w-full text-lg">
                 <div className="w-full  gap-5 flex-row flex">

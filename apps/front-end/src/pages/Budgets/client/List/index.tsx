@@ -47,6 +47,7 @@ export function ClientBudgetsList() {
   //   if (filter !== 'default') return setBudgets([...budgets].filter((item) => item.solicitation.form.phoneForm.model === filter));
   //   return refetch()
   // }
+  const [selectedRow, setSelectedRow] = useState<number>()
   return <>
     {!isLoading ? (
       <>
@@ -84,7 +85,7 @@ export function ClientBudgetsList() {
             </div>
             <div className="border-b border-b-[#323b45] mt-5 mt-10" />
             {budgets.length > 0 ?
-              budgets.map((budget) => <BudgetRow budget={budget} />) :
+              budgets.map((budget, key) => <div onClick={() => setSelectedRow(key)} className={`hover:bg-[#5f577426] ${selectedRow === key && '!bg-[#5f577426]'}`}><BudgetRow budget={budget} /></div>) :
               (<div className="mt-10 h-[200px] "><Text className="text-3xl" as="span">Não foram encontrados registros</Text></div>)
             }
           </Panel>

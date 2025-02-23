@@ -10,9 +10,10 @@ import { useNavigate } from "react-router-dom"
 import { FeedbackType } from "../../../../types/feedback"
 import { formatFeedbacks } from "../../../../formaters/feedback"
 import { GetFeedbacksFromStore } from "../../../../api/feedback/get-from-store"
-import { StoreSocialsType } from "../../../../types/store-profile"
+import { StoreContacts, StoreSocialsType } from "../../../../types/store-profile"
 import { getStoreSocials } from "../../../../api/user/store/get-socials"
-import { formatStoreSocials } from "../../../../formaters/store-profile"
+import { formatStoreContacts, formatStoreSocials } from "../../../../formaters/store-profile"
+import { getStoreContacts } from "../../../../api/user/store/get-contacts"
 
 export function StoreProfileOwner() {
   const navigate = useNavigate()
@@ -59,6 +60,17 @@ export function StoreProfileOwner() {
     })
   }, [storeInfos])
 
+  const [contacts, setContacts] = useState<StoreContacts[] | null>(null)
+
+  const { data: contactsData, isLoading: isLoadingContacts } = useQuery({
+    queryKey: ['get-contacts'],
+    queryFn: () => getStoreContacts()
+  })
+
+  useEffect(() => {
+    if (!isLoadingContacts && contactsData) return setContacts(formatStoreContacts(contactsData))
+  }, [contactsData, isLoadingContacts])
+
   return (
     <>
       <div className="">
@@ -79,9 +91,9 @@ export function StoreProfileOwner() {
         <StoreProfileComponent
           storeId={storeInfos.id}
           storeFeedbacksProps={{ feedbacks, canShowRateStore: false }}
-          mainPanelProps={{ name: storeInfos.name, rating: storeInfos.rating, storeSocials: socials }}
+          mainPanelProps={{ name: storeInfos.name, rating: storeInfos.rating, storeSocials: socials, storeProfileImg: storeInfos.profileImg }}
           storeProfileBudgets={{ budgets, isOwner: true }}
-          storeProfileLocation={{ lat: clintLocation.lat, lng: clintLocation.lng }}
+          storeProfileLocation={{ lat: clintLocation.lat, lng: clintLocation.lng, storeSocials: socials, contacts, storeProfileImg: storeInfos.profileImg }}
         />
       ) : ''}
     </>

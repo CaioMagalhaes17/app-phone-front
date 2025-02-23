@@ -1,8 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { Solicitation } from "../../../../types/solicitation"
 import { GetSolicitation } from "../../../../api/repair/solicitation/get-solicitation"
-import { Button, Panel, Text } from "@app/ui"
+import { Button, IconArrowBackward, Panel, Text } from "@app/ui"
 import { formatPhoneBrand, formatTopic, getStatusColor } from "../../../../formaters/solicitations"
 import { ProblemForm } from "./ProblemForm"
 import { PhoneForm } from "./PhoneForm"
@@ -115,9 +115,10 @@ export function StoreSolicitationDetails() {
       }
     })
   }
-
+  const navigate = useNavigate()
   return (
     <>
+      <Button onClick={() => navigate(-1)} className="btn-outline-primary flex flex-row gap-2"><IconArrowBackward /> Voltar</Button>
       {!isLoading && !budgetLoading && solicitationData ? (
         <div className="max-w-[1200px] mx-auto">
           <div className="flex flex-row">

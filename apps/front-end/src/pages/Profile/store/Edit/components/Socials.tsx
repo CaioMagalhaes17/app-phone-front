@@ -1,35 +1,58 @@
 import { Button, Input, Text } from "@app/ui";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createStoreSocials } from "../../../../../api/user/store/create-socials";
-import { useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 import { getStoreSocials } from "../../../../../api/user/store/get-socials";
 import { useEffect, useState } from "react";
 import { StoreSocialsType } from "../../../../../types/store-profile";
 import { formatSocialType, formatStoreSocials } from "../../../../../formaters/store-profile";
 import { socials as allSocials } from "../../../../../constants/socials";
+import { deleteStoreSocial } from "../../../../../api/user/store/delete-socials";
+import Swal from "sweetalert2";
 
 export function StoreSocials() {
   const client = useQueryClient()
-  const { register, handleSubmit, formState: { errors } } = useForm()
+  const { register, handleSubmit, formState: { errors }, watch } = useForm()
   const { mutateAsync } = useMutation({
     mutationFn: createStoreSocials
+  })
+
+  const { mutateAsync: mutateDelete } = useMutation({
+    mutationFn: deleteStoreSocial
   })
 
   const [socials, setSocials] = useState<StoreSocialsType[] | null>()
 
   const { data, isLoading } = useQuery({
     queryKey: ['get-socials'],
-    queryFn: getStoreSocials
+    queryFn: () => getStoreSocials()
   })
 
   useEffect(() => {
     if (!isLoading && data) return setSocials(formatStoreSocials(data))
   }, [data, isLoading])
 
-  async function onAddClick(data) {
+  async function onAddClick(data: FieldValues) {
     await mutateAsync(data, {
       onSuccess: () => {
         client.refetchQueries({ queryKey: ['get-socials'] })
+      }
+    })
+  }
+
+  async function onDeleteClick(id: string) {
+    Swal.fire({
+      title: 'Apagar rede social?',
+      showCancelButton: true,
+      cancelButtonText: 'Não',
+      confirmButtonText: 'Sim',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        await mutateDelete(id, {
+          onSuccess: () => {
+            client.refetchQueries({ queryKey: ['get-socials'] })
+          }
+        })
       }
     })
   }
@@ -49,7 +72,7 @@ export function StoreSocials() {
                   <div className="w-full">
                     <Input value={item.link} placeholder="Link do perfil" />
                   </div>
-                  <Button type="button" onClick={() => onDeleteClick()} className="btn-outline-danger">Excluir</Button>
+                  <Button type="button" onClick={() => onDeleteClick(item.id)} className="btn-outline-danger">Excluir</Button>
                 </div>
               </>
             )
@@ -70,7 +93,9 @@ export function StoreSocials() {
               })}
             </select>
             <div className="w-full">
-              <Input {...register('link')} placeholder="Link do perfil" />
+              <Input {...register('link', { required: true })} placeholder={watch('type') === 'whatsapp' ? 'Número do Whatsapp' : 'Link do perfil'} />
+              {errors.newTelNum && (<span className="text-danger">Campo Obrigatório</span>)}
+
             </div>
             <Button type="submit" className="btn-primary">Adicionar</Button>
           </div>

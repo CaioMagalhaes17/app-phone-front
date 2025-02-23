@@ -18,7 +18,7 @@ export function StoreContact() {
 
   const { data, isLoading } = useQuery({
     queryKey: ['get-contacts'],
-    queryFn: getStoreContacts
+    queryFn: () => getStoreContacts()
   })
 
   const { mutateAsync: deleteContact } = useMutation({
@@ -104,7 +104,7 @@ export function StoreContact() {
                     alwaysShowMask={false}
                     maskPlaceholder=""
                     type={'text'}
-                    {...register('newTelNum')}
+                    {...register('newTelNum', { required: true })}
                   />
                   {errors.newTelNum && (<span className="text-danger">Campo Obrigatório</span>)}
                 </>
@@ -121,7 +121,7 @@ export function StoreContact() {
           <div className="w-[40%] mt-5">
             <div className="flex items-center space-x-4 mb-4">
               <label className="flex items-center">
-                <input onClick={() => setType('email')} className="mr-2" type="radio" name="test" />
+                <input onClick={() => setType('email')} defaultChecked className="mr-2" type="radio" name="test" />
                 <span>Usar Email</span>
               </label>
               <label className="flex items-center">

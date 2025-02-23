@@ -1,21 +1,22 @@
-import { Button, IconFacebook, IconInstagram, IconWhatsApp, Panel, Text } from "@app/ui";
+import { IconFacebook, IconInstagram, IconWhatsApp, Panel, Text } from "@app/ui";
 import { Star } from "lucide-react";
 import { StoreSocialsType } from "../../../../types/store-profile";
+import { Link } from "react-router-dom";
 
 export interface StoreMainPainelProps {
   rating: number,
   name: string,
   storeSocials: StoreSocialsType[] | null
-
+  storeProfileImg: string
 }
 
-export function MainPainel({ rating, name, storeSocials }: StoreMainPainelProps) {
+export function MainPainel({ rating, name, storeSocials, storeProfileImg }: StoreMainPainelProps) {
   return (
     <>
       <Panel>
         <div className="max-w-[1200px] mr-auto ml-auto flex flex-row gap-5">
           <div className="w-[350px] flex flex-col gap-2 ">
-            <img width={'260px'} height={'260px'} src="https://avatars.githubusercontent.com/u/73131798?v=4" className="rounded-3xl" />
+            <img width={'260px'} height={'260px'} src={storeProfileImg} className="rounded-3xl" />
           </div>
           <div className="p-2 flex w-full text-left text-lg font-extrabold text-white gap-5 flex-col">
             <div className="flex flex-row gap-5">
@@ -25,11 +26,11 @@ export function MainPainel({ rating, name, storeSocials }: StoreMainPainelProps)
                   storeSocials?.map((item) => {
                     return (
                       <>
-                        <Button onClick={() => console.log(item.link)} className="btn-outline-primary rounded-full">
+                        <Link to={item.link} target="_blank" className="btn btn-outline-primary rounded-full">
                           {item.type === 'whatsapp' && <IconWhatsApp />}
                           {item.type === 'instagram' && <IconInstagram />}
                           {item.type === 'facebook' && <IconFacebook />}
-                        </Button>
+                        </Link>
                       </>
                     )
                   })

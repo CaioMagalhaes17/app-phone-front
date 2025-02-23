@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import { EditGeolocation } from "../../../../api/geolocation/edit-geolocation";
 import Swal from "sweetalert2";
 import { CreateGeolocation } from "../../../../api/geolocation/create-geolocation";
-import { StoreSvg } from "../../../../constants/svg-icons";
 
 export default function StoreMapEdit() {
   const { storeInfos, setStoreInfos, isMapLoaded } = useStore()
@@ -103,7 +102,7 @@ export default function StoreMapEdit() {
           <MapAdapter mapStyle={mapStyle} initialPosition={clintLocation}>
             <MarkAdapter
               position={clintLocation}
-              icon={StoreSvg}
+              icon={storeInfos.profileImg}
             />
           </MapAdapter>
         ) : ''}

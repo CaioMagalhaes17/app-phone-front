@@ -10,8 +10,9 @@ import { GetFeedbacksFromStore } from "../../../api/feedback/get-from-store"
 import { formatFeedbacks } from "../../../formaters/feedback"
 import { StoreProfileComponent } from "../../../components/Profiles/store"
 import { getStoreSocials } from "../../../api/user/store/get-socials"
-import { formatStoreSocials } from "../../../formaters/store-profile"
-import { StoreSocialsType } from "../../../types/store-profile"
+import { formatStoreContacts, formatStoreSocials } from "../../../formaters/store-profile"
+import { StoreContacts, StoreSocialsType } from "../../../types/store-profile"
+import { getStoreContacts } from "../../../api/user/store/get-contacts"
 
 export function StoreProfile() {
 
@@ -65,13 +66,25 @@ export function StoreProfile() {
   useEffect(() => {
     if (!isLoadingFeedback && feedbacksData) return setFeedbacks(formatFeedbacks(feedbacksData))
   }, [isLoadingFeedback, feedbacksData])
+
+  const [contacts, setContacts] = useState<StoreContacts[] | null>(null)
+
+  const { data: contactsData, isLoading: isLoadingContacts } = useQuery({
+    queryKey: ['get-contacts'],
+    queryFn: () => getStoreContacts(id)
+  })
+
+  useEffect(() => {
+    if (!isLoadingContacts && contactsData) return setContacts(formatStoreContacts(contactsData))
+  }, [contactsData, isLoadingContacts])
+
   return (
     <>
       {!isLoading && feedbacks && budgets ? (
         <StoreProfileComponent
           storeFeedbacksProps={{ feedbacks, canShowRateStore: true }}
-          mainPanelProps={{ name: profileData.name, rating: profileData.rating, storeSocials: socials }}
-          storeProfileLocation={{ lat: clintLocation.lat, lng: clintLocation.lng }}
+          mainPanelProps={{ name: profileData.name, rating: profileData.rating, storeSocials: socials, storeProfileImg: profileData.profileImg }}
+          storeProfileLocation={{ lat: clintLocation.lat, lng: clintLocation.lng, storeSocials: socials, contacts, storeProfileImg: profileData.profileImg }}
           storeProfileBudgets={{ budgets }}
           storeId={id}
         />

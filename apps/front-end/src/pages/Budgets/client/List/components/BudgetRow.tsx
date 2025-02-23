@@ -1,4 +1,4 @@
-import { Button, IconDollarSignCircle, IconStore, Text } from "@app/ui";
+import { Button, IconDollarSignCircle, IconMenu, IconStore, Text } from "@app/ui";
 import { BudgetType } from "../../../../../types/budget";
 import { formatPhoneBrand } from "../../../../../formaters/solicitations";
 import { Link } from "react-router-dom";
@@ -7,11 +7,11 @@ import { Star } from "lucide-react";
 export function BudgetRow({ budget }: { budget: BudgetType }) {
   return (
     <>
-      <div className="hover:bg-[#5f577426] max-h-[140px] mt-5 flex flex-row items-start gap-5">
+      <div className="max-h-[140px] mt-5 flex flex-row items-start gap-5">
         <div className="w-[100px]">
-          <img width="100" height="100" src="https://avatars.githubusercontent.com/u/73131798?v=4" className="rounded-3xl" />
+          <img width="100" height="100" src={budget.storeProfile.profileImg} className="rounded-3xl" />
         </div>
-        <div className="flex w-full flex-col max-w-[80%]">
+        <div className="flex w-full flex-col">
           <Text className="flex flex-row gap-5 items-center text-center text-white text-lg" as="span">
             {budget.storeProfile.name}
             <div className="flex flex-row mb-2">
@@ -33,7 +33,7 @@ export function BudgetRow({ budget }: { budget: BudgetType }) {
             <div className="w-full flex flex-row gap-5 items-center">
               <Link target="_blank" rel="noopener noreferrer" to={`/store-profile/${budget.storeProfile.id}`} className="btn-primary btn w-full flex flex-row gap-2"><IconStore />Acessar Loja</Link>
               <Button className="btn-outline-success flex w-full flex-row gap-2"><IconDollarSignCircle />Escolher orçamento</Button>
-
+              <Link to={`/solicitation/${budget.solicitation.id}`} className="btn btn-outline-primary flex flex-row gap-2"><IconMenu /></Link>
             </div>
           </div>
 
