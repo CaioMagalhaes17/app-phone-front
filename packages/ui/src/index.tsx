@@ -36,7 +36,10 @@ export { IconMenu } from './Icons/IconMenu'
 export { IconFacebook } from './Icons/IconFacebook'
 export { IconFacebookCircle } from './Icons/IconFacebookCircle'
 export { IconInstagram } from './Icons/IconInstagram'
+export { IconBell } from './Icons/IconBell'
+export { IconThreeDots } from './Icons/IconThreeDots'
 export { IconWhatsApp } from './Icons/IconWhatsapp'
+
 export {
   Carousel,
   CarouselContent,
@@ -79,3 +82,4 @@ export {
 } from './components/Dropdown'
 
 import './css/index.css'
+export { IconSettings } from "./Icons/IconSettings";

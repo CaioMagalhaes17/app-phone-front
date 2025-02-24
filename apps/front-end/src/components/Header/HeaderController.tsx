@@ -1,6 +1,7 @@
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, IconLogout, IconUser, Text } from "@app/ui"
 import useStore from "../../state"
 import { useNavigate } from "react-router-dom"
+import { HeaderNotificationsBox } from "../Notifications/HeaderNotificationsBox"
 
 export function HeaderController() {
   const { setClientInfos, clientInfos, setStoreInfos, storeInfos } = useStore()
@@ -32,25 +33,29 @@ export function HeaderController() {
     }
     return (
       <>
-        <DropdownMenu>
-          <DropdownMenuTrigger>
-            <div className="flex flex-row">
-              <Text className="text-[#c4c4c4] font-bold text-xl" as="h1">{clientInfos?.name}</Text>
-            </div>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="bg-black mt-5">
-            <DropdownMenuItem className="text-white">
-              <IconUser className="mr-2" />
-              Perfil
-            </DropdownMenuItem>
-            <DropdownMenuItem className="text-danger">
-              <button className="flex" onClick={() => handleLogout()}>
-                <IconLogout className="mr-2 rotate-90" />
-                Sair
-              </button>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <div className="flex flex-row gap-5">
+          <HeaderNotificationsBox />
+          <div className="w-[1px] h-[50px] bg-dark" />
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <div className="flex flex-row">
+                <Text className="text-[#c4c4c4] font-bold text-xl" as="h1">{clientInfos?.name}</Text>
+              </div>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="bg-black mt-5">
+              <DropdownMenuItem className="text-white">
+                <IconUser className="mr-2" />
+                Perfil
+              </DropdownMenuItem>
+              <DropdownMenuItem className="text-danger">
+                <button className="flex" onClick={() => handleLogout()}>
+                  <IconLogout className="mr-2 rotate-90" />
+                  Sair
+                </button>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </>
     )
   }
