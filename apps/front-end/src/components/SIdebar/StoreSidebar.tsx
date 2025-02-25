@@ -1,4 +1,4 @@
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, IconBill, IconChat, IconDollarSignCircle, IconHelpCircle, IconHome, IconPencil, IconSmartphone, IconStore, IconStreetMap } from "@app/ui"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, IconBill, IconChat, IconDollarSignCircle, IconHelpCircle, IconHome, IconMap, IconPencil, IconSmartphone, IconStore, IconStreetMap } from "@app/ui"
 import { Link } from "react-router-dom"
 import useStore from "../../state"
 
@@ -71,8 +71,8 @@ export function StoreSidebar() {
 
           <AccordionContent className="hover:text-white">
             <Link to='/store/map/edit' className="flex flex-row gap-2 items-center font-bold hover:text-white hover:underline text-lg ml-5 text-[#c4c4c4]">
-              <IconPencil />
-              Editar localização da loja
+              <IconMap />
+              Localização pelo mapa
             </Link>
           </AccordionContent>
         </AccordionItem>

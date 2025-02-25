@@ -43,7 +43,7 @@ export function AvaliableSolicitations() {
           <div className="flex justify-center">
             <Panel className="font-extrabold  max-w-[1200px] w-full">
               <div className="flex flex-row">
-                <Text className="text-3xl text-white" as="h1">Orçamentos recebidos</Text>
+                <Text className="text-3xl text-white" as="h1">Defeitos esperando orçamento</Text>
                 <div className="ml-auto" />
                 <select onClick={(e) => onOrderChange(e.currentTarget.value)} className="form-select !border-none bg-black form-select-lg text-white">
                   <option value="desc">

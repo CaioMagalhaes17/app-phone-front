@@ -28,6 +28,7 @@ export function StoreProfileComponent({ storeId, mainPanelProps, storeProfileLoc
         storeSocials={storeProfileLocation.storeSocials}
         contacts={storeProfileLocation.contacts}
         storeProfileImg={storeProfileLocation.storeProfileImg}
+        address={storeProfileLocation.address}
       />
     </>
   )

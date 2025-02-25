@@ -24,10 +24,10 @@ export function RadiusAdapter({ center, radius, onClick }: GoogleCirceProps) {
   )
 }
 
-export function AutoCompleteAdapter({ children, setLocation }: GoogleAutoCompleteProps) {
+export function AutoCompleteAdapter({ children, setLocation, setSelectedAddress }: GoogleAutoCompleteProps) {
   return (
     <>
-      <GoogleAutoComplete setLocation={setLocation}>
+      <GoogleAutoComplete setLocation={setLocation} setSelectedAddress={setSelectedAddress}>
         {children}
       </GoogleAutoComplete>
     </>

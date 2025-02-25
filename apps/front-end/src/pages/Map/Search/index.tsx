@@ -12,14 +12,14 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@app/ui"
-import { formatStoreProfile } from "../../../formaters/store-profile";
-import { StoreProfileFromApi, StoreProfileType } from "../../../types/store-profile";
+import { formatStoreContacts, formatStoreProfile } from "../../../formaters/store-profile";
+import { StoreContacts, StoreContactsFromApi, StoreProfileFromApi, StoreProfileType } from "../../../types/store-profile";
 import { Star } from "lucide-react";
 import { MapPinSvg } from "../../../constants/svg-icons";
 
 type StoresInsideRadius = {
   GeoLocation: { props: { latitude: number; longitude: number; } }
-  Profile: StoreProfileFromApi
+  Profile: StoreProfileFromApi & { storeProfileAdress: StoreContactsFromApi[] }
   _id: string
 }
 
@@ -30,7 +30,8 @@ export default function ClientMapSearch() {
   const navigate = useNavigate()
   const [selectedStore, setSelectedStore] = useState<{
     geoLocation: { props: { latitude: number; longitude: number; } },
-    storeProfile: StoreProfileType
+    storeProfile: StoreProfileType,
+    storeContacts: StoreContacts[]
   } | null>()
 
   useEffect(() => {
@@ -63,15 +64,18 @@ export default function ClientMapSearch() {
   function onStorePinClick(item: StoresInsideRadius) {
     const teste = {
       geoLocation: item.GeoLocation,
-      storeProfile: formatStoreProfile(item.Profile)
+      storeProfile: formatStoreProfile(item.Profile),
+      storeContacts: formatStoreContacts(item.Profile.storeProfileAdress)
     }
     setSelectedStore(teste)
   }
+  console.log(selectedStore)
+
 
   return (
     <>
       <div className="flex relative h-full gap-5">
-        <div style={{ borderRadius: '10px' }} className="max-w-xs flex flex-col  p-4 gap-2 items-center bg-black w-[420px]">
+        <div style={{ borderRadius: '10px' }} className="max-w-xs flex flex-col  p-4 gap-2 items-center bg-black w-[420px] overflow-y-auto scrollable">
           {selectedStore ? (
             <>
               <div className="w-full mt-5 flex flex-col">
@@ -153,10 +157,14 @@ export default function ClientMapSearch() {
                 <div className="border-b border-b-[#323b45] mt-5 w-[100%]" />
 
                 <div className="flex flex-col font-extrabold items-center mt-5">
-                  <Text className="text-white" as="span">Rua Resedá 248 - Santa Efigênia</Text>
-                  <Text className="text-white " as="span">Belo Horizonte</Text>
-                  <Text className="text-white-dark text-md mt-5" as="span">(31) 9 99585-3806 - (descrição)</Text>
-                  <Text className="text-white-dark text-md " as="span">caiomagalhaesdefaria@hotmail.com</Text>
+                  <Text className="text-white text-center" as="span">{selectedStore.storeProfile.address}</Text>
+                  {selectedStore.storeContacts.map((item) => {
+                    return (
+                      <>
+                        <Text className="text-white-dark text-md mt-5" as="span">{item.email || item.telNum} - {item.description}</Text>
+                      </>
+                    )
+                  })}
                 </div>
               </div>
               <div className="border-b border-b-[#323b45] w-[100%]" />

@@ -10,8 +10,9 @@ export type StoreProfileLocationProps = {
   storeSocials: StoreSocialsType[] | null
   contacts: StoreContacts[] | null
   storeProfileImg: string
+  address: string
 }
-export function StoreProfileLocation({ lat, lng, storeSocials, contacts, storeProfileImg }: StoreProfileLocationProps) {
+export function StoreProfileLocation({ lat, lng, storeSocials, contacts, storeProfileImg, address }: StoreProfileLocationProps) {
   const { isMapLoaded } = useStore()
 
   const mapStyle = {
@@ -27,8 +28,7 @@ export function StoreProfileLocation({ lat, lng, storeSocials, contacts, storePr
         <div className="flex flex-row relative h-full gap-5">
 
           <div style={{ borderRadius: '10px' }} className="max-w-xs flex flex-col  p-4 gap-2 items-center  w-[420px]">
-            <Text className="text-white text-lg " as="span">Rua Resedá 248 - Santa Efigênia</Text>
-            <Text className="text-white text-lg " as="span">Belo Horizonte</Text>
+            <Text className="text-white text-lg mt-10" as="span">{address}</Text>
             <div className="border-b border-b-[#323b45] mt-5 mt-10 w-full" />
             <div className="mt-auto mt-10" />
             {contacts && contacts.length > 0 ? (

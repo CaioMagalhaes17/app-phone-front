@@ -84,7 +84,7 @@ export function StoreProfile() {
         <StoreProfileComponent
           storeFeedbacksProps={{ feedbacks, canShowRateStore: true }}
           mainPanelProps={{ name: profileData.name, rating: profileData.rating, storeSocials: socials, storeProfileImg: profileData.profileImg }}
-          storeProfileLocation={{ lat: clintLocation.lat, lng: clintLocation.lng, storeSocials: socials, contacts, storeProfileImg: profileData.profileImg }}
+          storeProfileLocation={{ lat: clintLocation.lat, lng: clintLocation.lng, storeSocials: socials, contacts, storeProfileImg: profileData.profileImg, address: profileData.address }}
           storeProfileBudgets={{ budgets }}
           storeId={id}
         />

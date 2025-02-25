@@ -110,15 +110,13 @@ export function GoogleCircle({ center, radius, onClick }: GoogleCirceProps) {
 export type GoogleAutoCompleteProps = {
   children: React.ReactNode,
   setLocation: React.Dispatch<React.SetStateAction<{ lat: number; lng: number; } | null>>
+  setSelectedAddress?: any
 }
-export function GoogleAutoComplete({ children, setLocation }: GoogleAutoCompleteProps) {
+export function GoogleAutoComplete({ children, setLocation, setSelectedAddress }: GoogleAutoCompleteProps) {
   const [autocomplete, setAutocomplete] = useState<google.maps.places.Autocomplete | null>()
-  const [selectedAddress, setSelectedAddress] = useState<string>("")
   const handleLoad = (autocompleteInstance: google.maps.places.Autocomplete) => {
     setAutocomplete(autocompleteInstance);
   };
-  console.log(selectedAddress)
-
 
   const handlePlaceChanged = () => {
     if (autocomplete) {
