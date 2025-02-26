@@ -3,7 +3,6 @@ import { Link } from "react-router-dom"
 import { BudgetType } from "../../../../types/budget"
 import { formatPhoneBrand, formatTopic } from "../../../../formaters/solicitations"
 import { batteryQuestions, displayQuestions } from "../../../../constants/solicitation-form-questions";
-import { userImg } from "../../../../constants/images";
 
 export interface StoreProfileBudgetProps {
   budgets: [] | BudgetType[]

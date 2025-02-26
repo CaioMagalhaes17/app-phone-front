@@ -22,6 +22,8 @@ import { ClientBudgetsList } from "../pages/Budgets/client/List";
 import { StoreProfile } from "../pages/Profile/store";
 import { DirectSolicitationsCreate } from "../pages/Solicitations/client/Create/direct-solicitation";
 import { BudgetDetails } from "../pages/Budgets/client/Details";
+import { UserConfigurations } from "../pages/Configurations/client";
+import { UserStoreConfigurations } from "../pages/Configurations/store";
 
 const ClientMapEdit = React.lazy(() => import("../pages/Map/Edit/client"))
 const DefaultLayout = React.lazy(() => import("../components/DefaultLayout"))
@@ -107,6 +109,14 @@ export const routes: RouteObject[] = [
       {
         path: '/budget/:id',
         element: <BudgetDetails />
+      },
+      {
+        path: '/configurations',
+        element: <UserConfigurations />
+      },
+      {
+        path: '/store/configurations',
+        element: <UserStoreConfigurations />
       }
     ]
   },

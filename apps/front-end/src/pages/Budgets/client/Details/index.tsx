@@ -1,21 +1,24 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useGetBudgetById } from "../../../../hooks/budgets/useGetBudgetById";
-import { Button, IconMail, IconStore, IconWhatsApp, Panel, Text } from "@app/ui";
-import { ChevronDown, Star } from "lucide-react";
+import { Button, IconArrowBackward, IconMail, IconStore, IconWhatsApp, Panel, Text } from "@app/ui";
+import { Star } from "lucide-react";
 import { BudgetDetailsLocation } from "./components/Location";
 
 
 export function BudgetDetails() {
   const { id } = useParams() as { id: string }
   const { budget } = useGetBudgetById(id)
+  const navigate = useNavigate()
   return (
     <>
+      <Button className="btn-outline-primary" onClick={() => navigate(-1)}><IconArrowBackward />Voltar</Button>
       {budget && (
         <div className="flex flex-col">
           <div className="flex gap-10 mr-auto ml-auto mr-auto mt-10 flex-row">
             <Panel className="min-w-[900px]">
               <div className="flex flex-col p-4 font-extrabold">
                 <Text as="h1" className="text-white text-5xl">Orçamento</Text>
+                <div className="border-b border-b-[#323b45] mt-5 " />
                 <Text className="text-3xl mt-10 text-success" as="span">{budget.startValue} - {budget.endValue}</Text>
                 <Text as="span" className="">Previsão da duração do conserto: <Text as="span" className="text-white">2 dias úteis</Text></Text>
                 <Text as="span" className="mt-10">Sobre a loja</Text>
@@ -61,11 +64,15 @@ export function BudgetDetails() {
                     <span className="font-extrabold">Rápidos orçamentos</span>
                   </label>
                 </div>
-                <Text className="text-lg items-center flex flex-row mt-10 gap-10" as="span">Ver detalhes da solicitação de manutenção<ChevronDown /></Text>
+              </div>
+              <div className="mt-10 flex flex-row">
+                <div className="ml-auto" />
+                <Link to={`/solicitation/${budget.solicitation.id}`} className="btn btn-outline-primary">Acessar solicitação</Link>
               </div>
             </Panel>
             <Panel className="min-w-[400px] p-4">
-              <Text className="text-white text-5xl font-extrabold " as="h1">Loja</Text>
+              <Text className="text-white text-5xl mt-4 font-extrabold " as="h1">Loja</Text>
+              <div className="border-b border-b-[#323b45] mt-5 " />
               <div className="font-extrabold flex flex-row gap-5 mt-10">
                 <div className="w-[100px] max-h-[80px] ">
                   <img width="100" height="100" src={budget.storeProfile.profileImg} className="rounded-3xl" />

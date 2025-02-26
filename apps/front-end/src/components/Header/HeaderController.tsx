@@ -1,6 +1,6 @@
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, IconLogout, IconUser, Text } from "@app/ui"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, IconLogout, IconSettings, Text } from "@app/ui"
 import useStore from "../../state"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { userImg } from "../../constants/images"
 
 export function HeaderController() {
@@ -42,10 +42,12 @@ export function HeaderController() {
               <Text className="text-[#c4c4c4] font-bold text-xl" as="h1">{clientInfos?.name}</Text>
             </div>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="bg-black mt-5">
-            <DropdownMenuItem className="text-white">
-              <IconUser className="mr-2" />
-              Perfil
+          <DropdownMenuContent className="bg-black mt-5 font-extrabold">
+            <DropdownMenuItem className="flex flex-row gap-2 text-white">
+              <Link to="/configurations" className="flex flex-row gap-2">
+                <IconSettings />
+                Configurações
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuItem className="text-danger">
               <button className="flex" onClick={() => handleLogout()}>
@@ -89,9 +91,11 @@ export function HeaderController() {
             </div>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="bg-black mt-5">
-            <DropdownMenuItem className="text-white">
-              <IconUser className="mr-2" />
-              Perfil
+            <DropdownMenuItem className="flex flex-row gap-2 text-white">
+              <Link to="/store/configurations" className="flex flex-row gap-2">
+                <IconSettings />
+                Configurações
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuItem className="text-danger">
               <button className="flex" onClick={() => handleLogout()}>
