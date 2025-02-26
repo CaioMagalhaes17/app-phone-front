@@ -23,6 +23,10 @@
     @apply hover:bg-[#3ac53a36] hover:border-[#3ac53a36] border-[#009e3b] bg-[#009e3b] text-white shadow-[000];
   }
 
+  .btn-blue {
+    @apply hover:bg-blue hover:border-blue border-blue bg-blue text-white shadow-[000];
+  }
+
   .btn-twitch {
     @apply border-[#9147ff] bg-[#9147ff] text-white shadow-[000];
   }

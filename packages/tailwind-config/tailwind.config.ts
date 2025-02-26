@@ -10,7 +10,14 @@ const config: Omit<Config, 'content'> = {
       colors: {
         primary: {
           DEFAULT: '#635bff',
-          dark: '#009e3b',
+          dark: '#888ea8'
+        },
+        green: {
+          DEFAULT: '#009e3b'
+        },
+        blue: {
+          DEFAULT: "#1d3ad1",
+          light: "#1d3ad1"
         },
         dark: {
           DEFAULT: '#3b3f5c',

@@ -1,4 +1,4 @@
-import { Button, IconDollarSignCircle, IconStore, IconThreeDots, Text } from "@app/ui";
+import { IconArrowBackward, Text } from "@app/ui";
 import { BudgetType } from "../../../../../types/budget";
 import { formatPhoneBrand } from "../../../../../formaters/solicitations";
 import { Link } from "react-router-dom";
@@ -31,9 +31,8 @@ export function BudgetRow({ budget }: { budget: BudgetType }) {
               <Text as="span">Distância em km: {budget.solicitation.form.details}</Text>
             </div>
             <div className="w-full flex flex-row gap-5 items-center">
-              <Link target="_blank" rel="noopener noreferrer" to={`/store-profile/${budget.storeProfile.id}`} className="btn-primary btn w-full flex flex-row gap-2"><IconStore />Acessar Loja</Link>
-              <Button className="btn-outline-success flex w-full flex-row gap-2"><IconDollarSignCircle />Escolher orçamento</Button>
-              <Link to={`/solicitation/${budget.solicitation.id}`} className="btn btn-outline-primary flex flex-row gap-2"><IconThreeDots /></Link>
+              <div className="ml-auto" />
+              <Link to={`/budget/${budget.id}`} className="btn btn-primary flex flex-row gap-2"><IconArrowBackward />Ver detalhes</Link>
             </div>
           </div>
 

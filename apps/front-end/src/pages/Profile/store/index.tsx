@@ -9,10 +9,8 @@ import { formatBudgetsFromApi } from "../../../formaters/budget"
 import { GetFeedbacksFromStore } from "../../../api/feedback/get-from-store"
 import { formatFeedbacks } from "../../../formaters/feedback"
 import { StoreProfileComponent } from "../../../components/Profiles/store"
-import { getStoreSocials } from "../../../api/user/store/get-socials"
-import { formatStoreContacts, formatStoreSocials } from "../../../formaters/store-profile"
-import { StoreContacts, StoreSocialsType } from "../../../types/store-profile"
-import { getStoreContacts } from "../../../api/user/store/get-contacts"
+import { useGetStoreSocials } from "../../../hooks/profile/useGetStoreSocials"
+import { useGetStoreContacts } from "../../../hooks/profile/useGetStoreContacts"
 
 export function StoreProfile() {
 
@@ -29,19 +27,7 @@ export function StoreProfile() {
     queryFn: () => GetBudgetsByStoreId(id, { limit: '3', page: '1' })
   })
 
-  const [socials, setSocials] = useState<StoreSocialsType[] | null>(null)
-
-  const { data: socialsData, isLoading: isSocialsLoading } = useQuery({
-    queryKey: ['get-socials'],
-    queryFn: () => getStoreSocials(id)
-  })
-
-  useEffect(() => {
-    if (!isSocialsLoading && socialsData) {
-      setSocials(formatStoreSocials(socialsData))
-    }
-  }, [socialsData, isSocialsLoading])
-
+  const { socials } = useGetStoreSocials(id)
 
   useEffect(() => {
     if (!isLoadingBudgets) {
@@ -67,16 +53,7 @@ export function StoreProfile() {
     if (!isLoadingFeedback && feedbacksData) return setFeedbacks(formatFeedbacks(feedbacksData))
   }, [isLoadingFeedback, feedbacksData])
 
-  const [contacts, setContacts] = useState<StoreContacts[] | null>(null)
-
-  const { data: contactsData, isLoading: isLoadingContacts } = useQuery({
-    queryKey: ['get-contacts'],
-    queryFn: () => getStoreContacts(id)
-  })
-
-  useEffect(() => {
-    if (!isLoadingContacts && contactsData) return setContacts(formatStoreContacts(contactsData))
-  }, [contactsData, isLoadingContacts])
+  const { contacts } = useGetStoreContacts(id)
 
   return (
     <>

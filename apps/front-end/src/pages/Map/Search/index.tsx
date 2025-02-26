@@ -85,6 +85,7 @@ export default function ClientMapSearch() {
                       <CarouselItem><img className="h-full w-full" src={images[0]} /></CarouselItem>
                       <CarouselItem><img className="h-full w-full" src={images[0]} /></CarouselItem>
                       <CarouselItem><img className="h-full w-full" src={images[0]} /></CarouselItem>
+
                     </CarouselContent>
                     <CarouselPrevious className="left-0" />
                     <CarouselNext className="right-0" />
