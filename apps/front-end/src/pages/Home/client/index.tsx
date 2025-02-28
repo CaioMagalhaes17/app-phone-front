@@ -40,7 +40,7 @@ export function Home() {
         <div className="min-h-[450px] max-w-[1000px] w-full">
           <div className="flex flex-row items-center gap-10 justify-center text-center ">
             <div className="flex-col">
-              <h1 className="text-5xl font-extrabold text-white mb-4">
+              <h1 className="text-5xl font-extrabold text-black dark:text-white mb-4">
                 Facilitando serviços de assistência a celulares
               </h1>
 

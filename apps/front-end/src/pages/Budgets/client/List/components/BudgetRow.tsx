@@ -12,7 +12,7 @@ export function BudgetRow({ budget }: { budget: BudgetType }) {
           <img width="100" height="100" src={budget.storeProfile.profileImg} className="rounded-3xl" />
         </div>
         <div className="flex w-full flex-col">
-          <Text className="flex flex-row gap-5 items-center text-center text-white text-lg" as="span">
+          <Text className="flex flex-row gap-5 items-center text-center text-black dark:text-white text-lg" as="span">
             {budget.storeProfile.name}
             <div className="flex flex-row mb-2">
               {[...Array(5)].map((_, index) => (
@@ -27,7 +27,7 @@ export function BudgetRow({ budget }: { budget: BudgetType }) {
           <div className="flex flex-row w-full">
             <div className="w-full text-left flex flex-col gap-2">
               <Text className="text-success" as="span">{budget.startValue} - {budget.endValue}</Text>
-              <Text className="text-white" as="span">{formatPhoneBrand(budget.solicitation.form.phoneForm.brand)} - {budget.solicitation.form.phoneForm.model}</Text>
+              <Text className="text-dark dark:text-white" as="span">{formatPhoneBrand(budget.solicitation.form.phoneForm.brand)} - {budget.solicitation.form.phoneForm.model}</Text>
               <Text as="span">Distância em km: {budget.solicitation.form.details}</Text>
             </div>
             <div className="w-full flex flex-row gap-5 items-center">

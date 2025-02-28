@@ -29,7 +29,7 @@ export function BasicTable<T = unknown>({
   return (
     <div className="panel">
       <h5 className="flex flex-row gap-5 font-semibold text-lg dark:text-white-light mb-5">
-        <span className="text-3xl font-extrabold text-white" id="title">{title}</span>
+        <span className="text-3xl font-extrabold text-black dark:text-white" id="title">{title}</span>
       </h5>
       <div className="flex md:items-center justify-between md:flex-row flex-col mb-4.5 gap-5">
         <div className="flex items-center flex-wrap">{children}</div>

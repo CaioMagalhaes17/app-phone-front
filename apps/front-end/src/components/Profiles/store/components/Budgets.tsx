@@ -43,7 +43,7 @@ export function StoreProfileBudgets({ budgets, isOwner }: StoreProfileBudgetProp
                       <img width={'100px'} height={'100px'} src={'https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/390.png'} className="rounded-3xl" />
                     </div>
                     <div className="flex flex-col">
-                      <Text className="text-white text-lg" as="span">{formatTopic(budget.solicitation.form.problemTopic)} - {formatPhoneBrand(budget.solicitation.form.phoneForm.brand)} {budget.solicitation.form.phoneForm.model}</Text>
+                      <Text className="text-dark dark:text-white text-lg" as="span">{formatTopic(budget.solicitation.form.problemTopic)} - {formatPhoneBrand(budget.solicitation.form.phoneForm.brand)} {budget.solicitation.form.phoneForm.model}</Text>
                       <Text className="text-success text-lg" as="span">{budget.startValue} - {budget.endValue} </Text>
                       <Text className="text-white-dark" as="span">{getMainQuestion(budget.solicitation.form.problemForm)}</Text>
                     </div>

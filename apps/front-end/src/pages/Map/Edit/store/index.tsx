@@ -95,10 +95,14 @@ export default function StoreMapEdit() {
         </div>
         {clintLocation && isMapLoaded ? (
           <MapAdapter mapStyle={mapStyle} initialPosition={clintLocation}>
-            <MarkAdapter
-              position={clintLocation}
-              icon={storeInfos.profileImg}
-            />
+            {
+              storeInfos && (
+                <MarkAdapter
+                  position={clintLocation}
+                  icon={storeInfos.profileImg}
+                />
+              )
+            }
           </MapAdapter>
         ) : ''}
       </div>

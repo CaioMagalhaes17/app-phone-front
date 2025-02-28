@@ -47,21 +47,21 @@ export function SolicitationsList() {
       accessor: 'phone',
       title: 'Celular',
       render: ({ form }) => {
-        return <span className="text-white text-lg font-extrabold">{formatPhoneBrand(form.phoneForm.brand)} - {form.phoneForm.model}</span>
+        return <span className="text-dark dark:text-white text-lg font-extrabold">{formatPhoneBrand(form.phoneForm.brand)} - {form.phoneForm.model}</span>
       }
     },
     {
       accessor: 'topic',
       title: 'Raiz do problema',
       render: ({ form }) => {
-        return <span className="text-white text-lg font-extrabold">{formatTopic(form.problemTopic)}</span>
+        return <span className="text-dark dark:text-white text-lg font-extrabold">{formatTopic(form.problemTopic)}</span>
       }
     },
 
     {
       accessor: 'status',
       title: 'Status da solicitação',
-      cellsClassName: 'text-white !text-lg font-extrabold',
+      cellsClassName: 'text-black dark:text-white !text-lg font-extrabold',
       render: ({ status }) => {
         return (
           <span className={`text-${getStatusColor(status)}`}>{status}</span>
@@ -75,7 +75,7 @@ export function SolicitationsList() {
       sortable: true,
       render: ({ createdAt }) => {
         return (
-          <span className={`text-white`}>{dayjs(createdAt).format("DD/MM/YYYY")}</span>
+          <span className={`text-dark dark:text-white`}>{dayjs(createdAt).format("DD/MM/YYYY")}</span>
         )
       }
     },

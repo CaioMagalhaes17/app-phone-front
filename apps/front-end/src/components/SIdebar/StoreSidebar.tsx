@@ -86,17 +86,17 @@ export function StoreSidebar() {
             </div>
           </AccordionTrigger>
           <AccordionContent className="hover:text-white">
-            <button className="ml-5 font-bold hover:text-white hover:underline text-lg text-[#c4c4c4]">
+            <button className="ml-5 font-bold dark:text-[#c4c4c4] text-dark hover:underline text-lg">
               Como funciona
             </button>
           </AccordionContent>
           <AccordionContent className="hover:text-white">
-            <button className="ml-5 font-bold hover:text-white hover:underline text-lg text-[#c4c4c4]">
+            <button className="ml-5 font-bold dark:text-[#c4c4c4] text-dark hover:underline text-lg">
               Suporte
             </button>
           </AccordionContent>
           <AccordionContent className="hover:text-white">
-            <button className="ml-5 font-bold hover:text-white hover:underline text-lg text-[#c4c4c4]">
+            <button className="ml-5 font-bold dark:text-[#c4c4c4] text-dark hover:underline text-lg">
               Relatar erro
             </button>
           </AccordionContent>

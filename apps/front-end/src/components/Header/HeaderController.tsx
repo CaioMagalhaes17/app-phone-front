@@ -39,7 +39,7 @@ export function HeaderController() {
               <div className="w-[60px]">
                 <img width="50" height="50" src={userImg} className="rounded-3xl" />
               </div>
-              <Text className="text-[#c4c4c4] font-bold text-xl" as="h1">{clientInfos?.name}</Text>
+              <Text className="text-black dark:text-[#c4c4c4] font-bold text-xl" as="h1">{clientInfos?.name}</Text>
             </div>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="bg-black mt-5 font-extrabold">

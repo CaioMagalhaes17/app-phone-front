@@ -19,7 +19,7 @@ import { MapPinSvg } from "../../../constants/svg-icons";
 
 type StoresInsideRadius = {
   GeoLocation: { props: { latitude: number; longitude: number; } }
-  Profile: StoreProfileFromApi & { storeProfileAdress: StoreContactsFromApi[] }
+  Profile: StoreProfileFromApi & { storeProfileContacts: StoreContactsFromApi[] }
   _id: string
 }
 
@@ -48,7 +48,6 @@ export default function ClientMapSearch() {
     queryKey: ['fetch-stores-inside-client-radius'],
     queryFn: FetchStoresInsideClientRadius
   })
-
   const mapStyle = {
     width: '100%',
     height: '100%',
@@ -65,7 +64,7 @@ export default function ClientMapSearch() {
     const teste = {
       geoLocation: item.GeoLocation,
       storeProfile: formatStoreProfile(item.Profile),
-      storeContacts: formatStoreContacts(item.Profile.storeProfileAdress)
+      storeContacts: formatStoreContacts(item.Profile.storeProfileContacts)
     }
     setSelectedStore(teste)
   }
@@ -75,7 +74,7 @@ export default function ClientMapSearch() {
   return (
     <>
       <div className="flex relative h-full gap-5">
-        <div style={{ borderRadius: '10px' }} className="max-w-xs flex flex-col  p-4 gap-2 items-center bg-black w-[420px] overflow-y-auto scrollable">
+        <div style={{ borderRadius: '10px' }} className="max-w-xs flex flex-col  p-4 gap-2 items-center bg-white dark:bg-black w-[420px] overflow-y-auto scrollable">
           {selectedStore ? (
             <>
               <div className="w-full mt-5 flex flex-col">
@@ -103,7 +102,7 @@ export default function ClientMapSearch() {
                     />
                   ))}</div>
                   <div className="border-b border-b-[#323b45] " />
-                  <div className="flex flex-row gap-5">
+                  <div className="flex flex-row text-dark dark:text-white gap-5">
                     <label className=" flex items-center gap-2 block">
                       <input
                         type="checkbox"
@@ -126,7 +125,7 @@ export default function ClientMapSearch() {
                     </label>
 
                   </div>
-                  <div className="flex flex-row gap-5">
+                  <div className="flex flex-row text-dark dark:text-white gap-5">
                     <label className="text-md flex items-center gap-2 block">
                       <input
                         type="checkbox"
@@ -158,7 +157,7 @@ export default function ClientMapSearch() {
                 <div className="border-b border-b-[#323b45] mt-5 w-[100%]" />
 
                 <div className="flex flex-col font-extrabold items-center mt-5">
-                  <Text className="text-white text-center" as="span">{selectedStore.storeProfile.address}</Text>
+                  <Text className="text-dark dark:text-white text-center" as="span">{selectedStore.storeProfile.address}</Text>
                   {selectedStore.storeContacts.map((item) => {
                     return (
                       <>
@@ -177,8 +176,6 @@ export default function ClientMapSearch() {
               </div>
             )
           }
-
-
 
           <div className="mt-auto" />
           <Button onClick={() => navigate('/map/edit')} className="btn-primary flex flex-row w-full gap-5">

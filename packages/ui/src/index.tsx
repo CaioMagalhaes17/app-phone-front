@@ -81,5 +81,10 @@ export {
   DropdownMenuRadioGroup,
 } from './components/Dropdown'
 
+export { HSeparator } from "./atoms/HSeparator";
+export { VSeparator } from "./atoms/VSeparator";
 import './css/index.css'
+export { IconMoon } from "./Icons/IconMoon";
+export { IconSun } from "./Icons/IconSun";
+export { IconShoppingBag } from "./Icons/IconShoppingBag";
 export { IconSettings } from "./Icons/IconSettings";

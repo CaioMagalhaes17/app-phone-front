@@ -14,7 +14,7 @@ export function FeedbackRow({ feedback }: { feedback: FeedbackType }) {
           <img width="100" height="100" src={userImg} className="rounded-3xl" />
         </div>
         <div className="flex flex-col max-w-[80%]">
-          <Text className="flex flex-row gap-5 items-center text-center text-white text-lg" as="span">
+          <Text className="flex flex-row gap-5 items-center text-center text-dark dark:text-white text-lg" as="span">
             {feedback.clientProfile.name}
             <Text className="text-white-dark text-sm mt-1" as="span">
               {dayjs(feedback.createdAt).format('DD/MM/YYYY')}

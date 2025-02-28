@@ -6,7 +6,7 @@ export function HeaderNotificationsBox() {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger>
-          <div className="flex flex-row w-full">
+          <div className="flex flex-row w-full dark:text-[#c4c4c4] text-black">
             <IconBell />
             <span className="absolute top-2 ml-5 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
               5

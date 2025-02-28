@@ -23,6 +23,14 @@
     @apply hover:bg-[#3ac53a36] hover:border-[#3ac53a36] border-[#009e3b] bg-[#009e3b] text-white shadow-[000];
   }
 
+  .btn-outline-green {
+    @apply border-green text-green shadow-none hover:bg-green hover:text-white;
+  }
+
+  .btn-outline-blue {
+    @apply border-blue text-blue shadow-none hover:bg-blue hover:text-white;
+  }
+
   .btn-blue {
     @apply hover:bg-blue hover:border-blue border-blue bg-blue text-white shadow-[000];
   }
@@ -32,7 +40,7 @@
   }
 
   .btn-primary {
-    @apply border-primary bg-primary text-white shadow-[000];
+    @apply border-black dark:border-primary bg-black dark:bg-primary text-white shadow-[000];
   }
 
   .btn-primary-dark {
@@ -40,7 +48,7 @@
   }
 
   .btn-outline-primary {
-    @apply border-primary text-primary shadow-none hover:bg-primary hover:text-white;
+    @apply border-black dark:border-primary text-black dark:text-primary shadow-none hover:bg-black hover:dark:bg-primary hover:text-white;
   }
 
   .btn-outline-warning {

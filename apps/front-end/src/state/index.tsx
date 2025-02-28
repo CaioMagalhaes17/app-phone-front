@@ -25,6 +25,9 @@ type StateManager = {
   closeSidebar: boolean
   setCloseSidebar: (closeSidebar: boolean) => void
   setIsMapLoaded: (isMapLoaded: boolean) => void
+  theme: 'dark' | 'light'
+  setTheme: (theme: 'dark' | 'light') => void
+  load: () => Promise<void>
 }
 
 type StoreInfos = {
@@ -41,8 +44,22 @@ type StoreInfos = {
   }
 }
 
-const useStore = create<StateManager>((set) => {
+
+const useStore = create<StateManager>((set, get) => {
   return {
+    theme: (localStorage.getItem('theme') as 'dark' | 'light') || 'light',
+    setTheme: (theme: 'dark' | 'light') => {
+      const stateTheme = theme || get().theme
+      localStorage.setItem('theme', stateTheme)
+      set({
+        theme,
+      })
+      if (theme === 'dark') {
+        document.querySelector('body')?.classList.add('dark')
+      } else if (theme === 'light') {
+        document.querySelector('body')?.classList.remove('dark')
+      }
+    },
     closeSidebar: false,
     setCloseSidebar: (closeSidebar: boolean) => {
       set({
@@ -101,6 +118,17 @@ const useStore = create<StateManager>((set) => {
       set({
         isMapLoaded
       })
+    },
+    load: async () => {
+      const theme = get().theme
+      if (theme) {
+        if (theme === 'dark') {
+          document.querySelector('body')?.classList.add('dark')
+        } else if (theme === 'light') {
+
+          document.querySelector('body')?.classList.remove('dark')
+        }
+      }
     },
   }
 })

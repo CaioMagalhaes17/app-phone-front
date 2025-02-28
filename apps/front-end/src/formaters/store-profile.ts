@@ -52,3 +52,9 @@ export function formatSocialType(socialType: string) {
   if (socialType === 'instagram') return 'Instagram'
   if (socialType === 'whatsapp') return 'WhatsApp'
 }
+
+export function formatSocialColor(socialType: string) {
+  if (socialType === 'facebook') return 'blue'
+  if (socialType === 'instagram') return ' text-white'
+  if (socialType === 'whatsapp') return 'green'
+}

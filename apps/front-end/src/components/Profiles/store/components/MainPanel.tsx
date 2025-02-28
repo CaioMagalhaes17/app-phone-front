@@ -2,6 +2,7 @@ import { IconFacebook, IconInstagram, IconWhatsApp, Panel, Text } from "@app/ui"
 import { Star } from "lucide-react";
 import { StoreSocialsType } from "../../../../types/store-profile";
 import { Link } from "react-router-dom";
+import { formatSocialColor } from "../../../../formaters/store-profile";
 
 export interface StoreMainPainelProps {
   rating: number,
@@ -13,24 +14,24 @@ export interface StoreMainPainelProps {
 export function MainPainel({ rating, name, storeSocials, storeProfileImg }: StoreMainPainelProps) {
   return (
     <>
-      <Panel>
+      <Panel className="">
         <div className="max-w-[1200px] mr-auto ml-auto flex flex-row gap-5">
           <div className="w-[350px] flex flex-col gap-2 ">
             <img width={'260px'} height={'260px'} src={storeProfileImg} className="rounded-3xl" />
           </div>
           <div className="p-2 flex w-full text-left text-lg font-extrabold text-white gap-5 flex-col">
             <div className="flex flex-row gap-5">
-              <Text className="text-white font-extrabold text-3xl" as="span">{name}</Text>
+              <Text className="text-black dark:text-white font-extrabold text-3xl" as="span">{name}</Text>
               <div className="flex flex-row gap-2">
                 {
                   storeSocials?.map((item) => {
                     return (
                       <>
-                        <Link to={item.link} target="_blank" className="btn btn-outline-primary rounded-full">
+                        <Link to={item.link} target="_blank" className={`btn btn-outline-${formatSocialColor(item.type)} ${item.type === 'instagram' && 'bg-[linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)]'} rounded-full`}>
                           {item.type === 'whatsapp' && <IconWhatsApp />}
                           {item.type === 'instagram' && <IconInstagram />}
                           {item.type === 'facebook' && <IconFacebook />}
-                        </Link>
+                        </Link >
                       </>
                     )
                   })
@@ -48,7 +49,7 @@ export function MainPainel({ rating, name, storeSocials, storeProfileImg }: Stor
               />
             ))}</div>
             <div className="border-b border-b-[#323b45] " />
-            <div className="flex flex-row gap-5">
+            <div className="flex flex-row gap-5 text-dark dark:text-white">
               <label className="text-md flex items-center gap-2 block">
                 <input
                   type="checkbox"
@@ -69,29 +70,29 @@ export function MainPainel({ rating, name, storeSocials, storeProfileImg }: Stor
                 />
                 <span className="font-extrabold">Rápidos orçamentos</span>
               </label>
-
+              <label className="text-md flex items-center gap-2 block">
+                <input
+                  type="checkbox"
+                  className="form-checkbox rounded-full"
+                  checked
+                  disabled
+                  style={{ backgroundColor: 'currentcolor' }}
+                />
+                <span className="font-extrabold">Rápidos orçamentos</span>
+              </label>
+              <label className="text-md flex items-center gap-2 block">
+                <input
+                  type="checkbox"
+                  className="form-checkbox rounded-full"
+                  checked
+                  disabled
+                  style={{ backgroundColor: 'currentcolor' }}
+                />
+                <span className="font-extrabold">Rápidos orçamentos</span>
+              </label>
             </div>
             <div className="flex flex-row gap-5">
-              <label className="text-md flex items-center gap-2 block">
-                <input
-                  type="checkbox"
-                  className="form-checkbox rounded-full"
-                  checked
-                  disabled
-                  style={{ backgroundColor: 'currentcolor' }}
-                />
-                <span className="font-extrabold">Rápidos orçamentos</span>
-              </label>
-              <label className="text-md flex items-center gap-2 block">
-                <input
-                  type="checkbox"
-                  className="form-checkbox rounded-full"
-                  checked
-                  disabled
-                  style={{ backgroundColor: 'currentcolor' }}
-                />
-                <span className="font-extrabold">Rápidos orçamentos</span>
-              </label>
+
             </div>
           </div>
 

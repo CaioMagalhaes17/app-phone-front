@@ -54,7 +54,7 @@ export function ClientBudgetsList() {
         <div className="flex justify-center">
           <Panel className="font-extrabold  max-w-[1200px] w-full">
             <div className="flex flex-row">
-              <Text className="text-3xl text-white" as="h1">Orçamentos recebidos</Text>
+              <Text className="text-3xl text-black dark:text-white" as="h1">Orçamentos recebidos</Text>
               <div className="ml-auto" />
               {/* <select onClick={(e) => onFilterChange(e.currentTarget.value)} className="form-select !border-none bg-black form-select-lg text-white mr-5">
                 <option value="default">
@@ -68,7 +68,7 @@ export function ClientBudgetsList() {
                   )
                 }) : ''}
               </select> */}
-              <select onClick={(e) => onOrderChange(e.currentTarget.value)} className="form-select !border-none bg-black form-select-lg text-white">
+              <select onClick={(e) => onOrderChange(e.currentTarget.value)} className="form-select !border-none text-dark dark:bg-black form-select-lg dark:text-white">
                 <option value="rating">
                   Loja com mais notas
                 </option>

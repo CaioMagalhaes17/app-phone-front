@@ -45,8 +45,8 @@ const textStyles = cva("", {
   },
 });
 
-type TextElementTypes = 'span' | 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' 
-export type TextProps = ComponentProps<TextElementTypes> & VariantProps<typeof textStyles> & {as: TextElementTypes};
+type TextElementTypes = 'span' | 'p' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5'
+export type TextProps = ComponentProps<TextElementTypes> & VariantProps<typeof textStyles> & { as: TextElementTypes };
 
 export function Text({
   as,
@@ -60,24 +60,24 @@ export function Text({
   textoColor,
   ref,
   ...props
-}: TextProps){
-    const Component = as || "span";
+}: TextProps) {
+  const Component = as || "span";
 
-    return (
-      <Component
-        className={cn(
-          textStyles({
-            size,
-            weight,
-            emphasis,
-            italic,
-            underline,
-            align,
-            textoColor,
-            className,
-          })
-        )}
-        {...props}
-      />
-    );
-  }
+  return (
+    <Component
+      className={cn(
+        textStyles({
+          size,
+          weight,
+          emphasis,
+          italic,
+          underline,
+          align,
+          textoColor,
+          className,
+        })
+      )}
+      {...props}
+    />
+  );
+}

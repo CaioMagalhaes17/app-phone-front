@@ -24,6 +24,9 @@ import { DirectSolicitationsCreate } from "../pages/Solicitations/client/Create/
 import { BudgetDetails } from "../pages/Budgets/client/Details";
 import { UserConfigurations } from "../pages/Configurations/client";
 import { UserStoreConfigurations } from "../pages/Configurations/store";
+import { Market } from "../pages/Market/client/List";
+import { StoreMarket } from "../pages/Market/client/StoreMarket";
+import { ClientMarketProduct } from "../pages/Market/client/Product";
 
 const ClientMapEdit = React.lazy(() => import("../pages/Map/Edit/client"))
 const DefaultLayout = React.lazy(() => import("../components/DefaultLayout"))
@@ -117,7 +120,24 @@ export const routes: RouteObject[] = [
       {
         path: '/store/configurations',
         element: <UserStoreConfigurations />
-      }
+      },
+      {
+        path: '/instagram/auth',
+        element: <UserStoreConfigurations />
+      },
+      {
+        path: '/market',
+        element: <Market />
+      },
+      {
+        path: '/market/store/:id',
+        element: <StoreMarket />
+      },
+
+      {
+        path: '/market/store/product/:id',
+        element: <ClientMarketProduct />
+      },
     ]
   },
   {

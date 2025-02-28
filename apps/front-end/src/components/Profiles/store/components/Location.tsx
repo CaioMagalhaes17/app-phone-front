@@ -3,6 +3,7 @@ import { MapAdapter, MarkAdapter } from "../../../../adapters/Map";
 import useStore from "../../../../state";
 import { StoreContacts, StoreSocialsType } from "../../../../types/store-profile";
 import { Link } from "react-router-dom";
+import { formatSocialColor } from "../../../../formaters/store-profile";
 
 export type StoreProfileLocationProps = {
   lat: number,
@@ -23,12 +24,12 @@ export function StoreProfileLocation({ lat, lng, storeSocials, contacts, storePr
   return (
     <>
       <Panel className="mt-5 font-extrabold">
-        <Text className="text-3xl text-white" as="h1">Localização e Contato</Text>
+        <Text className="text-3xl text-black dark:text-white" as="h1">Localização e Contato</Text>
         <div className="border-b border-b-[#323b45] mt-5 mt-10" />
         <div className="flex flex-row relative h-full gap-5">
 
-          <div style={{ borderRadius: '10px' }} className="max-w-xs flex flex-col  p-4 gap-2 items-center  w-[420px]">
-            <Text className="text-white text-lg" as="span">{address}</Text>
+          <div style={{ borderRadius: '10px' }} className="max-w-xs flex flex-col p-4 gap-2 items-center  w-[420px]">
+            <Text className="text-dark dark:text-white text-lg" as="span">{address}</Text>
             <div className="border-b border-b-[#323b45] mt-5 mt-10 w-full" />
             <div className="mt-auto mt-10" />
             {contacts && contacts.length > 0 ? (
@@ -47,11 +48,11 @@ export function StoreProfileLocation({ lat, lng, storeSocials, contacts, storePr
                 storeSocials?.map((item) => {
                   return (
                     <>
-                      <Link to={item.link} target="_blank" className="btn btn-outline-primary rounded-full">
+                      <Link to={item.link} target="_blank" className={`btn btn-outline-${formatSocialColor(item.type)} ${item.type === 'instagram' && 'bg-[linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)]'} rounded-full`}>
                         {item.type === 'whatsapp' && <IconWhatsApp />}
                         {item.type === 'instagram' && <IconInstagram />}
                         {item.type === 'facebook' && <IconFacebook />}
-                      </Link>
+                      </Link >
                     </>
                   )
                 })
@@ -66,7 +67,7 @@ export function StoreProfileLocation({ lat, lng, storeSocials, contacts, storePr
             </MapAdapter>
           ) : (<>'Carregando...'</>)}</div>
         </div>
-      </Panel>
+      </Panel >
     </>
   )
 }
