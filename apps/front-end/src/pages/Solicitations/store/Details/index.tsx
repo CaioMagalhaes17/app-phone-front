@@ -118,7 +118,7 @@ export function StoreSolicitationDetails() {
   const navigate = useNavigate()
   return (
     <>
-      <Button onClick={() => navigate(-1)} className="btn-outline-primary flex flex-row gap-2"><IconArrowBackward /> Voltar</Button>
+      <Button onClick={() => navigate(-1)} className="btn-outline-primary flex flex-row gap-2"><IconArrowBackward /> </Button>
       {!isLoading && !budgetLoading && solicitationData ? (
         <div className="max-w-[1200px] mx-auto">
           <div className="flex flex-row">

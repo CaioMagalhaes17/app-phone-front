@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { getStoreProfileById } from "../../../api/user/store/get-profile-by-id"
 import { GetBudgetsByStoreId } from "../../../api/repair/budget/get-budgets-by-store-id"
 import { useEffect, useState } from "react"
@@ -11,6 +11,7 @@ import { formatFeedbacks } from "../../../formaters/feedback"
 import { StoreProfileComponent } from "../../../components/Profiles/store"
 import { useGetStoreSocials } from "../../../hooks/profile/useGetStoreSocials"
 import { useGetStoreContacts } from "../../../hooks/profile/useGetStoreContacts"
+import { Button, IconShoppingBag } from "@app/ui"
 
 export function StoreProfile() {
 
@@ -54,9 +55,10 @@ export function StoreProfile() {
   }, [isLoadingFeedback, feedbacksData])
 
   const { contacts } = useGetStoreContacts(id)
-
+  const navigate = useNavigate()
   return (
     <>
+      <Button onClick={() => navigate('/market/store/' + id)} className="btn-primary flex flex-row gap-2 mb-2 ml-auto"><IconShoppingBag />Ver Produtos</Button>
       {!isLoading && feedbacks && budgets ? (
         <StoreProfileComponent
           storeFeedbacksProps={{ feedbacks, canShowRateStore: true }}

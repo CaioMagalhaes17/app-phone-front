@@ -100,7 +100,7 @@ export function SolicitationDetails() {
     <>
       {!isLoading && solicitationData ? (
         <>
-          <Button onClick={() => navigate(-1)} className="btn-outline-primary flex flex-row gap-2"><IconArrowBackward /> Voltar</Button>
+          <Button onClick={() => navigate(-1)} className="btn-outline-primary flex flex-row gap-2"><IconArrowBackward /> </Button>
           <div className="max-w-[1200px] mx-auto">
             <div className="flex gap-5 flex-row">
               <Text className="text-white font-extrabold text-5xl" as="h1">Defeito em <span className="underline">{formatTopic(solicitationData?.form.problemTopic)}</span></Text>

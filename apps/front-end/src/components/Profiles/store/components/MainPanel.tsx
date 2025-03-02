@@ -1,4 +1,4 @@
-import { IconFacebook, IconInstagram, IconWhatsApp, Panel, Text } from "@app/ui";
+import { Button, IconFacebook, IconInstagram, IconShoppingBag, IconWhatsApp, Panel, Text } from "@app/ui";
 import { Star } from "lucide-react";
 import { StoreSocialsType } from "../../../../types/store-profile";
 import { Link } from "react-router-dom";

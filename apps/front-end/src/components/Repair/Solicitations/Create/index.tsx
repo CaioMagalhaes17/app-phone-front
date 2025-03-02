@@ -88,7 +88,7 @@ export function SolicitationForm({ steps, handleSendForm, customMap, storeProfil
   const navigate = useNavigate()
   return (
     <>
-      <Button onClick={() => navigate(-1)} className="btn-outline-primary flex flex-row gap-2"><IconArrowBackward /> Voltar</Button>
+      <Button onClick={() => navigate(-1)} className="btn-outline-primary flex flex-row gap-2"><IconArrowBackward /></Button>
       <div className="flex relative h-full gap-5 max-w-[1200px] mx-auto">
         <Panel style={{ borderRadius: '10px' }} className="flex flex-col gap-2 w-full h-full">
           <div className="w-full p-2 h-full">

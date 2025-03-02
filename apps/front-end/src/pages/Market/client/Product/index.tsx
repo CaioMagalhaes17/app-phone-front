@@ -7,7 +7,7 @@ export function ClientMarketProduct() {
   const navigate = useNavigate()
   return (
     <>
-      <Button onClick={() => navigate(-1)} className="btn-outline-primary flex flex-row gap-2 mb-5"><IconArrowBackward />Voltar</Button>
+      <Button onClick={() => navigate(-1)} className="btn-outline-primary flex flex-row gap-2 mb-5"><IconArrowBackward /></Button>
       <MarketProduct />
     </>
   )

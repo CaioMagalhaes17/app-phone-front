@@ -8,7 +8,7 @@ import { Suspense, useState } from "react"
 export default function DefaultLayoutExample({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <Box className={` vertical full main-section antialiased relative font-nunito text-sm font-normal`}>
+      <Box className={` vertical full shadow-5xl shadow-4xl shadow-3xl main-section antialiased relative sombra font-nunito text-sm font-normal`}>
         <Box className="relative">
           <Box className="navbar-sticky main-container text-white-dark min-h-screen">
             <Box className="main-content flex flex-col min-h-screen">

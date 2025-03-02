@@ -23,7 +23,7 @@ export function StoreFeedbacksList() {
   const navigate = useNavigate()
   return (
     <>
-      <Button onClick={() => navigate(-1)} className="btn-outline-primary flex flex-row gap-2"><IconArrowBackward /> Voltar</Button>
+      <Button onClick={() => navigate(-1)} className="btn-outline-primary flex flex-row gap-2"><IconArrowBackward /> </Button>
 
       {!isLoading && feedbacks ? (<div className="flex justify-center">
         <Panel className="font-extrabold  max-w-[1200px] w-full">

@@ -28,10 +28,10 @@ export default function ClientMapEdit() {
     )
   }, [clientInfos])
 
-  const mapStyle = {
+  const mapStyle: React.CSSProperties = {
     width: '100%',
     height: '100%',
-    borderRadius: '10px'
+    borderRadius: '10px',
   }
 
   function getBrowserLocation() {
@@ -81,9 +81,7 @@ export default function ClientMapEdit() {
   return (
     <>
       <div className="flex relative h-full gap-5">
-        <div style={{ borderRadius: '10px' }} className="max-w-xs flex flex-col  gap-2 items-center bg-black w-[420px]">
-          <h1 className="text-[#c4c4c4] font-extrabold text-xl mt-5">Definir localização de pesquisa</h1>
-          <div className="border-b border-b-[#323b45] mt-5 w-[90%]" />
+        <div style={{ borderRadius: '10px' }} className="max-w-xs flex flex-col  gap-2 items-center sombra dark:bg-black w-[420px]">
           <div className="text-left p-4">
             <Button onClick={() => getBrowserLocation()} className="btn-primary w-full"><IconMap />Usar localização exata do dispositivo</Button>
           </div>
@@ -111,7 +109,7 @@ export default function ClientMapEdit() {
             </Button>
           </div>
           <div className="border-b border-b-[#323b45] mt-5 w-[90%]" />
-          <div className="mt-5">
+          <div className="mt-[270px]">
             <Button onClick={() => navigate('/map')} className="btn-primary w-full flex gap-5 flex-row">
               <IconMap />
               <span>Procurar por lojas próximas</span>
@@ -119,13 +117,15 @@ export default function ClientMapEdit() {
           </div>
         </div>
         {clintLocation && isMapLoaded ? (
-          <MapAdapter mapStyle={mapStyle} initialPosition={clintLocation}>
-            <MarkAdapter
-              position={clintLocation}
-              icon={MapPinSvg}
-            />
-            <RadiusAdapter center={{ lat: clintLocation.lat, lng: clintLocation.lng }} radius={radius} />
-          </MapAdapter>
+          <div className="shadow-[0_10px_20px_-10px_rgba(13,15,24)] w-full h-full">
+            <MapAdapter mapStyle={mapStyle} initialPosition={clintLocation}>
+              <MarkAdapter
+                position={clintLocation}
+                icon={MapPinSvg}
+              />
+              <RadiusAdapter center={{ lat: clintLocation.lat, lng: clintLocation.lng }} radius={radius} />
+            </MapAdapter>
+          </div>
         ) : ''}
       </div>
     </>

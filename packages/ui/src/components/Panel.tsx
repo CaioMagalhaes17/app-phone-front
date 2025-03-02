@@ -4,13 +4,15 @@ import React, { ComponentProps } from "react";
 
 const panelStyle = cva([
   "panel",
+  "animate__fadeIn",
+  "animate__animated"
 ])
 
 type PanelProps = ComponentProps<"div"> & VariantProps<typeof panelStyle>;
 
-export function Panel({className, children, ...rest} : PanelProps){
+export function Panel({ className, children, ...rest }: PanelProps) {
   return (
-    <div className={cn(panelStyle({className}))} {...rest}>
+    <div className={cn(panelStyle({ className }))} {...rest}>
       {children}
     </div>
   )

@@ -11,9 +11,9 @@ export function BudgetDetails() {
   const navigate = useNavigate()
   return (
     <>
-      <Button className="btn-outline-primary" onClick={() => navigate(-1)}><IconArrowBackward />Voltar</Button>
+      <Button className="btn-outline-primary" onClick={() => navigate(-1)}><IconArrowBackward /></Button>
       {budget && (
-        <div className="flex flex-col">
+        <div className="flex flex-col ">
           <div className="flex gap-10 mr-auto ml-auto mr-auto mt-10 flex-row">
             <Panel className="min-w-[900px]">
               <div className="flex flex-col p-4 font-extrabold">
