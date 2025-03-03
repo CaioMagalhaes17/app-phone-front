@@ -13,9 +13,9 @@ export function PhoneForm({ phoneForm }: { phoneForm: PhoneFormType }) {
       <div className="flex flex-col mt-6 gap-1 mb-5">
         <Text className="font-extrabold text-lg" as="h1">Marca - <span className="text-white">{formatPhoneBrand(phoneForm.brand)}</span></Text>
         <Text className="font-extrabold text-lg" as="h1">Modelo - <span className="text-white">{phoneForm.model}</span></Text>
-        <Text className="font-extrabold text-lg" as="h1">{phoneQuestions[2].question} - <span className={`text-${getAnswerColor(phoneForm.previousRepair)}`}>{formatPreviousRepair(phoneForm.previousRepair)}</span></Text>
-        <Text className="font-extrabold text-lg" as="h1">{phoneQuestions[3].question} - <span className={`text-${getAnswerColor(phoneForm.originalHardware)}`}>{formatOriginalHardwareAnswer(phoneForm.originalHardware)}</span></Text>
-        <Text className="font-extrabold text-lg" as="h1">{phoneQuestions[4].question} - <span className="text-white">{formatUsageTime(phoneForm.usageTime)}</span></Text>
+        <Text className="font-extrabold text-lg" as="h1">{phoneQuestions[2].question} - <span className={getAnswerColor(phoneForm.previousRepair)}>{formatPreviousRepair(phoneForm.previousRepair)}</span></Text>
+        <Text className="font-extrabold text-lg" as="h1">{phoneQuestions[3].question} - <span className={getAnswerColor(phoneForm.originalHardware)}>{formatOriginalHardwareAnswer(phoneForm.originalHardware)}</span></Text>
+        <Text className="font-extrabold text-lg" as="h1">{phoneQuestions[4].question} - <span className="text-dark dark:text-white">{formatUsageTime(phoneForm.usageTime)}</span></Text>
       </div>
     </Panel>
   )

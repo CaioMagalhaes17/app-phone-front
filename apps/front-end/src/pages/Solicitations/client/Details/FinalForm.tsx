@@ -78,7 +78,7 @@ export function FinalForm({ deliveryPreference, timePreference, details, solicit
             <Text className="font-extrabold text-lg" as="h1">{finalQuestions[0].question} - <span className={`text-${getTimePreferenceColor(timePreference)}`}>{formatTimePreference(timePreference)}</span></Text>
             <Text className="font-extrabold text-lg" as="h1">{finalQuestions[1].question} - <span className={`text-${getDeliveryPreferenceColor(deliveryPreference)}`}>{formatDeliveryPreference(deliveryPreference)}</span></Text>
             <Text className="font-extrabold text-lg text-white mt-2" as="h1">{finalQuestions[2].question}:</Text>
-            <textarea value={details} disabled className="placeholder:text-white-dark w-full rounded-md border px-4 py-2 text-sm font-semibold !outline-none focus:border-primary focus:ring-transparent border-[#17263c] bg-[#121e32] text-white-dark focus:border-primary" />
+            <textarea value={details} disabled className="placeholder:text-dark placeholder:dark:text-white-dark w-full rounded-md border px-4 py-2 text-sm font-semibold !outline-none focus:border-primary focus:ring-transparent border-[#17263c]  text-white-dark focus:border-primary" />
           </div>
         </Panel>
       ) : (
@@ -93,7 +93,7 @@ export function FinalForm({ deliveryPreference, timePreference, details, solicit
               <Text className="font-extrabold text-lg" as="h1">{finalQuestions[0].question} - <select className="form-select rounded bg-black form-select-lg text-white" {...register(finalQuestions[0].questionId)}>{finalQuestions[0].options.map((item) => <option value={item.optionId}>{item.text}</option>)} </select></Text>
               <Text className="font-extrabold text-lg" as="h1">{finalQuestions[1].question} - <select className="form-select rounded bg-black form-select-lg text-white" {...register(finalQuestions[1].questionId)}>{finalQuestions[1].options.map((item) => <option value={item.optionId}>{item.text}</option>)} </select></Text>
               <Text className="font-extrabold text-lg text-white mt-2" as="h1">{finalQuestions[2].question}:</Text>
-              <textarea {...register(finalQuestions[2].questionId)} defaultValue={details} className="placeholder:text-white-dark w-full rounded-md border px-4 py-2 text-sm font-semibold !outline-none focus:border-primary focus:ring-transparent border-[#17263c] bg-[#121e32] text-white-dark focus:border-primary" />
+              <textarea {...register(finalQuestions[2].questionId)} defaultValue={details} className="placeholder:text-dark placeholder:dark:text-white-dark w-full rounded-md border px-4 py-2 text-sm font-semibold !outline-none focus:border-primary focus:ring-transparent border-[#17263c] bg-[#121e32] text-white-dark focus:border-primary" />
             </div>
           </form>
         </Panel>

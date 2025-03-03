@@ -20,6 +20,7 @@ import { MapPinSvg } from "../../../constants/svg-icons";
 type StoresInsideRadius = {
   GeoLocation: { props: { latitude: number; longitude: number; } }
   Profile: StoreProfileFromApi & { storeProfileContacts: StoreContactsFromApi[] }
+  contacts: StoreContactsFromApi[]
   _id: string
 }
 
@@ -48,28 +49,21 @@ export default function ClientMapSearch() {
     queryKey: ['fetch-stores-inside-client-radius'],
     queryFn: FetchStoresInsideClientRadius
   })
+  console.log(data)
   const mapStyle = {
     width: '100%',
     height: '100%',
     borderRadius: '10px'
   }
 
-  const images = [
-    'https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/390.png',
-    'https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/390.png',
-    'https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/390.png',
-  ]
-
   function onStorePinClick(item: StoresInsideRadius) {
     const teste = {
       geoLocation: item.GeoLocation,
       storeProfile: formatStoreProfile(item.Profile),
-      storeContacts: formatStoreContacts(item.Profile.storeProfileContacts)
+      storeContacts: formatStoreContacts(item.contacts)
     }
     setSelectedStore(teste)
   }
-  console.log(selectedStore)
-
 
   return (
     <>
@@ -81,10 +75,7 @@ export default function ClientMapSearch() {
                 <div className="items-center flex justify-center">
                   <Carousel className="">
                     <CarouselContent className="h-[220px]">
-                      <CarouselItem><img className="h-full w-full" src={images[0]} /></CarouselItem>
-                      <CarouselItem><img className="h-full w-full" src={images[0]} /></CarouselItem>
-                      <CarouselItem><img className="h-full w-full" src={images[0]} /></CarouselItem>
-
+                      <CarouselItem><img className="h-full w-full" src={selectedStore.storeProfile.profileImg} /></CarouselItem>
                     </CarouselContent>
                     <CarouselPrevious className="left-0" />
                     <CarouselNext className="right-0" />
@@ -204,7 +195,7 @@ export default function ClientMapSearch() {
               <InfoWindowAdapter onClose={() => setSelectedStore(null)} position={{ lat: selectedStore.geoLocation.props.latitude, lng: selectedStore.geoLocation.props.longitude }} options={{ pixelOffset: new window.google.maps.Size(0, -40) }}>
                 <>
                   <div className="h-[200px] w-[200px]">
-                    <img className="w-[200px] h-[100px]" src={images[0]} />
+                    <img className="w-[200px] h-[100px]" src={selectedStore.storeProfile.profileImg} />
                     <Text as="span" className="font-extrabold text-dark">{selectedStore.storeProfile.name}</Text>
                   </div>
                 </>

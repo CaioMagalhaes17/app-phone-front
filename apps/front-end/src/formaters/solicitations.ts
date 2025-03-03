@@ -72,10 +72,10 @@ export function formatUsageTime(usageTime: string) {
 }
 
 export function getAnswerColor(answer: string) {
-  if (answer === 'yes' || answer === 'Sim') return 'success'
-  if (answer === 'no' || answer === 'Não') return 'danger'
-  if (answer === 'dontknow' || answer === 'Não sei') return 'warning'
-  return 'white'
+  if (answer === 'yes' || answer === 'Sim') return 'text-success'
+  if (answer === 'no' || answer === 'Não') return 'text-danger'
+  if (answer === 'dontknow' || answer === 'Não sei') return 'text-warning'
+  return 'text-dark dark:text-white'
 }
 
 export function getTimePreferenceColor(timePreference: string) {

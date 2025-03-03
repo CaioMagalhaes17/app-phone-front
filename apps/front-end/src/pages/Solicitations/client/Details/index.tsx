@@ -103,7 +103,7 @@ export function SolicitationDetails() {
           <Button onClick={() => navigate(-1)} className="btn-outline-primary flex flex-row gap-2"><IconArrowBackward /> </Button>
           <div className="max-w-[1200px] mx-auto">
             <div className="flex gap-5 flex-row">
-              <Text className="text-white font-extrabold text-5xl" as="h1">Defeito em <span className="underline">{formatTopic(solicitationData?.form.problemTopic)}</span></Text>
+              <Text className="text-black dark:text-white font-extrabold text-5xl" as="h1">Defeito em <span className="underline">{formatTopic(solicitationData?.form.problemTopic)}</span></Text>
               <div className="mr-auto" />
               {canCancelSolicitation() && (
                 <Button onClick={() => handleDeleteSolicitation()} className="btn-danger flex flex-row gap-2"><IconX />Cancelar solicitação de conserto</Button>
@@ -120,7 +120,7 @@ export function SolicitationDetails() {
               (
                 <Panel className="font-extrabold mt-6 max-w-[1200px] w-full">
                   <div className="flex flex-row">
-                    <Text className="text-3xl text-white" as="h1">Orçamentos</Text>
+                    <Text className="text-3xl text-black dark:text-white" as="h1">Orçamentos</Text>
                     <div className="ml-auto" />
                   </div>
                   <div className="border-b border-b-[#323b45] mt-5 mt-10" />
@@ -132,7 +132,7 @@ export function SolicitationDetails() {
                             <img width={'100px'} height={'100px'} src={budget.storeProfile.profileImg} className="rounded-3xl" />
                           </div>
                           <div className="flex flex-col">
-                            <Text className="text-white text-lg" as="span">{budget.storeProfile.name}</Text>
+                            <Text className="text-dark dark:text-white text-lg" as="span">{budget.storeProfile.name}</Text>
                             <Text className="text-success" as="span">{budget.startValue} - {budget.endValue}</Text>
                           </div>
                           <div className="ml-auto">

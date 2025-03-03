@@ -110,17 +110,17 @@ export function ProblemForm({ problemForm, topic, solicitationId, canEdit }: { c
         !editMode ? (
           <Panel className="w-full">
             <div className="flex flex-row">
-              <Text className="text-white font-extrabold text-2xl" as="h1">Questionário do problema:</Text>
+              <Text className="text-dark dark:text-white font-extrabold text-2xl" as="h1">Questionário do problema:</Text>
               <div className="mr-auto" />
               {canEdit && (<Button onClick={() => setEditMode(true)} className="btn-primary"><IconPencil /></Button>)}
             </div>
             <div className="flex flex-col mt-6 gap-1 mb-5 mt-10">
-              <Text className="font-extrabold text-lg" as="h1">Defeito - <span className="text-white">{formattedProblem[0].answer}</span></Text>
-              <Text className="font-extrabold text-lg" as="h1">{formattedProblem[1].question} - <span className={`text-white`}>{formattedProblem[1].answer}</span></Text>
-              <Text className="font-extrabold text-lg" as="h1">{formattedProblem[2].question} - <span className={`text-${getAnswerColor(formattedProblem[2].answer)}`}>{formattedProblem[2].answer}</span></Text>
-              <Text className="font-extrabold text-lg" as="h1">{formattedProblem[3].question} - <span className={`text-${getAnswerColor(formattedProblem[3].answer)}`}>{formattedProblem[3].answer}</span></Text>
-              <Text className="font-extrabold text-lg" as="h1">{formattedProblem[4].question} - <span className={`text-${getAnswerColor(formattedProblem[4].answer)}`}>{formattedProblem[4].answer}</span></Text>
-              <Text className="font-extrabold text-lg" as="h1">{formattedProblem[5].question} - <span className={`text-${getAnswerColor(formattedProblem[5].answer)}`}>{formattedProblem[5].answer}</span></Text>
+              <Text className="font-extrabold text-lg" as="h1">Defeito - <span className="text-dark dark:text-white">{formattedProblem[0].answer}</span></Text>
+              <Text className="font-extrabold text-lg" as="h1">{formattedProblem[1].question} - <span className={getAnswerColor(formattedProblem[1].answer)}>{formattedProblem[1].answer}</span></Text>
+              <Text className="font-extrabold text-lg" as="h1">{formattedProblem[2].question} - <span className={getAnswerColor(formattedProblem[2].answer)}>{formattedProblem[2].answer}</span></Text>
+              <Text className="font-extrabold text-lg" as="h1">{formattedProblem[3].question} - <span className={getAnswerColor(formattedProblem[3].answer)}>{formattedProblem[3].answer}</span></Text>
+              <Text className="font-extrabold text-lg" as="h1">{formattedProblem[4].question} - <span className={getAnswerColor(formattedProblem[4].answer)}>{formattedProblem[4].answer}</span></Text>
+              <Text className="font-extrabold text-lg" as="h1">{formattedProblem[5].question} - <span className={getAnswerColor(formattedProblem[5].answer)}>{formattedProblem[5].answer}</span></Text>
             </div>
           </Panel>
         ) : (
@@ -132,13 +132,13 @@ export function ProblemForm({ problemForm, topic, solicitationId, canEdit }: { c
                 <Button className="btn-primary flex flex-row gap-2"><IconSave />Salvar</Button>
               </div>
               <div className="flex flex-col mt-6 gap-3 mb-5 mt-10">
-                <Text className="font-extrabold text-lg" as="h1">Raiz do problema - <select {...register('topic')} defaultValue={topic} className="form-select rounded bg-black form-select-lg text-white">{avaliableTopics.map((item: ProblemTopicType) => <option key={item} value={item}>{formatTopic(item)}</option>)}</select></Text>
-                <Text className="font-extrabold text-lg" as="h1">Defeito -<select className="form-select rounded bg-black form-select-lg text-white" {...register(problemQuestions[0].questionId)}>{problemQuestions[0].options.map((item) => <option value={item.optionId}>{item.text}</option>)}</select></Text>
-                <Text className="font-extrabold text-lg" as="h1">{problemQuestions[1].question} - <select className="form-select rounded bg-black form-select-lg text-white" {...register(problemQuestions[1].questionId)}>{problemQuestions[1].options.map((item) => <option value={item.optionId}>{item.text}</option>)}</select></Text>
-                <Text className="font-extrabold text-lg" as="h1">{problemQuestions[2].question} - <select className="form-select rounded bg-black form-select-lg text-white" {...register(problemQuestions[2].questionId)}>{problemQuestions[2].options.map((item) => <option value={item.optionId}>{item.text}</option>)}</select></Text>
-                <Text className="font-extrabold text-lg" as="h1">{problemQuestions[3].question} - <select className="form-select rounded bg-black form-select-lg text-white" {...register(problemQuestions[3].questionId)}>{problemQuestions[3].options.map((item) => <option value={item.optionId}>{item.text}</option>)}</select></Text>
-                <Text className="font-extrabold text-lg" as="h1">{problemQuestions[4].question} - <select className="form-select rounded bg-black form-select-lg text-white" {...register(problemQuestions[4].questionId)}>{problemQuestions[4].options.map((item) => <option value={item.optionId}>{item.text}</option>)}</select></Text>
-                <Text className="font-extrabold text-lg" as="h1">{problemQuestions[5].question} - <select className="form-select rounded bg-black form-select-lg text-white" {...register(problemQuestions[5].questionId)}>{problemQuestions[5].options.map((item) => <option value={item.optionId}>{item.text}</option>)}</select></Text>
+                <Text className="font-extrabold text-lg" as="h1">Raiz do problema - <select {...register('topic')} defaultValue={topic} className="form-select rounded bg-black form-select-lg text-dark dark:text-white">{avaliableTopics.map((item: ProblemTopicType) => <option key={item} value={item}>{formatTopic(item)}</option>)}</select></Text>
+                <Text className="font-extrabold text-lg" as="h1">Defeito -<select className="form-select rounded bg-black form-select-lg text-dark dark:text-white" {...register(problemQuestions[0].questionId)}>{problemQuestions[0].options.map((item) => <option value={item.optionId}>{item.text}</option>)}</select></Text>
+                <Text className="font-extrabold text-lg" as="h1">{problemQuestions[1].question} - <select className="form-select rounded bg-black form-select-lg text-dark dark:text-white" {...register(problemQuestions[1].questionId)}>{problemQuestions[1].options.map((item) => <option value={item.optionId}>{item.text}</option>)}</select></Text>
+                <Text className="font-extrabold text-lg" as="h1">{problemQuestions[2].question} - <select className="form-select rounded bg-black form-select-lg text-dark dark:text-white" {...register(problemQuestions[2].questionId)}>{problemQuestions[2].options.map((item) => <option value={item.optionId}>{item.text}</option>)}</select></Text>
+                <Text className="font-extrabold text-lg" as="h1">{problemQuestions[3].question} - <select className="form-select rounded bg-black form-select-lg text-dark dark:text-white" {...register(problemQuestions[3].questionId)}>{problemQuestions[3].options.map((item) => <option value={item.optionId}>{item.text}</option>)}</select></Text>
+                <Text className="font-extrabold text-lg" as="h1">{problemQuestions[4].question} - <select className="form-select rounded bg-black form-select-lg text-dark dark:text-white" {...register(problemQuestions[4].questionId)}>{problemQuestions[4].options.map((item) => <option value={item.optionId}>{item.text}</option>)}</select></Text>
+                <Text className="font-extrabold text-lg" as="h1">{problemQuestions[5].question} - <select className="form-select rounded bg-black form-select-lg text-dark dark:text-white" {...register(problemQuestions[5].questionId)}>{problemQuestions[5].options.map((item) => <option value={item.optionId}>{item.text}</option>)}</select></Text>
               </div>
             </form>
           </Panel>
