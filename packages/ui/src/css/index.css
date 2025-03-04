@@ -112,7 +112,7 @@ body {
   }
 
   .leftbar {
-    @apply dark:bg-black bg-white dark:border-r-[#323b45] sombra;
+    @apply dark:bg-black bg-white dark:border-r-[#323b45] shadow-2xl;
     padding: 25px;
     width: 305px;
     top: 72px;
@@ -142,7 +142,7 @@ body {
   }
 
   .sombra {
-    @apply shadow-[0_10px_20px_-10px_rgba(13,15,24)];
+    @apply shadow-[0_10px_30px_-10px_rgba(13,15,24)];
   }
   
 }

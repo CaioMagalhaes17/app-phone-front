@@ -1,5 +1,5 @@
 import {
-  Panel, Text, Carousel,
+  Panel, Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
@@ -8,34 +8,48 @@ import {
   Button,
 } from "@app/ui";
 import { ProductItem } from "./ProductsItem";
+import { useNavigate } from "react-router-dom";
+import { ProductsRowType } from "../../../../types/products";
 
 export type ProductsRowProps = {
-  title: string
   isOwner: boolean
-  id: string
+  row: ProductsRowType
 }
-export function ProductsRow({ title, isOwner, id }: ProductsRowProps) {
+export function ProductsRow({ isOwner, row }: ProductsRowProps) {
+  const navigate = useNavigate()
   return (
     <>
-      <div className="flex flex-row mb-5">
-        <span className="dark:text-white text-black text-3xl font-extrabold">{title}</span>
-        {isOwner && (<Button className="btn-primary ml-auto flex flex-row gap-2"><IconPencil />Editar</Button>)}
-      </div>
-      <Panel className="p-4 flex flex-row w-full justify-center gap-5 ">
-        <Carousel opts={{
-          align: "start",
-        }}
-          className="w-full " >
-          <CarouselContent>
-            {Array.from({ length: 5 }).map((_, index) => (
-              <CarouselItem key={index} className="basis-1/4">
-                <ProductItem name="Headset NIgger stringer" price="R$320" category="Fones de ouvidos" />
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious className="left-0" />
-          <CarouselNext className="right-0" />
-        </Carousel>
+      <Panel>
+        <div className="flex flex-row mb-5">
+          <span className="dark:text-white text-black text-3xl font-extrabold">{row.name}</span>
+          {isOwner && (
+            <>
+              <div className="flex flex-row gap-2 ml-auto">
+                <Button onClick={() => navigate('/store/market/row/edit')} className="btn-primary ml-auto flex flex-row gap-2"><IconPencil />Editar Prateleira</Button>
+              </div>
+            </>
+          )}
+        </div>
+        <Panel className="p-4 flex flex-row w-full justify-center gap-5 ">
+          <Carousel opts={{
+            align: "start",
+          }}
+            className="w-full " >
+            <CarouselContent>
+              {row.products.map((product, index) => {
+                return (
+                  <>
+                    <CarouselItem key={index} className="basis-1/4">
+                      <ProductItem product={product} />
+                    </CarouselItem>
+                  </>
+                )
+              })}
+            </CarouselContent>
+            <CarouselPrevious className="left-0" />
+            <CarouselNext className="right-0" />
+          </Carousel>
+        </Panel>
       </Panel>
     </>
   )

@@ -32,12 +32,16 @@ type StateManager = {
 
 type StoreInfos = {
   id: string
-  name: string,
-  profileImg: string,
-  rating: number,
-  email: string,
-  telNum: string,
   address: string,
+  description: string
+  email: string,
+  name: string
+  profileImg: string,
+  telNum: string,
+  createdAt: string
+  updatedAt: string
+  userId: string
+  rating: number
   location: {
     latitude: number,
     longitude: number
@@ -90,12 +94,15 @@ const useStore = create<StateManager>((set, get) => {
     },
     storeInfos: {
       id: '',
-      profileId: '',
+      address: '',
+      description: '',
+      email: '',
       name: '',
       profileImg: '',
-      address: '',
-      email: '',
       telNum: '',
+      createdAt: '',
+      updatedAt: '',
+      userId: '',
       rating: 0,
       location: {
         latitude: 0,

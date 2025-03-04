@@ -1,4 +1,4 @@
-import { HSeparator, Panel } from "@app/ui";
+import { HSeparator } from "@app/ui";
 import { ProductsRow } from "../../../../components/Market/Products/row/ProductsRow";
 import { StoresRow } from "../../../../components/Market/Stores/row/StoresRow";
 import { useQuery } from "@tanstack/react-query";
@@ -22,16 +22,12 @@ export function Market() {
   console.log(nearStores)
   return (
     <>
-      <Panel>
-        <ProductsRow isOwner={false} id="1" title="Produtos Mais Vendidos" />
-      </Panel>
+      <ProductsRow isOwner={false} id="1" title="Produtos Mais Vendidos" />
       <HSeparator className="mb-10 mt-10" />
       {nearStores &&
         (
           <>
-            <Panel>
-              <StoresRow title="Lojas Abertas Mais Próximas" stores={nearStores} />
-            </Panel>
+            <StoresRow title="Lojas Abertas Mais Próximas" stores={nearStores} />
           </>
         )}
     </>

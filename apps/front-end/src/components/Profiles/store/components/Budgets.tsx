@@ -29,7 +29,7 @@ export function StoreProfileBudgets({ budgets, isOwner }: StoreProfileBudgetProp
         {budgets.length > 0 ? (
           <>
             <div className="flex flex-row">
-              <Text className="text-3xl text-white" as="h1">Ultimos Orçamentos</Text>
+              <Text className="text-3xl text-black dark:text-white" as="h1">Ultimos Orçamentos</Text>
               {isOwner ? <Link to="/store/budget/list" className="btn ml-auto btn-primary flex flex-row gap-2"><IconPlus /> Ver todas</Link>
                 : <Link to={`/solicitations/create/${budgets[0].storeProfile.id}`} className="btn ml-auto btn-primary flex flex-row gap-2"><IconSend /> Pedir orçamento de conserto direto para loja</Link>}
 

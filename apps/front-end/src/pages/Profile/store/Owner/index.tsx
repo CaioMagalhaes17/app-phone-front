@@ -5,7 +5,7 @@ import { GetBudgets } from "../../../../api/repair/budget/get-budgets"
 import { useEffect, useState } from "react"
 import { BudgetType } from "../../../../types/budget"
 import { formatBudgetsFromApi } from "../../../../formaters/budget"
-import { Button, IconPencil } from "@app/ui"
+import { Button, IconPencil, IconShoppingBag } from "@app/ui"
 import { useNavigate } from "react-router-dom"
 import { FeedbackType } from "../../../../types/feedback"
 import { formatFeedbacks } from "../../../../formaters/feedback"
@@ -75,15 +75,10 @@ export function StoreProfileOwner() {
     <>
       <div className="">
         <ul className="flex font-semibold border-b border-[#191e3a] flex-row mb-5 whitespace-nowrap overflow-y-auto">
-          <li className="inline-block p-4">
-            <Button className="btn-outline-primary">Contato/Endereço</Button>
-          </li>
-          <li className="inline-block p-4">
-            <Button className="btn-outline-primary">Feedbacks</Button>
-          </li>
           <div className="ml-auto" />
-          <li className="inline-block p-4">
+          <li className="p-4 flex flex-row gap-5">
             <Button className="btn-primary flex flex-row gap-2" onClick={() => navigate('/store/profile/edit')}><IconPencil />Editar Perfil</Button>
+            <Button className="btn-primary flex flex-row gap-2" onClick={() => navigate('/store/market')}><IconShoppingBag />Acessar Mercado</Button>
           </li>
         </ul>
       </div>
