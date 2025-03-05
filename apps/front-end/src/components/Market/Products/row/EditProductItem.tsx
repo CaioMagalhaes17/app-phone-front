@@ -1,7 +1,7 @@
 import { Button, IconPencil, Text } from "@app/ui";
-import { pokemon } from "../../../../constants/images";
 import { ProductType } from "../../../../types/products";
 import { useNavigate } from "react-router-dom";
+import { noImage } from "../../../../constants/images";
 
 export function EditProductItem({ product }: { product: ProductType }) {
   const navigate = useNavigate()
@@ -9,7 +9,7 @@ export function EditProductItem({ product }: { product: ProductType }) {
     <>
       <div className="max-h-[140px] mt-5 flex flex-row items-start gap-5">
         <div className="w-[120px]">
-          <img width="150" src={pokemon} className="rounded-3xl" />
+          <img width="150" src={product.productImg || noImage} className="rounded-3xl" />
         </div>
         <div className="font-extrabold flex w-full flex-col">
           <Text className="flex flex-row gap-5 items-center text-center text-black dark:text-white text-lg" as="span">

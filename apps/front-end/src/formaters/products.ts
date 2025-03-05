@@ -14,7 +14,8 @@ export function formatProduct(product: ProductFromApi): ProductType {
     isActive: product.props.isActive,
     createdAt: product.props.createdAt,
     storeProfileId: product.props.storeProfileId,
-    updatedAt: product.props.updatedAt
+    updatedAt: product.props.updatedAt,
+    productImg: product.props.productImg
   }
 }
 

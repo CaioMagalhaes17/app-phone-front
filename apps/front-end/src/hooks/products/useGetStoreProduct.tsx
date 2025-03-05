@@ -14,6 +14,5 @@ export function useGetStoreProduct(id: string) {
   useEffect(() => {
     if (!isLoading && data) setProduct(formatProduct(data))
   }, [isLoading, data])
-
   return { product, isLoading }
 }

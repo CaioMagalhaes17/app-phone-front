@@ -1,5 +1,5 @@
-import { Button, HSeparator, IconSave, Input, Panel, Text } from "@app/ui";
-import { pokemon } from "../../../../constants/images";
+import { Button, HSeparator, IconPencil, IconSave, Input, Panel, Text } from "@app/ui";
+import { noImage } from "../../../../constants/images";
 import { ProductsRow } from "../../Products/row/ProductsRow";
 import { useGetStoreProductsRowById } from "../../../../hooks/products/useGetStoreProductsRowById";
 import { ProductType } from "../../../../types/products";
@@ -7,9 +7,10 @@ import { useState } from "react";
 import { formatCurrency } from "../../../../utils/currency-formatter";
 import { FieldValues, useForm } from "react-hook-form";
 import { productsCategories } from "../../../../constants/products";
+import { CreateProductImgModal } from "./CreateProductImgModal";
 
 type EditProductProps = {
-  onProductSave: (data: Pick<ProductType, 'category' | 'description' | 'isActive' | 'price' | 'name'>) => void
+  onProductSave: (data: Pick<ProductType, 'category' | 'description' | 'isActive' | 'price' | 'name' | 'productImg'>) => void
   rowId: string
 }
 export function CreateProduct({ rowId, onProductSave }: EditProductProps) {
@@ -17,9 +18,16 @@ export function CreateProduct({ rowId, onProductSave }: EditProductProps) {
   const [price, setPrice] = useState<string>('R$0,00')
   const { register, handleSubmit, formState: { errors } } = useForm()
   const [isActive, setIsActive] = useState(true)
+  const [newImage, setNewImage] = useState<string>(noImage)
 
   function onSubmit(data: FieldValues) {
-    onProductSave({ price, category: data.category, description: data.description, name: data.name, isActive: true })
+    onProductSave({ price, category: data.category, description: data.description, name: data.name, isActive: true, productImg: newImage })
+  }
+
+  function onPhotoEditClick() {
+    const open = document.getElementById('openModal')
+    open?.click()
+    console.log(open)
   }
 
   return (
@@ -28,8 +36,11 @@ export function CreateProduct({ rowId, onProductSave }: EditProductProps) {
         <div className="w-[1500px] mr-auto ml-auto mb-10">
           <Panel className="p-4 flex flex-col items-center font-extrabold">
             <div className="flex flex-row w-[900px] justify-center">
-              <div className="w-[350px]">
-                <img src={pokemon} />
+              <div onClick={() => onPhotoEditClick()} className="relative group mr-5">
+                <img width={'500px'} height={'300px'} src={newImage} className="rounded-3xl" />
+                <div className="rounded-3xl absolute inset-0 bg-dark bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
+                  <span className="text-white text-3xl font-bold flex flex-row gap-2 items-center"><IconPencil /> Editar</span>
+                </div>
               </div>
               <Panel className="ml-auto h-full flex flex-col w-[450px]">
                 <Input maxLength={40} {...register('name', { required: true })} className="text-black dark:text-white !text-lg" />
@@ -72,6 +83,7 @@ export function CreateProduct({ rowId, onProductSave }: EditProductProps) {
       {row && !isRowLoading ? (
         <ProductsRow isOwner={true} row={row} />
       ) : ''}
+      <CreateProductImgModal setNewImage={setNewImage} productImg={newImage} />
     </>
   )
 }

@@ -78,11 +78,11 @@ export function ProductEdit() {
   return (
     <>
       <div className="flex flex-row gap-5 items-center mb-5">
-        <Button onClick={() => navigate(-1)} className="btn-outline-primary "><IconArrowBackward /></Button>
+        <Button onClick={() => navigate('/store/market/row/edit')} className="btn-outline-primary "><IconArrowBackward /></Button>
         <VSeparator className="mr-1 ml-1" />
-        <Text className="text-black dark:text-white font-extrabold text-5xl" as="h1">Edição de Prateleiras</Text>
+        <Text className="text-black dark:text-white font-extrabold text-5xl" as="h1">Edição de Produto</Text>
       </div>
-      {!isLoading && product ? (
+      {!isLoading && product && product.id === id ? (
         <EditProduct onProductDelete={onProductDelete} product={product} onProductSave={onProductSave} />
       ) : ''}
     </>

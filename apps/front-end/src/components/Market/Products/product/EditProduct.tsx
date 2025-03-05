@@ -1,5 +1,4 @@
-import { Button, HSeparator, IconSave, IconTrash, Input, Panel, Text } from "@app/ui";
-import { pokemon } from "../../../../constants/images";
+import { Button, HSeparator, IconPencil, IconSave, IconTrash, Input, Panel, Text } from "@app/ui";
 import { ProductsRow } from "../../Products/row/ProductsRow";
 import { useGetStoreProductsRowById } from "../../../../hooks/products/useGetStoreProductsRowById";
 import { ProductType } from "../../../../types/products";
@@ -7,6 +6,8 @@ import { useState } from "react";
 import { formatCurrency } from "../../../../utils/currency-formatter";
 import { FieldValues, useForm } from "react-hook-form";
 import { productsCategories } from "../../../../constants/products";
+import { EditProductImgModal } from "./EditProductImgModal";
+import { noImage } from "../../../../constants/images";
 
 type EditProductProps = {
   onProductDelete: (id: string) => void
@@ -20,7 +21,13 @@ export function EditProduct({ product, onProductSave, onProductDelete }: EditPro
   const [isActive, setIsActive] = useState(product.isActive)
 
   function onSubmit(data: FieldValues) {
-    onProductSave({ price, category: data.category, description: data.description, name: data.name, isActive: true })
+    onProductSave({ price, category: data.category, description: data.description, name: data.name, isActive })
+  }
+
+  function onPhotoEditClick() {
+    const open = document.getElementById('openModal')
+    open?.click()
+    console.log(open)
   }
 
   return (
@@ -29,8 +36,11 @@ export function EditProduct({ product, onProductSave, onProductDelete }: EditPro
         <div className="w-[1500px] mr-auto ml-auto mb-10">
           <Panel className="p-4 flex flex-col items-center font-extrabold">
             <div className="flex flex-row w-[900px] justify-center">
-              <div className="w-[350px]">
-                <img src={pokemon} />
+              <div onClick={() => onPhotoEditClick()} className="relative group mr-5">
+                <img width={'500px'} height={'300px'} src={product.productImg || noImage} className="rounded-3xl" />
+                <div className="rounded-3xl absolute inset-0 bg-dark bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
+                  <span className="text-white text-3xl font-bold flex flex-row gap-2 items-center"><IconPencil /> Editar</span>
+                </div>
               </div>
               <Panel className="ml-auto h-full flex flex-col w-[450px]">
                 <Input maxLength={40} {...register('name', { required: true })} defaultValue={product.name} className="text-black dark:text-white !text-lg" />
@@ -39,7 +49,7 @@ export function EditProduct({ product, onProductSave, onProductDelete }: EditPro
                 <HSeparator />
                 <textarea {...register('description', { required: true })} defaultValue={product.description} placeholder="Descrição do produto" className="rounded-lg mt-5 text-dark dark:text-white dark:bg-black" />
                 {errors.description && (<p className="font-bold text-danger text-left">Campo Obrigatório*</p>)}
-                <select {...register('category')} className="form-select text-dark dark:bg-black form-select-lg dark:text-white mt-10">
+                <select defaultValue={product.category} {...register('category')} className="form-select text-dark dark:bg-black form-select-lg dark:text-white mt-10">
                   {productsCategories.map((item) => (
                     <option value={item} className="text-dark dark:text-white font-extrabold">
                       {item}
@@ -77,6 +87,7 @@ export function EditProduct({ product, onProductSave, onProductDelete }: EditPro
       {row && !isRowLoading ? (
         <ProductsRow isOwner={true} row={row} />
       ) : ''}
+      <EditProductImgModal productImg={product.productImg || noImage} productId={product.id} />
     </>
   )
 }

@@ -14,6 +14,7 @@ export type ProductType = {
   rowId: string
   storeProfileId: string
   updatedAt: string
+  productImg: string
 }
 
 

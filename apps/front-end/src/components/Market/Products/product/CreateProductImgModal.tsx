@@ -1,23 +1,25 @@
+
 import { Button, Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger, IconSave, Text } from "@app/ui";
 import { useEffect } from "react";
-import { UploadStoreProfileImg } from "../../../../../api/user/store/upload-store-profile-img";
-import { useMutation } from "@tanstack/react-query";
-import useStore from "../../../../../state";
-import { useUploadFile } from "../../../../../hooks/useUploadFile";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useUploadFile } from "../../../../hooks/useUploadFile";
+import { CreateProductImg } from "../../../../api/products/create-product-img";
 
-export function UploadProfile() {
-  const { storeInfos, setStoreInfos } = useStore()
-
+export function CreateProductImgModal({ productImg, setNewImage }: { productImg: string, setNewImage: React.Dispatch<React.SetStateAction<string>> }) {
   const { mutateAsync } = useMutation({
-    mutationFn: UploadStoreProfileImg
+    mutationFn: CreateProductImg
   })
   const { handleFileChange, newFile, onSaveClick } = useUploadFile(mutateAsync)
-
+  const client = useQueryClient()
 
   useEffect(() => {
     if (newFile) {
-      console.log(newFile)
-      setStoreInfos({ ...storeInfos, profileImg: newFile })
+      client.refetchQueries({ queryKey: ['get-product'] })
+      client.refetchQueries({ queryKey: ['get-products'] })
+      client.refetchQueries({ queryKey: ['get-products-rows'] })
+      client.refetchQueries({ queryKey: ['get-products-row'] })
+      document.getElementById('closeModal')?.click()
+      setNewImage(newFile)
     }
   }, [newFile])
 
@@ -30,11 +32,11 @@ export function UploadProfile() {
         <DialogContent className=" !z-51 font-extrabold bg-dark text-white-dark w-full">
           <DialogClose id="closeModal" className="hidden" />
           <DialogHeader>
-            <DialogTitle className="font-extrabold text-white text-2xl">Alterar imagem de perfil</DialogTitle>
+            <DialogTitle className="font-extrabold text-white text-2xl">Criar imagem para produto</DialogTitle>
           </DialogHeader>
           <div className="flex flex-col">
             <div className="">
-              <img className="rounded-xl" src={storeInfos.profileImg} />
+              <img className="rounded-xl" src={productImg} />
               <Text as="span">Imagem Atual</Text>
             </div>
             <input

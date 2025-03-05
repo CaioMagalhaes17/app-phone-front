@@ -1,2 +1,3 @@
 export const userImg = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-erUOQght_VvS9h9OS_0J6wvFFIQHtIRgGjv-e1RBZ3fP02XlcM59WPkFb9cN-0U2uik&usqp=CAU'
 export const pokemon = 'https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/390.png'
+export const noImage = 'https://e7.pngegg.com/pngimages/709/358/png-clipart-price-toyservice-soil-business-no-till-farming-no-rectangle-pie.png'
