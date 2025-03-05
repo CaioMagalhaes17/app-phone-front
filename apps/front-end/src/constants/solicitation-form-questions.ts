@@ -475,7 +475,6 @@ export type BatteryFormType = {
 export function getStepTwoAnswersByForm(topic: string, questionsObj: DisplayFormType | BatteryFormType) {
   if (questionsObj) {
     if (topic === 'battery' && 'battery-A' in questionsObj) {
-      console.log('3131232')
       const answersFormated = [
         {
           question: batteryQuestions[0].question,

@@ -7,7 +7,7 @@ import { formatProduct } from "../../formaters/products";
 export function useGetStoreProduct(id: string) {
   const [product, setProduct] = useState<ProductType | null>(null)
   const { data, isLoading } = useQuery({
-    queryKey: ['get-product'],
+    queryKey: ['get-product', id],
     queryFn: () => GetProduct(id)
   })
 

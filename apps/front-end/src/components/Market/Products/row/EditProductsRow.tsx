@@ -8,24 +8,36 @@ import {
   Input,
   IconSave,
   Text,
+  IconPlus,
+  VSeparator,
+  IconTrash,
 } from "@app/ui";
 import { EditProductItem } from "./EditProductItem";
 import { useState } from "react";
 import { ProductsRowType } from "../../../../types/products";
 import { FieldValues, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 export type ProductsRowProps = {
   title: string
   isOwner: boolean
   id: string
 }
-export function EditProductsRow({ row, setUpdateRowData }: { setUpdateRowData: React.Dispatch<React.SetStateAction<{ id: string, name: string, isActive: boolean }>>, row: ProductsRowType }) {
+
+type EditProductsRowProps = {
+  setUpdateRowData: React.Dispatch<React.SetStateAction<{ id: string, name: string, isActive: boolean }>>,
+  row: ProductsRowType,
+  onRowDelete: (id: string) => void
+}
+export function EditProductsRow({ row, setUpdateRowData, onRowDelete }: EditProductsRowProps) {
   const { register, handleSubmit, formState: { errors } } = useForm()
   const [isActive, setIsActive] = useState(row.isActive)
+  const navigate = useNavigate()
 
   function onSubmit(data: FieldValues) {
     setUpdateRowData({ id: row.id, name: data.name, isActive })
   }
+
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -33,10 +45,10 @@ export function EditProductsRow({ row, setUpdateRowData }: { setUpdateRowData: R
           <div className="flex flex-row mb-5">
             <div className="flex flex-col">
               {errors.name && (<p className="font-bold text-danger text-left">Campo Obrigatório*</p>)}
-              <Input {...register('name', { required: true })} defaultValue={row.name} className="!w-[500px] !text-lg" type="text" />
+              <Input maxLength={50} {...register('name', { required: true })} defaultValue={row.name} className="!w-[500px] !text-lg" type="text" />
             </div>
             <div className="flex flex-col ml-10">
-              <Text className="text-dark dark:text-white text-lg font-extrabold" as="span">Prateleira ativa</Text>
+              <Text className="text-dark dark:text-white text-lg font-extrabold" as="span">Prateleira {isActive ? 'Ativa' : 'Inativada'}</Text>
               <button
                 type="button"
                 onClick={() => setIsActive(!isActive)}
@@ -50,6 +62,7 @@ export function EditProductsRow({ row, setUpdateRowData }: { setUpdateRowData: R
               </button>
             </div>
             <div className="flex flex-row gap-2 ml-auto">
+              <Button type="button" onClick={() => onRowDelete(row.id)} className="btn-danger ml-auto flex flex-row gap-2"><IconTrash />Excluir Prateleira</Button>
               <Button type="submit" className="btn-primary ml-auto flex flex-row gap-2"><IconSave />Salvar</Button>
             </div>
           </div>
@@ -58,12 +71,20 @@ export function EditProductsRow({ row, setUpdateRowData }: { setUpdateRowData: R
               align: "start",
             }}
               className="w-full " >
-              <CarouselContent>
-                {row.products.map((product, index) => (
-                  <CarouselItem key={index} className="basis-1/3">
-                    <EditProductItem product={product} />
-                  </CarouselItem>
-                ))}
+              <CarouselContent className="p-4">
+                {row.products.map((product, index) => {
+                  return (
+                    <>
+                      <CarouselItem key={index} className="hover:bg-[#c4c4c4] basis-1/3">
+                        <EditProductItem product={product} />
+                      </CarouselItem>
+                      <VSeparator className="ml-2 h-[100px]" />
+                    </>
+                  )
+                })}
+                <div className="flex flex-row items-center justify-center ml-10">
+                  <Button onClick={() => navigate('/store/market/product/create/' + row.id)} type="button" className="btn-primary"><IconPlus />Adicionar Produto</Button>
+                </div>
               </CarouselContent>
               <CarouselPrevious className="left-0" />
               <CarouselNext className="right-0" />

@@ -12,7 +12,6 @@ export function useGetStoreProductsRowById(id: string) {
   })
   useEffect(() => {
     if (!isLoading && data) {
-      console.log('312321312312312', data)
       setRows(formatProductsRow(data))
     }
   }, [isLoading, data])

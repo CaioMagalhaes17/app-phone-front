@@ -1,21 +1,11 @@
 import { Button, Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger, IconDollarSignCircle, IconSend, Input, Text } from "@app/ui";
 import { useState } from "react";
+import { formatCurrency } from "../../../../utils/currency-formatter";
 
 export function ReturnBudget({ onSaveClick }: { onSaveClick: ({ startValue, endValue, details }: { startValue: string, endValue: string, details: string }) => void }) {
   const [startValue, setStartValue] = useState('')
   const [endValue, setEndValue] = useState('')
   const [details, setDetails] = useState('')
-
-  const formatCurrency = (value: string) => {
-    const numericValue = value.replace(/\D/g, "");
-
-    const formattedValue = new Intl.NumberFormat("pt-BR", {
-      style: "currency",
-      currency: "BRL"
-    }).format(Number(numericValue) / 100);
-
-    return formattedValue;
-  };
 
   return (
     <>

@@ -40,7 +40,7 @@ export function ProductsRow({ isOwner, row }: ProductsRowProps) {
                 return (
                   <>
                     <CarouselItem key={index} className="basis-1/4">
-                      <ProductItem product={product} />
+                      <ProductItem isOwner={isOwner} product={product} />
                     </CarouselItem>
                   </>
                 )

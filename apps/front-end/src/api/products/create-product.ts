@@ -1,11 +1,12 @@
 import { AxiosError } from "axios"
 import { Api } from "../axios"
 import { handleAxiosErrors } from "../errors"
+import { ProductType } from "../../types/products"
 
-export async function GetProductsRowById(id: string) {
+export async function CreateProduct(data: Pick<ProductType, 'category' | 'description' | 'isActive' | 'price' | 'name' | 'rowId'>) {
   try {
-    const response = await Api().get(`/product/row/${id}`)
-    return response.data
+    const response = await Api().post(`/product`, data)
+    return response
   } catch (error) {
     if (error instanceof AxiosError) return handleAxiosErrors(error, {
       timer: 10000,

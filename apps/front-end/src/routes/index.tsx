@@ -30,6 +30,7 @@ import { ClientMarketProduct } from "../pages/Market/client/Product";
 import { StoreMarketProfile } from "../pages/Market/store/profile";
 import { StoreProductsRowEdit } from "../pages/Market/store/products/RowEdit";
 import { ProductEdit } from "../pages/Market/store/products/ProductEdit";
+import { ProductCreate } from "../pages/Market/store/products/ProductCreate";
 
 const ClientMapEdit = React.lazy(() => import("../pages/Map/Edit/client"))
 const DefaultLayout = React.lazy(() => import("../components/DefaultLayout"))
@@ -152,6 +153,10 @@ export const routes: RouteObject[] = [
       {
         path: '/store/market/product/edit/:id',
         element: <ProductEdit />
+      },
+      {
+        path: '/store/market/product/create/:id',
+        element: <ProductCreate />
       },
     ]
   },

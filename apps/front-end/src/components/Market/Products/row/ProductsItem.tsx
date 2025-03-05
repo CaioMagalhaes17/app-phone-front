@@ -3,17 +3,10 @@ import { pokemon } from "../../../../constants/images";
 import { Link } from "react-router-dom";
 import { ProductType } from "../../../../types/products";
 
-export type ProductItemProps = {
-  name: string,
-  price: string,
-  category: string
-  id: string
-}
-
-export function ProductItem({ product }: { product: ProductType }) {
+export function ProductItem({ product, isOwner }: { product: ProductType, isOwner: boolean }) {
   return (
     <>
-      <Link to={`/market/store/product/${product.id}`} className="max-h-[140px] mt-5 flex flex-row items-start gap-5">
+      <Link to={isOwner ? `/store/market/product/edit/${product.id}` : `/market/store/product/${product.id}`} className="max-h-[140px] mt-5 flex flex-row items-start gap-5">
         <div className="w-[120px]">
           <img width="150" src={pokemon} className="rounded-3xl" />
         </div>

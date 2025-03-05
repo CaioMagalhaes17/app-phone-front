@@ -1,11 +1,11 @@
 import { AxiosError } from "axios"
-import { Api } from "../axios"
 import { handleAxiosErrors } from "../errors"
+import { Api } from "../axios"
 
-export async function GetProductsRowById(id: string) {
+export async function DeleteProductsRow(id: string) {
   try {
-    const response = await Api().get(`/product/row/${id}`)
-    return response.data
+    const response = await Api().delete(`/product/row/${id}`)
+    return response
   } catch (error) {
     if (error instanceof AxiosError) return handleAxiosErrors(error, {
       timer: 10000,

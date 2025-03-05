@@ -3,12 +3,6 @@ import { pokemon } from "../../../../constants/images";
 import { ProductType } from "../../../../types/products";
 import { useNavigate } from "react-router-dom";
 
-export type ProductItemProps = {
-  name: string,
-  price: string,
-  category: string
-}
-
 export function EditProductItem({ product }: { product: ProductType }) {
   const navigate = useNavigate()
   return (
@@ -28,7 +22,7 @@ export function EditProductItem({ product }: { product: ProductType }) {
               )}</Text>
               <div className="flex flex-row">
                 <Text className="text-black dark:text-white" as="span">{product.category}</Text>
-                <Button onClick={() => navigate('/store/market/product/edit/' + product.id)} type="button" className="btn-primary ml-auto flex flex-row gap-2"><IconPencil />Editar Produto</Button>
+                <Button onClick={() => navigate('/store/market/product/edit/' + product.id)} type="button" className="btn-primary ml-auto flex flex-row gap-2"><IconPencil />Editar</Button>
               </div>
             </div>
           </div>

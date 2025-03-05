@@ -1,4 +1,4 @@
-import { Button, HSeparator, IconSave, IconTrash, Input, Panel, Text } from "@app/ui";
+import { Button, HSeparator, IconSave, Input, Panel, Text } from "@app/ui";
 import { pokemon } from "../../../../constants/images";
 import { ProductsRow } from "../../Products/row/ProductsRow";
 import { useGetStoreProductsRowById } from "../../../../hooks/products/useGetStoreProductsRowById";
@@ -9,15 +9,14 @@ import { FieldValues, useForm } from "react-hook-form";
 import { productsCategories } from "../../../../constants/products";
 
 type EditProductProps = {
-  onProductDelete: (id: string) => void
-  product: ProductType,
   onProductSave: (data: Pick<ProductType, 'category' | 'description' | 'isActive' | 'price' | 'name'>) => void
+  rowId: string
 }
-export function EditProduct({ product, onProductSave, onProductDelete }: EditProductProps) {
-  const { isLoading: isRowLoading, row } = useGetStoreProductsRowById(product.rowId)
-  const [price, setPrice] = useState<string>(product.price)
+export function CreateProduct({ rowId, onProductSave }: EditProductProps) {
+  const { isLoading: isRowLoading, row } = useGetStoreProductsRowById(rowId)
+  const [price, setPrice] = useState<string>('R$0,00')
   const { register, handleSubmit, formState: { errors } } = useForm()
-  const [isActive, setIsActive] = useState(product.isActive)
+  const [isActive, setIsActive] = useState(true)
 
   function onSubmit(data: FieldValues) {
     onProductSave({ price, category: data.category, description: data.description, name: data.name, isActive: true })
@@ -33,11 +32,11 @@ export function EditProduct({ product, onProductSave, onProductDelete }: EditPro
                 <img src={pokemon} />
               </div>
               <Panel className="ml-auto h-full flex flex-col w-[450px]">
-                <Input maxLength={40} {...register('name', { required: true })} defaultValue={product.name} className="text-black dark:text-white !text-lg" />
+                <Input maxLength={40} {...register('name', { required: true })} className="text-black dark:text-white !text-lg" />
                 {errors.name && (<p className="font-bold text-danger text-left">Campo Obrigatório*</p>)}
                 <Input className="mt-5 !text-green" placeholder="R$0,00" value={price} onChange={(e) => setPrice(formatCurrency(e.target.value))} type="text" />
                 <HSeparator />
-                <textarea {...register('description', { required: true })} defaultValue={product.description} placeholder="Descrição do produto" className="rounded-lg mt-5 text-dark dark:text-white dark:bg-black" />
+                <textarea {...register('description', { required: true })} placeholder="Descrição do produto" className="rounded-lg mt-5 text-dark dark:text-white dark:bg-black" />
                 {errors.description && (<p className="font-bold text-danger text-left">Campo Obrigatório*</p>)}
                 <select {...register('category')} className="form-select text-dark dark:bg-black form-select-lg dark:text-white mt-10">
                   {productsCategories.map((item) => (
@@ -62,11 +61,7 @@ export function EditProduct({ product, onProductSave, onProductDelete }: EditPro
                 </div>
                 <Button type="submit" className="btn-primary mt-10 flex flex-row gap-2">
                   <IconSave />
-                  Salvar
-                </Button>
-                <Button onClick={() => onProductDelete(product.id)} type="button" className="btn-danger mt-2 flex flex-row gap-2">
-                  <IconTrash />
-                  Excluir
+                  Criar Produto
                 </Button>
               </Panel>
             </div>
