@@ -4,11 +4,11 @@ import { GetProductsRows } from "../../api/products/get-products-rows";
 import { formatProductsRows } from "../../formaters/products";
 import { ProductsRowType } from "../../types/products";
 
-export function useGetStoreProductsRows() {
+export function useGetStoreProductsRows(id?: string) {
   const [rows, setRows] = useState<ProductsRowType[] | null>()
   const { data, isLoading } = useQuery({
     queryKey: ['get-products-rows'],
-    queryFn: GetProductsRows
+    queryFn: () => GetProductsRows(id)
   })
   useEffect(() => {
     if (!isLoading && data) {

@@ -24,13 +24,13 @@ import { DirectSolicitationsCreate } from "../pages/Solicitations/client/Create/
 import { BudgetDetails } from "../pages/Budgets/client/Details";
 import { UserConfigurations } from "../pages/Configurations/client";
 import { UserStoreConfigurations } from "../pages/Configurations/store";
-import { Market } from "../pages/Market/client/List";
 import { StoreMarket } from "../pages/Market/client/StoreMarket";
 import { ClientMarketProduct } from "../pages/Market/client/Product";
 import { StoreMarketProfile } from "../pages/Market/store/profile";
 import { StoreProductsRowEdit } from "../pages/Market/store/products/RowEdit";
 import { ProductEdit } from "../pages/Market/store/products/ProductEdit";
 import { ProductCreate } from "../pages/Market/store/products/ProductCreate";
+import { ClientMarketHome } from "../pages/Market/client/home";
 
 const ClientMapEdit = React.lazy(() => import("../pages/Map/Edit/client"))
 const DefaultLayout = React.lazy(() => import("../components/DefaultLayout"))
@@ -131,7 +131,7 @@ export const routes: RouteObject[] = [
       },
       {
         path: '/market',
-        element: <Market />
+        element: <ClientMarketHome />
       },
       {
         path: '/market/store/:id',

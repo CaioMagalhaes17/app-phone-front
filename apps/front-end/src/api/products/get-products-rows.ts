@@ -2,9 +2,13 @@ import { AxiosError } from "axios"
 import { Api } from "../axios"
 import { handleAxiosErrors } from "../errors"
 
-export async function GetProductsRows() {
+export async function GetProductsRows(id?: string) {
   try {
-    const response = await Api().get(`/product/row`)
+    if (id) {
+      const response = await Api().get(`/product/rows/${id}`)
+      return response.data
+    }
+    const response = await Api().get(`/product/rows`)
     return response.data
   } catch (error) {
     if (error instanceof AxiosError) return handleAxiosErrors(error, {
