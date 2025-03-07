@@ -1,6 +1,8 @@
-import { HSeparator } from "@app/ui";
+import { HSeparator, Text } from "@app/ui";
 import { StoresRow } from "../../../../components/Market/Stores/row/StoresRow";
 import { useGetStoresInsideClientRadius } from "../../../../hooks/geolocation/useGetStoresInsideClientRadius";
+import { CategoriesRow } from "../../../../components/Market/categories/CategoriesRow";
+import { productsCategories } from "../../../../constants/products";
 
 
 
@@ -8,7 +10,9 @@ export function ClientMarketHome() {
   const { stores, storesLoading } = useGetStoresInsideClientRadius()
   return (
     <>
-      {/* <ProductsRow isOwner={false} id="1" title="Produtos Mais Vendidos" /> */}
+      <Text as="h1" className="text-5xl text-black dark:text-white font-extrabold">Mercado</Text>
+      <HSeparator className="mb-5" />
+      <CategoriesRow categories={productsCategories} title="Categorias" />
       <HSeparator className="mb-10 mt-10" />
       {stores && !storesLoading ?
         (

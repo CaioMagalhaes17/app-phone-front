@@ -83,7 +83,6 @@ export function EditProduct({ product, onProductSave, onProductDelete }: EditPro
           </Panel>
         </div>
       </form>
-      <Text className="text-dark dark:text-white font-extrabold text-4xl mb-2" as="h1">Produtos da mesma prateleira</Text>
       {row && !isRowLoading ? (
         <ProductsRow isOwner={true} row={row} />
       ) : ''}

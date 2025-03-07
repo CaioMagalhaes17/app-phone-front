@@ -1,6 +1,8 @@
 export const productsCategories = [
   'Fones de ouvido',
-  'Capinha',
-  'Película',
-  'Carregadores',
+  'Capinhas',
+  'Películas',
+  'Cabos e Carregadores',
+  'Suportes',
+  'Exclusivos Apple',
 ]

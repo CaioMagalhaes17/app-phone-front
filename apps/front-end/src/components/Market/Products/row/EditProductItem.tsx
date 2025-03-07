@@ -17,7 +17,7 @@ export function EditProductItem({ product }: { product: ProductType }) {
           </Text>
           <div className="flex w-full flex-row">
             <div className="w-full text-left flex flex-col gap-2">
-              <Text className="text-success flex flex-row" as="span">{product.price} {!product.isActive && (
+              <Text className="text-green flex flex-row" as="span">{product.price} {!product.isActive && (
                 <Text className="text-danger ml-2" as="span">INATIVADO</Text>
               )}</Text>
               <div className="flex flex-row">

@@ -16,7 +16,7 @@ export function ProductItem({ product, isOwner }: { product: ProductType, isOwne
           </Text>
           <div className="flex w-full flex-row">
             <div className="w-full text-left flex flex-col gap-2">
-              <Text className="text-success" as="span">{product.price} {!product.isActive && isOwner ? (
+              <Text className="text-green" as="span">{product.price} {!product.isActive && isOwner ? (
                 <Text className="text-danger ml-2" as="span">INATIVADO</Text>
               ) : ''}</Text>
               <Text className="text-black dark:text-white" as="span">{product.category}</Text>

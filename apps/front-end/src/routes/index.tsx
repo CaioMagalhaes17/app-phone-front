@@ -31,6 +31,7 @@ import { StoreProductsRowEdit } from "../pages/Market/store/products/RowEdit";
 import { ProductEdit } from "../pages/Market/store/products/ProductEdit";
 import { ProductCreate } from "../pages/Market/store/products/ProductCreate";
 import { ClientMarketHome } from "../pages/Market/client/home";
+import { ClientMarketCategoryProducts } from "../pages/Market/client/category";
 
 const ClientMapEdit = React.lazy(() => import("../pages/Map/Edit/client"))
 const DefaultLayout = React.lazy(() => import("../components/DefaultLayout"))
@@ -157,6 +158,10 @@ export const routes: RouteObject[] = [
       {
         path: '/store/market/product/create/:id',
         element: <ProductCreate />
+      },
+      {
+        path: '/market/by-category/:category',
+        element: <ClientMarketCategoryProducts />
       },
     ]
   },

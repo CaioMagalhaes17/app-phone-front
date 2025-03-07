@@ -19,7 +19,7 @@ export function BudgetDetails() {
               <div className="flex flex-col p-4 font-extrabold">
                 <Text as="h1" className="text-black dark:text-white text-5xl">Orçamento</Text>
                 <div className="border-b border-b-[#323b45] mt-5 " />
-                <Text className="text-3xl mt-10 text-success" as="span">{budget.startValue} - {budget.endValue}</Text>
+                <Text className="text-3xl mt-10 text-green" as="span">{budget.startValue} - {budget.endValue}</Text>
                 <Text as="span" className="">Previsão da duração do conserto: <Text as="span" className="text-dark dark:text-white">2 dias úteis</Text></Text>
                 <Text as="span" className="text-dark dark:text-[#c4c4c4] mt-10">Sobre a loja</Text>
                 <div className="flex flex-row gap-5 text-lg text-dark dark:text-white">
@@ -92,7 +92,7 @@ export function BudgetDetails() {
                   </Text>
                   <div className="flex flex-row w-full">
                     <div className="w-full text-left flex flex-col gap-2">
-                      <Text className="text-lg text-success" as="span">Aberto</Text>
+                      <Text className="text-lg text-green" as="span">Aberto</Text>
                       <Text as="span">Distância em km: {budget.solicitation.form.details}</Text>
                     </div>
                   </div>

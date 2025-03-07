@@ -52,7 +52,7 @@ export function StoreBudgetList() {
       title: 'Valor estimado',
       render: ({ startValue, endValue }) => {
         return (
-          <span className="text-lg text-success font-extrabold">{startValue} - {endValue}</span>
+          <span className="text-lg text-green font-extrabold">{startValue} - {endValue}</span>
         )
 
       }

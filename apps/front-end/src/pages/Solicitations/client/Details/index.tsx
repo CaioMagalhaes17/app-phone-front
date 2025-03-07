@@ -133,7 +133,7 @@ export function SolicitationDetails() {
                           </div>
                           <div className="flex flex-col">
                             <Text className="text-dark dark:text-white text-lg" as="span">{budget.storeProfile.name}</Text>
-                            <Text className="text-success" as="span">{budget.startValue} - {budget.endValue}</Text>
+                            <Text className="text-green" as="span">{budget.startValue} - {budget.endValue}</Text>
                           </div>
                           <div className="ml-auto">
                             <Link target="_blank" rel="noopener noreferrer" to={`/store-profile/${budget.storeProfile.id}`} className="btn-primary btn flex flex-row gap-2"><IconStore />Acessar perfil da loja</Link>

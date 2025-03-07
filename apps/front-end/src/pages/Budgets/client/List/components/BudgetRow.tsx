@@ -26,7 +26,7 @@ export function BudgetRow({ budget }: { budget: BudgetType }) {
           </Text>
           <div className="flex flex-row w-full">
             <div className="w-full text-left flex flex-col gap-2">
-              <Text className="text-success" as="span">{budget.startValue} - {budget.endValue}</Text>
+              <Text className="text-green" as="span">{budget.startValue} - {budget.endValue}</Text>
               <Text className="text-dark dark:text-white" as="span">{formatPhoneBrand(budget.solicitation.form.phoneForm.brand)} - {budget.solicitation.form.phoneForm.model}</Text>
               <Text as="span">Distância em km: {budget.solicitation.form.details}</Text>
             </div>

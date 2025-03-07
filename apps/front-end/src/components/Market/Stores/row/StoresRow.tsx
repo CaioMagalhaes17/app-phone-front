@@ -29,7 +29,7 @@ export function StoresRow({ title, stores }: ProductsRowProps) {
                 {stores.map((store, index) => (
                   <>
                     <CarouselItem key={index} className="basis-1/4">
-                      <Link type="button" className="font-extrabold flex flex-row gap-5" to={`/market/store/${store.profile.id}`}>
+                      <Link type="button" className="hover:dark:bg-[#5a505033] font-extrabold flex flex-row gap-5" to={`/market/store/${store.profile.id}`}>
                         <div className="w-[150px] max-h-[120px] ">
                           <img width="100" height="100" src={store.profile.profileImg} className="rounded-3xl" />
                         </div>
@@ -48,7 +48,7 @@ export function StoresRow({ title, stores }: ProductsRowProps) {
                           </div>
                           <div className="flex flex-row w-full">
                             <div className="w-full text-left flex flex-col gap-2">
-                              <Text className="text-lg text-success" as="span">Aberto</Text>
+                              <Text className="text-lg text-green" as="span">Aberto</Text>
                               <Text as="span">Distância em km: 5km</Text>
                             </div>
                           </div>

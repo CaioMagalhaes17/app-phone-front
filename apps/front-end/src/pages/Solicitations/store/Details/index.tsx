@@ -137,7 +137,7 @@ export function StoreSolicitationDetails() {
                   <div className="mr-auto" />
                   <Button onClick={() => handleDeleteBudget()} className="btn-danger">Excluir orçamento</Button>
                 </div>
-                <Text className="text-lg flex flex-row gap-5 text-success" as="span">{budgetData[0].props.startValue} <span className="text-white">até</span> {budgetData[0].props.endValue}</Text>
+                <Text className="text-lg flex flex-row gap-5 text-green" as="span">{budgetData[0].props.startValue} <span className="text-white">até</span> {budgetData[0].props.endValue}</Text>
                 <textarea value={budgetData[0].props.details} disabled className="placeholder:text-white-dark w-full h-full rounded-md border px-4 py-2 text-sm font-semibold !outline-none focus:border-primary focus:ring-transparent border-[#17263c] bg-[#121e32] text-white-dark focus:border-primary" />
               </Panel>
             }

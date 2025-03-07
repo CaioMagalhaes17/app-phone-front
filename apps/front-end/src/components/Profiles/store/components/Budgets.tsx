@@ -44,7 +44,7 @@ export function StoreProfileBudgets({ budgets, isOwner }: StoreProfileBudgetProp
                     </div>
                     <div className="flex flex-col">
                       <Text className="text-dark dark:text-white text-lg" as="span">{formatTopic(budget.solicitation.form.problemTopic)} - {formatPhoneBrand(budget.solicitation.form.phoneForm.brand)} {budget.solicitation.form.phoneForm.model}</Text>
-                      <Text className="text-success text-lg" as="span">{budget.startValue} - {budget.endValue} </Text>
+                      <Text className="text-green text-lg" as="span">{budget.startValue} - {budget.endValue} </Text>
                       <Text className="text-white-dark" as="span">{getMainQuestion(budget.solicitation.form.problemForm)}</Text>
                     </div>
                   </div>
