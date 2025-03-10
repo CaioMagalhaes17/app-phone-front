@@ -67,6 +67,10 @@
     @apply border-success text-success shadow-none hover:bg-success hover:text-white;
   }
 
+  .btn-outline-green {
+    @apply border-green text-green shadow-none hover:bg-green hover:text-white;
+  }
+
   .btn-danger {
     @apply border-danger bg-danger text-white shadow-danger/60;
   }

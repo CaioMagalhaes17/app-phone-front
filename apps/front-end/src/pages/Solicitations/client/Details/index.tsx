@@ -139,7 +139,7 @@ export function SolicitationDetails() {
                             <Link target="_blank" rel="noopener noreferrer" to={`/store-profile/${budget.storeProfile.id}`} className="btn-primary btn flex flex-row gap-2"><IconStore />Acessar perfil da loja</Link>
                           </div>
                           <div className="">
-                            <Button className="btn-outline-success flex flex-row gap-2"><IconDollarSignCircle />Escolher orçamento</Button>
+                            <Button className="btn-outline-green flex flex-row gap-2"><IconDollarSignCircle />Escolher orçamento</Button>
                           </div>
                         </div>
                         <div className="border-b border-b-[#323b45] mt-5 mt-10" />

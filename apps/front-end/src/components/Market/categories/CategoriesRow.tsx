@@ -2,8 +2,6 @@ import {
   Panel, Text, Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@app/ui";
 import { pokemon } from "../../../constants/images";
 import { useNavigate } from "react-router-dom";
@@ -40,8 +38,6 @@ export function CategoriesRow({ title, categories }: ProductsRowProps) {
                   </>
                 ))}
               </CarouselContent>
-              <CarouselPrevious className="left-0" />
-              <CarouselNext className="right-0" />
             </Carousel>
           </Panel>
         </div >

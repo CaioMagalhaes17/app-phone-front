@@ -4,7 +4,7 @@ import { appleModels } from "../../../../../constants/solicitation-form-question
 export function AppleModelsSelect({ register, questionId, errors, modelInputValue }: { modelInputValue?: string, errors: FieldErrors<FieldValues>, questionId: string, register: UseFormRegister<FieldValues> }) {
   return (
     <>
-      <select {...register(questionId, { required: true })} className="form-select rounded bg-black form-select-lg text-white w-full mt-1" defaultValue={modelInputValue ? modelInputValue : 'default'}>
+      <select {...register(questionId, { required: true })} className="form-select rounded dark:bg-black form-select-lg text-dark dark:text-white w-full mt-1" defaultValue={modelInputValue ? modelInputValue : 'default'}>
         {appleModels.map((item, index) => {
           return (
             <>

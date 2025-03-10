@@ -15,7 +15,7 @@ export function SolicitationsCreate() {
   })
 
 
-  async function handleSendForm(data: Pick<SolicitationFormProps, 'deliveryPreference' | 'timePreference' | 'details'> & {
+  async function handleSendForm(data: Pick<SolicitationFormProps, 'deliveryPreference' | 'timePreference' | 'details' | 'solicitationImages'> & {
     problemForm: BatteryFormType | DisplayFormType,
     topic: ProblemTopicType,
     phoneForm: PhoneFormType
@@ -40,7 +40,8 @@ export function SolicitationsCreate() {
           problemTopic: data.topic,
           deliveryPreference: data.deliveryPreference,
           details: data.details,
-          timePreference: data.timePreference
+          timePreference: data.timePreference,
+          solicitationImages: data.solicitationImages
         })
         if (response && response.status === 201 || response && response.status === 200) {
           client.refetchQueries({ queryKey: ['get-solicitations'] })

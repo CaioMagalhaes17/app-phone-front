@@ -27,7 +27,7 @@ export function MainPainel({ rating, name, storeSocials, storeProfileImg }: Stor
                   storeSocials?.map((item) => {
                     return (
                       <>
-                        <Link to={item.link} target="_blank" className={`btn btn-outline-${formatSocialColor(item.type)} ${item.type === 'instagram' && 'bg-[linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)]'} rounded-full`}>
+                        <Link to={item.link} target="_blank" className={`btn btn-${formatSocialColor(item.type)} ${item.type === 'instagram' && 'bg-[linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)]'} rounded-full`}>
                           {item.type === 'whatsapp' && <IconWhatsApp />}
                           {item.type === 'instagram' && <IconInstagram />}
                           {item.type === 'facebook' && <IconFacebook />}

@@ -46,7 +46,7 @@ export function formatTopic(topic: ProblemTopicType) {
 }
 
 export function getStatusColor(status: string) {
-  if (status === OPEN_TO_BUDGETS_SOLICITATION_STATUS) return 'success'
+  if (status === OPEN_TO_BUDGETS_SOLICITATION_STATUS) return 'green'
   if (status === CANCELED_SOLICITATION_STATUS) return 'danger'
   if (status === DIRECT_SOLICITATION) return 'warning'
 }
@@ -72,7 +72,7 @@ export function formatUsageTime(usageTime: string) {
 }
 
 export function getAnswerColor(answer: string) {
-  if (answer === 'yes' || answer === 'Sim') return 'text-success'
+  if (answer === 'yes' || answer === 'Sim') return 'text-green'
   if (answer === 'no' || answer === 'Não') return 'text-danger'
   if (answer === 'dontknow' || answer === 'Não sei') return 'text-warning'
   return 'text-dark dark:text-white'
@@ -80,7 +80,7 @@ export function getAnswerColor(answer: string) {
 
 export function getTimePreferenceColor(timePreference: string) {
   if (timePreference === 'urgent') return 'danger'
-  if (timePreference === 'normal') return 'success'
+  if (timePreference === 'normal') return 'green'
 }
 
 export function formatTimePreference(timePreference: string) {
@@ -95,6 +95,6 @@ export function formatDeliveryPreference(deliveryPreference: string) {
 }
 
 export function getDeliveryPreferenceColor(deliveryPreference: string) {
-  if (deliveryPreference === 'yes') return 'success'
+  if (deliveryPreference === 'yes') return 'green'
   if (deliveryPreference === 'noPriority') return 'warning'
 }

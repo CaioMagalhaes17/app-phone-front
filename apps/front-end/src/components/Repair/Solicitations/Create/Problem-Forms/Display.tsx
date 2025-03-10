@@ -37,12 +37,12 @@ export function DisplayForm({ onSubmit, setActiveTab, stepTwoInfos }: { stepTwoI
             <div className="flex items-center !mb-10">
               <div className="flex-1 p-4">
                 <Text
-                  className="font-extrabold text-xl text-white"
+                  className="font-extrabold text-xl text-dark dark:text-white"
                   as="span"
                 >
                   {questions[0].question}
                 </Text>
-                <select {...register(questions[0].questionId, { required: true })} defaultValue={stepTwoInfos?.[questions[0].questionId] ? stepTwoInfos[questions[0].questionId] : 'default'} className="form-select rounded bg-black form-select-lg text-white w-full mt-1">
+                <select {...register(questions[0].questionId, { required: true })} defaultValue={stepTwoInfos?.[questions[0].questionId] ? stepTwoInfos[questions[0].questionId] : 'default'} className="form-select rounded dark:bg-black form-select-lg text-white w-full mt-1">
                   <option value="default">Selecione</option>
                   {questions[0].options.map((item, index) => {
                     return (
@@ -56,12 +56,12 @@ export function DisplayForm({ onSubmit, setActiveTab, stepTwoInfos }: { stepTwoI
               </div>
               <div className="flex-1 p-4">
                 <Text
-                  className="font-extrabold text-xl text-white"
+                  className="font-extrabold text-xl text-dark dark:text-white"
                   as="span"
                 >
                   {questions[1].question}
                 </Text>
-                <select {...register(questions[1].questionId)} defaultValue={stepTwoInfos?.[questions[1].questionId] ? stepTwoInfos[questions[1].questionId] : 'default'} className="form-select rounded bg-black form-select-lg text-white w-full mt-1">
+                <select {...register(questions[1].questionId)} defaultValue={stepTwoInfos?.[questions[1].questionId] ? stepTwoInfos[questions[1].questionId] : 'default'} className="form-select rounded dark:bg-black form-select-lg text-dark dark:text-white w-full mt-1">
                   <option value="default">Selecione</option>
                   {questions[1].options.map((item, index) => {
                     return (
@@ -79,12 +79,12 @@ export function DisplayForm({ onSubmit, setActiveTab, stepTwoInfos }: { stepTwoI
               <div className="flex items-center !mb-10">
                 <div className="flex-1 p-4">
                   <Text
-                    className="font-extrabold text-xl text-white"
+                    className="font-extrabold text-xl text-dark dark:text-white"
                     as="span"
                   >
                     {questions[2].question}
                   </Text>
-                  <select {...register(questions[2].questionId)} defaultValue={stepTwoInfos?.[questions[2].questionId] ? stepTwoInfos[questions[2].questionId] : 'default'} className="form-select rounded bg-black form-select-lg text-white w-full mt-1">
+                  <select {...register(questions[2].questionId)} defaultValue={stepTwoInfos?.[questions[2].questionId] ? stepTwoInfos[questions[2].questionId] : 'default'} className="form-select rounded dark:bg-black form-select-lg text-dark dark:text-white w-full mt-1">
                     <option value="default">Selecione</option>
                     {questions[2].options.map((item, index) => {
                       return (
@@ -98,12 +98,12 @@ export function DisplayForm({ onSubmit, setActiveTab, stepTwoInfos }: { stepTwoI
                 </div>
                 <div className="flex-1 p-4">
                   <Text
-                    className="font-extrabold text-xl text-white"
+                    className="font-extrabold text-xl text-dark dark:text-white"
                     as="span"
                   >
                     {questions[3].question}
                   </Text>
-                  <select {...register(questions[3].questionId)} defaultValue={stepTwoInfos?.[questions[3].questionId] ? stepTwoInfos[questions[3].questionId] : 'default'} className="form-select rounded bg-black form-select-lg text-white w-full mt-1">
+                  <select {...register(questions[3].questionId)} defaultValue={stepTwoInfos?.[questions[3].questionId] ? stepTwoInfos[questions[3].questionId] : 'default'} className="form-select rounded dark:bg-black form-select-lg text-dark dark:text-white w-full mt-1">
                     <option value="default">Selecione</option>
                     {questions[3].options.map((item, index) => {
                       return (
@@ -124,12 +124,12 @@ export function DisplayForm({ onSubmit, setActiveTab, stepTwoInfos }: { stepTwoI
               <div className="flex items-center">
                 <div className="flex-1 p-4">
                   <Text
-                    className="font-extrabold text-xl text-white"
+                    className="font-extrabold text-xl text-dark dark:text-white"
                     as="span"
                   >
                     {questions[4].question}
                   </Text>
-                  <select {...register(questions[4].questionId)} defaultValue={stepTwoInfos?.[questions[4].questionId] ? stepTwoInfos[questions[4].questionId] : 'default'} className="form-select rounded bg-black form-select-lg text-white w-full mt-1">
+                  <select {...register(questions[4].questionId)} defaultValue={stepTwoInfos?.[questions[4].questionId] ? stepTwoInfos[questions[4].questionId] : 'default'} className="form-select rounded dark:bg-black form-select-lg text-dark dark:text-white w-full mt-1">
                     <option value="default">Selecione</option>
                     {questions[4].options.map((item, index) => {
                       return (
@@ -145,12 +145,12 @@ export function DisplayForm({ onSubmit, setActiveTab, stepTwoInfos }: { stepTwoI
                 {optionalField && (
                   <div className="flex-1 p-4">
                     <Text
-                      className="font-extrabold text-xl text-white"
+                      className="font-extrabold text-xl text-dark dark:text-white"
                       as="span"
                     >
                       {questions[5].question}
                     </Text>
-                    <select {...register(questions[5].questionId)} defaultValue={stepTwoInfos?.[questions[5].questionId] ? stepTwoInfos[questions[5].questionId] : 'default'} className="form-select rounded bg-black form-select-lg text-white w-full mt-1">
+                    <select {...register(questions[5].questionId)} defaultValue={stepTwoInfos?.[questions[5].questionId] ? stepTwoInfos[questions[5].questionId] : 'default'} className="form-select rounded dark:bg-black form-select-lg text-dark dark:text-white w-full mt-1">
                       <option value="default">Selecione</option>
                       {questions[5].options.map((item, index) => {
                         return (

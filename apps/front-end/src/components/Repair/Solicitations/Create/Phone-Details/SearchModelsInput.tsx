@@ -30,12 +30,12 @@ export function SearchModelsInput({ phoneModels, searchInputError, brand, search
       />
       {searchInputError && (<span className="text-danger">Campo Obrigatório</span>)}
       {searchModel && !finishSearch ? (
-        <ul onClick={() => setFinishSearch(true)} className="mt-2 border border-gray-300 rounded-lg bg-black shadow">
+        <ul onClick={() => setFinishSearch(true)} className="mt-2 border border-gray-300 rounded-lg bg-[#ffffff] dark:bg-black shadow">
           {filteredModels.length > 0 ? (
             filteredModels.map((model, index) => (
               <li
                 key={index}
-                className="p-2 text-white hover:bg-gray-100 cursor-pointer"
+                className="p-2 text-dark hover:bg-[#c4c4c4] dark:text-white dark:hover:bg-gray-100 cursor-pointer"
                 onClick={() => setSearchModel(model)} // Define o modelo selecionado no input
               >
                 {model}

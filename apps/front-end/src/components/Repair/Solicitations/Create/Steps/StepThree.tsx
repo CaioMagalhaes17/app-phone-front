@@ -57,17 +57,17 @@ export function PhoneFormStep({ setActiveTab, onSubmit, stepThreeInfos }: { step
             <div className="flex items-center !mb-10">
               <div className="flex-1 p-4">
                 <Text
-                  className="font-extrabold text-xl text-white"
+                  className="font-extrabold text-xl text-dark dark:text-white"
                   as="span"
                 >
                   {questions[0].question}
                 </Text>
-                <select {...register(questions[0].questionId, { required: true })} defaultValue={stepThreeInfos?.[questions[0].questionId] ? stepThreeInfos[questions[0].questionId] : 'default'} className="form-select rounded bg-black form-select-lg text-white w-full mt-1">
+                <select {...register(questions[0].questionId, { required: true })} defaultValue={stepThreeInfos?.[questions[0].questionId] ? stepThreeInfos[questions[0].questionId] : 'default'} className="form-select rounded dark:bg-black form-select-lg text-dark dark:text-white w-full mt-1">
                   <option value="default">Selecione</option>
                   {questions[0].options.map((item, index) => {
                     return (
                       <>
-                        <option key={index} value={item.optionId}>{item.text}</option>
+                        <option className="text-dark dark:text-white" key={index} value={item.optionId}>{item.text}</option>
                       </>
                     )
                   })}
@@ -78,7 +78,7 @@ export function PhoneFormStep({ setActiveTab, onSubmit, stepThreeInfos }: { step
             <div className="flex items-center !mb-10">
               <div className="flex-1 p-4">
                 <Text
-                  className="font-extrabold text-xl text-white"
+                  className="font-extrabold text-xl text-dark dark:text-white"
                   as="span"
                 >
                   {questions[1].question}
@@ -99,7 +99,7 @@ export function PhoneFormStep({ setActiveTab, onSubmit, stepThreeInfos }: { step
                 {
                   watch('brand') === 'default' && (
                     <>
-                      <select className="form-select rounded bg-black form-select-lg text-white w-full mt-1">
+                      <select className="form-select rounded dark:bg-black form-select-lg text-dark dark:text-white w-full mt-1">
                         <option value="default">Selecione</option>
                       </select>
                       {errors[questions[0].questionId] && (<span className="text-danger">Campo Obrigatório</span>)}
@@ -112,12 +112,12 @@ export function PhoneFormStep({ setActiveTab, onSubmit, stepThreeInfos }: { step
             <div className="flex items-center !mb-10">
               <div className="flex-1 p-4">
                 <Text
-                  className="font-extrabold text-xl text-white"
+                  className="font-extrabold text-xl text-dark dark:text-white"
                   as="span"
                 >
                   {questions[2].question}
                 </Text>
-                <select {...register(questions[2].questionId, { required: true })} defaultValue={stepThreeInfos?.[questions[2].questionId] ? stepThreeInfos[questions[2].questionId] : 'default'} className="form-select rounded bg-black form-select-lg text-white w-full mt-1">
+                <select {...register(questions[2].questionId, { required: true })} defaultValue={stepThreeInfos?.[questions[2].questionId] ? stepThreeInfos[questions[2].questionId] : 'default'} className="form-select rounded dark:bg-black form-select-lg text-dark dark:text-white w-full mt-1">
                   <option value="default">Selecione</option>
                   {questions[2].options.map((item, index) => {
                     return (
@@ -131,12 +131,12 @@ export function PhoneFormStep({ setActiveTab, onSubmit, stepThreeInfos }: { step
               </div>
               <div className="flex-1 p-4">
                 <Text
-                  className="font-extrabold text-xl text-white"
+                  className="font-extrabold text-xl text-dark dark:text-white"
                   as="span"
                 >
                   {questions[3].question}
                 </Text>
-                <select {...register(questions[3].questionId, { required: true })} defaultValue={stepThreeInfos?.[questions[3].questionId] ? stepThreeInfos[questions[3].questionId] : 'default'} className="form-select rounded bg-black form-select-lg text-white w-full mt-1">
+                <select {...register(questions[3].questionId, { required: true })} defaultValue={stepThreeInfos?.[questions[3].questionId] ? stepThreeInfos[questions[3].questionId] : 'default'} className="form-select rounded dark:bg-black form-select-lg text-dark dark:text-white w-full mt-1">
                   <option value="default">Selecione</option>
                   {questions[3].options.map((item, index) => {
                     return (
@@ -152,12 +152,12 @@ export function PhoneFormStep({ setActiveTab, onSubmit, stepThreeInfos }: { step
             <div className="flex items-center">
               <div className="flex-1 p-4">
                 <Text
-                  className="font-extrabold text-xl text-white"
+                  className="font-extrabold text-xl text-dark dark:text-white"
                   as="span"
                 >
                   {questions[4].question}
                 </Text>
-                <select {...register(questions[4].questionId, { required: true })} defaultValue={stepThreeInfos?.[questions[4].questionId] ? stepThreeInfos[questions[4].questionId] : 'default'} className="form-select rounded bg-black form-select-lg text-white w-full mt-1">
+                <select {...register(questions[4].questionId, { required: true })} defaultValue={stepThreeInfos?.[questions[4].questionId] ? stepThreeInfos[questions[4].questionId] : 'default'} className="form-select rounded dark:bg-black form-select-lg text-dark dark:text-white w-full mt-1">
                   <option value="default">Selecione</option>
                   {questions[4].options.map((item, index) => {
                     return (
