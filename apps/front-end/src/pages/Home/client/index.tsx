@@ -3,8 +3,9 @@ import { InfoWindowAdapter, MapAdapter, MarkAdapter, RadiusAdapter } from "../..
 import useStore from "../../../state";
 import { FetchStoresInsideClientRadius } from "../../../api/geolocation/fetch-stores-inside-client-radius";
 import { Button, IconPencil, IconSearch, IconSend, Input, Text } from "@app/ui";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 type StoresInsideRadius = {
   GeoLocation: { props: { latitude: number; longitude: number; } }
@@ -13,8 +14,8 @@ type StoresInsideRadius = {
 }
 
 export function Home() {
+  const navigate = useNavigate()
   const { clientInfos, isMapLoaded } = useStore()
-
   const clientInitialPosition = {
     lat: clientInfos?.location?.latitude,
     lng: clientInfos?.location?.longitude,
@@ -26,6 +27,22 @@ export function Home() {
     queryFn: FetchStoresInsideClientRadius
   })
 
+  useEffect(() => {
+    if (!storesLoading && data.status === 'geolocationNotFound') {
+      Swal.fire({
+        timer: 10000,
+        showCloseButton: false,
+        showCancelButton: false,
+        confirmButtonText: 'Configurar Localização',
+        icon: 'info',
+        title: 'Antes de tudo...',
+        text: 'Vamos configurar sua localização para encontrar lojas próximas'
+      }).then(() => {
+        return navigate('/map/edit')
+      })
+    }
+  }, [storesLoading, data])
+
   const mapStyle = {
     width: '100%',
     height: '600px',
@@ -33,7 +50,7 @@ export function Home() {
   }
 
   const [selectedStore, setSelectedStore] = useState<StoresInsideRadius | null>()
-  const navigate = useNavigate()
+
   return (
     <>
       <div className="flex mt-10 justify-center ">
@@ -116,7 +133,7 @@ export function Home() {
             {isMapLoaded && (
               <>
                 <MapAdapter mapStyle={mapStyle} initialPosition={clientInitialPosition}>
-                  {!storesLoading && data.length > 0 ? (data.map((item: StoresInsideRadius) => {
+                  {!storesLoading && data && data.length > 0 ? (data.map((item: StoresInsideRadius) => {
                     return (
                       <MarkAdapter icon={item.Profile.props.profileImg} onClick={() => setSelectedStore(item)} position={{ lat: item.GeoLocation.props.latitude, lng: item.GeoLocation.props.longitude }} key={item._id} />
                     )

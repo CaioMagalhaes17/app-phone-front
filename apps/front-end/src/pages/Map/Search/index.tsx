@@ -16,6 +16,7 @@ import { formatStoreContacts, formatStoreProfile } from "../../../formaters/stor
 import { StoreContacts, StoreContactsFromApi, StoreProfileFromApi, StoreProfileType } from "../../../types/store-profile";
 import { Star } from "lucide-react";
 import { MapPinSvg } from "../../../constants/svg-icons";
+import Swal from "sweetalert2";
 
 type StoresInsideRadius = {
   GeoLocation: { props: { latitude: number; longitude: number; } }
@@ -49,7 +50,24 @@ export default function ClientMapSearch() {
     queryKey: ['fetch-stores-inside-client-radius'],
     queryFn: FetchStoresInsideClientRadius
   })
-  console.log(data)
+
+  useEffect(() => {
+    if (!storesLoading && data.status === 'geolocationNotFound') {
+      Swal.fire({
+        timer: 6000,
+        showCloseButton: false,
+        showCancelButton: false,
+        confirmButtonText: 'Configurar Localização',
+        icon: 'info',
+        title: 'Antes de tudo...',
+        text: 'Vamos configurar sua localização para encontrar lojas próximas'
+      }).then(() => {
+        return navigate('/map/edit')
+      })
+    }
+  }, [storesLoading, data])
+
+
   const mapStyle = {
     width: '100%',
     height: '100%',
@@ -176,7 +194,7 @@ export default function ClientMapSearch() {
         </div>
         {clintLocation && isMapLoaded ? (
           <MapAdapter onClick={() => setSelectedStore(null)} mapStyle={mapStyle} initialPosition={clintLocation}>
-            {!storesLoading && data.length > 0 ? (data.map((item: StoresInsideRadius) => {
+            {!storesLoading && data && data.length > 0 ? (data.map((item: StoresInsideRadius) => {
               return (
                 <MarkAdapter
                   onClick={() => onStorePinClick(item)}

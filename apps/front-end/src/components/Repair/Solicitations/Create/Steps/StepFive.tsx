@@ -20,6 +20,7 @@ export function MapStep({ setActiveTab }: { setActiveTab: React.Dispatch<React.S
     Profile: StoreProfileFromApi
     _id: string
   }
+
   const [selectedStore, setSelectedStore] = useState<{
     geoLocation: { props: { latitude: number; longitude: number; } },
     storeProfile: StoreProfileType
@@ -35,7 +36,7 @@ export function MapStep({ setActiveTab }: { setActiveTab: React.Dispatch<React.S
       lng: clientInfos?.location.longitude,
     })
     setRadius(
-      (clientInfos?.location.radius)
+      (clientInfos?.location.radius || 2500)
     )
   }, [clientInfos])
 
@@ -111,24 +112,24 @@ export function MapStep({ setActiveTab }: { setActiveTab: React.Dispatch<React.S
     <>
       <div className="flex relative w-full h-[500px] mt-5">
         <div className="flex flex-col items-center w-[530px]">
-          <h1 className="text-[#c4c4c4] font-extrabold text-white text-xl">Definir Localização para envio de orçamento</h1>
+          <h1 className="font-extrabold text-dark dark:text-white text-xl">Definir Localização para envio de orçamento</h1>
           <div className="border-b border-b-[#323b45] mt-5 w-[90%]" />
           <div className="text-left p-4">
             <Button onClick={() => getBrowserLocation()} className="btn-primary w-full"><IconMap />Usar localização exata do dispositivo</Button>
           </div>
           <Text className="text-lg font-extrabold " as="span">OU</Text>
           <div className="text-left p-2 w-full ">
-            <Text className="font-extrabold" as="span">Endereço desejado</Text>
+            <Text className="font-extrabold text-xl" as="span">Escrever endereço</Text>
             <div className="flex gap-2 flex-row w-full">
               {isMapLoaded && (
                 <AutoCompleteAdapter setLocation={setLocation}>
-                  <Input type="text w-full" placeholder="Endereço" />
+                  <Input type="text" className="w-full" placeholder="Endereço" />
                 </AutoCompleteAdapter>
               )}
             </div>
           </div>
-          <div className="text-left p-6 w-full">
-            <Text className="font-extrabold" as="span">Alterar tamanho do raio de pesquisa</Text>
+          <div className="text-left mt-5 mb-5 w-full">
+            <Text className="text-lg font-extrabold" as="span">Alterar tamanho do raio de pesquisa</Text>
             <div className="flex gap-2 flex-row">
               <input type="range" className="w-full" value={radius} onChange={(event: React.ChangeEvent<HTMLInputElement>) => setRadius(Number(event.target.value))} min="600" max="6000" placeholder="Endereço" />
             </div>
@@ -174,7 +175,7 @@ export function MapStep({ setActiveTab }: { setActiveTab: React.Dispatch<React.S
       </div>
       <div className="flex p-6 relative justify-between w-full">
         <Button type="button" onClick={() => setActiveTab(3)} className="btn-primary">Voltar</Button>
-        <Button type="submit" onClick={() => setActiveTab(5)} className="btn-primary">Próximo</Button>
+        <Button type="submit" disabled={!clintLocation?.lat} onClick={() => setActiveTab(5)} className="btn-primary">Próximo</Button>
       </div>
     </>
   )

@@ -54,9 +54,9 @@ export function ClientHeader() {
                 <Text className="text-black dark:text-[#c4c4c4] font-bold text-xl" as="h1">{clientInfos?.name}</Text>
               </div>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="bg-black mt-5 font-extrabold">
-              <DropdownMenuItem className="flex flex-row gap-2 text-white">
-                <Link to="/configurations" className="flex flex-row gap-2">
+            <DropdownMenuContent className="bg-[#d9d9d963] dark:bg-black mt-5 font-extrabold">
+              <DropdownMenuItem className="flex flex-row gap-2 text-dark dark:text-white">
+                <Link to="/configurations" className=" flex flex-row gap-2">
                   <IconSettings />
                   Configurações
                 </Link>

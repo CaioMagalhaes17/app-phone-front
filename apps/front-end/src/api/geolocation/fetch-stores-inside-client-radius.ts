@@ -7,12 +7,18 @@ export async function FetchStoresInsideClientRadius() {
     const response = await Api().get('/geolocation/stores/in-range')
     return response.data.value
   } catch (error) {
-    if (error instanceof AxiosError) return handleAxiosErrors(error, {
-      timer: 10000,
-      showCloseButton: false,
-      showCancelButton: false,
-      icon: 'error',
-      title: error.code
-    })
+
+    if (error instanceof AxiosError) {
+      if (error.response?.data.statusCode === 404) {
+        return { status: 'geolocationNotFound' }
+      }
+      return handleAxiosErrors(error, {
+        timer: 10000,
+        showCloseButton: false,
+        showCancelButton: false,
+        icon: 'error',
+        title: error.code
+      })
+    }
   }
 }

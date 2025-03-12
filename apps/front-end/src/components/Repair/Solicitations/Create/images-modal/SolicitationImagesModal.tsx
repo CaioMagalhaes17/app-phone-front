@@ -1,5 +1,5 @@
 
-import { Button, Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger, IconPlus, Text } from "@app/ui";
+import { Button, Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger, IconSave, Text } from "@app/ui";
 import { useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useUploadFile } from "../../../../../hooks/useUploadFile";
@@ -53,7 +53,8 @@ export function SolicitationImgsModal({ items, setItems }: { items: string[], se
             />
           </div>
           <DialogFooter>
-            <Button disabled={items.length > 3} className="btn-primary flex flex-row gap-2" onClick={() => onSaveClick()}><IconPlus />Adicionar</Button>
+            <Text as="span">Escolha uma imagem e salve uma por vez</Text>
+            <Button disabled={items.length > 3} className="btn-primary flex flex-row gap-2" onClick={() => onSaveClick()}><IconSave />Salvar Imagem</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

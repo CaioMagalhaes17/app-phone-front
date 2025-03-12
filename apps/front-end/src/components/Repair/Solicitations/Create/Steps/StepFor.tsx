@@ -1,9 +1,10 @@
 
-import { Button, IconPlus, IconSend, Text } from "@app/ui"
+import { Button, IconPlus, IconSend, IconTrash, Text } from "@app/ui"
 import { finalQuestions } from "../../../../../constants/solicitation-form-questions"
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form"
 import { SolicitationImgsModal } from "../images-modal/SolicitationImagesModal"
 import { useState } from "react"
+import Swal from "sweetalert2"
 
 export function FinalsQuestions({ stepFourInfos, setActiveTab, onSubmit }: { stepFourInfos?: FieldValues, onSubmit: (data: FieldValues, images: string[]) => void, setActiveTab: React.Dispatch<React.SetStateAction<number>> }) {
   const { register, handleSubmit, formState: { errors }, setError } = useForm()
@@ -23,6 +24,26 @@ export function FinalsQuestions({ stepFourInfos, setActiveTab, onSubmit }: { ste
   };
 
   const [items, setItems] = useState<string[]>([]);
+
+  const removeImage = (index: number) => {
+    Swal.fire({
+      titleText: 'Excluir Imagem?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Sim',
+      cancelButtonText: 'Não',
+      padding: '2em',
+      customClass: {
+        confirmButton: 'btn btn-green btn-lg m-1',
+        cancelButton: 'btn btn-danger btn-lg m-1',
+      },
+      buttonsStyling: false,
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        setItems((prevItems) => prevItems.filter((_, i) => i !== index));
+      }
+    })
+  };
 
   return (
     <>
@@ -87,11 +108,12 @@ export function FinalsQuestions({ stepFourInfos, setActiveTab, onSubmit }: { ste
               <Text className="text-lg font-extrabold dark:text-white text-dark" as="h1">Adicionar fotos do aparelho (não obrigatório)</Text>
               <div className="flex flex-row gap-5">
                 {items.length > 0 && items.map((item, index) => (
-                  <img
-                    key={index}
-                    src={item}
-                    className="max-w-[200px] max-h-[200px] object-contain"
-                  />
+                  <div key={index} onClick={() => removeImage(index)} className="relative group w-full">
+                    <img src={item} className="w-[200px] h-[200px] cursor-pointer" />
+                    <div className="w-[200px] h-[200px] rounded-3xl absolute inset-0 bg-dark bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">
+                      <span className="text-white text-3xl font-bold flex flex-row gap-2 items-center"><IconTrash /> Excluir</span>
+                    </div>
+                  </div>
                 ))}
               </div>
               <Button onClick={() => document.getElementById('openModal')?.click()} type="button" className="btn-primary flex flex-row gap-2 mt-5"><IconPlus />Adicionar imagens</Button>
