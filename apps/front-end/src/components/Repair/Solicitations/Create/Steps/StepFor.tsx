@@ -1,14 +1,10 @@
-/* eslint-disable prefer-const */
-import { Button, IconSend, Text } from "@app/ui"
+
+import { Button, IconPlus, IconSend, Text } from "@app/ui"
 import { finalQuestions } from "../../../../../constants/solicitation-form-questions"
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form"
-import { useEffect } from "react";
-import { useUploadFile } from "../../../../../hooks/useUploadFile";
-import { useMutation } from "@tanstack/react-query";
-import { noImage } from "../../../../../constants/images";
-import { UploadSolicitationImg } from "../../../../../api/repair/solicitation/upload-solicitation-imgs";
+import { SolicitationImgsModal } from "../images-modal/SolicitationImagesModal"
+import { useState } from "react"
 
-let problemImages: string[] = []
 export function FinalsQuestions({ stepFourInfos, setActiveTab, onSubmit }: { stepFourInfos?: FieldValues, onSubmit: (data: FieldValues, images: string[]) => void, setActiveTab: React.Dispatch<React.SetStateAction<number>> }) {
   const { register, handleSubmit, formState: { errors }, setError } = useForm()
   const handleFormSubmit: SubmitHandler<FieldValues> = async (data) => {
@@ -23,25 +19,10 @@ export function FinalsQuestions({ stepFourInfos, setActiveTab, onSubmit }: { ste
       }
     });
     if (hasError) return
-    await onSubmit(data, problemImages);
+    await onSubmit(data, items);
   };
 
-  const { mutateAsync } = useMutation({
-    mutationFn: UploadSolicitationImg
-  })
-  const { handleFileChange, newFile, onSaveClick } = useUploadFile(mutateAsync)
-
-  useEffect(() => {
-    if (newFile) {
-      problemImages.push(newFile)
-    }
-  }, [newFile])
-
-  function handleUploadFile(e: React.ChangeEvent<HTMLInputElement>) {
-    console.log('3123212')
-    handleFileChange(e)
-    onSaveClick()
-  }
+  const [items, setItems] = useState<string[]>([]);
 
   return (
     <>
@@ -100,35 +81,20 @@ export function FinalsQuestions({ stepFourInfos, setActiveTab, onSubmit }: { ste
                 </Text>
                 <textarea defaultValue={stepFourInfos?.[finalQuestions[2].questionId] ? stepFourInfos[finalQuestions[2].questionId] : ''} {...register(finalQuestions[2].questionId, { required: true })} placeholder="Sobrou algo para especificar? Conta pra gente!" className="placeholder:text-white-dark w-full mt-5 rounded-md border px-4 py-2 text-sm font-semibold !outline-none focus:border-primary focus:ring-transparent border-[#17263c] dark:bg-[#121e32] text-white-dark focus:border-primary" />
               </div>
-
             </div>
             {errors[finalQuestions[2].questionId] && (<span className="text-danger">Campo Obrigatório</span>)}
-            <div className="flex flex-col mt-10 items-center justify-center">
-              <Text className="font-extrabold text-xl text-dark dark:text-white" as="h1">Imagens do aparelho (Não Obrigatório)</Text>
-              <div className="flex flex-col items-center justify-center">
-                <div className="flex gap-5 flex-row h-[100px] w-[150px] items-center justify-center">
-                  {problemImages.length === 0 ? (
-                    <>
-                      <img src={noImage} />
-                      <img src={noImage} />
-                      <img src={noImage} />
-                    </>
-                  ) : (
-                    problemImages.map((image) => (
-                      <img src={image} />
-                    ))
-                  )}
-                </div>
-                <div className="flex items-center justify-center">
-                  <input
-                    id="ctnFile"
-                    type="file"
-                    onChange={(e) => handleUploadFile(e)}
-                    className="text-white form-input mt-2 file:py-2 file:px-4 file:border-0 file:font-semibold p-0 file:bg-black dark:file:bg-primary file:text-white"
+            <div className="flex flex-col items-center justify-center">
+              <Text className="text-lg font-extrabold dark:text-white text-dark" as="h1">Adicionar fotos do aparelho (não obrigatório)</Text>
+              <div className="flex flex-row gap-5">
+                {items.length > 0 && items.map((item, index) => (
+                  <img
+                    key={index}
+                    src={item}
+                    className="max-w-[200px] max-h-[200px] object-contain"
                   />
-                </div>
-
+                ))}
               </div>
+              <Button onClick={() => document.getElementById('openModal')?.click()} type="button" className="btn-primary flex flex-row gap-2 mt-5"><IconPlus />Adicionar imagens</Button>
             </div>
             <div className="mt-auto" />
             <div className="flex p-6 flex-row justify-between w-full">
@@ -138,6 +104,7 @@ export function FinalsQuestions({ stepFourInfos, setActiveTab, onSubmit }: { ste
           </div>
         </form>
       )}
+      <SolicitationImgsModal setItems={setItems} items={items} />
     </>
   )
 }

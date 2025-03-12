@@ -14,6 +14,7 @@ import { BudgetType } from "../../../../types/budget";
 import { formatBudgetsFromApi } from "../../../../formaters/budget";
 import { CANCELED_SOLICITATION_STATUS } from "../../../../constants/solicitation-status";
 import { Solicitation } from "../../../../types/solicitation";
+import { SolicitationImages } from "../../../../components/Repair/Solicitations/Details/SolicitationImages";
 
 export function SolicitationDetails() {
   const [budgets, setBudgets] = useState<BudgetType[] | []>([])
@@ -116,6 +117,7 @@ export function SolicitationDetails() {
               <PhoneForm canEdit={canEdit} solicitationId={id} phoneForm={solicitationData.form.phoneForm} />
             </div>
             <FinalForm canEdit={canEdit} solicitationId={id} deliveryPreference={solicitationData.form.deliveryPreference} timePreference={solicitationData.form.timePreference} details={solicitationData.form.details} />
+            <SolicitationImages images={solicitationData.form.solicitationImgs} />
             {budgets.length > 0 && !budgetsLoading ?
               (
                 <Panel className="font-extrabold mt-6 max-w-[1200px] w-full">

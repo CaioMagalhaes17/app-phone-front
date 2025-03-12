@@ -11,7 +11,7 @@ export function ReturnBudget({ onSaveClick }: { onSaveClick: ({ startValue, endV
     <>
       <Dialog>
         <DialogTrigger>
-          <Button id="openModal" className="btn-success !text-dark text-lg flex flex-row gap-2"><IconDollarSignCircle /> Retornar valor de conserto</Button>
+          <Button id="openModal" className="btn-green text-white text-lg flex flex-row gap-2"><IconDollarSignCircle /> Retornar valor de conserto</Button>
         </DialogTrigger>
         <DialogContent className=" !z-51 font-extrabold bg-dark text-white-dark w-full">
           <DialogClose id="closeModal" className="hidden" />

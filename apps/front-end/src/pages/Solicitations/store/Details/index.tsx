@@ -12,6 +12,7 @@ import Swal from "sweetalert2"
 import { CreateBudget } from "../../../../api/repair/budget/create-budget"
 import { GetStoreSolicitationBudgets } from "../../../../api/repair/budget/get-by-store-solicitation"
 import { DeleteBudgets } from "../../../../api/repair/budget/delete-budget"
+import { SolicitationImages } from "../../../../components/Repair/Solicitations/Details/SolicitationImages"
 
 export function StoreSolicitationDetails() {
   const { id } = useParams() as { id: string }
@@ -123,7 +124,7 @@ export function StoreSolicitationDetails() {
         <div className="max-w-[1200px] mx-auto">
           <div className="flex flex-row">
             <div className="flex flex-col gap-2">
-              <Text className="text-white font-extrabold text-5xl" as="h1">Defeito em <span className="underline">{formatTopic(solicitationData?.form.problemTopic)}</span></Text>
+              <Text className="text-black dark:text-white font-extrabold text-5xl" as="h1">Defeito em <span className="underline">{formatTopic(solicitationData?.form.problemTopic)}</span></Text>
               <div>
                 <Text className="font-extrabold text-xl" as="h1">{formatPhoneBrand(solicitationData.form.phoneForm.brand)} - {solicitationData.form.phoneForm.model}</Text>
                 {budgetData.length === 0 && (<Text className={`font-extrabold text-md mt-2 text-${getStatusColor(solicitationData.status)}`} as="h1">{solicitationData.status}</Text>)}
@@ -143,10 +144,11 @@ export function StoreSolicitationDetails() {
             }
           </div>
           <div className="mt-10 flex flex-row gap-6 w-full">
-            <ProblemForm topic={solicitationData.form.problemTopic} problemForm={solicitationData.form.problemForm} />
-            <PhoneForm phoneForm={solicitationData.form.phoneForm} />
+            <ProblemForm solicitationId={solicitationData.id} topic={solicitationData.form.problemTopic} problemForm={solicitationData.form.problemForm} />
+            <PhoneForm solicitationId={solicitationData.id} phoneForm={solicitationData.form.phoneForm} />
           </div>
-          <FinalForm deliveryPreference={solicitationData.form.deliveryPreference} timePreference={solicitationData.form.timePreference} details={solicitationData.form.details} />
+          <FinalForm solicitationId={solicitationData.id} deliveryPreference={solicitationData.form.deliveryPreference} timePreference={solicitationData.form.timePreference} details={solicitationData.form.details} />
+          <SolicitationImages images={solicitationData.form.solicitationImgs} />
         </div>
       ) : ''}
     </>

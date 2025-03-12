@@ -20,7 +20,7 @@
   }
 
   .btn-green {
-    @apply hover:bg-[#3ac53a36] hover:border-[#3ac53a36] border-[#009e3b] bg-[#009e3b] text-white shadow-[000];
+    @apply border-[#009e3b] bg-[#009e3b] text-white shadow-[000];
   }
 
   .btn-outline-green {

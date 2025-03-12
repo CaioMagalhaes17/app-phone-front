@@ -1,7 +1,7 @@
 import { ClientProfileType } from "./client-profile"
 
 export type SolicitationFormProps = {
-  solicitationImages: string[]
+  solicitationImgs: string[]
   problemTopic: ProblemTopicType
   problemForm: BatteryFormType | DisplayFormType
   phoneForm: PhoneFormType

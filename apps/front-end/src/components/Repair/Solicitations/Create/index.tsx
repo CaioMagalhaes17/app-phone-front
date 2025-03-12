@@ -14,7 +14,7 @@ import { useNavigate } from "react-router-dom";
 
 export interface SolicitationsCreateProps {
   steps: string[]
-  handleSendForm: (data: Pick<SolicitationFormProps, 'deliveryPreference' | 'timePreference' | 'details' | 'solicitationImages'> & {
+  handleSendForm: (data: Pick<SolicitationFormProps, 'deliveryPreference' | 'timePreference' | 'details' | 'solicitationImgs'> & {
     problemForm: BatteryFormType | DisplayFormType,
     topic: ProblemTopicType,
     phoneForm: PhoneFormType
@@ -78,7 +78,7 @@ export function SolicitationForm({ steps, handleSendForm, customMap, storeProfil
         deliveryPreference: data.deliveryPreference,
         details: data.details,
         timePreference: data.timePreference,
-        solicitationImages: images
+        solicitationImgs: images
       })
   };
 
