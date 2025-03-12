@@ -132,14 +132,14 @@ export function StoreSolicitationDetails() {
             </div>
             <div className="mr-auto" />
             {budgetData.length === 0 ? (<ReturnBudget onSaveClick={handleSave} />) :
-              <Panel className="flex flex-col gap-2 h-full w-[500px]">
+              <Panel className="flex flex-col font-extrabold gap-2 h-full w-[500px]">
                 <div className="flex flex-row">
-                  <Text className="text-lg text-white" as="span">Orçamento retornado</Text>
+                  <Text className="text-lg  text-dark dark:text-white" as="span">Orçamento retornado</Text>
                   <div className="mr-auto" />
                   <Button onClick={() => handleDeleteBudget()} className="btn-danger">Excluir orçamento</Button>
                 </div>
-                <Text className="text-lg flex flex-row gap-5 text-green" as="span">{budgetData[0].props.startValue} <span className="text-white">até</span> {budgetData[0].props.endValue}</Text>
-                <textarea value={budgetData[0].props.details} disabled className="placeholder:text-white-dark w-full h-full rounded-md border px-4 py-2 text-sm font-semibold !outline-none focus:border-primary focus:ring-transparent border-[#17263c] bg-[#121e32] text-white-dark focus:border-primary" />
+                <Text className="text-lg flex flex-row gap-5 text-green" as="span">{budgetData[0].props.startValue} <span className="text-black dark:text-white">até</span> {budgetData[0].props.endValue}</Text>
+                <textarea value={budgetData[0].props.details} disabled className="placeholder:text-white-dark w-full h-full rounded-md border px-4 py-2 text-sm font-semibold !outline-none focus:border-primary focus:ring-transparent border-[#17263c] dark:bg-[#121e32] text-dark dark:text-white-dark focus:border-primary" />
               </Panel>
             }
           </div>

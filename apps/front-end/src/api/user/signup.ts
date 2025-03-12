@@ -2,12 +2,37 @@ import { AxiosError } from "axios"
 import { Api } from "../axios"
 import { handleAxiosErrors } from "../errors"
 
-export async function signup(data: { login: string, password: string, isStore: boolean, name: string, permission?: string }) {
+export type UserClientSignup = { login: string, password: string, isStore: boolean, name: string, permission?: string }
+export type UserStoreSignup = {
+  name: string,
+  login: string,
+  password: string,
+  isStore: boolean,
+  telNum: string,
+  address: string,
+  location: {
+    lat: number,
+    lng: number
+  },
+  permission?: string
+}
+
+export async function signup(data: UserClientSignup | UserStoreSignup) {
   try {
     const response = await Api().post('/user', data)
     return response.data
   } catch (error) {
     if (error instanceof AxiosError) {
+      if (error.response?.data.message.includes('Login já existe')) {
+        return handleAxiosErrors(error, {
+          timer: 5000,
+          showCloseButton: false,
+          showCancelButton: false,
+          icon: 'error',
+          title: 'O Login já existe',
+          text: 'Esse email já está sendo utilizado como login'
+        })
+      }
       if (error.status === 400 && error.response?.data.message.includes('inválidos.')) {
         return handleAxiosErrors(error, {
           timer: 3000,

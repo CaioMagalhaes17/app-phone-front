@@ -6,15 +6,15 @@ export function HeaderNotificationsBox() {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger>
-          <div className="flex flex-row w-full dark:text-[#c4c4c4] text-black">
+          <div className="flex flex-row w-full">
             <IconBell />
             <span className="absolute top-2 ml-5 bg-red-500 text-white text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full">
               5
             </span>
           </div>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="bg-black mt-5 max-h-[500px] w-[500px] mr-10 p-4 flex flex-col">
-          <div className="flex text-white flex-row justify-between items-center">
+        <DropdownMenuContent className="border-2 bg-white dark:bg-black mt-5 max-h-[500px] w-[500px] mr-10 p-4 flex flex-col">
+          <div className="flex dark:text-white flex-row justify-between items-center">
             <Text className="text-2xl font-extrabold" as="h1">Notificações</Text>
             <IconSettings />
           </div>

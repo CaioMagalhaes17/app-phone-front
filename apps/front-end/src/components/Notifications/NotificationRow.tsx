@@ -9,17 +9,14 @@ export function NotificationRow() {
           <img width="50" height="50" src={userImg} className="rounded-3xl" />
         </div>
         <div className="flex flex-col max-w-[80%]">
-          <Text className="flex flex-row gap-5 items-center text-center text-white text-lg" as="span">
+          <Text className="flex flex-row gap-5 items-center text-center text-dark dark:text-white text-lg" as="span">
             Orçamento recebido
             <Text className="text-white-dark text-sm mt-1" as="span">
               01/04/2003
             </Text>
           </Text>
-          <div className="flex flex-row mb-2">
+          <div className="text-white-dark flex flex-row mb-2">
             Teste caraioo
-          </div>
-          <div className="text-left">
-            dasdasdas
           </div>
         </div>
       </div>

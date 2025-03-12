@@ -24,7 +24,11 @@ export function StoreHeader() {
       location: {
         latitude: 0,
         longitude: 0,
-      }
+      },
+      description: "",
+      createdAt: "",
+      updatedAt: "",
+      userId: ""
     })
     localStorage.removeItem('accessToken')
     navigate('/store/login')
@@ -49,11 +53,11 @@ export function StoreHeader() {
                   <div className="w-[60px]">
                     <img width="50" height="50" src={storeInfos.profileImg} className="rounded-3xl" />
                   </div>
-                  <Text className="text-[#c4c4c4] font-bold text-xl" as="h1">{storeInfos?.name}</Text>
+                  <Text className="text-dark dark:text-white font-bold text-xl" as="h1">{storeInfos?.name}</Text>
                 </div>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-black mt-5">
-                <DropdownMenuItem className="flex flex-row gap-2 text-white">
+              <DropdownMenuContent className="font-extrabold bg-white dark:bg-black mt-5">
+                <DropdownMenuItem className="flex flex-row gap-2 text-dark dark:text-white">
                   <Link to="/store/configurations" className="flex flex-row gap-2">
                     <IconSettings />
                     Configurações

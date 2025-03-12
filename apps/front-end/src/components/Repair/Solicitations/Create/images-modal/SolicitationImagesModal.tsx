@@ -52,8 +52,8 @@ export function SolicitationImgsModal({ items, setItems }: { items: string[], se
               className="text-white form-input mt-2 file:py-2 file:px-4 file:border-0 file:font-semibold p-0 file:bg-black dark:file:bg-primary ltr:file:mr-5 rtl:file-ml-5 file:text-white"
             />
           </div>
-          <DialogFooter>
-            <Text as="span">Escolha uma imagem e salve uma por vez</Text>
+          <DialogFooter className="items-center">
+            <Text as="span">Salve uma imagem por vez</Text>
             <Button disabled={items.length > 3} className="btn-primary flex flex-row gap-2" onClick={() => onSaveClick()}><IconSave />Salvar Imagem</Button>
           </DialogFooter>
         </DialogContent>

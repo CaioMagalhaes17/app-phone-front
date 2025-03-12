@@ -10,22 +10,22 @@ export function SolicitationRow({ solicitation }: { solicitation: Solicitation }
   const answers = getStepTwoAnswersByForm(solicitation.form.problemTopic, solicitation.form.problemForm)
   return (
     <>
-      <div className="hover:bg-[#5f577426] max-h-[140px] mt-5 flex flex-row items-start gap-5">
+      <div className="hover:bg-[#5f577426] text-dark dark:text-white max-h-[140px] mt-5 flex flex-row items-start gap-5">
         <div className="w-[100px]">
           <img width="100" height="100" src={'https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/390.png'} className="rounded-3xl" />
         </div>
         <div className="flex w-full flex-col max-w-[80%]">
-          <Text className="flex flex-row gap-5 items-center text-center text-white text-lg" as="span">
+          <Text className="flex flex-row gap-5 items-center text-center  text-lg" as="span">
             {answers[0].answer} {solicitation.status === DIRECT_SOLICITATION && (<><span className="text-warning">{solicitation.status}</span></>)}
           </Text>
           <div className="flex flex-row w-full ">
             <div className="w-full text-left flex flex-col ">
-              <Text className="text-white mt-3" as="span">{formatPhoneBrand(solicitation.form.phoneForm.brand)} - {solicitation.form.phoneForm.model}</Text>
+              <Text className=" mt-3" as="span">{formatPhoneBrand(solicitation.form.phoneForm.brand)} - {solicitation.form.phoneForm.model}</Text>
 
               {solicitation.form.timePreference === 'urgent' && (
                 <Text className={`text-${getTimePreferenceColor(solicitation.form.timePreference)}`} as="span">{formatTimePreference(solicitation.form.timePreference)}</Text>
               )}
-              <Text as="span">{dayjs(solicitation.createdAt).format('DD/MM/YYYY')}</Text>
+              <Text className="text-white-dark" as="span">{dayjs(solicitation.createdAt).format('DD/MM/YYYY')}</Text>
 
             </div>
             <div className="flex flex-row w-[30%] gap-5 items-center">

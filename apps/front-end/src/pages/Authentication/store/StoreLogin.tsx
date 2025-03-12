@@ -30,20 +30,20 @@ export default function ClientLogin() {
 
   return (
     <>
-      <div className="absolute inset-0 bg-black">
+      <div className="absolute inset-0 dark:bg-black">
 
       </div>
 
       <div className="relative flex min-h-screen items-center justify-center bg-cover bg-center bg-no-repeat px-6 py-10 sm:px-16">
-        <div className="relative w-full max-w-[570px] rounded-md p-2">
-          <div className="relative flex flex-col justify-center rounded-md bg-dark px-6 py-10">
+        <div className="relative font-extrabold w-full max-w-[570px] rounded-md border-2 p-2">
+          <div className="relative flex flex-col justify-center rounded-md dark:bg-dark px-6 py-10">
             <div className="mx-auto w-full">
               <div className="mb-10">
-                <h1 className="text-3xl font-extrabold text-white">Acessar sua Loja</h1>
+                <h1 className="text-3xl font-extrabold text-dark dark:text-white">Acessar sua Loja</h1>
                 <div className="w-full border-black/60 border mt-2" />
               </div>
 
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 text-white">
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-5 text-dark dark:text-white">
                 <div>
                   <label htmlFor="Name">Email</label>
                   <div className="relative text-white-dark">
@@ -74,14 +74,14 @@ export default function ClientLogin() {
                 <span className="absolute inset-x-0 top-1/2 h-px w-full -translate-y-1/2 bg-black"></span>
               </div>
 
-              <div className="text-center text-white mb-5">
+              <div className="text-center text-dark dark:text-white mb-5">
                 Não possui uma conta?&nbsp;
                 <Link to="/store/signup" className="uppercase text-primary underline transition">
                   Cadastrar
                 </Link>
               </div>
 
-              <div className="text-center text-white">
+              <div className="text-center">
                 <Link to="/login" className="uppercase text-primary underline transition">
                   ENTRAR COM CONTA CLIENTE
                 </Link>

@@ -42,7 +42,7 @@ export function DisplayForm({ onSubmit, setActiveTab, stepTwoInfos }: { stepTwoI
                 >
                   {questions[0].question}
                 </Text>
-                <select {...register(questions[0].questionId, { required: true })} defaultValue={stepTwoInfos?.[questions[0].questionId] ? stepTwoInfos[questions[0].questionId] : 'default'} className="form-select rounded dark:bg-black form-select-lg text-white w-full mt-1">
+                <select {...register(questions[0].questionId, { required: true })} defaultValue={stepTwoInfos?.[questions[0].questionId] ? stepTwoInfos[questions[0].questionId] : 'default'} className="form-select rounded dark:bg-black form-select-lg text-dark dark:text-white w-full mt-1">
                   <option value="default">Selecione</option>
                   {questions[0].options.map((item, index) => {
                     return (

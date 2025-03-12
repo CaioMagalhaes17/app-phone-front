@@ -101,7 +101,7 @@ export function EditStoreProfile() {
                   <Text className="text-center" as="span">Endereço</Text>
                   {isMapLoaded && (
                     <AutoCompleteAdapter setLocation={setLocation} setSelectedAddress={setSelectedAddress}>
-                      <Input type="text w-full" defaultValue={storeInfos.address} placeholder="Endereço" />
+                      <Input type="text" defaultValue={storeInfos.address} placeholder="Endereço" />
                     </AutoCompleteAdapter>
                   )}
                   <Button onClick={() => saveAddress()} className="ml-auto btn-outline-primary flex flex-row gap-2 mt-2"><IconSave />Salvar Endereço</Button>

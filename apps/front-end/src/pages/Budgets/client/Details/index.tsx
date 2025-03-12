@@ -1,8 +1,8 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useGetBudgetById } from "../../../../hooks/budgets/useGetBudgetById";
-import { Button, IconArrowBackward, IconMail, IconStore, IconWhatsApp, Panel, Text } from "@app/ui";
-import { Star } from "lucide-react";
+import { Button, IconArrowBackward, Panel, Text } from "@app/ui";
 import { BudgetDetailsLocation } from "./components/Location";
+import { StoreResume } from "../../../../components/Profiles/store/resume";
 
 
 export function BudgetDetails() {
@@ -70,41 +70,7 @@ export function BudgetDetails() {
                 <Link to={`/solicitation/${budget.solicitation.id}`} className="btn btn-outline-primary">Acessar solicitação</Link>
               </div>
             </Panel>
-            <Panel className="min-w-[400px] p-4">
-              <Text className="text-black dark:text-white text-5xl mt-4 font-extrabold " as="h1">Loja</Text>
-              <div className="border-b border-b-[#323b45] mt-5 " />
-              <div className="font-extrabold flex flex-row gap-5 mt-10">
-                <div className="w-[100px] max-h-[80px] ">
-                  <img width="100" height="100" src={budget.storeProfile.profileImg} className="rounded-3xl" />
-                </div>
-                <div className="flex w-full flex-col">
-                  <Text className="flex flex-row gap-5 items-center text-center text-dark dark:text-white text-lg" as="span">
-                    {budget.storeProfile.name}
-                    <div className="flex flex-row mb-2">
-                      {[...Array(5)].map((_, index) => (
-                        <Star
-                          key={index}
-                          className={index < budget.storeProfile.rating ? "fill-yellow-500 text-yellow-500" : "fill-none text-gray-300"}
-                          size={16}
-                        />
-                      ))}
-                    </div>
-                  </Text>
-                  <div className="flex flex-row w-full">
-                    <div className="w-full text-left flex flex-col gap-2">
-                      <Text className="text-lg text-green" as="span">Aberto</Text>
-                      <Text as="span">Distância em km: {budget.solicitation.form.details}</Text>
-                    </div>
-                  </div>
-                </div >
-              </div >
-              <div className="border-b border-b-[#323b45] mb-5 mt-5" />
-              <div className="flex flex-col gap-5">
-                <Button className="btn-green flex flex-row gap-2"><IconWhatsApp />Chamar no Whatsapp</Button>
-                <Button className="btn-blue flex flex-row gap-2"><IconMail />Enviar Email</Button>
-                <Link target="_blank" to={`/store-profile/${budget.storeProfile.id}`} className="btn-primary btn flex flex-row gap-2"><IconStore />Perfil da loja</Link>
-              </div>
-            </Panel>
+            <StoreResume storeProfile={budget.storeProfile} />
           </div>
           <BudgetDetailsLocation budget={budget} />
         </div>
