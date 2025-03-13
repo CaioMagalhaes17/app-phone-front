@@ -33,7 +33,7 @@ export default function ClientSignUp() {
 
       <div className="font-extrabold relative flex min-h-screen items-center justify-center bg-cover bg-center bg-no-repeat px-6 py-10 sm:px-16">
         <div className="relative w-full max-w-[570px] rounded-md p-2">
-          <div className="relative flex flex-col justify-center rounded-md border-2 dark:bg-dark px-6 py-10">
+          <div className="relative flex flex-col justify-center rounded-md border-2 dark:border-black dark:bg-dark px-6 py-10">
             <div className="mx-auto w-full">
               <div className="mb-5">
                 <h1 className="text-3xl font-extrabold text-black dark:text-white">Crie sua conta</h1>
@@ -104,9 +104,9 @@ export default function ClientSignUp() {
               </div>
 
               <div className="flex flex-col mb-10">
-                <div className="flex flex-row border-2 p-2 items-center justify-center">
+                <div className="flex flex-row border dark:border-black p-2 items-center justify-center">
                   <img src="https://www.cdnlogo.com/logos/g/35/google-icon.svg" className="w-[50px] h-[50px]" />
-                  <Text className="ml-5 text-dark dark:text-white-dark" as="span">Cadastrar com Google</Text>
+                  <Text className="ml-5 text-dark dark:text-white" as="span">Cadastrar com Google</Text>
                 </div>
               </div>
 

@@ -11,7 +11,7 @@ export function useGetStoresInsideClientRadius() {
   const navigate = useNavigate()
   const { isLoading: storesLoading, data } = useQuery({
     queryKey: ['fetch-stores-inside-client-radius'],
-    queryFn: FetchStoresInsideClientRadius
+    queryFn: FetchStoresInsideClientRadius,
   })
 
   useEffect(() => {

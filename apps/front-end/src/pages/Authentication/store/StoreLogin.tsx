@@ -35,7 +35,7 @@ export default function ClientLogin() {
       </div>
 
       <div className="relative flex min-h-screen items-center justify-center bg-cover bg-center bg-no-repeat px-6 py-10 sm:px-16">
-        <div className="relative font-extrabold w-full max-w-[570px] rounded-md border-2 p-2">
+        <div className="relative font-extrabold w-full max-w-[570px] rounded-md border-2 dark:border-black p-2">
           <div className="relative flex flex-col justify-center rounded-md dark:bg-dark px-6 py-10">
             <div className="mx-auto w-full">
               <div className="mb-10">

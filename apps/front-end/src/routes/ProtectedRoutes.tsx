@@ -12,7 +12,7 @@ export const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const accessToken = localStorage.getItem("accessToken");
   const isStore: string | null = localStorage.getItem('isStore')
   const [isLoading, setIsLoading] = useState(true)
-  const { setClientInfos, setStoreInfos, setIsMapLoaded } = useStore()
+  const { setClientInfos, setStoreInfos, setIsMapLoaded, clientInfos } = useStore()
   const isLoaded = LoadGoogleApi()
   const location = useLocation()
   const isStoreRoute = location.pathname.startsWith("/store")
@@ -24,7 +24,9 @@ export const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   useEffect(() => {
     const checkAuth = async () => {
       if (isStore === 'false') {
-        await loadClient()
+        if (!clientInfos.name) {
+          await loadClient()
+        }
       } else {
         await loadStore()
       }
@@ -36,6 +38,7 @@ export const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   }, [location, isLoaded])
 
   async function loadClient() {
+    console.log('niggerszinh')
     const response = await getClientProfile()
     setClientInfos(response)
     setIsLoading(false)

@@ -6,6 +6,7 @@ import { Button, IconPencil, IconSearch, IconSend, Input, Text } from "@app/ui";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { MapPinSvg } from "../../../constants/svg-icons";
 
 type StoresInsideRadius = {
   GeoLocation: { props: { latitude: number; longitude: number; } }
@@ -123,7 +124,7 @@ export function Home() {
         <div className="flex flex-col w-full max-w-[1200px]">
           <div className="flex flex-row mb-4 gap-5">
             <div className="flex">
-              <Text className="text-white text-3xl font-extrabold " as="h1">Assistências técnicas mais próximas</Text>
+              <Text className="text-dark dark:text-white text-3xl font-extrabold " as="h1">Assistências técnicas mais próximas</Text>
             </div>
             <div className="mr-auto" />
             <Button onClick={() => navigate('/map/edit')} className="btn-primary flex flex-row gap-5"><IconPencil />Editar localização de pesquisa</Button>
@@ -136,8 +137,13 @@ export function Home() {
                   {!storesLoading && data && data.length > 0 ? (data.map((item: StoresInsideRadius) => {
                     return (
                       <MarkAdapter icon={item.Profile.props.profileImg} onClick={() => setSelectedStore(item)} position={{ lat: item.GeoLocation.props.latitude, lng: item.GeoLocation.props.longitude }} key={item._id} />
+
                     )
                   })) : ''}
+                  <MarkAdapter
+                    position={clientInitialPosition}
+                    icon={MapPinSvg}
+                  />
                   <RadiusAdapter center={{ lat: clientInitialPosition.lat, lng: clientInitialPosition.lng }} radius={clientInitialPosition.radius} />
                   {selectedStore && (
                     <InfoWindowAdapter onClose={() => setSelectedStore(null)} position={{ lat: selectedStore.GeoLocation.props.latitude, lng: selectedStore.GeoLocation.props.longitude }} options={{ pixelOffset: new window.google.maps.Size(0, -40) }}>
