@@ -16,7 +16,6 @@ export const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const isLoaded = LoadGoogleApi()
   const location = useLocation()
   const isStoreRoute = location.pathname.startsWith("/store")
-
   if (!accessToken) {
     return <Navigate to={'/'} replace />;
   }
@@ -65,6 +64,8 @@ export const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   if (isLoading) {
     return <div> Carregando...</div>
   }
+
+
 
   return children;
 };

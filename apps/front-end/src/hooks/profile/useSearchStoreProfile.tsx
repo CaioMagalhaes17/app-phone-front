@@ -15,7 +15,6 @@ export function useSearchStoreProfiles(query: string) {
   })
 
   useEffect(() => {
-    console.log('cai aqui?', data)
     if (!isStoreLoading && data) {
       console.log('bundabunda', data)
       setProfiles(data)

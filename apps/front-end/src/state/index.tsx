@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 
 type ClientInfos = {
+  id: string,
   name: string,
   profileImg: string,
   location: {
@@ -42,6 +43,7 @@ type StoreInfos = {
   updatedAt: string
   userId: string
   rating: number
+  subscriptionPlanId: string
   location: {
     latitude: number,
     longitude: number
@@ -79,6 +81,7 @@ const useStore = create<StateManager>((set, get) => {
       })
     },
     clientInfos: {
+      id: '',
       name: '',
       profileImg: '',
       location: {
@@ -104,6 +107,7 @@ const useStore = create<StateManager>((set, get) => {
       updatedAt: '',
       userId: '',
       rating: 0,
+      subscriptionPlanId: '',
       location: {
         latitude: 0,
         longitude: 0,

@@ -1,7 +1,10 @@
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger, IconBell, IconSettings, Text } from "@app/ui";
 import { NotificationRow } from "./NotificationRow";
+import useNotifications from "../../hooks/useNotifications";
 
 export function HeaderNotificationsBox() {
+  const { notifications } = useNotifications()
+  console.log('notificalçoes', notifications)
   return (
     <>
       <DropdownMenu>

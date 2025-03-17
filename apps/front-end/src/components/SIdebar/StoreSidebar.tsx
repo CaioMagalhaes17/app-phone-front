@@ -1,4 +1,4 @@
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, IconBill, IconChat, IconDollarSignCircle, IconHelpCircle, IconHome, IconMap, IconPencil, IconShoppingBag, IconSmartphone, IconStore, IconStreetMap, Text } from "@app/ui"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, IconBill, IconChat, IconDollarSignCircle, IconHelpCircle, IconHome, IconMap, IconPencil, IconShoppingBag, IconSmartphone, IconStore, IconStreetMap, IconVerified, Text } from "@app/ui"
 import { Link, useNavigate } from "react-router-dom"
 import useStore from "../../state"
 
@@ -83,6 +83,10 @@ export function StoreSidebar() {
           </AccordionContent>
         </AccordionItem>
       </Accordion>
+      <Link to='/store/plans' className="font-bold hover:underline text-lg cursor-pointer text-black dark:text-white flex flex-row gap-5 mt-2 mb-4">
+        <IconVerified />
+        Planos
+      </Link>
       <Accordion type="single" collapsible className="">
         <AccordionItem value="item-1">
           <AccordionTrigger className="mb-2 text-black dark:text-white text-lg font-extrabold">

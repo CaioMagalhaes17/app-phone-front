@@ -28,6 +28,5 @@ export async function login(data: { login: string, password: string }, isStore: 
       })
 
     }
-    console.log(error)
   }
 }

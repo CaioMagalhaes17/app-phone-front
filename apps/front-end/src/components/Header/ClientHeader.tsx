@@ -16,6 +16,7 @@ export function ClientHeader() {
   const navigate = useNavigate()
   function handleLogout() {
     setClientInfos({
+      id: '',
       name: '',
       profileImg: '',
       location: {
@@ -27,6 +28,7 @@ export function ClientHeader() {
     localStorage.removeItem('accessToken')
     navigate('/login')
   }
+
   return (
     <UIHeader>
       <div className="h-[80px] shadow-md relative flex w-full items-center px-5 py-2.5 dark:bg-black dark:border-b-[#323b45]">

@@ -16,7 +16,6 @@ export function useSearchProducts(query: string) {
   })
 
   useEffect(() => {
-    console.log('cai aqui?', data)
     if (!isProductsLoading && data) {
       console.log(data)
       setProducts(formatProducts(data))

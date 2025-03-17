@@ -25,6 +25,7 @@ export function StoreHeader() {
         latitude: 0,
         longitude: 0,
       },
+      subscriptionPlanId: '',
       description: "",
       createdAt: "",
       updatedAt: "",

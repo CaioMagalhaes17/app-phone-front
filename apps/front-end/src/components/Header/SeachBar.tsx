@@ -23,7 +23,6 @@ export function SearchBar() {
     })
   }
 
-  console.log(profiles)
   return (
     <>
       <div className="ml-10 flex flex-col ">
