@@ -14,7 +14,7 @@ export default function ClientLogin() {
   const { register, formState: { errors }, handleSubmit } = useForm()
 
   const { mutateAsync } = useMutation({
-    mutationFn: (data: LoginForm) => login(data),
+    mutationFn: (data: LoginForm) => login(data, true),
     mutationKey: ['login']
   })
 
@@ -25,7 +25,7 @@ export default function ClientLogin() {
     const response = await mutateAsync(data as LoginForm);
     localStorage.setItem('accessToken', response.token)
     localStorage.setItem('isStore', 'true')
-    window.location.replace('/store/home')
+    window.location.replace('/store/dashboard')
   };
 
   return (

@@ -1,13 +1,13 @@
 import { AxiosError } from "axios"
 import { Api } from "./axios"
-import { HandleAxiosErrors } from "./errors"
+import { handleAxiosErrors } from "./errors"
 
-export async function testApi() {
+export async function checkUserAuth() {
   try {
-    const response = await Api().get('/ping')
+    const response = await Api().get('/checkAuth')
     return response
   } catch (error) {
-    if (error instanceof AxiosError) return HandleAxiosErrors(error, {
+    if (error instanceof AxiosError) return handleAxiosErrors(error, {
       timer: 10000,
       showCloseButton: false,
       showCancelButton: false,

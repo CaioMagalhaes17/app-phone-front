@@ -1,11 +1,9 @@
 import { Button } from "@app/ui";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import useStore from "../../../../state";
 
 export default function StoreProfilePicker() {
   const [selectedProfile, setSelectedProfile] = useState<string>('');
-  const { setStoreInfos } = useStore()
   const profiles = [
     { id: '1', name: "Perfil 1" },
     { id: '2', name: "Perfil 2" },
@@ -58,7 +56,7 @@ export default function StoreProfilePicker() {
             </div>
           ))}
         </div>
-        <Link to="/">
+        <Link to="/dashboard">
           <Button disabled={selectedProfile === ''} className="text-lg btn-primary">Continuar</Button>
         </Link>
       </div>

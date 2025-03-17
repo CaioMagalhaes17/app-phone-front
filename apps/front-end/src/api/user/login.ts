@@ -2,9 +2,9 @@ import { AxiosError } from "axios"
 import { Api } from "../axios"
 import { handleAxiosErrors } from "../errors"
 
-export async function login(data: { login: string, password: string }) {
+export async function login(data: { login: string, password: string }, isStore: boolean) {
   try {
-    const response = await Api().post('/user/login', data)
+    const response = await Api().post('/user/login', { isStore, ...data })
     return response.data
   } catch (error) {
     if (error instanceof AxiosError) {

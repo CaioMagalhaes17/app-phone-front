@@ -42,7 +42,7 @@ export default function StoreSignUp() {
       })
       localStorage.setItem('accessToken', response.token)
       localStorage.setItem('isStore', 'true')
-      window.location.replace('/store/home')
+      window.location.replace('/store/dashboard')
     }
 
   }

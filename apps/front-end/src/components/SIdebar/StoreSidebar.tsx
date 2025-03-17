@@ -7,7 +7,7 @@ export function StoreSidebar() {
   const navigate = useNavigate()
   return (
     <>
-      <Link to='/store/home' className="font-bold hover:underline text-lg cursor-pointer text-black dark:text-white flex flex-row gap-5 mb-4">
+      <Link to='/store/dashboard' className="font-bold hover:underline text-lg cursor-pointer text-black dark:text-white flex flex-row gap-5 mb-4">
         <IconHome />
         Início
       </Link>

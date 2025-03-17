@@ -18,7 +18,7 @@ export const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const isStoreRoute = location.pathname.startsWith("/store")
 
   if (!accessToken) {
-    return <Navigate to={isStore && isStore === 'true' ? "/store/login" : "/login"} replace />;
+    return <Navigate to={'/'} replace />;
   }
 
   useEffect(() => {
@@ -57,7 +57,7 @@ export const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
     }
 
     if (!isStoreRoute && isStore === 'true') {
-      if (location.pathname.startsWith('/store-feedbacks') && location.pathname.startsWith('/store/home')) return
+      if (location.pathname.startsWith('/store-feedbacks') && location.pathname.startsWith('/store/dashboard')) return
       return window.location.href = '/404'
     }
   }

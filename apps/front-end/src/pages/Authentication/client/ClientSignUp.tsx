@@ -22,7 +22,7 @@ export default function ClientSignUp() {
     })
     localStorage.setItem('accessToken', response.token)
     localStorage.setItem('isStore', 'false')
-    window.location.replace('/')
+    window.location.replace('/dashboard')
   }
 
   return (

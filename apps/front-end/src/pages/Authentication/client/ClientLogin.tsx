@@ -15,7 +15,7 @@ export default function ClientLogin() {
   const { register, formState: { errors }, handleSubmit } = useForm()
 
   const { mutateAsync } = useMutation({
-    mutationFn: (data: LoginForm) => login(data),
+    mutationFn: (data: LoginForm) => login(data, false),
     mutationKey: ['login']
   })
 
@@ -25,7 +25,7 @@ export default function ClientLogin() {
     const response = await mutateAsync(data as LoginForm);
     localStorage.setItem('accessToken', response.token)
     localStorage.setItem('isStore', 'false')
-    window.location.replace('/')
+    window.location.replace('/dashboard')
   };
   return (
     <>
@@ -62,6 +62,7 @@ export default function ClientLogin() {
                       <IconMail fill={true} />
                     </span>
                   </div>
+                  {errors.login && (<p className="font-bold text-danger">Campo Obrigatório</p>)}
                   <div className="mt-5">
                     <label className="text-dark dark:text-white" htmlFor="Name">Senha</label>
                     <div className="relative text-white-dark">
@@ -75,11 +76,13 @@ export default function ClientLogin() {
                 </div>) : (<div>
                   <label className="text-dark dark:text-white" htmlFor="Name">Telefone</label>
                   <div className="relative text-white-dark">
-                    <Input id="Name" placeholder="Digite seu número de telefone" className="form-input !ps-10 placeholder:text-white-dark" />
+                    <Input {...register('telNum', { required: true })} id="Name" placeholder="Digite seu número de telefone" className="form-input !ps-10 placeholder:text-white-dark" />
                     <span className="absolute start-4 top-1/2 -translate-y-1/2">
                       <IconPhone />
                     </span>
                   </div>
+                  {errors.telNum && (<p className="font-bold text-danger">Campo Obrigatório</p>)}
+
                 </div>)}
 
 

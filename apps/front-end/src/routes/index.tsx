@@ -34,6 +34,7 @@ import { ClientMarketHome } from "../pages/Market/client/home";
 import { ClientMarketCategoryProducts } from "../pages/Market/client/category";
 import { UserSignUp } from "../pages/Authentication";
 import { LandingHome } from "../pages/Landing/home";
+import { PublicRoutes } from "./PublicRoutes";
 
 const ClientMapEdit = React.lazy(() => import("../pages/Map/Edit/client"))
 const DefaultLayout = React.lazy(() => import("../components/DefaultLayout"))
@@ -49,7 +50,7 @@ export const routes: RouteObject[] = [
     ),
     children: [
       {
-        path: '/',
+        path: '/dashboard',
         element: <Home />,
       },
       {
@@ -81,7 +82,7 @@ export const routes: RouteObject[] = [
         element: <ClientBudgetsList />,
       },
       {
-        path: '/store/home',
+        path: '/store/dashboard',
         element: <StoreHome />,
       },
       {
@@ -168,37 +169,45 @@ export const routes: RouteObject[] = [
     ]
   },
   {
-    path: '/signup',
-    element: <ClientSignUp />
-  },
-  {
-    path: '/chooseProfileType/:id',
-    element: <UserSignUp />
-  },
-  {
-    path: '/login',
-    element: <ClientLogin />
-  },
-  {
-    path: '/store/login',
-    element: <StoreLogin />
-  },
-  {
-    path: '/store/signup',
-    element: <StoreSignUp />
-  },
-  {
-    path: '/store/profile/picker',
-    element: <StoreProfilePicker />
-  },
-  {
-    path: "*",
-    element: <Error404 />
-  },
-  {
-    path: '/landing',
-    element: <LandingHome />
+    element: (
+      <PublicRoutes />
+    ),
+    children: [
+      {
+        path: '/signup',
+        element: <ClientSignUp />
+      },
+      {
+        path: '/chooseProfileType/:id',
+        element: <UserSignUp />
+      },
+      {
+        path: '/login',
+        element: <ClientLogin />
+      },
+      {
+        path: '/store/login',
+        element: <StoreLogin />
+      },
+      {
+        path: '/store/signup',
+        element: <StoreSignUp />
+      },
+      {
+        path: '/store/profile/picker',
+        element: <StoreProfilePicker />
+      },
+      {
+        path: "*",
+        element: <Error404 />
+      },
+      {
+        path: '/',
+        element: <LandingHome />
+      }
+    ]
   }
+
 ]
 
 export const appRoute = createBrowserRouter(routes)

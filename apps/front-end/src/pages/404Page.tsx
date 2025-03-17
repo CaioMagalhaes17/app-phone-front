@@ -14,7 +14,7 @@ const Error404 = () => {
             className="mx-auto -mt-10 w-full max-w-xs object-cover md:-mt-14 md:max-w-xl"
           />
           <p className="mt-5 text-base dark:text-white">Página não encontrada!</p>
-          <Button onClick={() => navigate(isStore ? '/store/home' : '/')} className="text-lg btn-primary">Início</Button>
+          <Button onClick={() => navigate(isStore ? '/store/dashboard' : '/dashboard')} className="text-lg btn-primary">Início</Button>
         </div>
       </div>
     </div>

@@ -5,7 +5,7 @@ export function ClientSidebar() {
   const navigate = useNavigate()
   return (
     <>
-      <Text as="span" onClick={() => navigate('/')} className="font-extrabold hover:underline text-lg cursor-pointer text-black dark:text-white flex flex-row gap-5 mb-5">
+      <Text as="span" onClick={() => navigate('/dashboard')} className="font-extrabold hover:underline text-lg cursor-pointer text-black dark:text-white flex flex-row gap-5 mb-5">
         <IconHome />
         Início
       </Text>
