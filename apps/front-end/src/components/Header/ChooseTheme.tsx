@@ -24,7 +24,7 @@ export function ChooseTheme() {
         <button
           id="theme-lt-dk"
           className={`${theme === 'dark' &&
-            'flex items-center p-2 rounded-full hover:text-white '
+            'flex items-center p-2 dark:text-white rounded-full hover:text-white '
             }`}
           onClick={() => {
             setTheme('light')

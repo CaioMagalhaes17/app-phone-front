@@ -32,7 +32,8 @@ import { ProductEdit } from "../pages/Market/store/products/ProductEdit";
 import { ProductCreate } from "../pages/Market/store/products/ProductCreate";
 import { ClientMarketHome } from "../pages/Market/client/home";
 import { ClientMarketCategoryProducts } from "../pages/Market/client/category";
-import { UserSignUp } from "../pages/Authentication/client";
+import { UserSignUp } from "../pages/Authentication";
+import { LandingHome } from "../pages/Landing/home";
 
 const ClientMapEdit = React.lazy(() => import("../pages/Map/Edit/client"))
 const DefaultLayout = React.lazy(() => import("../components/DefaultLayout"))
@@ -171,7 +172,7 @@ export const routes: RouteObject[] = [
     element: <ClientSignUp />
   },
   {
-    path: '/new',
+    path: '/chooseProfileType/:id',
     element: <UserSignUp />
   },
   {
@@ -193,6 +194,10 @@ export const routes: RouteObject[] = [
   {
     path: "*",
     element: <Error404 />
+  },
+  {
+    path: '/landing',
+    element: <LandingHome />
   }
 ]
 
