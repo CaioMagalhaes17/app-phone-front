@@ -88,7 +88,7 @@ export function StoreProfileOwner() {
           storeFeedbacksProps={{ feedbacks, canShowRateStore: false }}
           mainPanelProps={{ name: storeInfos.name, rating: storeInfos.rating, storeSocials: socials, storeProfileImg: storeInfos.profileImg }}
           storeProfileBudgets={{ budgets, isOwner: true }}
-          storeProfileLocation={{ lat: clintLocation.lat, lng: clintLocation.lng, storeSocials: socials, contacts, storeProfileImg: storeInfos.profileImg, address: storeInfos.address }}
+          storeProfileLocation={{ isOwner: true, lat: clintLocation.lat, lng: clintLocation.lng, storeSocials: socials, contacts, storeProfileImg: storeInfos.profileImg, address: storeInfos.address }}
         />
       ) : ''}
     </>

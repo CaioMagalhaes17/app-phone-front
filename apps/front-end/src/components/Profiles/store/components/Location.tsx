@@ -1,4 +1,4 @@
-import { Button, IconFacebook, IconInstagram, IconPencil, IconWhatsApp, Panel, Text } from "@app/ui";
+import { IconFacebook, IconInstagram, IconPencil, IconWhatsApp, Panel, Text } from "@app/ui";
 import { MapAdapter, MarkAdapter } from "../../../../adapters/Map";
 import useStore from "../../../../state";
 import { StoreContacts, StoreSocialsType } from "../../../../types/store-profile";
@@ -12,11 +12,11 @@ export type StoreProfileLocationProps = {
   contacts: StoreContacts[] | null
   storeProfileImg: string
   address: string
-  isOwner: boolean
+  isOwner?: boolean
 }
 export function StoreProfileLocation({ lat, lng, storeSocials, contacts, storeProfileImg, address, isOwner }: StoreProfileLocationProps) {
   const { isMapLoaded } = useStore()
-
+  console.log(isOwner)
   const mapStyle = {
     width: '100%',
     height: '100%',
@@ -27,7 +27,9 @@ export function StoreProfileLocation({ lat, lng, storeSocials, contacts, storePr
       <Panel className="mt-5 font-extrabold">
         <div className="flex flex-row">
           <Text className="text-3xl text-black dark:text-white" as="h1">Localização e Contato</Text>
-          <Link to="/store/map/edit" className="btn-primary btn ml-auto"><IconPencil className="mr-2" />Alterar Localização</Link>
+          {isOwner && (
+            <Link to="/store/map/edit" className="btn-primary btn ml-auto"><IconPencil className="mr-2" />Alterar Localização</Link>
+          )}
         </div>
         <div className="border-b border-b-[#323b45] mt-5 mt-10" />
         <div className="flex flex-row relative h-full gap-5">

@@ -10,7 +10,7 @@ export function ProblemFormComponent({ topic, problemForm, canEdit, solicitation
   const [editMode, setEditMode] = useState(false)
   useEffect(() => {
     setFormattedProblem(getStepTwoAnswersByForm(topic, problemForm))
-  }, [])
+  }, [problemForm])
   console.log(formattedProblem)
   return (
     <>

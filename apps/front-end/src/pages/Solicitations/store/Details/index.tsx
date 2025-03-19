@@ -18,15 +18,15 @@ export function StoreSolicitationDetails() {
   const { id } = useParams() as { id: string }
   const client = useQueryClient()
   const { data: solicitationData, isLoading } = useQuery<Solicitation>({
-    queryKey: ['get-solicitation'],
+    queryKey: ['get-solicitation', id],
     queryFn: () => GetSolicitation(id)
   })
 
   const { data: budgetData, isLoading: budgetLoading } = useQuery({
-    queryKey: ['get-budget'],
+    queryKey: ['get-budget', id],
     queryFn: () => GetStoreSolicitationBudgets(id)
   })
-
+  console.log(budgetData)
   const { mutateAsync } = useMutation({
     mutationKey: ['return-budget'],
     mutationFn: CreateBudget

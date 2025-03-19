@@ -7,8 +7,10 @@ import { formatFeedbacks } from "../../../../formaters/feedback";
 import { FeedbackRow } from "../../../../components/Feedbacks/row";
 import { Button, IconArrowBackward, Panel, Text } from "@app/ui";
 import { CreateFeedback } from "../../../../components/Feedbacks/create-modal";
+import useStore from "../../../../state";
 
 export function StoreFeedbacksList() {
+  const { storeInfos } = useStore()
   const { id } = useParams() as { id: string }
   const [feedbacks, setFeedbacks] = useState<FeedbackType[] | null>()
   const { data, isLoading } = useQuery({
@@ -28,10 +30,12 @@ export function StoreFeedbacksList() {
       {!isLoading && feedbacks ? (<div className="flex justify-center">
         <Panel className="font-extrabold  max-w-[1200px] w-full">
           <div className="flex flex-row">
-            <Text className="text-3xl text-white" as="h1">Avaliações</Text>
+
+            <Text className="text-3xl text-black dark:text-white" as="h1">Avaliações</Text>
             <div className="ml-auto" />
-            <CreateFeedback storeName="teste" storeId={id} />
-            <Button className="btn-outline-primary mr-5">Filtrar</Button>
+            {storeInfos.id !== id ? (
+              <CreateFeedback storeName="teste" storeId={id} />
+            ) : ''}
           </div>
           <div className="border-b border-b-[#323b45] mt-5 mt-10" />
           {feedbacks.length > 0 ?

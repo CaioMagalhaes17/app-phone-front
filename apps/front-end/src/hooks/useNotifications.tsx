@@ -1,13 +1,14 @@
 import { useEffect, useState, useRef } from 'react';
 import { io, Socket } from 'socket.io-client';
 import useStore from '../state';
+import { NotificationType } from '../types/notification';
 
 const useNotifications = () => {
   const { storeInfos, clientInfos } = useStore();
   const isStore = localStorage.getItem('isStore') === 'true';
   const profileId = isStore ? storeInfos.id : clientInfos.id;
 
-  const [notifications, setNotifications] = useState<string[]>([]);
+  const [notifications, setNotifications] = useState<NotificationType[]>([]);
   const socketRef = useRef<Socket | null>(null);
 
   useEffect(() => {

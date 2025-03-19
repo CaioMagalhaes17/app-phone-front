@@ -21,6 +21,7 @@ export function BudgetDetailsLocation({ budget }: { budget: BudgetType }) {
               contacts={contacts}
               storeProfileImg={storeProfile.profileImg}
               address={storeProfile.address}
+              isOwner={false}
             />
           </div>
         </>

@@ -23,6 +23,7 @@ export function StoreProfileComponent({ storeId, mainPanelProps, storeProfileLoc
         <StoreProfileBudgets budgets={storeProfileBudgets.budgets} isOwner={storeProfileBudgets?.isOwner} />
       </div>
       <StoreProfileLocation
+        isOwner={storeProfileLocation.isOwner}
         lat={storeProfileLocation.lat}
         lng={storeProfileLocation.lng}
         storeSocials={storeProfileLocation.storeSocials}
