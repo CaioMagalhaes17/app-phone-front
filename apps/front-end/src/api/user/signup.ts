@@ -15,6 +15,7 @@ export type UserStoreSignup = {
     lng: number
   },
   permission?: string
+  useTelNumAsWpp: boolean
 }
 
 export async function signup(data: UserClientSignup | UserStoreSignup) {

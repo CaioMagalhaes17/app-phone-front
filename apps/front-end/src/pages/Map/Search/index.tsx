@@ -12,7 +12,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@app/ui"
-import { formatStoreContacts, formatStoreProfile } from "../../../formaters/store-profile";
+import { formatStoreContact, formatStoreProfile } from "../../../formaters/store-profile";
 import { StoreContacts, StoreContactsFromApi, StoreProfileFromApi, StoreProfileType } from "../../../types/store-profile";
 import { Star } from "lucide-react";
 import { MapPinSvg } from "../../../constants/svg-icons";
@@ -21,7 +21,7 @@ import Swal from "sweetalert2";
 type StoresInsideRadius = {
   GeoLocation: { props: { latitude: number; longitude: number; } }
   Profile: StoreProfileFromApi & { storeProfileContacts: StoreContactsFromApi[] }
-  contacts: StoreContactsFromApi[]
+  contacts: StoreContactsFromApi
   _id: string
 }
 
@@ -33,7 +33,7 @@ export default function ClientMapSearch() {
   const [selectedStore, setSelectedStore] = useState<{
     geoLocation: { props: { latitude: number; longitude: number; } },
     storeProfile: StoreProfileType,
-    storeContacts: StoreContacts[]
+    storeContacts: StoreContacts
   } | null>()
 
   useEffect(() => {
@@ -78,7 +78,7 @@ export default function ClientMapSearch() {
     const teste = {
       geoLocation: item.GeoLocation,
       storeProfile: formatStoreProfile(item.Profile),
-      storeContacts: formatStoreContacts(item.contacts)
+      storeContacts: formatStoreContact(item.contacts)
     }
     setSelectedStore(teste)
   }
@@ -167,13 +167,8 @@ export default function ClientMapSearch() {
 
                 <div className="flex flex-col font-extrabold items-center mt-5">
                   <Text className="text-dark dark:text-white text-center" as="span">{selectedStore.storeProfile.address}</Text>
-                  {selectedStore.storeContacts.map((item) => {
-                    return (
-                      <>
-                        <Text className="text-white-dark text-md mt-5" as="span">{item.email || item.telNum} - {item.description}</Text>
-                      </>
-                    )
-                  })}
+                  <Text className="text-white-dark text-md mt-5" as="span">{selectedStore.storeContacts.telNum}</Text>
+                  <Text className="text-white-dark text-md mt-5" as="span">{selectedStore.storeContacts.email}</Text>
                 </div>
               </div>
               <div className="border-b border-b-[#323b45] w-[100%]" />

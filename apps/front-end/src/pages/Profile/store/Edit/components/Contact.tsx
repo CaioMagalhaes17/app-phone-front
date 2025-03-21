@@ -1,137 +1,94 @@
 import ReactInputMask from 'react-input-mask'
-import { Button, IconPlus, Input, Text } from "@app/ui";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { Button, IconPencil, IconWhatsApp, Input, Text } from "@app/ui";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { FieldValues, useForm } from "react-hook-form";
-import { getStoreContacts } from "../../../../../api/user/store/get-contacts";
-import { useEffect, useState } from "react";
-import { StoreContacts } from "../../../../../types/store-profile";
-import { formatStoreContacts } from "../../../../../formaters/store-profile";
-import { deleteStoreContacts } from "../../../../../api/user/store/delete-contacts";
-import Swal from "sweetalert2";
-import { CreateStoreContacts } from "../../../../../api/user/store/create-contact";
+import { UpdateStoreContacts } from '../../../../../api/user/store/update-contact';
+import Swal from 'sweetalert2';
+import { useGetStoreContacts } from '../../../../../hooks/profile/useGetStoreContacts';
 
 export function StoreContact() {
   const { register, handleSubmit, formState: { errors } } = useForm()
-  const [contacts, setContacts] = useState<StoreContacts[] | []>([])
   const client = useQueryClient()
-  const [type, setType] = useState<"email" | "telNum">("email")
 
-  const { data, isLoading } = useQuery({
-    queryKey: ['get-contacts'],
-    queryFn: () => getStoreContacts()
+  const { contacts } = useGetStoreContacts()
+
+  const { mutateAsync: updateContact } = useMutation({
+    mutationFn: UpdateStoreContacts,
+    mutationKey: ['update-contact']
   })
 
-  const { mutateAsync: deleteContact } = useMutation({
-    mutationFn: deleteStoreContacts,
-    mutationKey: ['delete-contact']
-  })
 
-  const { mutateAsync: createContact } = useMutation({
-    mutationFn: CreateStoreContacts,
-    mutationKey: ['create-contact']
-  })
-
-  async function onNewContact(data: FieldValues) {
-    if (type === 'telNum') {
-      await createContact({ description: data.newDescription, main: false, telNum: data.newTelNum })
-    } else {
-      await createContact({ description: data.newDescription, main: false, email: data.newEmail })
-
+  async function onContactEdit(data: FieldValues) {
+    const response = await updateContact({ email: data.email, telNum: data.telNum, wppNum: data.wppNum })
+    if (response && response.status === 200) {
+      Swal.fire({
+        titleText: 'Contatos alterados com sucesso!',
+        icon: 'success',
+        showCancelButton: false,
+        confirmButtonText: 'Sim',
+        padding: '2em',
+        customClass: {
+          confirmButton: 'btn btn-primary btn-lg m-1',
+        },
+        buttonsStyling: false,
+      }).then(() => {
+        client.refetchQueries({ queryKey: ['get-contacts'] })
+      })
     }
-    client.refetchQueries({ queryKey: ['get-contacts'] })
   }
 
-  async function onContactDelete(id: string) {
-    Swal.fire({
-      title: 'Apagar contato?',
-      showCancelButton: true,
-      cancelButtonText: 'Não',
-      confirmButtonText: 'Sim',
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        await deleteContact(id, {
-          onSuccess: () => {
-            client.refetchQueries({ queryKey: ['get-contacts'] })
-          }
-        })
-      }
-    })
-  }
-
-  useEffect(() => {
-    if (!isLoading && data) return setContacts(formatStoreContacts(data))
-  }, [data, isLoading])
 
   return (
     <>
-      <form onSubmit={handleSubmit(onNewContact)}>
-        <Text className="text-white text-left text-3xl" as="span">Contato</Text>
-        <div className="flex flex-col text-lg">
-          {contacts.length > 0 && (
-            contacts.map((item) => {
-              console.log(item)
-              return (
-                <>
-                  <div className="flex items-center flex-row gap-5 mb-10">
-                    <div className="w-full">
-                      <Text as="span">{item.email ? 'Email' : 'Número de telefone'}</Text>
-                      <Input value={item.telNum || item.email} />
-                    </div>
-                    <div className="w-full">
-                      <Text as="span">Observação</Text>
-                      <Input value={item.description} />
-                    </div>
-                    <Button type="button" onClick={() => onContactDelete(item.id)} className="btn-outline-danger">Excluir</Button>
-                  </div>
-                </>
-              )
-            })
-          )}
-          <div className="flex items-center flex-row gap-5 mt-10">
-
-            <div className="w-full">
-              <Text as="span">{type === 'email' ? 'Email' : 'Número de telefone'}</Text>
-              {type === 'email' ? (
-                <>
-                  <Input type="email" {...register('newEmail', { required: true })} className="" />
-                  {errors.newEmail && (<span className="text-danger">Campo Obrigatório</span>)}
-                </>
-              ) : (
-                <>
-                  <ReactInputMask
-                    className="form-input-custom"
-                    mask={'(99) 99999-9999'}
-                    alwaysShowMask={false}
-                    maskPlaceholder=""
-                    type={'text'}
-                    {...register('newTelNum', { required: true })}
-                  />
-                  {errors.newTelNum && (<span className="text-danger">Campo Obrigatório</span>)}
-                </>
-
-              )}
+      {contacts && (
+        <form onSubmit={handleSubmit(onContactEdit)}>
+          <Text className="text-dark dark:text-white mr-auto flex flex-row text-3xl " as="span">Contato</Text>
+          <div className="flex flex-col text-lg mt-10">
+            <div className="flex items-center flex-row gap-5 mb-10">
+              <div className='flex flex-col w-full '>
+                <Button className='btn-green w-full flex flex-row gap-2'> <IconWhatsApp />Whatsapp</Button>
+                {errors.wppNum && (<span className="text-left text-danger">Campo Obrigatório</span>)}
+              </div>
+              <div className="w-full flex flex-col">
+                <ReactInputMask
+                  className="form-input-custom"
+                  mask={'(99) 99999-9999'}
+                  alwaysShowMask={false}
+                  maskPlaceholder="(99) 99999-9999"
+                  type={'text'}
+                  defaultValue={contacts.wppNum}
+                  {...register('wppNum', { required: true })}
+                />
+              </div>
+              <Button type="submit" onClick={() => ''} className="btn-outline-green flex flex-row gap-5"><IconPencil /> {contacts.wppNum ? 'Editar' : 'Adicionar'}</Button>
             </div>
-            <div className="w-full">
-              <Text as="span">Observação</Text>
-              <Input {...register('newDescription', { required: true })} className="" />
-              {errors.newDescription && (<span className="text-danger">Campo Obrigatório</span>)}
+            <div className="flex items-center flex-row gap-5 mb-10">
+              <div className="w-full flex flex-col">
+                <Text as="span">{'Número de telefone'}</Text>
+                <ReactInputMask
+                  className="form-input-custom"
+                  mask={'(99) 99999-9999'}
+                  alwaysShowMask={false}
+                  maskPlaceholder="(99) 99999-9999"
+                  type={'text'}
+                  defaultValue={contacts.telNum}
+                  {...register('telNum', { required: true })}
+                />
+                {errors.telNum && (<span className="text-left text-danger">Campo Obrigatório</span>)}
+              </div>
+              <Button type="submit" className='btn-outline-primary flex flex-row gap-5 mt-7'><IconPencil />Editar</Button>
             </div>
-            <Button type="submit" className="btn-primary flex flex-row"><IconPlus /> Adicionar</Button>
-          </div>
-          <div className="w-[40%] mt-5">
-            <div className="flex items-center space-x-4 mb-4">
-              <label className="flex items-center">
-                <input onClick={() => setType('email')} defaultChecked className="mr-2" type="radio" name="test" />
-                <span>Usar Email</span>
-              </label>
-              <label className="flex items-center">
-                <input onClick={() => setType('telNum')} className="mr-2" type="radio" name="test" />
-                <span>Usar Número de Telefone</span>
-              </label>
+            <div className="flex items-center flex-row gap-5 mb-10">
+              <div className="w-full flex flex-col">
+                <Text as="span">{'E-mail'}</Text>
+                <Input defaultValue={contacts.email} {...register('email', { required: true })} />
+                {errors.email && (<span className="text-left text-danger">Campo Obrigatório</span>)}
+              </div>
+              <Button type="submit" className='btn-outline-primary flex flex-row gap-5 mt-7'><IconPencil />Editar</Button>
             </div>
           </div>
-        </div>
-      </form>
+        </form>
+      )}
     </>
   )
 }

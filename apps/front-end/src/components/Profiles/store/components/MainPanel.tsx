@@ -9,9 +9,10 @@ export interface StoreMainPainelProps {
   name: string,
   storeSocials: StoreSocialsType[] | null
   storeProfileImg: string
+  distance?: number
 }
 
-export function MainPainel({ rating, name, storeSocials, storeProfileImg }: StoreMainPainelProps) {
+export function MainPainel({ rating, name, storeSocials, storeProfileImg, distance }: StoreMainPainelProps) {
   return (
     <>
       <Panel className="">
@@ -37,7 +38,9 @@ export function MainPainel({ rating, name, storeSocials, storeProfileImg }: Stor
                   })
                 }
               </div>
-
+              {distance && (
+                <Text className="text-dark dark:text-white ml-auto" as="span">Distância: {Math.floor(distance) >= 1000 ? `${Math.floor(distance)} km` : `${Math.floor(distance)} m`}</Text>
+              )}
             </div>
             <div className="border-b border-b-[#323b45] " />
             <Text className="text-white-dark font-extrabold text-xl" as="span">Aberta/Fechada</Text>

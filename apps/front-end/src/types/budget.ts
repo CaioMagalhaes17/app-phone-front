@@ -5,6 +5,7 @@ export type BudgetFormProps = {
   startValue: string
   endValue: string
   solicitationId: string
+  estimatedTime: string
   details?: string
 }
 
@@ -15,6 +16,7 @@ export type BudgetFromApiType = {
     details: string
     solicitation: SolicitationsFromApi
     storeProfile: StoreProfileFromApi
+    estimatedTime: string
     updatedAt: string,
     createdAt: string,
   }
@@ -28,6 +30,7 @@ export type BudgetType = {
   details: string
   solicitation: Solicitation
   storeProfile: StoreProfileType
+  estimatedTime: string
   updatedAt: string,
   createdAt: string,
 }

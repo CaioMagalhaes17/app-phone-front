@@ -12,7 +12,7 @@ import Swal from "sweetalert2";
 
 export function StoreSocials() {
   const client = useQueryClient()
-  const { register, handleSubmit, formState: { errors }, watch } = useForm()
+  const { register, handleSubmit, formState: { errors } } = useForm()
   const { mutateAsync } = useMutation({
     mutationFn: createStoreSocials
   })
@@ -59,7 +59,7 @@ export function StoreSocials() {
 
   return (
     <>
-      <Text className="text-white text-3xl" as="span">Redes sociais</Text>
+      <Text className="text-dark dark:text-white text-3xl" as="span">Redes sociais</Text>
       <div className="flex flex-col text-lg mt-5">
         {socials && socials.length > 0 ? (
           socials.map((item) => {
@@ -81,7 +81,7 @@ export function StoreSocials() {
         ) : ''}
         <form onSubmit={handleSubmit(onAddClick)}>
           <div className="flex items-center flex-row gap-5">
-            <select {...register('type')} className="form-select rounded bg-black form-select-lg text-white w-full">
+            <select {...register('type')} className="form-select rounded dark:bg-black form-select-lg text-dark dark:text-white w-full">
               {allSocials.map((item) => {
                 return (
                   <>
@@ -93,7 +93,7 @@ export function StoreSocials() {
               })}
             </select>
             <div className="w-full">
-              <Input {...register('link', { required: true })} placeholder={watch('type') === 'whatsapp' ? 'Número do Whatsapp' : 'Link do perfil'} />
+              <Input className="placeholder:text-dark placeholder:dark:text-white" {...register('link', { required: true })} placeholder='Link do perfil' />
               {errors.newTelNum && (<span className="text-danger">Campo Obrigatório</span>)}
 
             </div>

@@ -11,10 +11,34 @@ export function StoreSidebar() {
         <IconHome />
         Início
       </Link>
-      <Text as="span" onClick={() => navigate('/store/market')} className="font-extrabold hover:underline text-lg cursor-pointer text-black dark:text-white flex flex-row gap-5 mt-7 mb-5">
+      <Accordion type="single" collapsible className="">
+        <AccordionItem value="item-1">
+          <AccordionTrigger className="text-black dark:text-white text-lg font-extrabold">
+            <div className="flex flex-row gap-5">
+              <IconSmartphone />
+              Retornar Orçamentos
+            </div>
+          </AccordionTrigger>
+          <AccordionContent className="hover:text-white">
+            <Link to='/store/avaliable/solicitations' className="ml-5 items-center font-bold text-dark dark:text-[#c4c4c4] hover:underline text-lg flex flex-row gap-2">
+              <IconBill />
+              Lista de Defeitos
+            </Link>
+          </AccordionContent>
+          <AccordionContent className="hover:text-white">
+            <Link to='/store/budget/list' className="ml-5 items-center font-bold text-dark dark:text-[#c4c4c4] hover:underline text-lg  flex flex-row gap-2">
+              <IconDollarSignCircle />
+              Histórico de Orçamentos
+            </Link>
+          </AccordionContent>
+
+        </AccordionItem>
+      </Accordion>
+      <Text as="span" onClick={() => navigate('/store/market')} className="font-extrabold hover:underline text-lg cursor-pointer text-black dark:text-white flex flex-row gap-5 mt-5 mb-5">
         <IconShoppingBag />
         Seu Mercado
       </Text>
+
       <Accordion type="single" collapsible className="">
         <AccordionItem value="item-1">
           <AccordionTrigger className="mb-2 text-black dark:text-white text-lg flex flex-row font-extrabold">
@@ -43,29 +67,7 @@ export function StoreSidebar() {
           </AccordionContent>
         </AccordionItem>
       </Accordion>
-      <Accordion type="single" collapsible className="">
-        <AccordionItem value="item-1">
-          <AccordionTrigger className="mb-2 text-black dark:text-white text-lg font-extrabold">
-            <div className="flex flex-row gap-5">
-              <IconSmartphone />
-              Retornar Orçamentos
-            </div>
-          </AccordionTrigger>
-          <AccordionContent className="hover:text-white">
-            <Link to='/store/avaliable/solicitations' className="ml-5 items-center font-bold text-dark dark:text-[#c4c4c4] hover:underline text-lg flex flex-row gap-2">
-              <IconBill />
-              Lista de Defeitos
-            </Link>
-          </AccordionContent>
-          <AccordionContent className="hover:text-white">
-            <Link to='/store/budget/list' className="ml-5 items-center font-bold text-dark dark:text-[#c4c4c4] hover:underline text-lg  flex flex-row gap-2">
-              <IconDollarSignCircle />
-              Histórico de Orçamentos
-            </Link>
-          </AccordionContent>
 
-        </AccordionItem>
-      </Accordion>
 
       <Accordion type="single" collapsible className="">
         <AccordionItem value="item-1">

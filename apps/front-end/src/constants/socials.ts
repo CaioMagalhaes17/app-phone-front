@@ -7,9 +7,4 @@ export const socials = [
     formattedName: 'Instagram',
     type: 'instagram'
   },
-  {
-    formattedName: 'Whatsapp',
-    type: 'whatsapp'
-  },
-
 ]

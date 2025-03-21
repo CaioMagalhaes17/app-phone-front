@@ -14,7 +14,7 @@ type DetailsProductProps = {
 export function DetailsProduct({ product }: DetailsProductProps) {
   const [otherRows, setOtherRows] = useState<ProductsRowType[]>()
   const { isLoading: isRowLoading, row: productRow } = useGetStoreProductsRowById(product.rowId)
-  const { isLoading, storeProfile } = useGetStoreProfileById(product.storeProfileId)
+  const { isLoading, storeProfile, distance } = useGetStoreProfileById(product.storeProfileId)
   const { isLoading: isAllRowsLoading, rows: allRows } = useGetStoreProductsRows(product.storeProfileId)
 
   useEffect(() => {
@@ -45,7 +45,7 @@ export function DetailsProduct({ product }: DetailsProductProps) {
 
         </Panel>
         {!isLoading && storeProfile ? (
-          <StoreResume showMarket={true} storeProfile={storeProfile} />
+          <StoreResume distance={distance} showMarket={true} storeProfile={storeProfile} />
         ) : ''}
       </div>
       <div className="mb-10">

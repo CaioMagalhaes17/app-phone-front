@@ -15,8 +15,9 @@ export type MarketStoreProfileProps = {
   socials: StoreSocialsType[]
   isOwner: boolean
   rows: ProductsRowType[]
+  distance?: number
 }
-export function MarketStoreProfile({ storeProfile, socials, isOwner, rows }: MarketStoreProfileProps) {
+export function MarketStoreProfile({ distance, storeProfile, socials, isOwner, rows }: MarketStoreProfileProps) {
   const navigate = useNavigate()
   return (
     <>
@@ -28,6 +29,7 @@ export function MarketStoreProfile({ storeProfile, socials, isOwner, rows }: Mar
 
         </div>
         <MainPainel
+          distance={distance}
           name={storeProfile.name}
           rating={storeProfile.rating}
           storeProfileImg={storeProfile.profileImg}

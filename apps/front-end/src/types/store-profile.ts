@@ -30,11 +30,11 @@ export type StoreProfileType = {
 
 export type StoreContactsFromApi = {
   props: {
+    wppNum: string
     createdAt: string,
     description: string,
     email?: string
     telNum?: string
-    main: boolean
     storeProfileId: string
     updatedAt: string
   },
@@ -47,7 +47,7 @@ export type StoreContacts = {
   description: string,
   email?: string
   telNum?: string
-  main: boolean
+  wppNum: string
   storeProfileId: string
   updatedAt: string
 }

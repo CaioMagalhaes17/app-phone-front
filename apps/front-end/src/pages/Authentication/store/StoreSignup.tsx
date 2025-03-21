@@ -7,24 +7,30 @@ import { useMutation } from "@tanstack/react-query";
 import { signup } from "../../../api/user/signup";
 import Swal from "sweetalert2";
 import { LoadGoogleApi } from "../../../adapters/Map/lib/ApiLoader";
+import ReactInputMask from "react-input-mask";
 
 export default function StoreSignUp() {
   const isLoaded = LoadGoogleApi()
+  const [isActive, setIsActive] = useState(true)
   const { register, handleSubmit, formState: { errors } } = useForm()
   const [storeLocation, setLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [selectedAddress, setSelectedAddress] = useState<string>("")
   const { mutateAsync } = useMutation({
     mutationFn: signup
   })
-  console.log(storeLocation, selectedAddress)
+  const [error, setError] = useState({ type: '', text: '' })
+
   async function onSubmit(data: FieldValues) {
-    console.log(selectedAddress)
+    setError({ type: '', text: '' })
+    if (data.password !== data.confirmPassword) return setError({ type: 'password', text: 'As senhas não estão iguais' })
     if (selectedAddress.includes('Endereço não')) {
+      console.log('nigger')
       return Swal.fire({
         title: 'Endereço Inválido',
         text: 'Escreva novamente e clique no endereço'
       })
     }
+    console.log(data)
     if (selectedAddress !== '' && storeLocation && storeLocation.lat && storeLocation.lng) {
       localStorage.removeItem('accessToken')
       localStorage.removeItem('isStore')
@@ -39,12 +45,13 @@ export default function StoreSignUp() {
         name: data.name,
         password: data.password,
         telNum: data.telNum,
+        useTelNumAsWpp: isActive
       })
       localStorage.setItem('accessToken', response.token)
       localStorage.setItem('isStore', 'true')
       window.location.replace('/store/dashboard')
     }
-
+    return setError({ type: 'location', text: 'O campo de endereço não pode ser vazio' })
   }
 
   return (
@@ -68,6 +75,7 @@ export default function StoreSignUp() {
                       <IconUser />
                     </span>
                   </div>
+                  {errors.name && (<p className="font-bold text-danger text-left">Campo Obrigatório*</p>)}
                 </div>
                 <div>
                   <label htmlFor="Name">Email (será utilizado como login)</label>
@@ -77,6 +85,7 @@ export default function StoreSignUp() {
                       <IconMail />
                     </span>
                   </div>
+                  {errors.email && (<p className="font-bold text-danger text-left">Campo Obrigatório*</p>)}
                 </div>
 
                 <div className="flex flex-row justify-between">
@@ -88,26 +97,50 @@ export default function StoreSignUp() {
                         <IconLockDots />
                       </span>
                     </div>
+                    {errors.password && (<p className="font-bold text-danger text-left">Campo Obrigatório*</p>)}
                   </div>
                   <div >
                     <label htmlFor="Name">Confirmação da senha</label>
                     <div className="relative text-white-dark">
-                      <Input id="Name" type="password" placeholder="Confirmação" className="form-input !ps-10 placeholder:text-white-dark" />
+                      <Input id="Name" type="password" {...register('confirmPassword', { required: true })} placeholder="Confirmação" className="form-input !ps-10 placeholder:text-white-dark" />
                       <span className="absolute start-4 top-1/2 -translate-y-1/2">
                         <IconLockDots />
                       </span>
                     </div>
+                    {errors.confirmPassword && (<p className="font-bold text-danger text-left">Campo Obrigatório*</p>)}
                   </div>
                 </div>
-
+                {error.type === 'password' && (<p className="font-bold text-danger text-left">{error.text}</p>)}
                 <div>
                   <label htmlFor="Name">Telefone principal</label>
                   <div className="relative text-white-dark">
-                    <Input {...register('telNum', { required: true })} type="text" placeholder="Digite o telefone principal" className="form-input !ps-10 placeholder:text-white-dark" />
+                    <ReactInputMask
+                      className="form-input-custom !ps-10"
+                      mask={'(99) 99999-9999'}
+                      alwaysShowMask={false}
+                      maskPlaceholder="(99) 99999-9999"
+                      type={'text'}
+                      {...register('telNum')}
+                    />
                     <span className="absolute start-4 top-1/2 -translate-y-1/2">
                       <IconPhone />
                     </span>
                   </div>
+                  {errors.telNum && (<p className="font-bold text-danger text-left">Campo Obrigatório*</p>)}
+                  <div className="flex flex-row gap-5 mt-2">
+                    <label className="text-white-dark" htmlFor="Name">Usar como número do WhatsApp?</label>
+                    <button
+                      onClick={() => setIsActive(!isActive)}
+                      className={`relative inline-flex h-6 w-12 items-center rounded-full transition ${isActive ? "bg-primary" : "bg-gray-300"
+                        }`}
+                    >
+                      <span
+                        className={`inline-block h-5 w-5 transform rounded-full bg-white transition ${isActive ? "translate-x-6" : "translate-x-1"
+                          }`}
+                      />
+                    </button>
+                  </div>
+
                 </div>
 
                 <div>
@@ -122,6 +155,7 @@ export default function StoreSignUp() {
                       <IconMap />
                     </span>
                   </div>
+                  {error.type === 'location' && (<p className="font-bold text-danger text-left">{error.text}</p>)}
                 </div>
                 {/* <div>
                   <label htmlFor="Name">Descrição/Detalhes da loja</label>

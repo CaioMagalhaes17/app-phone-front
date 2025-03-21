@@ -2,10 +2,10 @@ import { useEffect, useState } from "react"
 import { StoreContacts } from "../../types/store-profile"
 import { useQuery } from "@tanstack/react-query"
 import { getStoreContacts } from "../../api/user/store/get-contacts"
-import { formatStoreContacts } from "../../formaters/store-profile"
+import { formatStoreContact } from "../../formaters/store-profile"
 
 export function useGetStoreContacts(id?: string) {
-  const [contacts, setContacts] = useState<StoreContacts[] | null>(null)
+  const [contacts, setContacts] = useState<StoreContacts>()
 
   const { data: contactsData, isLoading: isLoadingContacts } = useQuery({
     queryKey: ['get-contacts'],
@@ -13,8 +13,9 @@ export function useGetStoreContacts(id?: string) {
   })
 
   useEffect(() => {
-    if (!isLoadingContacts && contactsData) return setContacts(formatStoreContacts(contactsData))
+    if (!isLoadingContacts && contactsData) {
+      setContacts(formatStoreContact(contactsData))
+    }
   }, [contactsData, isLoadingContacts])
-
   return { isLoadingContacts, contacts }
 }

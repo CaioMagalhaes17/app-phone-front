@@ -23,7 +23,7 @@ export function formatStoreContact(storeContact: StoreContactsFromApi): StoreCon
     telNum: storeContact.props.telNum,
     description: storeContact.props.description,
     storeProfileId: storeContact.props.storeProfileId,
-    main: storeContact.props.main,
+    wppNum: storeContact.props.wppNum,
     createdAt: storeContact.props.createdAt,
     updatedAt: storeContact.props.updatedAt
   }

@@ -7,7 +7,7 @@ import { StoreResume } from "../../../../components/Profiles/store/resume";
 
 export function BudgetDetails() {
   const { id } = useParams() as { id: string }
-  const { budget } = useGetBudgetById(id)
+  const { budget, distance } = useGetBudgetById(id)
   const navigate = useNavigate()
   return (
     <>
@@ -19,8 +19,18 @@ export function BudgetDetails() {
               <div className="flex flex-col p-4 font-extrabold">
                 <Text as="h1" className="text-black dark:text-white text-5xl">Orçamento</Text>
                 <div className="border-b border-b-[#323b45] mt-5 " />
-                <Text className="text-3xl mt-10 text-green" as="span">{budget.startValue} - {budget.endValue}</Text>
-                <Text as="span" className="">Previsão da duração do conserto: <Text as="span" className="text-dark dark:text-white">2 dias úteis</Text></Text>
+                <div className="flex flex-row mt-10">
+                  <div className="flex flex-col">
+                    <Text className="text-3xl  text-green" as="span">{budget.startValue} - {budget.endValue}</Text>
+                    <Text as="span" className="text-lg mt-5">Previsão da duração do conserto: <Text as="span" className="text-dark dark:text-white">{budget.estimatedTime}</Text></Text>
+                  </div>
+                  {budget.details && (
+                    <div className="ml-auto flex flex-col mr-10">
+                      <Text className="text-lg text-dark dark:text-white" as="span">Observações:</Text>
+                      <textarea value={budget.details} className="placeholder:text-white-dark rounded-md border text-sm font-semibold !outline-none focus:border-primary focus:ring-transparent border-[#17263c] dark:bg-[#121e32] text-white-dark focus:border-primary" />
+                    </div>
+                  )}
+                </div>
                 <Text as="span" className="text-dark dark:text-[#c4c4c4] mt-10">Sobre a loja</Text>
                 <div className="flex flex-row gap-5 text-lg text-dark dark:text-white">
                   <label className="text-md flex items-center gap-2 block">
@@ -70,7 +80,7 @@ export function BudgetDetails() {
                 <Link to={`/solicitation/${budget.solicitation.id}`} className="btn btn-outline-primary">Acessar solicitação</Link>
               </div>
             </Panel>
-            <StoreResume storeProfile={budget.storeProfile} />
+            <StoreResume distance={distance} storeProfile={budget.storeProfile} />
           </div>
           <BudgetDetailsLocation budget={budget} />
         </div>

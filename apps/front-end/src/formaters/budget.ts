@@ -15,5 +15,6 @@ export function formatBudgetfromApi(budget: BudgetFromApiType): BudgetType {
     storeProfile: formatStoreProfile(budget.props.storeProfile),
     updatedAt: budget.props.updatedAt,
     createdAt: budget.props.createdAt,
+    estimatedTime: budget.props.estimatedTime
   }
 }

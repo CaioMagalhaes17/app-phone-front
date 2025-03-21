@@ -2,8 +2,9 @@ import { Button, HSeparator, IconMail, IconShoppingBag, IconStore, IconWhatsApp,
 import { Star } from "lucide-react";
 import { Link } from "react-router-dom";
 import { StoreProfileType } from "../../../../types/store-profile";
+import { getWppLink } from "../../../../utils/get-wpp-link";
 
-export function StoreResume({ storeProfile, showMarket }: { showMarket?: boolean, storeProfile: StoreProfileType }) {
+export function StoreResume({ storeProfile, showMarket, distance }: { distance: number, showMarket?: boolean, storeProfile: StoreProfileType }) {
   return (
     <>
       <Panel className="min-w-[300px] p-4">
@@ -29,14 +30,14 @@ export function StoreResume({ storeProfile, showMarket }: { showMarket?: boolean
             <div className="flex flex-row w-full">
               <div className="w-full text-left flex flex-col gap-2">
                 <Text className="text-lg text-green" as="span">Aberto</Text>
-                <Text as="span">Distância em km: {storeProfile.email}</Text>
+                <Text as="span">Distância: {Math.floor(distance) >= 1000 ? `${Math.floor(distance)} km` : `${Math.floor(distance)} m`}</Text>
               </div>
             </div>
           </div >
         </div >
         <HSeparator className="mb-5" />
         <div className="flex flex-col gap-5">
-          <Button className="btn-green flex flex-row gap-2"><IconWhatsApp />Chamar no Whatsapp</Button>
+          <Link target="_blank" to={getWppLink('storeProfile', storeProfile.telNum)} className="btn btn-green flex flex-row gap-2"><IconWhatsApp />Chamar no Whatsapp</Link>
           <Button className="btn-blue flex flex-row gap-2"><IconMail />Enviar Email</Button>
           {showMarket ? (
             <Link target="_blank" to={`/market/store/${storeProfile.id}`} className="btn-primary btn flex flex-row gap-2"><IconShoppingBag />Produtos da loja</Link>

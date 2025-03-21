@@ -1,56 +1,21 @@
-import { useQuery } from "@tanstack/react-query"
 import { StoreProfileComponent } from "../../../../components/Profiles/store"
 import useStore from "../../../../state"
-import { GetBudgets } from "../../../../api/repair/budget/get-budgets"
 import { useEffect, useState } from "react"
-import { BudgetType } from "../../../../types/budget"
-import { formatBudgetsFromApi } from "../../../../formaters/budget"
 import { Button, IconPencil, IconShoppingBag } from "@app/ui"
 import { useNavigate } from "react-router-dom"
-import { FeedbackType } from "../../../../types/feedback"
-import { formatFeedbacks } from "../../../../formaters/feedback"
-import { GetFeedbacksFromStore } from "../../../../api/feedback/get-from-store"
-import { StoreContacts, StoreSocialsType } from "../../../../types/store-profile"
-import { getStoreSocials } from "../../../../api/user/store/get-socials"
-import { formatStoreContacts, formatStoreSocials } from "../../../../formaters/store-profile"
-import { getStoreContacts } from "../../../../api/user/store/get-contacts"
+import { useGetStoreContacts } from "../../../../hooks/profile/useGetStoreContacts"
+import { useGetStoreSocials } from "../../../../hooks/profile/useGetStoreSocials"
+import { useGetStoreFeedbacks } from "../../../../hooks/profile/useGetStoreFeedbacks"
+import { useGetBudgets } from "../../../../hooks/budgets/useGetBudgets"
 
 export function StoreProfileOwner() {
   const navigate = useNavigate()
-  const [budgets, setBudgets] = useState<BudgetType[] | []>([])
-  const [socials, setSocials] = useState<StoreSocialsType[] | null>(null)
   const { storeInfos } = useStore()
-  const { data, isLoading } = useQuery({
-    queryKey: ['get-budgets'],
-    queryFn: () => GetBudgets({ page: '1', limit: '3' })
-  })
-  const { data: socialsData, isLoading: isSocialsLoading } = useQuery({
-    queryKey: ['get-socials'],
-    queryFn: () => getStoreSocials()
-  })
 
-  useEffect(() => {
-    if (!isSocialsLoading && socialsData) {
-      setSocials(formatStoreSocials(socialsData))
-    }
-  }, [socialsData, isSocialsLoading])
-
-  useEffect(() => {
-    if (!isLoading) {
-      setBudgets(formatBudgetsFromApi(data))
-    }
-  }, [isLoading, data])
-
-  const [feedbacks, setFeedbacks] = useState<FeedbackType[] | null>(null)
-
-  const { data: feedbacksData, isLoading: isLoadingFeedback } = useQuery({
-    queryKey: ['get-feedbacks'],
-    queryFn: () => GetFeedbacksFromStore(storeInfos.id, { limit: '3', page: '1' })
-  })
-
-  useEffect(() => {
-    if (!isLoadingFeedback && feedbacksData) return setFeedbacks(formatFeedbacks(feedbacksData))
-  }, [isLoadingFeedback, feedbacksData])
+  const { contacts } = useGetStoreContacts()
+  const { socials } = useGetStoreSocials()
+  const { feedbacks } = useGetStoreFeedbacks(storeInfos.id, { page: '1', limit: '1' })
+  const { budgets, isLoading } = useGetBudgets({ page: '1', limit: '3' })
 
   const [clintLocation, setLocation] = useState<{ lat: number; lng: number }>({ lat: 0, lng: 0 });
   useEffect(() => {
@@ -60,16 +25,6 @@ export function StoreProfileOwner() {
     })
   }, [storeInfos])
 
-  const [contacts, setContacts] = useState<StoreContacts[] | null>(null)
-
-  const { data: contactsData, isLoading: isLoadingContacts } = useQuery({
-    queryKey: ['get-contacts'],
-    queryFn: () => getStoreContacts()
-  })
-
-  useEffect(() => {
-    if (!isLoadingContacts && contactsData) return setContacts(formatStoreContacts(contactsData))
-  }, [contactsData, isLoadingContacts])
 
   return (
     <>
@@ -82,7 +37,7 @@ export function StoreProfileOwner() {
           </li>
         </ul>
       </div>
-      {!isLoading && feedbacks ? (
+      {!isLoading && feedbacks && contacts ? (
         <StoreProfileComponent
           storeId={storeInfos.id}
           storeFeedbacksProps={{ feedbacks, canShowRateStore: false }}

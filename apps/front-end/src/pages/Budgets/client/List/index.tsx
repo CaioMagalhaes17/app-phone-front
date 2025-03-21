@@ -16,7 +16,7 @@ export function ClientBudgetsList() {
 
   useEffect(() => {
     if (!isFetching && data) {
-      const budgetsFormatted = formatBudgetsFromApi(data)
+      const budgetsFormatted = formatBudgetsFromApi(data.budgets)
       setBudgets([...budgetsFormatted].sort((a, b) => b.storeProfile.rating - a.storeProfile.rating));
       // const uniqueModelsD = [...new Set(data.map((item: any) => item.props.solicitation.props.form.props.phoneForm.model).filter((model: any) => typeof model === "string")
       // )] as string[];
@@ -30,7 +30,19 @@ export function ClientBudgetsList() {
         setBudgets([...budgets].sort((a, b) => b.storeProfile.rating - a.storeProfile.rating));
         break
       case 'distance':
-
+        setBudgets([...budgets].sort((a, b) => {
+          const distanceA = data.distances.filter((item: { storeProfileId: string }) => {
+            if (item.storeProfileId === a.storeProfile.id) {
+              return item
+            }
+          })[0].distance
+          const distanceB = data.distances.filter((item: { storeProfileId: string }) => {
+            if (item.storeProfileId === b.storeProfile.id) {
+              return item
+            }
+          })[0].distance
+          return distanceA - distanceB
+        }))
         break
       case 'descPrice':
         setBudgets([...budgets].sort((a, b) => Number(b.startValue.replace('R$', '').replace(',', '.').replace(/\./g, "")) - Number(a.startValue.replace('R$', '').replace(',', '.').replace(/\./g, ""))))
@@ -75,18 +87,26 @@ export function ClientBudgetsList() {
                 <option value="distance">
                   Loja mais próxima
                 </option>
-                <option value='descPrice'>
-                  Maior preço
-                </option>
                 <option value='ascPrice'>
                   Menor preço
+                </option>
+                <option value='descPrice'>
+                  Maior preço
                 </option>
               </select>
             </div>
             <div className="border-b border-b-[#323b45] mt-5 mt-10" />
-            {budgets.length > 0 ?
-              budgets.map((budget, key) => <div onClick={() => setSelectedRow(key)} className={`hover:bg-[#5f577426] ${selectedRow === key && '!bg-[#5f577426]'}`}><BudgetRow budget={budget} /></div>) :
-              (<div className="mt-10 h-[200px] "><Text className="text-3xl" as="span">Não foram encontrados registros</Text></div>)
+            {
+              budgets.length > 0 ?
+                budgets.map((budget, key) => {
+                  const store = (data.distances.filter((distance: { distance: number, storeProfileId: string }) => distance.storeProfileId === budget.storeProfile.id))
+                  return (
+                    <>
+                      <div onClick={() => setSelectedRow(key)} className={`hover:bg-[#5f577426] ${selectedRow === key && '!bg-[#5f577426]'}`}><BudgetRow distance={store[0].distance} budget={budget} /></div>
+                    </>
+                  )
+                }) :
+                (<div className="mt-10 h-[200px] "><Text className="text-3xl" as="span">Não foram encontrados registros</Text></div>)
             }
           </Panel>
         </div>

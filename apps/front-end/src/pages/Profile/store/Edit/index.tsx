@@ -69,7 +69,7 @@ export function EditStoreProfile() {
       <div className=" flex justify-center ">
         <Panel className="!shadow-lg !shadow-black font-extrabold max-w-[1200px] w-full">
           <div className="flex flex-row justify-center items-center">
-            <Text className="text-3xl text-white" as="h1">Editar perfil</Text>
+            <Text className="text-3xl text-dark dark:text-white" as="h1">Editar perfil</Text>
             <div className="mr-auto" />
           </div>
           <div className="border-b border-b-[#323b45] mt-5 mt-10" />

@@ -76,7 +76,7 @@ export function StoreSolicitationDetails() {
     })
   }
 
-  async function handleSave({ startValue, endValue, details }: { startValue: string, endValue: string, details: string }) {
+  async function handleSave({ startValue, endValue, details, estimatedTime }: { startValue: string, endValue: string, estimatedTime: string, details?: string }) {
     const closeBtn = document.getElementById('closeModal')
     const openBtn = document.getElementById('openModal')
     closeBtn?.click()
@@ -96,7 +96,7 @@ export function StoreSolicitationDetails() {
     }).then(async (result) => {
       if (result.isDismissed) return openBtn?.click()
       if (result.isConfirmed) {
-        const response = await mutateAsync({ startValue, endValue, details, solicitationId: id })
+        const response = await mutateAsync({ startValue, endValue, details, estimatedTime, solicitationId: id })
         if (response && response.status == 201) {
           client.refetchQueries({ queryKey: ['get-solicitation'] })
           client.refetchQueries({ queryKey: ['get-solicitations'] })
@@ -131,7 +131,7 @@ export function StoreSolicitationDetails() {
               </div>
             </div>
             <div className="mr-auto" />
-            {budgetData.length === 0 ? (<ReturnBudget onSaveClick={handleSave} />) :
+            {budgetData.length === 0 ? (<ReturnBudget handleSave={handleSave} />) :
               <Panel className="flex flex-col font-extrabold gap-2 h-full w-[500px]">
                 <div className="flex flex-row">
                   <Text className="text-lg  text-dark dark:text-white" as="span">Orçamento retornado</Text>

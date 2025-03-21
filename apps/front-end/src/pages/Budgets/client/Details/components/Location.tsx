@@ -11,7 +11,7 @@ export function BudgetDetailsLocation({ budget }: { budget: BudgetType }) {
 
   return (
     <>
-      {storeProfile && (
+      {storeProfile && contacts ? (
         <>
           <div className="w-[1340px] ml-auto mr-auto">
             <StoreProfileLocation
@@ -25,7 +25,7 @@ export function BudgetDetailsLocation({ budget }: { budget: BudgetType }) {
             />
           </div>
         </>
-      )}
+      ) : ''}
     </>
   )
 }

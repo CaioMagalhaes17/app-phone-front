@@ -17,7 +17,7 @@ export interface StoreProfileComponent {
 export function StoreProfileComponent({ storeId, mainPanelProps, storeProfileLocation, storeProfileBudgets, storeFeedbacksProps }: StoreProfileComponent) {
   return (
     <>
-      <MainPainel rating={mainPanelProps.rating} name={mainPanelProps.name} storeSocials={mainPanelProps.storeSocials} storeProfileImg={mainPanelProps.storeProfileImg} />
+      <MainPainel distance={mainPanelProps.distance} rating={mainPanelProps.rating} name={mainPanelProps.name} storeSocials={mainPanelProps.storeSocials} storeProfileImg={mainPanelProps.storeProfileImg} />
       <div className="gap-5 flex mt-5 font-extrabold flex-row">
         <StoreFeedbacks storeId={storeId} feedbacks={storeFeedbacksProps.feedbacks} canShowRateStore={storeFeedbacksProps.canShowRateStore} />
         <StoreProfileBudgets budgets={storeProfileBudgets.budgets} isOwner={storeProfileBudgets?.isOwner} />

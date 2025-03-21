@@ -12,6 +12,8 @@ export function HeaderNotificationsBox() {
   const { notifications, isLoading } = useGetNotifications()
   useEffect(() => {
     client.refetchQueries({ queryKey: ['get-notifications'] })
+    client.refetchQueries({ queryKey: ['get-budgets'] })
+
   }, [newNotifications])
   return (
     <>
