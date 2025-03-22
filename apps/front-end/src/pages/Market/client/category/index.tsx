@@ -1,4 +1,4 @@
-import { Button, HSeparator, IconArrowBackward, IconMap, IconStreetMap, Text, VSeparator } from "@app/ui";
+import { Button, HSeparator, IconArrowBackward, IconStreetMap, Text, VSeparator } from "@app/ui";
 import { useGetNearProductsByCategory } from "../../../../hooks/products/useGetNearProductsByCategory";
 import { useNavigate, useParams } from "react-router-dom";
 import { ProductsWithoutDefinedRow } from "../../../../components/Market/Products/row/ProductsWithoutDefinedRow";

@@ -16,8 +16,9 @@ export function MapStep({ setActiveTab }: { setActiveTab: React.Dispatch<React.S
   const [radius, setRadius] = useState<number>(0)
   const client = useQueryClient()
   type StoresInsideRadius = {
-    GeoLocation: { props: { latitude: number; longitude: number; } }
-    Profile: StoreProfileFromApi
+    geoLocation: { props: { latitude: number; longitude: number; } }
+    profile: StoreProfileFromApi
+    distance: number
     _id: string
   }
 
@@ -97,8 +98,8 @@ export function MapStep({ setActiveTab }: { setActiveTab: React.Dispatch<React.S
 
   function onStorePinClick(item: StoresInsideRadius) {
     const teste = {
-      geoLocation: item.GeoLocation,
-      storeProfile: formatStoreProfile(item.Profile)
+      geoLocation: item.geoLocation,
+      storeProfile: formatStoreProfile(item.profile)
     }
     setSelectedStore(teste)
   }
@@ -149,8 +150,8 @@ export function MapStep({ setActiveTab }: { setActiveTab: React.Dispatch<React.S
               return (
                 <MarkAdapter
                   onClick={() => onStorePinClick(item)}
-                  icon={item.Profile.props.profileImg}
-                  position={{ lat: item.GeoLocation.props.latitude, lng: item.GeoLocation.props.longitude }}
+                  icon={item.profile.props.profileImg}
+                  position={{ lat: item.geoLocation.props.latitude, lng: item.geoLocation.props.longitude }}
                   key={item._id}
                 />
               )

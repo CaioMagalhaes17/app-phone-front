@@ -1,14 +1,17 @@
 import { GeolocationFromApi, GeolocationType } from "../types/geolocation";
 import { StoresInsideRadiusFromApi, StoresInsideRadiusType } from "../types/stores";
-import { formatStoreProfile } from "./store-profile";
+import { formatStoreContact, formatStoreProfile } from "./store-profile";
 
 export function formatStoresInsideRadius(stores: StoresInsideRadiusFromApi[]): StoresInsideRadiusType[] {
   return stores.map((store) => formatStoreInsideRadius(store));
 }
-export function formatStoreInsideRadius(store: StoresInsideRadiusFromApi): StoresInsideRadiusType {
+export function formatStoreInsideRadius(item: StoresInsideRadiusFromApi): StoresInsideRadiusType {
   return {
-    geolocation: formatGeolocation(store.GeoLocation),
-    profile: formatStoreProfile(store.Profile)
+    id: item._id,
+    contacts: formatStoreContact(item.contacts),
+    location: formatGeolocation(item.location),
+    profile: formatStoreProfile(item.profile),
+    distance: item.distance
   }
 }
 
@@ -18,6 +21,6 @@ export function formatGeolocation(geolocation: GeolocationFromApi): GeolocationT
     id: geolocation._id,
     latitude: geolocation.props.latitude,
     longitude: geolocation.props.longitude,
-    radius: geolocation.props.radius
+    radius: geolocation.props.radius,
   }
 }

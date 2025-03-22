@@ -1,40 +1,24 @@
-import { useQuery } from "@tanstack/react-query";
-import { Button, IconPencil, IconStore, Text } from "@app/ui";
+import { Button, HSeparator, IconMail, IconPencil, IconPhone, IconStore, IconStreetMap, IconWhatsApp, Panel, Text } from "@app/ui";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useStore from "../../../state";
-import { FetchStoresInsideClientRadius } from "../../../api/geolocation/fetch-stores-inside-client-radius";
 import { InfoWindowAdapter, MapAdapter, MarkAdapter, RadiusAdapter } from "../../../adapters/Map";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@app/ui"
-import { formatStoreContact, formatStoreProfile } from "../../../formaters/store-profile";
-import { StoreContacts, StoreContactsFromApi, StoreProfileFromApi, StoreProfileType } from "../../../types/store-profile";
 import { Star } from "lucide-react";
 import { MapPinSvg } from "../../../constants/svg-icons";
-import Swal from "sweetalert2";
+import { getWppLink } from "../../../utils/get-wpp-link";
+import { StoresInsideRadiusType } from "../../../types/stores";
+import { useGetStoresInsideClientRadius } from "../../../hooks/geolocation/useGetStoresInsideClientRadius";
+import { StoreItem } from "../../../components/Market/Stores/row/StoresItem";
 
-type StoresInsideRadius = {
-  GeoLocation: { props: { latitude: number; longitude: number; } }
-  Profile: StoreProfileFromApi & { storeProfileContacts: StoreContactsFromApi[] }
-  contacts: StoreContactsFromApi
-  _id: string
-}
+
 
 export default function ClientMapSearch() {
   const { clientInfos, isMapLoaded } = useStore()
   const [clintLocation, setLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [radius, setRadius] = useState<number>(0)
   const navigate = useNavigate()
-  const [selectedStore, setSelectedStore] = useState<{
-    geoLocation: { props: { latitude: number; longitude: number; } },
-    storeProfile: StoreProfileType,
-    storeContacts: StoreContacts
-  } | null>()
+  const [selectedStore, setSelectedStore] = useState<StoresInsideRadiusType | null>()
+  const { stores, storesLoading, setNearStores } = useGetStoresInsideClientRadius()
 
   useEffect(() => {
     setLocation({
@@ -46,26 +30,11 @@ export default function ClientMapSearch() {
     )
   }, [clientInfos])
 
-  const { isLoading: storesLoading, data } = useQuery({
-    queryKey: ['fetch-stores-inside-client-radius'],
-    queryFn: FetchStoresInsideClientRadius
-  })
-
   useEffect(() => {
-    if (!storesLoading && data.status === 'geolocationNotFound') {
-      Swal.fire({
-        timer: 6000,
-        showCloseButton: false,
-        showCancelButton: false,
-        confirmButtonText: 'Configurar Localização',
-        icon: 'info',
-        title: 'Antes de tudo...',
-        text: 'Vamos configurar sua localização para encontrar lojas próximas'
-      }).then(() => {
-        return navigate('/map/edit')
-      })
+    if (stores.length > 0) {
+      console.log(stores)
     }
-  }, [storesLoading, data])
+  }, [storesLoading])
 
 
   const mapStyle = {
@@ -73,40 +42,48 @@ export default function ClientMapSearch() {
     height: '100%',
     borderRadius: '10px'
   }
+  function onOrderChange(orderStatus: string) {
+    switch (orderStatus) {
+      case 'rating':
+        setNearStores([...stores].sort((a, b) => b.profile.rating - a.profile.rating));
+        break
+      case 'distance':
+        setNearStores([...stores].sort((a, b) =>
+          a.distance - b.distance
+        ))
+        break
 
-  function onStorePinClick(item: StoresInsideRadius) {
-    const teste = {
-      geoLocation: item.GeoLocation,
-      storeProfile: formatStoreProfile(item.Profile),
-      storeContacts: formatStoreContact(item.contacts)
+      default:
+        console.log('nothing')
     }
-    setSelectedStore(teste)
   }
-
   return (
     <>
-      <div className="flex relative h-full gap-5">
-        <div style={{ borderRadius: '10px' }} className="max-w-xs flex flex-col  p-4 gap-2 items-center bg-white dark:bg-black w-[420px] overflow-y-auto scrollable">
+      <div className="flex flex-row">
+        <Text className="text-4xl font-bold flex flex-row gap-5 text-black dark:text-white items-center " as="h1"><IconStreetMap width="40px" height="40px" />Lojas Próximas</Text>
+        <Button className="btn-outline-primary flex flex-row gap-2 ml-auto"><IconPencil />Editar Localização</Button>
+      </div>
+      <HSeparator className="mb-5" />
+      <div className="flex relative h-full gap-5 ">
+        <Panel className="flex flex-col  gap-2 items-center bg-white dark:bg-black w-[540px] overflow-y-auto scrollable">
           {selectedStore ? (
             <>
               <div className="w-full mt-5 flex flex-col">
                 <div className="items-center flex justify-center">
-                  <Carousel className="">
-                    <CarouselContent className="h-[220px]">
-                      <CarouselItem><img className="h-full w-full" src={selectedStore.storeProfile.profileImg} /></CarouselItem>
-                    </CarouselContent>
-                    <CarouselPrevious className="left-0" />
-                    <CarouselNext className="right-0" />
-                  </Carousel>
+                  <img className="h-full w-full" src={selectedStore.profile.profileImg} />
                 </div>
                 <div className="p-2 flex w-full text-left font-extrabold text-white gap-2 flex-col">
-                  <Text className="text-white font-extrabold" as="span">{selectedStore.storeProfile.name}</Text>
+                  <Text className="text-white font-extrabold" as="span">{selectedStore.profile.name}</Text>
                   <div className="border-b border-b-[#323b45]" />
-                  <Text className="text-white-dark font-extrabold" as="span">Aberta/Fechada</Text>
+                  <Text className="text-white-dark font-extrabold flex flex-row justify-between items-center" as="span">
+                    Aberta/Fechada
+                    <Text className="text-dark dark:text-white ml-auto" as="span">Distância: {Math.floor(selectedStore.distance) >= 1000 ? `${Math.floor(Math.floor(selectedStore.distance) / 1000)} km` : `${Math.floor(selectedStore.distance)} m`}</Text>
+                  </Text>
                   <div className="flex flex-row">{[...Array(5)].map((_, index) => (
                     <Star
+                      absoluteStrokeWidth={true}
                       key={index}
-                      className={index < selectedStore.storeProfile.rating ? "fill-yellow-500 text-yellow-500" : "fill-none text-gray-300"}
+                      className={index < selectedStore.profile.rating ? "fill-yellow-500 text-yellow-500" : "fill-none text-gray-300"}
                       size={20}
                     />
                   ))}</div>
@@ -159,16 +136,17 @@ export default function ClientMapSearch() {
                 </div>
                 <div className="border-b border-b-[#323b45] mt-5 w-[100%]" />
 
-                <Link target="_blank" rel="noopener noreferrer" to={`/store-profile/${selectedStore.storeProfile.id}`} className="btn btn-primary flex flex-row w-full gap-5 mt-5">
+                <Link target="_blank" rel="noopener noreferrer" to={`/store-profile/${selectedStore.profile.id}`} className="btn btn-primary flex flex-row w-full gap-5 mt-5">
                   <IconStore />
                   Ir para o perfil da loja
                 </Link>
                 <div className="border-b border-b-[#323b45] mt-5 w-[100%]" />
 
                 <div className="flex flex-col font-extrabold items-center mt-5">
-                  <Text className="text-dark dark:text-white text-center" as="span">{selectedStore.storeProfile.address}</Text>
-                  <Text className="text-white-dark text-md mt-5" as="span">{selectedStore.storeContacts.telNum}</Text>
-                  <Text className="text-white-dark text-md mt-5" as="span">{selectedStore.storeContacts.email}</Text>
+                  <Text className="text-dark dark:text-white text-center text-lg mb-5" as="span">{selectedStore.profile.address}</Text>
+                  <Link target="_blank" to={getWppLink('storeProfile', selectedStore.contacts.wppNum)} className="btn btn-green flex flex-row gap-2 mb-5"><IconWhatsApp />Chamar no Whatsapp</Link>
+                  <Text className="text-dark dark:text-white text-xl flex flex-row gap-2 items-center" as="span"><IconPhone />{selectedStore.contacts.telNum}</Text>
+                  <Text className="text-dark dark:text-white text-xl mb-10 flex flex-row gap-2 items-center" as="span"><IconMail />{selectedStore.contacts.email}</Text>
                 </div>
               </div>
               <div className="border-b border-b-[#323b45] w-[100%]" />
@@ -180,42 +158,74 @@ export default function ClientMapSearch() {
               </div>
             )
           }
+        </Panel>
+        <Panel className="w-[900px]">
+          {clintLocation && isMapLoaded ? (
+            <MapAdapter onClick={() => setSelectedStore(null)} mapStyle={mapStyle} initialPosition={clintLocation}>
+              {!storesLoading && stores && stores.length > 0 ? (stores.map((item, i) => {
+                return (
+                  <MarkAdapter
+                    onClick={() => setSelectedStore(item)}
+                    position={{ lat: item.location.latitude, lng: item.location.longitude }}
+                    key={i}
+                    icon={item.profile.profileImg}
+                  />
+                )
+              })) : ''}
 
-          <div className="mt-auto" />
-          <Button onClick={() => navigate('/map/edit')} className="btn-primary flex flex-row w-full gap-5">
-            <IconPencil />
-            Editar localização de pesquisa
-          </Button>
-        </div>
-        {clintLocation && isMapLoaded ? (
-          <MapAdapter onClick={() => setSelectedStore(null)} mapStyle={mapStyle} initialPosition={clintLocation}>
-            {!storesLoading && data && data.length > 0 ? (data.map((item: StoresInsideRadius) => {
-              return (
-                <MarkAdapter
-                  onClick={() => onStorePinClick(item)}
-                  position={{ lat: item.GeoLocation.props.latitude, lng: item.GeoLocation.props.longitude }}
-                  key={item._id}
-                  icon={item.Profile.props.profileImg}
-                />
-              )
-            })) : ''}
-            <MarkAdapter
-              position={clintLocation}
-              icon={MapPinSvg}
-            />
-            <RadiusAdapter onClick={() => setSelectedStore(null)} center={{ lat: clintLocation.lat, lng: clintLocation.lng }} radius={radius} />
-            {selectedStore && (
-              <InfoWindowAdapter onClose={() => setSelectedStore(null)} position={{ lat: selectedStore.geoLocation.props.latitude, lng: selectedStore.geoLocation.props.longitude }} options={{ pixelOffset: new window.google.maps.Size(0, -40) }}>
-                <>
-                  <div className="h-[200px] w-[200px]">
-                    <img className="w-[200px] h-[100px]" src={selectedStore.storeProfile.profileImg} />
-                    <Text as="span" className="font-extrabold text-dark">{selectedStore.storeProfile.name}</Text>
-                  </div>
-                </>
-              </InfoWindowAdapter>
-            )}
-          </MapAdapter>
-        ) : ''}
+              <RadiusAdapter onClick={() => setSelectedStore(null)} center={{ lat: clintLocation.lat, lng: clintLocation.lng }} radius={radius} />
+              <MarkAdapter
+                position={clintLocation}
+                icon={MapPinSvg}
+              />
+              {selectedStore && (
+                <InfoWindowAdapter onClose={() => setSelectedStore(null)} position={{ lat: selectedStore.location.latitude, lng: selectedStore.location.longitude }} options={{ pixelOffset: new window.google.maps.Size(0, -40) }}>
+                  <>
+                    <div className="h-[200px] w-[200px]">
+                      <img className="w-[200px] h-[100px]" src={selectedStore.profile.profileImg} />
+                      <Text as="span" className="font-extrabold text-dark">{selectedStore.profile.name}</Text>
+                    </div>
+                  </>
+                </InfoWindowAdapter>
+              )}
+            </MapAdapter>
+          ) : ''}
+        </Panel>
+        <Panel className="flex flex-col gap-2 items-center bg-white dark:bg-black w-[540px] overflow-y-auto scrollable">
+          {
+            stores && stores.length > 0 ? (
+              <>
+                <div className="font-bold flex flex-col gap-5">
+                  <select onClick={(e) => onOrderChange(e.currentTarget.value)} className="form-select ml-auto !border-none text-dark dark:bg-black form-select-lg dark:text-white">
+                    <option value="rating">
+                      Loja com mais notas
+                    </option>
+                    <option value="distance">
+                      Loja mais próxima
+                    </option>
+                    <option value='ascPrice'>
+                      Menor preço
+                    </option>
+                    <option value='descPrice'>
+                      Maior preço
+                    </option>
+                  </select>
+                  {stores.map((store) => (
+                    <StoreItem onClick={() => setSelectedStore(store)} distance={store.distance} name={store.profile.name} profileImg={store.profile.profileImg} rating={store.profile.rating} />
+                  ))}
+                </div>
+              </>
+            ) : (
+              <div className="mt-[250px] flex flex-col justify-center items-center">
+                <Text as="span" className="text-3xl text-center font-extrabold mt-10 mb-10">Nenhuma loja encontrada</Text>
+                <Button onClick={() => navigate('/map/edit')} className="btn-primary flex flex-row w-full gap-5">
+                  <IconPencil />
+                  Editar localização de pesquisa
+                </Button>
+              </div>
+            )
+          }
+        </Panel>
       </div>
     </>
   )

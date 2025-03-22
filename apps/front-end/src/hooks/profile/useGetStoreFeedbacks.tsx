@@ -5,7 +5,7 @@ import { GetFeedbacksFromStore } from "../../api/feedback/get-from-store"
 import { formatFeedbacks } from "../../formaters/feedback"
 
 export function useGetStoreFeedbacks(id: string, pagination?: { limit: string, page: string }) {
-  const [feedbacks, setFeedbacks] = useState<FeedbackType[]>()
+  const [feedbacks, setFeedbacks] = useState<FeedbackType[] | []>([])
 
   const { data: feedbacksData, isLoading: isLoadingFeedback } = useQuery({
     queryKey: ['get-feedbacks'],

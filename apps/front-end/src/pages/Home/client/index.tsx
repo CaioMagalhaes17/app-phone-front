@@ -1,18 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
 import { InfoWindowAdapter, MapAdapter, MarkAdapter, RadiusAdapter } from "../../../adapters/Map";
 import useStore from "../../../state";
-import { FetchStoresInsideClientRadius } from "../../../api/geolocation/fetch-stores-inside-client-radius";
 import { Button, IconPencil, IconSearch, IconSend, Input, Text } from "@app/ui";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
 import { MapPinSvg } from "../../../constants/svg-icons";
-
-type StoresInsideRadius = {
-  GeoLocation: { props: { latitude: number; longitude: number; } }
-  Profile: { props: { name: string, profileImg: string, email: string, telNum: string, description: string, address: string } }
-  _id: string
-}
+import { useGetStoresInsideClientRadius } from "../../../hooks/geolocation/useGetStoresInsideClientRadius";
+import { StoresInsideRadiusType } from "../../../types/stores";
 
 export function Home() {
   const navigate = useNavigate()
@@ -23,26 +16,7 @@ export function Home() {
     radius: clientInfos?.location?.radius
   }
 
-  const { isLoading: storesLoading, data } = useQuery({
-    queryKey: ['fetch-stores-inside-client-radius'],
-    queryFn: FetchStoresInsideClientRadius
-  })
-
-  useEffect(() => {
-    if (!storesLoading && data.status === 'geolocationNotFound') {
-      Swal.fire({
-        timer: 10000,
-        showCloseButton: false,
-        showCancelButton: false,
-        confirmButtonText: 'Configurar Localização',
-        icon: 'info',
-        title: 'Antes de tudo...',
-        text: 'Vamos configurar sua localização para encontrar lojas próximas'
-      }).then(() => {
-        return navigate('/map/edit')
-      })
-    }
-  }, [storesLoading, data])
+  const { stores, storesLoading } = useGetStoresInsideClientRadius()
 
   const mapStyle = {
     width: '100%',
@@ -50,7 +24,7 @@ export function Home() {
     borderRadius: '10px'
   }
 
-  const [selectedStore, setSelectedStore] = useState<StoresInsideRadius | null>()
+  const [selectedStore, setSelectedStore] = useState<StoresInsideRadiusType>()
 
   return (
     <>
@@ -134,9 +108,9 @@ export function Home() {
             {isMapLoaded && (
               <>
                 <MapAdapter mapStyle={mapStyle} initialPosition={clientInitialPosition}>
-                  {!storesLoading && data && data.length > 0 ? (data.map((item: StoresInsideRadius) => {
+                  {!storesLoading && stores && stores.length > 0 ? (stores.map((item) => {
                     return (
-                      <MarkAdapter icon={item.Profile.props.profileImg} onClick={() => setSelectedStore(item)} position={{ lat: item.GeoLocation.props.latitude, lng: item.GeoLocation.props.longitude }} key={item._id} />
+                      <MarkAdapter icon={item.profile.profileImg} onClick={() => setSelectedStore(item)} position={{ lat: item.location.latitude, lng: item.location.longitude }} key={item.id} />
 
                     )
                   })) : ''}
@@ -146,9 +120,9 @@ export function Home() {
                   />
                   <RadiusAdapter center={{ lat: clientInitialPosition.lat, lng: clientInitialPosition.lng }} radius={clientInitialPosition.radius} />
                   {selectedStore && (
-                    <InfoWindowAdapter onClose={() => setSelectedStore(null)} position={{ lat: selectedStore.GeoLocation.props.latitude, lng: selectedStore.GeoLocation.props.longitude }} options={{ pixelOffset: new window.google.maps.Size(0, -40) }}>
+                    <InfoWindowAdapter onClose={() => setSelectedStore(undefined)} position={{ lat: selectedStore.location.latitude, lng: selectedStore.location.longitude }} options={{ pixelOffset: new window.google.maps.Size(0, -40) }}>
                       <>
-                        Loja: {selectedStore.Profile.props.name}
+                        Loja: {selectedStore.profile.name}
                       </>
                     </InfoWindowAdapter>
                   )}

@@ -3,7 +3,6 @@ import { cva, VariantProps } from "class-variance-authority";
 import React, { ComponentProps } from "react";
 
 const panelStyle = cva([
-  "panel",
   "animate__fadeIn",
   "animate__animated"
 ])

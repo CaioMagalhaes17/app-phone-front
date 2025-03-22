@@ -9,10 +9,10 @@ export function ClientSidebar() {
         <IconHome />
         Início
       </Text>
-      <Text as="span" onClick={() => navigate('/market')} className="font-extrabold hover:underline text-lg cursor-pointer text-black dark:text-white flex flex-row gap-5 mt-7 mb-5">
+      <Link to='/market' className="font-extrabold hover:underline text-lg cursor-pointer text-black dark:text-white flex flex-row gap-5 mt-7 mb-5">
         <IconShoppingBag />
         Mercado
-      </Text>
+      </Link>
       <Accordion type="single" collapsible className="">
         <AccordionItem value="item-1">
           <AccordionTrigger className="mb-2 dark:text-white text-black text-lg font-extrabold">

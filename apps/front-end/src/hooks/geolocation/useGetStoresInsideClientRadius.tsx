@@ -7,7 +7,7 @@ import Swal from "sweetalert2"
 import { useNavigate } from "react-router-dom"
 
 export function useGetStoresInsideClientRadius() {
-  const [stores, setNearStores] = useState<StoresInsideRadiusType[] | null>(null)
+  const [stores, setNearStores] = useState<StoresInsideRadiusType[] | []>([])
   const navigate = useNavigate()
   const { isLoading: storesLoading, data } = useQuery({
     queryKey: ['fetch-stores-inside-client-radius'],
@@ -29,10 +29,10 @@ export function useGetStoresInsideClientRadius() {
           return navigate('/map/edit')
         })
       } else {
-        setNearStores(formatStoresInsideRadius(data))
+        setNearStores([...formatStoresInsideRadius(data)].sort((a, b) => b.profile.rating - a.profile.rating))
       }
     }
   }, [storesLoading, data])
 
-  return { storesLoading, stores }
+  return { storesLoading, stores, setNearStores }
 }

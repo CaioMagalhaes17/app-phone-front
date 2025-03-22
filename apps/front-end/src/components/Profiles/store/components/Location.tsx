@@ -1,4 +1,4 @@
-import { IconFacebook, IconInstagram, IconMail, IconPencil, IconPhone, IconWhatsApp, Panel, Text } from "@app/ui";
+import { HSeparator, IconFacebook, IconInstagram, IconMail, IconPencil, IconPhone, IconStreetMap, IconWhatsApp, Panel, Text } from "@app/ui";
 import { MapAdapter, MarkAdapter } from "../../../../adapters/Map";
 import useStore from "../../../../state";
 import { StoreContacts, StoreSocialsType } from "../../../../types/store-profile";
@@ -25,25 +25,22 @@ export function StoreProfileLocation({ lat, lng, storeSocials, contacts, storePr
   console.log(lat, lng)
   return (
     <>
-      <Panel className="mt-5 font-extrabold">
+      <Panel id="location" className="mt-5 font-bold">
         <div className="flex flex-row">
-          <Text className="text-3xl text-black dark:text-white" as="h1">Localização e Contato</Text>
+          <Text className="text-3xl text-black dark:text-white flex flex-row gap-5 items-center " as="h1"><IconStreetMap height="50px" width="40px" /> Localização e Contato</Text>
           {isOwner && (
             <Link to="/store/map/edit" className="btn-primary btn ml-auto"><IconPencil className="mr-2" />Alterar Localização</Link>
           )}
         </div>
-        <div className="border-b border-b-[#323b45] mt-5 mt-10" />
+        <HSeparator className="mt-2" />
         <div className="flex flex-row relative h-full gap-5">
-
           <div style={{ borderRadius: '10px' }} className="max-w-xs flex flex-col p-4 gap-2 items-center  w-[420px]">
-            <Text className="text-dark dark:text-white text-lg" as="span">{address}</Text>
-            <div className="border-b border-b-[#323b45] mt-5 mt-10 mb-10 w-full" />
+            <Text className="text-black dark:text-white text-lg" as="span">{address}</Text>
 
-            <Link target="_blank" to={getWppLink('storeProfile', contacts.wppNum)} className="btn btn-green flex flex-row gap-2 mb-5"><IconWhatsApp />Chamar no Whatsapp</Link>
-            <Text className="text-dark dark:text-white text-xl flex flex-row gap-2 items-center" as="span"><IconPhone />{contacts.telNum}</Text>
-            <Text className="text-dark dark:text-white text-xl mb-10 flex flex-row gap-2 items-center" as="span"><IconMail />{contacts.email}</Text>
+            <Text className="text-black dark:text-white mt-auto text-xl flex flex-row gap-2 items-center" as="span"><IconPhone />{contacts.telNum}</Text>
+            <Text className="text-black dark:text-white text-xl flex flex-row gap-2 items-center" as="span"><IconMail />{contacts.email}</Text>
 
-            <div className="border-b border-b-[#323b45] mt-5 mt-10 w-full" />
+            <Link target="_blank" to={getWppLink('storeProfile', contacts.wppNum)} className="btn btn-green flex flex-row gap-2 "><IconWhatsApp />Chamar no Whatsapp</Link>
             <div className="flex flex-row mt-5 gap-2">
               {
                 storeSocials?.map((item) => {

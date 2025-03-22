@@ -171,6 +171,7 @@ export const routes: RouteObject[] = [
         path: '/store/plans',
         element: <StorePlans />
       },
+
     ]
   },
   {

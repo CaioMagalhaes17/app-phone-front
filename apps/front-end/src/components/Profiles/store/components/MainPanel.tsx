@@ -39,7 +39,7 @@ export function MainPainel({ rating, name, storeSocials, storeProfileImg, distan
                 }
               </div>
               {distance && (
-                <Text className="text-dark dark:text-white ml-auto" as="span">Distância: {Math.floor(distance) >= 1000 ? `${Math.floor(distance)} km` : `${Math.floor(distance)} m`}</Text>
+                <Text className="text-dark dark:text-white ml-auto" as="span">Distância: {Math.floor(distance) >= 1000 ? `${Math.floor(Math.floor(distance) / 1000)} km` : `${Math.floor(distance)} m`}</Text>
               )}
             </div>
             <div className="border-b border-b-[#323b45] " />

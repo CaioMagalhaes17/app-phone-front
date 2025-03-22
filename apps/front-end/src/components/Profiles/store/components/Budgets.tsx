@@ -1,4 +1,4 @@
-import { IconPlus, IconSend, Panel, Text } from "@app/ui"
+import { HSeparator, IconClock, IconPlus, IconSend, Panel, Text } from "@app/ui"
 import { Link } from "react-router-dom"
 import { BudgetType } from "../../../../types/budget"
 import { formatPhoneBrand, formatTopic } from "../../../../formaters/solicitations"
@@ -25,16 +25,17 @@ export function StoreProfileBudgets({ budgets, isOwner }: StoreProfileBudgetProp
   }
   return (
     <>
-      <Panel className="w-full">
+      <Panel className="w-full font-bold">
         {budgets.length > 0 ? (
           <>
             <div className="flex flex-row">
-              <Text className="text-3xl text-black dark:text-white" as="h1">Ultimos Orçamentos</Text>
+              <Text className="text-2xl text-black dark:text-white flex flex-row gap-2 items-center" as="h1"><IconClock />Ultimos Orçamentos</Text>
               {isOwner ? <Link to="/store/budget/list" className="btn ml-auto btn-primary flex flex-row gap-2"><IconPlus /> Ver todas</Link>
-                : <Link to={`/solicitations/create/${budgets[0].storeProfile.id}`} className="btn ml-auto btn-primary flex flex-row gap-2"><IconSend /> Pedir orçamento de conserto direto para loja</Link>}
+                : <Link to={`/solicitations/create/${budgets[0].storeProfile.id}`} className="btn ml-auto btn-primary flex flex-row gap-2"><IconSend /> Solicitar Conserto</Link>}
 
             </div>
-            <div className="border-b border-b-[#323b45] mt-5 " />
+
+            <HSeparator />
             {budgets.map((budget) => {
               return (
                 <>
@@ -48,7 +49,7 @@ export function StoreProfileBudgets({ budgets, isOwner }: StoreProfileBudgetProp
                       <Text className="text-white-dark" as="span">{getMainQuestion(budget.solicitation.form.problemForm)}</Text>
                     </div>
                   </div>
-                  <div className="border-b border-b-[#323b45] mt-5 " />
+                  <HSeparator />
                 </>
 
               )
@@ -58,9 +59,9 @@ export function StoreProfileBudgets({ budgets, isOwner }: StoreProfileBudgetProp
         ) : (
           <>
             <div className="flex flex-row">
-              <Text className="text-3xl text-white" as="h1">Ultimos Orçamentos</Text>
+              <Text className="text-2xl text-black dark:text-white" as="h1">Ultimos Orçamentos</Text>
             </div>
-            <div className="border-b border-b-[#323b45] mt-5 " />
+            <HSeparator />
             <div className="mt-10 h-[200px]">
               <Text className="text-3xl" as="span">Não foram encontrados registros</Text>
             </div>

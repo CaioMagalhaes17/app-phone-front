@@ -1,12 +1,18 @@
-import { StoreContactsFromApi, StoreProfileFromApi } from "./store-profile";
+import { GeolocationFromApi, GeolocationType } from "./geolocation";
+import { StoreContacts, StoreContactsFromApi, StoreProfileFromApi, StoreProfileType } from "./store-profile";
 
 export type StoresInsideRadiusFromApi = {
-  GeoLocation: { props: { latitude: number; longitude: number; }, _id: string }
-  Profile: StoreProfileFromApi & { storeProfileContacts: StoreContactsFromApi[], _id: string }
+  location: GeolocationFromApi
+  profile: StoreProfileFromApi
+  contacts: StoreContactsFromApi
+  distance: number
   _id: string
 }
 
 export type StoresInsideRadiusType = {
-  geolocation: { latitude: number; longitude: number; }
-  profile: any
+  id: string,
+  location: GeolocationType
+  profile: StoreProfileType
+  contacts: StoreContacts
+  distance: number
 }

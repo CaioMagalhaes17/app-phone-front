@@ -1,4 +1,4 @@
-import { Text } from "@app/ui";
+import { HSeparator, Text } from "@app/ui";
 import { Star } from "lucide-react";
 import { FeedbackType } from "../../types/feedback";
 import dayjs from "dayjs";
@@ -34,7 +34,7 @@ export function FeedbackRow({ feedback }: { feedback: FeedbackType }) {
           </div>
         </div>
       </div>
-      <div className="border-b border-b-[#323b45] mt-5" />
+      <HSeparator />
     </>
   )
 }

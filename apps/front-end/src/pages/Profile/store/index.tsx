@@ -1,43 +1,54 @@
-import { useNavigate, useParams } from "react-router-dom"
-import { useEffect, useState } from "react"
-
-import { StoreProfileComponent } from "../../../components/Profiles/store"
-import { useGetStoreSocials } from "../../../hooks/profile/useGetStoreSocials"
-import { useGetStoreContacts } from "../../../hooks/profile/useGetStoreContacts"
-import { Button, IconShoppingBag } from "@app/ui"
-import { useGetStoreProfileById } from "../../../hooks/profile/useGetLocationByProfileId"
-import { useGetBudgetsFromStore } from "../../../hooks/budgets/useGetBudgetsByStoreId"
-import { useGetStoreFeedbacks } from "../../../hooks/profile/useGetStoreFeedbacks"
+import { useParams } from "react-router-dom";
+import { useGetStoreProfileById } from "../../../hooks/profile/useGetLocationByProfileId";
+import { StoreProfileMain } from "../../../components/Profiles/store/new";
+import { useGetStoreContacts } from "../../../hooks/profile/useGetStoreContacts";
+import { StoreProfileLocation } from "../../../components/Profiles/store/components/Location";
+import { useGetStoreSocials } from "../../../hooks/profile/useGetStoreSocials";
+import { StoreFeedbacks } from "../../../components/Profiles/store/components/Feedbacks";
+import { StoreProfileBudgets } from "../../../components/Profiles/store/components/Budgets";
+import { useGetStoreFeedbacks } from "../../../hooks/profile/useGetStoreFeedbacks";
+import { useGetBudgetsFromStore } from "../../../hooks/budgets/useGetBudgetsByStoreId";
+import { StoreProfileServices } from "../../../components/Profiles/store/components/Services";
 
 export function StoreProfile() {
   const { id } = useParams() as { id: string }
   const { storeProfile, distance, isLoading } = useGetStoreProfileById(id)
-  const { budgets } = useGetBudgetsFromStore(id, { limit: '3', page: '1' })
-  const { socials } = useGetStoreSocials(id)
   const { contacts } = useGetStoreContacts(id)
-  const { feedbacks } = useGetStoreFeedbacks(id, { limit: '3', page: '1' })
-  const [clintLocation, setLocation] = useState<{ lat: number; lng: number }>({ lat: 0, lng: 0 });
-  useEffect(() => {
-    if (storeProfile) {
-      setLocation({
-        lat: storeProfile.location.latitude,
-        lng: storeProfile.location.longitude,
-      })
-    }
-  }, [budgets])
-
-  const navigate = useNavigate()
+  const { socials } = useGetStoreSocials(id)
+  const { feedbacks } = useGetStoreFeedbacks(id)
+  const { budgets } = useGetBudgetsFromStore(id, { limit: '3', page: '1' })
   return (
     <>
-      <Button onClick={() => navigate('/market/store/' + id)} className="btn-primary flex flex-row gap-2 mb-2 ml-auto"><IconShoppingBag />Ver Produtos</Button>
-      {!isLoading && feedbacks && budgets && contacts && storeProfile && clintLocation.lat !== 0 ? (
-        <StoreProfileComponent
-          storeFeedbacksProps={{ feedbacks, canShowRateStore: true }}
-          mainPanelProps={{ distance: distance, name: storeProfile.name, rating: storeProfile.rating, storeSocials: socials, storeProfileImg: storeProfile.profileImg }}
-          storeProfileLocation={{ lat: clintLocation.lat, lng: clintLocation.lng, storeSocials: socials, contacts, storeProfileImg: storeProfile.profileImg, address: storeProfile.address }}
-          storeProfileBudgets={{ budgets }}
-          storeId={id}
-        />
+      {!isLoading && storeProfile && contacts ? (
+        <>
+          <StoreProfileMain
+            distance={distance}
+            startWorkTime="08h"
+            endWorkTime="17h"
+            name={storeProfile.name}
+            qualities={['Possui entregas', 'Rápidos Orçamentos', 'Responde rápido', 'Trabalhamos com Apple também']}
+            rating={storeProfile.rating}
+            storeProfileImg={storeProfile.profileImg}
+            wppNum={contacts.wppNum}
+          />
+          <StoreProfileServices storeProfileImg={storeProfile.profileImg} />
+          <div className="max-w-[1242px] ml-auto mr-auto">
+            <StoreProfileLocation
+              address={storeProfile.address}
+              contacts={contacts}
+              lat={storeProfile.location.latitude}
+              lng={storeProfile.location.longitude}
+              storeProfileImg={storeProfile.profileImg}
+              storeSocials={socials}
+              isOwner={false}
+            />
+          </div>
+
+          <div className="gap-5 flex mt-10 flex-row max-w-[1242px] ml-auto mr-auto">
+            <StoreFeedbacks storeId={storeProfile.id} feedbacks={feedbacks} canShowRateStore={true} />
+            <StoreProfileBudgets budgets={budgets} isOwner={false} />
+          </div>
+        </>
       ) : ''}
     </>
   )

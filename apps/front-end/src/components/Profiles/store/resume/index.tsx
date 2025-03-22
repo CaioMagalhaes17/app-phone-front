@@ -30,7 +30,7 @@ export function StoreResume({ storeProfile, showMarket, distance }: { distance: 
             <div className="flex flex-row w-full">
               <div className="w-full text-left flex flex-col gap-2">
                 <Text className="text-lg text-green" as="span">Aberto</Text>
-                <Text as="span">Distância: {Math.floor(distance) >= 1000 ? `${Math.floor(distance)} km` : `${Math.floor(distance)} m`}</Text>
+                <Text as="span">Distância: {Math.floor(distance) >= 1000 ? `${Math.floor(Math.floor(distance) / 1000)} km` : `${Math.floor(distance)} m`}</Text>
               </div>
             </div>
           </div >

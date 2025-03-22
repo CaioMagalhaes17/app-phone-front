@@ -109,12 +109,12 @@ export default function StoreMapEdit() {
         {clintLocation && isMapLoaded ? (
           <MapAdapter mapStyle={mapStyle} initialPosition={clintLocation}>
             {
-              storeInfos && (
+              storeInfos && storeInfos.profileImg ? (
                 <MarkAdapter
                   position={clintLocation}
                   icon={storeInfos.profileImg}
                 />
-              )
+              ) : ''
             }
           </MapAdapter>
         ) : ''}
