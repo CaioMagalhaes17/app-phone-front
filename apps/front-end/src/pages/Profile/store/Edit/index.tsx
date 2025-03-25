@@ -1,4 +1,4 @@
-import { Button, IconSave, Input, Panel, Text, IconPencil } from "@app/ui";
+import { Button, IconSave, Input, Panel, Text, IconPencil, IconUser } from "@app/ui";
 import { StoreContact } from "./components/Contact";
 import { StoreSocials } from "./components/Socials";
 import useStore from "../../../../state";
@@ -67,9 +67,9 @@ export function EditStoreProfile() {
         </li>
       </ul>
       <div className=" flex justify-center ">
-        <Panel className="!shadow-lg !shadow-black font-extrabold max-w-[1200px] w-full">
+        <Panel className="font-bold max-w-[1200px] mt-10 w-full">
           <div className="flex flex-row justify-center items-center">
-            <Text className="text-3xl text-dark dark:text-white" as="h1">Editar perfil</Text>
+            <Text className="text-3xl text-black dark:text-white flex flex-row gap-5 items-center" as="h1"><IconUser className="w-[40px] h-[40px]" />Editar perfil</Text>
             <div className="mr-auto" />
           </div>
           <div className="border-b border-b-[#323b45] mt-5 mt-10" />
@@ -81,7 +81,7 @@ export function EditStoreProfile() {
                   <span className="text-white text-lg font-bold flex flex-row gap-2 items-center"><IconPencil /> Editar</span>
                 </div>
               </div>
-              <div className="w-full flex flex-col text-lg">
+              <div className="text-dark dark:text-white w-full flex flex-col text-lg">
                 <div className="w-full  gap-5 flex-row flex">
                   <div className="w-full">
                     <Text as="span">Nome</Text>

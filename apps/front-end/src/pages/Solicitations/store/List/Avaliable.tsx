@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query"
 import { GetAvaliableSolicitationsForStore } from "../../../../api/repair/solicitation/avaliable-for-store"
 import { useEffect, useState } from "react"
 import { formatSolicitations } from "../../../../formaters/solicitations"
-import { Panel, Text } from "@app/ui"
+import { IconBill, Panel, Text } from "@app/ui"
 import { SolicitationRow } from "./components/SolicitationRow"
 
 export function AvaliableSolicitations() {
@@ -41,11 +41,11 @@ export function AvaliableSolicitations() {
       {!isLoading && avaliableSolicitations ? (
         <>
           <div className="flex justify-center">
-            <Panel className="font-extrabold  max-w-[1200px] w-full">
+            <Panel className="font-bold  max-w-[1200px] w-full">
               <div className="flex flex-row">
-                <Text className="text-3xl text-dark dark:text-white" as="h1">Defeitos esperando retorno</Text>
+                <Text className="text-3xl text-black dark:text-white flex flex-row gap-5 items-center" as="h1"><IconBill />Defeitos esperando retorno</Text>
                 <div className="ml-auto" />
-                <select onClick={(e) => onOrderChange(e.currentTarget.value)} className="form-select !border-none dark:bg-black form-select-lg text-dark dark:text-white">
+                <select onClick={(e) => onOrderChange(e.currentTarget.value)} className="form-select !border-none dark:bg-black form-select-lg text-black dark:text-white">
                   <option value="desc">
                     Mais recentes
                   </option>

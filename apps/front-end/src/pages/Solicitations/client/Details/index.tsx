@@ -1,6 +1,5 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { GetSolicitation } from "../../../../api/repair/solicitation/get-solicitation";
 import { Button, IconArrowBackward, IconDollarSignCircle, IconStore, IconX, Panel, Text } from "@app/ui";
 import { formatPhoneBrand, formatTopic, getStatusColor } from "../../../../formaters/solicitations";
 import Swal from "sweetalert2";
@@ -8,37 +7,26 @@ import { EditSolicitation } from "../../../../api/repair/solicitation/edit-solic
 import { ProblemForm } from "./ProblemForm";
 import { PhoneForm } from "./PhoneForm";
 import { FinalForm } from "./FinalForm";
-import { GetBudgetsbySolicitation } from "../../../../api/repair/budget/get-budget-by-solicitation";
 import { useEffect, useState } from "react";
-import { BudgetType } from "../../../../types/budget";
-import { formatBudgetsFromApi } from "../../../../formaters/budget";
 import { CANCELED_SOLICITATION_STATUS } from "../../../../constants/solicitation-status";
 import { Solicitation } from "../../../../types/solicitation";
 import { SolicitationImages } from "../../../../components/Repair/Solicitations/Details/SolicitationImages";
+import { useGetSolicitationById } from "../../../../hooks/solicitation/useGetSolicitationById";
+import { useGetBudgetBySolicitationId } from "../../../../hooks/budgets/useGetBudgetBySolicitationId";
 
 export function SolicitationDetails() {
-  const [budgets, setBudgets] = useState<BudgetType[] | []>([])
   const [canEdit, setCanEdit] = useState<boolean>(true)
   const { id } = useParams() as { id: string }
-  const { data: solicitationData, isLoading } = useQuery<Solicitation>({
-    queryKey: ['get-solicitation'],
-    queryFn: () => GetSolicitation(id)
-  })
-
-  const { data: budgetsData, isLoading: budgetsLoading } = useQuery({
-    queryKey: ['get-budgets'],
-    queryFn: () => GetBudgetsbySolicitation(id)
-  })
-
+  const { isLoading, solicitationData } = useGetSolicitationById(id)
+  const { budgets, budgetsLoading } = useGetBudgetBySolicitationId(id)
   useEffect(() => {
     if (!budgetsLoading) {
-      setBudgets(formatBudgetsFromApi(budgetsData))
-      if (budgetsData.length > 0) {
+      if (budgets.length > 0) {
         return setCanEdit(false)
       }
       return setCanEdit(true)
     }
-  }, [budgetsData, budgetsLoading])
+  }, [budgets, budgetsLoading])
 
   useEffect(() => {
 

@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import useStore from "../../../../state";
 import { AutoCompleteAdapter, MapAdapter, MarkAdapter } from "../../../../adapters/Map";
-import { Button, IconMap, IconSave, Input, Text } from "@app/ui";
+import { Button, HSeparator, IconMap, IconSave, IconStreetMap, Input, Text } from "@app/ui";
 import { useEffect, useState } from "react";
 import { EditGeolocation } from "../../../../api/geolocation/edit-geolocation";
 import Swal from "sweetalert2";
@@ -81,7 +81,8 @@ export default function StoreMapEdit() {
 
   return (
     <>
-
+      <Text className="flex flex-row gap-2 font-bold text-black dark:text-white items-center text-4xl" as="h1"><IconStreetMap width="50px" height="50px" />Alterar Localização</Text>
+      <HSeparator className="mb-5" />
       <div className="flex relative h-full gap-5">
         <div style={{ borderRadius: '10px' }} className="max-w-xs flex flex-col  gap-2 items-center sombra dark:bg-black w-[420px]">
           <div className="text-left p-4 mt-10">

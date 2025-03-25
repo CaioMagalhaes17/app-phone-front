@@ -13,7 +13,7 @@ const useNotifications = () => {
 
   useEffect(() => {
     if (!socketRef.current && profileId) {
-      socketRef.current = io('http://localhost:3001', {
+      socketRef.current = io(window.location.hostname === 'localhost' ? 'https://nest-domain-driven-design.fly.dev/' : 'https://nest-domain-driven-design.fly.dev/', {
         query: { profileId },
       });
 

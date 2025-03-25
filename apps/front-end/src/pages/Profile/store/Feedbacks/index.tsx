@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { FeedbackType } from "../../../../types/feedback";
 import { formatFeedbacks } from "../../../../formaters/feedback";
 import { FeedbackRow } from "../../../../components/Feedbacks/row";
-import { Button, IconArrowBackward, Panel, Text } from "@app/ui";
+import { Button, IconArrowBackward, IconChat, Panel, Text } from "@app/ui";
 import { CreateFeedback } from "../../../../components/Feedbacks/create-modal";
 import useStore from "../../../../state";
 
@@ -28,10 +28,10 @@ export function StoreFeedbacksList() {
       <Button onClick={() => navigate(-1)} className="btn-outline-primary flex flex-row gap-2"><IconArrowBackward /> </Button>
 
       {!isLoading && feedbacks ? (<div className="flex justify-center">
-        <Panel className="font-extrabold  max-w-[1200px] w-full">
+        <Panel className="font-bold  max-w-[1200px] w-full">
           <div className="flex flex-row">
 
-            <Text className="text-3xl text-black dark:text-white" as="h1">Avaliações</Text>
+            <Text className="text-3xl text-black dark:text-white flex flex-row gap-5 items-center" as="h1"><IconChat />Avaliações</Text>
             <div className="ml-auto" />
             {storeInfos.id !== id ? (
               <CreateFeedback storeName="teste" storeId={id} />

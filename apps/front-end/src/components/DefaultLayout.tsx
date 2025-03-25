@@ -17,7 +17,7 @@ export default function DefaultLayout() {
               <Sidebar />
               <Suspense>
                 <Box className="hidden shadow-3xl shadow-4xl teste-default bg-success bg-warning bg-danger text-warning text-success text-danger text-primary" />
-                <Box data-overlap="false" id="page-container" style={{ left: closeSidebar ? '0px' : '305px' }} className="animate__fadeIn animate__animated page-container p-4 scrollable">
+                <Box data-overlap="false" id="page-container" style={{ left: closeSidebar ? '0px' : '305px' }} className="animate__fadeIn animate__animated page-container scrollable">
                   <Outlet />
                 </Box>
               </Suspense>

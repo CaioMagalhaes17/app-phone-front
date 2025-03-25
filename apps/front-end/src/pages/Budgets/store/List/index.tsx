@@ -9,6 +9,7 @@ import { useEffect, useState } from "react"
 import { formatBudgetsFromApi } from "../../../../formaters/budget"
 import { BudgetType } from "../../../../types/budget"
 import { BasicTable } from "../../../../components/Datatable"
+import dayjs from "dayjs"
 
 export function StoreBudgetList() {
   const [budgets, setBudgets] = useState<BudgetType[] | []>([])
@@ -27,7 +28,7 @@ export function StoreBudgetList() {
       accessor: 'phone',
       title: 'Celular',
       render: ({ solicitation }) => {
-        return <span className="text-white text-lg font-extrabold">{formatPhoneBrand(solicitation.form.phoneForm.brand)} - {solicitation.form.phoneForm.model}</span>
+        return <span className="text-dark dark:text-white text-lg font-bold">{formatPhoneBrand(solicitation.form.phoneForm.brand)} - {solicitation.form.phoneForm.model}</span>
       }
     },
     {
@@ -43,7 +44,7 @@ export function StoreBudgetList() {
           const questionOne = solicitation.form.problemForm['display-A']
           answer = displayQuestions[0].options.filter((item) => item.optionId === questionOne)[0]
         }
-        return <span className="text-white text-lg font-extrabold">{answer.text}</span>
+        return <span className="text-dark dark:text-white text-lg font-bold">{answer.text}</span>
       }
     },
 
@@ -52,30 +53,22 @@ export function StoreBudgetList() {
       title: 'Valor estimado',
       render: ({ startValue, endValue }) => {
         return (
-          <span className="text-lg text-green font-extrabold">{startValue} - {endValue}</span>
+          <span className="text-lg text-green font-bold">{startValue} - {endValue}</span>
         )
 
       }
     },
     {
-      accessor: 'details',
-      title: 'Detalhes do orçamento',
-      cellsClassName: 'break-all whitespace-normal max-w-[350px]',
-      render: ({ details }) => {
-        return <span className="text-white w-full font-extrabold">{details}</span>
+      accessor: 'createdAt',
+      title: 'Criado em',
+      cellsClassName: 'text-dark dark:text-white font-extrabold',
+      render: ({ createdAt }) => {
+        return (
+          <span>{dayjs(createdAt).format("DD/MM/YYYY")}</span>
+        )
       }
     },
-    // {
-    //   accessor: 'createdAt',
-    //   title: 'Criado em',
-    //   cellsClassName: 'text-white font-extrabold',
-    //   sortable: true,
-    //   render: ({ createdAt }) => {
-    //     return (
-    //       <span className={`text-white`}>{dayjs(createdAt).format("DD/MM/YYYY")}</span>
-    //     )
-    //   }
-    // },
+
     {
       accessor: 'actions',
       title: 'Ações',

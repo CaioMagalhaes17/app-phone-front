@@ -1,12 +1,15 @@
-import { StoreProfileComponent } from "../../../../components/Profiles/store"
 import useStore from "../../../../state"
-import { useEffect, useState } from "react"
-import { Button, IconPencil, IconShoppingBag } from "@app/ui"
+import { Button, HSeparator, IconPencil, IconShoppingBag } from "@app/ui"
 import { useNavigate } from "react-router-dom"
 import { useGetStoreContacts } from "../../../../hooks/profile/useGetStoreContacts"
 import { useGetStoreSocials } from "../../../../hooks/profile/useGetStoreSocials"
 import { useGetStoreFeedbacks } from "../../../../hooks/profile/useGetStoreFeedbacks"
 import { useGetBudgets } from "../../../../hooks/budgets/useGetBudgets"
+import { StoreProfileMain } from "../../../../components/Profiles/store/new"
+import { StoreProfileServices } from "../../../../components/Profiles/store/components/Services"
+import { StoreProfileLocation } from "../../../../components/Profiles/store/components/Location"
+import { StoreFeedbacks } from "../../../../components/Profiles/store/components/Feedbacks"
+import { StoreProfileBudgets } from "../../../../components/Profiles/store/components/Budgets"
 
 export function StoreProfileOwner() {
   const navigate = useNavigate()
@@ -17,34 +20,47 @@ export function StoreProfileOwner() {
   const { feedbacks } = useGetStoreFeedbacks(storeInfos.id, { page: '1', limit: '1' })
   const { budgets, isLoading } = useGetBudgets({ page: '1', limit: '3' })
 
-  const [clintLocation, setLocation] = useState<{ lat: number; lng: number }>({ lat: 0, lng: 0 });
-  useEffect(() => {
-    setLocation({
-      lat: storeInfos.location.latitude,
-      lng: storeInfos.location.longitude,
-    })
-  }, [storeInfos])
-
-
   return (
     <>
-      <div className="">
-        <ul className="flex font-semibold border-b border-[#191e3a] flex-row mb-5 whitespace-nowrap overflow-y-auto">
-          <div className="ml-auto" />
-          <li className="p-4 flex flex-row gap-5">
-            <Button className="btn-primary flex flex-row gap-2" onClick={() => navigate('/store/profile/edit')}><IconPencil />Editar Perfil</Button>
-            <Button className="btn-primary flex flex-row gap-2" onClick={() => navigate('/store/market')}><IconShoppingBag />Acessar Mercado</Button>
-          </li>
-        </ul>
-      </div>
+      <ul className="flex font-semibold flex-row whitespace-nowrap overflow-y-auto">
+        <div className="ml-auto" />
+        <li className="p-4 flex flex-row gap-5">
+          <Button className="btn-primary flex flex-row gap-2" onClick={() => navigate('/store/profile/edit')}><IconPencil />Editar Perfil</Button>
+          <Button className="btn-primary flex flex-row gap-2" onClick={() => navigate('/store/market')}><IconShoppingBag />Acessar Mercado</Button>
+        </li>
+      </ul>
       {!isLoading && feedbacks && contacts ? (
-        <StoreProfileComponent
-          storeId={storeInfos.id}
-          storeFeedbacksProps={{ feedbacks, canShowRateStore: false }}
-          mainPanelProps={{ name: storeInfos.name, rating: storeInfos.rating, storeSocials: socials, storeProfileImg: storeInfos.profileImg }}
-          storeProfileBudgets={{ budgets, isOwner: true }}
-          storeProfileLocation={{ isOwner: true, lat: clintLocation.lat, lng: clintLocation.lng, storeSocials: socials, contacts, storeProfileImg: storeInfos.profileImg, address: storeInfos.address }}
-        />
+        <>
+          <StoreProfileMain
+            startWorkTime="08h"
+            endWorkTime="17h"
+            name={storeInfos.name}
+            qualities={['Possui entregas', 'Rápidos Orçamentos', 'Responde rápido', 'Trabalhamos com Apple também']}
+            rating={storeInfos.rating}
+            storeProfileImg={storeInfos.profileImg}
+            wppNum={contacts.wppNum}
+          />
+          <StoreProfileServices storeProfileImg={storeInfos.profileImg} />
+          <HSeparator />
+
+          <div className="max-w-[1242px] ml-auto mr-auto">
+            <StoreProfileLocation
+              address={storeInfos.address}
+              contacts={contacts}
+              lat={storeInfos.location.latitude}
+              lng={storeInfos.location.longitude}
+              storeProfileImg={storeInfos.profileImg}
+              storeSocials={socials}
+              isOwner={false}
+            />
+          </div>
+          <HSeparator />
+
+          <div className="gap-5 flex mt-10 flex-row max-w-[1242px] ml-auto mr-auto">
+            <StoreFeedbacks storeId={storeInfos.id} feedbacks={feedbacks} canShowRateStore={true} />
+            <StoreProfileBudgets budgets={budgets} isOwner={false} />
+          </div>
+        </>
       ) : ''}
     </>
   )

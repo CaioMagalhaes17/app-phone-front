@@ -3,9 +3,11 @@ import { NotificationRow } from "./NotificationRow";
 import useNotifications from "../../hooks/useNotifications";
 import { useGetNotifications } from "../../hooks/notification/useGetNotifications";
 import { useQueryClient } from "@tanstack/react-query";
+import useStore from "../../state";
 import { useEffect, useState } from "react";
 
 export function HeaderNotificationsBox() {
+  const { setCloseSidebar } = useStore()
   const client = useQueryClient()
   const [eraseNewNotifications, setEraseNewNotifications] = useState(false)
   const { notifications: newNotifications } = useNotifications()
@@ -17,8 +19,11 @@ export function HeaderNotificationsBox() {
   }, [newNotifications])
   return (
     <>
-      <DropdownMenu>
-        <DropdownMenuTrigger onClick={() => setEraseNewNotifications(true)}>
+      <DropdownMenu onOpenChange={(s) => {
+        setEraseNewNotifications(true);
+        setCloseSidebar(!s)
+      }}>
+        <DropdownMenuTrigger>
           <div className="flex flex-row w-full">
             <IconBell />
             {newNotifications.length > 0 && !eraseNewNotifications ? (

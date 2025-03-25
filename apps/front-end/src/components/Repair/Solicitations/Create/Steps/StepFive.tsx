@@ -1,35 +1,28 @@
 import { Button, IconMap, IconSave, Input, Text } from "@app/ui";
 import { useEffect, useState } from "react";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { EditGeolocation } from "../../../../../api/geolocation/edit-geolocation";
 import useStore from "../../../../../state";
 import { AutoCompleteAdapter, InfoWindowAdapter, MapAdapter, MarkAdapter, RadiusAdapter } from "../../../../../adapters/Map";
 import Swal from "sweetalert2";
-import { FetchStoresInsideClientRadius } from "../../../../../api/geolocation/fetch-stores-inside-client-radius";
 import { MapPinSvg } from "../../../../../constants/svg-icons";
-import { formatStoreProfile } from "../../../../../formaters/store-profile";
-import { StoreProfileFromApi, StoreProfileType } from "../../../../../types/store-profile";
+import { useGetStoresInsideClientRadius } from "../../../../../hooks/geolocation/useGetStoresInsideClientRadius";
+import { StoresInsideRadiusType } from "../../../../../types/stores";
 
 export function MapStep({ setActiveTab }: { setActiveTab: React.Dispatch<React.SetStateAction<number>> }) {
   const { clientInfos, setClientInfos, isMapLoaded } = useStore()
   const [clintLocation, setLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [radius, setRadius] = useState<number>(0)
   const client = useQueryClient()
-  type StoresInsideRadius = {
-    geoLocation: { props: { latitude: number; longitude: number; } }
-    profile: StoreProfileFromApi
-    distance: number
-    _id: string
-  }
 
-  const [selectedStore, setSelectedStore] = useState<{
-    geoLocation: { props: { latitude: number; longitude: number; } },
-    storeProfile: StoreProfileType
-  } | null>()
+  const [selectedStore, setSelectedStore] = useState<StoresInsideRadiusType | null>()
+
 
   const { mutateAsync } = useMutation({
     mutationFn: EditGeolocation
   })
+
+  const { stores, storesLoading } = useGetStoresInsideClientRadius()
 
   useEffect(() => {
     setLocation({
@@ -91,18 +84,7 @@ export function MapStep({ setActiveTab }: { setActiveTab: React.Dispatch<React.S
     }
   }
 
-  const { isLoading: storesLoading, data } = useQuery({
-    queryKey: ['fetch-stores-inside-client-radius'],
-    queryFn: FetchStoresInsideClientRadius
-  })
 
-  function onStorePinClick(item: StoresInsideRadius) {
-    const teste = {
-      geoLocation: item.geoLocation,
-      storeProfile: formatStoreProfile(item.profile)
-    }
-    setSelectedStore(teste)
-  }
   const images = [
     'https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/390.png',
     'https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/390.png',
@@ -146,13 +128,13 @@ export function MapStep({ setActiveTab }: { setActiveTab: React.Dispatch<React.S
         </div>
         {clintLocation && isMapLoaded ? (
           <MapAdapter onClick={() => setSelectedStore(null)} mapStyle={mapStyle} initialPosition={clintLocation}>
-            {!storesLoading && data.length > 0 ? (data.map((item: StoresInsideRadius) => {
+            {!storesLoading && stores.length > 0 ? (stores.map((item, i) => {
               return (
                 <MarkAdapter
-                  onClick={() => onStorePinClick(item)}
-                  icon={item.profile.props.profileImg}
-                  position={{ lat: item.geoLocation.props.latitude, lng: item.geoLocation.props.longitude }}
-                  key={item._id}
+                  onClick={() => setSelectedStore(item)}
+                  icon={item.profile.profileImg}
+                  position={{ lat: item.location.latitude, lng: item.location.longitude }}
+                  key={i}
                 />
               )
             })) : ''}
@@ -161,11 +143,11 @@ export function MapStep({ setActiveTab }: { setActiveTab: React.Dispatch<React.S
               icon={MapPinSvg}
             />
             {selectedStore && (
-              <InfoWindowAdapter onClose={() => setSelectedStore(null)} position={{ lat: selectedStore.geoLocation.props.latitude, lng: selectedStore.geoLocation.props.longitude }} options={{ pixelOffset: new window.google.maps.Size(0, -40) }}>
+              <InfoWindowAdapter onClose={() => setSelectedStore(null)} position={{ lat: selectedStore.location.latitude, lng: selectedStore.location.longitude }} options={{ pixelOffset: new window.google.maps.Size(0, -40) }}>
                 <>
                   <div className="h-[200px] w-[200px]">
                     <img className="w-[200px] h-[100px]" src={images[0]} />
-                    <Text as="span" className="font-extrabold text-dark">{selectedStore.storeProfile.name}</Text>
+                    <Text as="span" className="font-extrabold text-dark">{selectedStore.profile.name}</Text>
                   </div>
                 </>
               </InfoWindowAdapter>

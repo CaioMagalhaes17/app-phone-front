@@ -29,6 +29,8 @@ type StateManager = {
   theme: 'dark' | 'light'
   setTheme: (theme: 'dark' | 'light') => void
   load: () => Promise<void>
+  baseBackendUrl: string,
+  setBaseBackendUrl: (baseUrl: string) => void
 }
 
 type StoreInfos = {
@@ -141,6 +143,12 @@ const useStore = create<StateManager>((set, get) => {
         }
       }
     },
+    baseBackendUrl: 'https://nest-domain-driven-design.fly.dev/',
+    setBaseBackendUrl: (baseBackendUrl: string) => {
+      set({
+        baseBackendUrl
+      })
+    }
   }
 })
 

@@ -7,13 +7,19 @@ import { signup } from "../../../api/user/signup";
 
 export default function ClientSignUp() {
   const [useEmail, setUseEmail] = useState<boolean>(true)
-  const { register, handleSubmit, formState: { errors } } = useForm()
+  const { register, handleSubmit, formState: { errors }, setError } = useForm()
   const { mutateAsync } = useMutation({
     mutationFn: signup
   })
   async function onSubmit(data: FieldValues) {
     localStorage.removeItem('accessToken')
     localStorage.removeItem('isStore')
+    if (data.password !== data.passwordConfirm) {
+      setError('passwordConfirm', {
+        message: 'As senhas não se coincidem',
+        type: 'confirmError'
+      })
+    }
     const response = await mutateAsync({
       login: data.email,
       password: data.password,
@@ -77,12 +83,23 @@ export default function ClientSignUp() {
                     <div>
                       <label htmlFor="Name">Senha</label>
                       <div className="relative text-white-dark">
-                        <Input {...register('password', { required: true })} type="text" placeholder="Digite sua senha" className="form-input !ps-10 placeholder:text-white-dark" />
+                        <Input {...register('password', { required: true })} type="password" placeholder="Digite sua senha" className="form-input !ps-10 placeholder:text-white-dark" />
                         <span className="absolute start-4 top-1/2 -translate-y-1/2">
                           <IconLockDots />
                         </span>
                       </div>
                       {errors.password && (<p className="font-bold text-danger text-left">Campo Obrigatório*</p>)}
+                    </div>
+                    <div>
+                      <label htmlFor="Name">Confirmar senha</label>
+                      <div className="relative text-white-dark">
+                        <Input {...register('passwordConfirm', { required: true })} type="password" placeholder="Confirme sua senha" className="form-input !ps-10 placeholder:text-white-dark" />
+                        <span className="absolute start-4 top-1/2 -translate-y-1/2">
+                          <IconLockDots />
+                        </span>
+                      </div>
+                      {errors.passwordConfirm && (<p className="font-bold text-danger text-left">Campo Obrigatório*</p>)}
+                      {errors.passwordConfirm?.type === 'confirmError' && (<p className="font-bold text-danger text-left">{errors.passwordConfirm?.message as string}</p>)}
                     </div>
                   </>
                 ) : (<div>

@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useStore from "../../../../state";
 import { AutoCompleteAdapter, MapAdapter, MarkAdapter, RadiusAdapter } from "../../../../adapters/Map";
-import { Button, IconMap, IconSave, Input, Text } from "@app/ui";
+import { Button, IconMap, IconSave, IconSend, Input, Text } from "@app/ui";
 import { useEffect, useState } from "react";
 import { EditGeolocation } from "../../../../api/geolocation/edit-geolocation";
 import Swal from "sweetalert2";
@@ -12,23 +12,26 @@ export default function ClientMapEdit() {
   const { clientInfos, setClientInfos, isMapLoaded } = useStore()
   const [clintLocation, setLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [selectedAddress, setSelectedAddress] = useState<string>("")
+  console.log(selectedAddress)
   const [radius, setRadius] = useState<number>(0)
   const navigate = useNavigate()
   const client = useQueryClient()
   const { mutateAsync } = useMutation({
     mutationFn: EditGeolocation
   })
-
   useEffect(() => {
+    setRadius(
+      (clientInfos?.location.radius || 2500)
+    )
+    if (!clientInfos?.location.latitude) return getBrowserLocation()
+
     setLocation({
       lat: clientInfos?.location.latitude,
       lng: clientInfos?.location.longitude,
     })
-    setRadius(
-      (clientInfos?.location.radius || 2500)
-    )
+
   }, [clientInfos])
-  console.log(selectedAddress)
+
   const mapStyle: React.CSSProperties = {
     width: '100%',
     height: '100%',
@@ -82,7 +85,7 @@ export default function ClientMapEdit() {
 
   return (
     <>
-      <div className="flex relative h-full gap-5">
+      <div className="flex relative h-full gap-5 p-4 max-w-[1240px] mr-auto ml-auto ">
         <div style={{ borderRadius: '10px' }} className="max-w-xs flex flex-col  gap-2 items-center sombra dark:bg-black w-[420px]">
           <div className="text-left p-4 mt-10">
             <Button onClick={() => getBrowserLocation()} className="btn-primary w-full"><IconMap />Usar localização exata do dispositivo</Button>
@@ -112,7 +115,11 @@ export default function ClientMapEdit() {
           </div>
           <div className="border-b border-b-[#323b45] mt-5 w-[90%]" />
           <div className="mt-[220px]">
-            <Button onClick={() => navigate('/map')} className="btn-primary w-full flex gap-5 flex-row">
+            <Button onClick={() => navigate('/solicitations/create')} className="btn-primary mb-5 w-full flex gap-5 flex-row">
+              <IconSend />
+              <span>Solicitar conserto de celular</span>
+            </Button>
+            <Button onClick={() => navigate('/map')} className="btn-outline-primary w-full flex gap-5 flex-row">
               <IconMap />
               <span>Procurar por lojas próximas</span>
             </Button>

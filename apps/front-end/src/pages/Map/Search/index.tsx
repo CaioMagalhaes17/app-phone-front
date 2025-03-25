@@ -61,7 +61,7 @@ export default function ClientMapSearch() {
     <>
       <div className="flex flex-row">
         <Text className="text-4xl font-bold flex flex-row gap-5 text-black dark:text-white items-center " as="h1"><IconStreetMap width="40px" height="40px" />Lojas Próximas</Text>
-        <Button className="btn-outline-primary flex flex-row gap-2 ml-auto"><IconPencil />Editar Localização</Button>
+        <Button onClick={() => navigate('/map/edit')} className="btn-outline-primary flex flex-row gap-2 ml-auto"><IconPencil />Editar Localização</Button>
       </div>
       <HSeparator className="mb-5" />
       <div className="flex relative h-full gap-5 ">

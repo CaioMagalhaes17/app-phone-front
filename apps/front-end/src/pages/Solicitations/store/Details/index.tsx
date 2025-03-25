@@ -2,7 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { useNavigate, useParams } from "react-router-dom"
 import { Solicitation } from "../../../../types/solicitation"
 import { GetSolicitation } from "../../../../api/repair/solicitation/get-solicitation"
-import { Button, IconArrowBackward, Panel, Text } from "@app/ui"
+import { Button, HSeparator, IconArrowBackward, IconSmartphone, Panel, Text } from "@app/ui"
 import { formatPhoneBrand, formatTopic, getStatusColor } from "../../../../formaters/solicitations"
 import { ProblemForm } from "./ProblemForm"
 import { PhoneForm } from "./PhoneForm"
@@ -122,17 +122,19 @@ export function StoreSolicitationDetails() {
       <Button onClick={() => navigate(-1)} className="btn-outline-primary flex flex-row gap-2"><IconArrowBackward /> </Button>
       {!isLoading && !budgetLoading && solicitationData ? (
         <div className="max-w-[1200px] mx-auto">
+          <Text className="text-black dark:text-white font-bold text-5xl flex flex-row gap-5 items-center" as="h1"><IconSmartphone />Formulário do problema</Text>
+          <HSeparator className="mb-10" />
           <div className="flex flex-row">
             <div className="flex flex-col gap-2">
-              <Text className="text-black dark:text-white font-extrabold text-5xl" as="h1">Defeito em <span className="underline">{formatTopic(solicitationData?.form.problemTopic)}</span></Text>
+              <Text className="text-black dark:text-white font-bold text-5xl" as="h1">Defeito em <span className="">{formatTopic(solicitationData?.form.problemTopic)}</span></Text>
               <div>
-                <Text className="font-extrabold text-xl" as="h1">{formatPhoneBrand(solicitationData.form.phoneForm.brand)} - {solicitationData.form.phoneForm.model}</Text>
-                {budgetData.length === 0 && (<Text className={`font-extrabold text-md mt-2 text-${getStatusColor(solicitationData.status)}`} as="h1">{solicitationData.status}</Text>)}
+                <Text className="font-bold text-xl" as="h1">{formatPhoneBrand(solicitationData.form.phoneForm.brand)} - {solicitationData.form.phoneForm.model}</Text>
+                {budgetData.length === 0 && (<Text className={`font-bold text-md mt-2 text-${getStatusColor(solicitationData.status)}`} as="h1">{solicitationData.status}</Text>)}
               </div>
             </div>
             <div className="mr-auto" />
             {budgetData.length === 0 ? (<ReturnBudget handleSave={handleSave} />) :
-              <Panel className="flex flex-col font-extrabold gap-2 h-full w-[500px]">
+              <Panel className="bg-whte rounded-md p-5 sombra flex flex-col font-bold gap-2 h-full w-[500px]">
                 <div className="flex flex-row">
                   <Text className="text-lg  text-dark dark:text-white" as="span">Orçamento retornado</Text>
                   <div className="mr-auto" />
@@ -148,7 +150,10 @@ export function StoreSolicitationDetails() {
             <PhoneForm solicitationId={solicitationData.id} phoneForm={solicitationData.form.phoneForm} />
           </div>
           <FinalForm solicitationId={solicitationData.id} deliveryPreference={solicitationData.form.deliveryPreference} timePreference={solicitationData.form.timePreference} details={solicitationData.form.details} />
-          <SolicitationImages images={solicitationData.form.solicitationImgs} />
+          <HSeparator />
+          {solicitationData.form.solicitationImgs.length > 0 && (
+            <SolicitationImages images={solicitationData.form.solicitationImgs} />
+          )}
         </div>
       ) : ''}
     </>

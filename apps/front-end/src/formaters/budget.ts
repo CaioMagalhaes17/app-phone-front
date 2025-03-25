@@ -3,6 +3,7 @@ import { formatSolicitation } from "./solicitations";
 import { formatStoreProfile } from "./store-profile";
 
 export function formatBudgetsFromApi(budgets: BudgetFromApiType[]): BudgetType[] {
+  console.log(budgets, 'array vazio?')
   return budgets.map((budget) => formatBudgetfromApi(budget))
 }
 export function formatBudgetfromApi(budget: BudgetFromApiType): BudgetType {

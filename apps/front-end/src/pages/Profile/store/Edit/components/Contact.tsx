@@ -1,5 +1,5 @@
 import ReactInputMask from 'react-input-mask'
-import { Button, IconPencil, IconWhatsApp, Input, Text } from "@app/ui";
+import { Button, IconOldPhone, IconPencil, IconPhone, IconWhatsApp, Input, Text } from "@app/ui";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { FieldValues, useForm } from "react-hook-form";
 import { UpdateStoreContacts } from '../../../../../api/user/store/update-contact';
@@ -42,7 +42,7 @@ export function StoreContact() {
     <>
       {contacts && (
         <form onSubmit={handleSubmit(onContactEdit)}>
-          <Text className="text-dark dark:text-white mr-auto flex flex-row text-3xl " as="span">Contato</Text>
+          <Text className="text-black dark:text-white mr-auto flex flex-row text-3xl gap-2 items-center" as="span"><IconOldPhone />Contato</Text>
           <div className="flex flex-col text-lg mt-10">
             <div className="flex items-center flex-row gap-5 mb-10">
               <div className='flex flex-col w-full '>

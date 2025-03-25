@@ -22,6 +22,7 @@ export default function ClientLogin() {
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     localStorage.removeItem('accessToken')
     localStorage.removeItem('isStore')
+    console.log('a')
     const response = await mutateAsync(data as LoginForm);
     localStorage.setItem('accessToken', response.token)
     localStorage.setItem('isStore', 'false')

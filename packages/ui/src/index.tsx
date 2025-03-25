@@ -84,6 +84,7 @@ export {
 export { HSeparator } from "./atoms/HSeparator";
 export { VSeparator } from "./atoms/VSeparator";
 import './css/index.css'
+export { IconOldPhone } from "./Icons/IconOldPhone";
 export { IconClock } from "./Icons/IconClock";
 export { IconVerified } from "./Icons/IconVerified";
 export { IconMoon } from "./Icons/IconMoon";

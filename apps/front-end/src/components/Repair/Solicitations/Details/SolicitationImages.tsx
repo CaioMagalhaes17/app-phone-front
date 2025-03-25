@@ -8,10 +8,10 @@ export function SolicitationImages({ images }: { images: string[] }) {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
-      <Panel className="mt-10 font-extrabold ">
+      <Panel className="mt-10 font-bold ">
         <div className="flex flex-col">
           <div className="flex flex-row">
-            <Text className="text-dark dark:text-white text-2xl" as="h1">Imagens do Celular:</Text>
+            <Text className="text-black dark:text-white text-3xl" as="h1">Imagens do Celular:</Text>
             <div className="ml-auto"></div>
           </div>
           <div className="flex flex-row gap-10 mt-5">

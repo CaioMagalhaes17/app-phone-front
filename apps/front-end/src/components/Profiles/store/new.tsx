@@ -10,7 +10,7 @@ export function StoreProfileMain({ name, startWorkTime, endWorkTime, distance, r
   name: string,
   startWorkTime: string,
   endWorkTime: string,
-  distance: number,
+  distance?: number,
   rating: number,
   qualities: string[]
   storeProfileImg: string
@@ -26,7 +26,9 @@ export function StoreProfileMain({ name, startWorkTime, endWorkTime, distance, r
             <div className="flex flex-col">
               <Text className="text-5xl text-black dark:text-white" as="h1">{name}</Text>
               <Text className="text-xl text-white-dark" as="h1">{startWorkTime} - {endWorkTime}</Text>
-              <Text className="text-white-dark" as="span">Distância: {Math.floor(distance) >= 1000 ? `${Math.floor(Math.floor(distance) / 1000)} km` : `${Math.floor(distance)} m`}</Text>
+              {distance && (
+                <Text className="text-white-dark" as="span">Distância: {Math.floor(distance) >= 1000 ? `${Math.floor(Math.floor(distance) / 1000)} km` : `${Math.floor(distance)} m`}</Text>
+              )}
             </div>
             <div className="flex flex-row mb-[50px]">
               {[...Array(5)].map((_, index) => (

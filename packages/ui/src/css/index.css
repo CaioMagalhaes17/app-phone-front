@@ -100,7 +100,7 @@ body {
   }
 
   .panel {
-    @apply relative rounded-md p-5 sombra dark:shadow-[#060818] bg-white dark:bg-black;
+    @apply relative rounded-md p-5 sombra dark:shadow-[#060818]
   }
 
   .navbar-sticky header {
@@ -130,11 +130,15 @@ body {
     left: 305px;
     right: 0px;
     bottom: 0;
-    top: 100px;
+    top: 80px;
     position: absolute;
     text-align: center;
     margin-right: 0;
     transition: all .5s ease;
+  }
+
+  .pointer-all {
+    pointer-events: all !important;
   }
 
   .scrollable {

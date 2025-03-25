@@ -1,4 +1,4 @@
-import { Button, IconMenu, IconSend, Header as UIHeader, VSeparator } from "@app/ui";
+import { Button, IconMenu, IconSend, IconStreetMap, Header as UIHeader, VSeparator } from "@app/ui";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, IconLogout, IconSettings } from "@app/ui"
 import useStore from "../../state";
 import { Text } from "@app/ui"
@@ -41,14 +41,20 @@ export function ClientHeader() {
         <SearchBar />
         <div className="mr-auto" />
         <div className="flex flex-row gap-5">
-          <Button className="btn-outline-primary border-none flex flex-row gap-2">
+          <Button onClick={() => navigate('/solicitations/create')} className="btn-outline-primary border-none flex flex-row gap-2">
             <IconSend />
             Solicitar Conserto
+          </Button>
+          <Button onClick={() => navigate('/map')} className="btn-outline-primary border-none flex flex-row gap-2">
+            <IconStreetMap />
+            Procurar por lojas próximas
           </Button>
           <ChooseTheme />
           <HeaderNotificationsBox />
           <VSeparator className="ml-5" />
-          <DropdownMenu>
+          <DropdownMenu onOpenChange={(s) =>
+            setCloseSidebar(!s)
+          } >
             <DropdownMenuTrigger>
               <div className="flex flex-row items-center">
                 <div className="w-[60px]">
