@@ -48,7 +48,7 @@
   }
 
   .btn-outline-primary {
-    @apply border-black dark:border-primary hover:dark:text-white text-black dark:text-primary shadow-none hover:bg-black hover:dark:bg-primary hover:text-white;
+    @apply border-black dark:border-white-dark hover:dark:text-white text-black dark:text-white shadow-none hover:bg-black hover:dark:bg-primary hover:text-white;
   }
 
   .btn-outline-warning {

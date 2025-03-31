@@ -10,6 +10,8 @@ export type StoreProfileFromApi = {
     updatedAt: string
     userId: string
     rating: number
+    tags?: string[]
+    workingTime?: string
   },
   _id: string
 }
@@ -26,6 +28,8 @@ export type StoreProfileType = {
   updatedAt: string
   userId: string
   rating: number
+  tags?: string[]
+  workingTime?: string
 }
 
 export type StoreContactsFromApi = {

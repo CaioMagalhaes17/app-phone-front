@@ -1,6 +1,6 @@
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useGetBudgetById } from "../../../../hooks/budgets/useGetBudgetById";
-import { Button, IconArrowBackward, Panel, Text } from "@app/ui";
+import { Button, HSeparator, IconArrowBackward, IconDollarSignCircle, Panel, Text } from "@app/ui";
 import { BudgetDetailsLocation } from "./components/Location";
 import { StoreResume } from "../../../../components/Profiles/store/resume";
 
@@ -13,12 +13,12 @@ export function BudgetDetails() {
     <>
       <Button className="btn-outline-primary" onClick={() => navigate(-1)}><IconArrowBackward /></Button>
       {budget && (
-        <div className="flex flex-col ">
+        <div className="flex flex-col max-w-[1250px] ml-auto mr-auto font-bold">
           <div className="flex gap-10 mr-auto ml-auto mr-auto mt-10 flex-row">
             <Panel className="min-w-[900px]">
-              <div className="flex flex-col p-4 font-extrabold">
-                <Text as="h1" className="text-black dark:text-white text-5xl">Orçamento</Text>
-                <div className="border-b border-b-[#323b45] mt-5 " />
+              <div className="flex flex-col">
+                <Text as="h1" className="text-black dark:text-white text-4xl flex flex-row gap-5 items-center"><IconDollarSignCircle className="w-[40px] h-[40px]" />Orçamento</Text>
+                <HSeparator />
                 <div className="flex flex-row mt-10">
                   <div className="flex flex-col">
                     <Text className="text-3xl  text-green" as="span">{budget.startValue} - {budget.endValue}</Text>

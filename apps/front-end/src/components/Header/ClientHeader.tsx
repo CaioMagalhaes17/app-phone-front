@@ -40,7 +40,7 @@ export function ClientHeader() {
         </div>
         <SearchBar />
         <div className="mr-auto" />
-        <div className="flex flex-row gap-5">
+        <div className="flex flex-row ">
           <Button onClick={() => navigate('/solicitations/create')} className="btn-outline-primary border-none flex flex-row gap-2">
             <IconSend />
             Solicitar Conserto
@@ -50,6 +50,7 @@ export function ClientHeader() {
             Procurar por lojas próximas
           </Button>
           <ChooseTheme />
+          <div className="ml-5" />
           <HeaderNotificationsBox />
           <VSeparator className="ml-5" />
           <DropdownMenu onOpenChange={(s) =>

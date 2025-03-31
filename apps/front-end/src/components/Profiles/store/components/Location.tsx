@@ -1,4 +1,4 @@
-import { HSeparator, IconFacebook, IconInstagram, IconMail, IconPencil, IconPhone, IconStreetMap, IconWhatsApp, Panel, Text } from "@app/ui";
+import { HSeparator, IconFacebook, IconInstagram, IconMail, IconOldPhone, IconPencil, IconStreetMap, IconWhatsApp, Panel, Text } from "@app/ui";
 import { MapAdapter, MarkAdapter } from "../../../../adapters/Map";
 import useStore from "../../../../state";
 import { StoreContacts, StoreSocialsType } from "../../../../types/store-profile";
@@ -37,7 +37,7 @@ export function StoreProfileLocation({ lat, lng, storeSocials, contacts, storePr
           <div style={{ borderRadius: '10px' }} className="max-w-xs flex flex-col p-4 gap-2 items-center  w-[420px]">
             <Text className="text-black dark:text-white text-lg" as="span">{address}</Text>
 
-            <Text className="text-black dark:text-white mt-auto text-xl flex flex-row gap-2 items-center" as="span"><IconPhone />{contacts.telNum}</Text>
+            <Text className="text-black dark:text-white mt-auto text-xl flex flex-row gap-2 items-center" as="span"><IconOldPhone />{contacts.telNum}</Text>
             <Text className="text-black dark:text-white text-xl flex flex-row gap-2 items-center" as="span"><IconMail />{contacts.email}</Text>
 
             <Link target="_blank" to={getWppLink('storeProfile', contacts.wppNum)} className="btn btn-green flex flex-row gap-2 "><IconWhatsApp />Chamar no Whatsapp</Link>
@@ -56,7 +56,7 @@ export function StoreProfileLocation({ lat, lng, storeSocials, contacts, storePr
               }
             </div>
           </div>
-          <div className="h-[500px] w-full p-4">
+          <div className="h-[500px] mt-5 sombra rounded-xl w-full">
             {isMapLoaded ? (
               <MapAdapter mapStyle={mapStyle} initialPosition={{ lat, lng }}>
                 <MarkAdapter icon={storeProfileImg}

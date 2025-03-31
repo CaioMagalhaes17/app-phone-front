@@ -1,28 +1,10 @@
-import { useQuery } from "@tanstack/react-query"
-import { GetBudgetsToClient } from "../../../../api/repair/budget/get-budgets-to-client"
-import { useEffect, useState } from "react"
-import { formatBudgetsFromApi } from "../../../../formaters/budget"
-import { BudgetType } from "../../../../types/budget"
-import { Panel, Text } from "@app/ui"
+import { useState } from "react"
+import { IconBill, Panel, Text } from "@app/ui"
 import { BudgetRow } from "./components/BudgetRow"
+import { useGetBudgetsToClient } from "../../../../hooks/budgets/useGetBudgetsToClient"
 
 export function ClientBudgetsList() {
-  const [budgets, setBudgets] = useState<BudgetType[] | []>([])
-  // const [uniqueModels, setUniqueModels] = useState<string[]>()
-  const { data, isLoading, isFetching } = useQuery({
-    queryKey: ['get-budgets'],
-    queryFn: () => GetBudgetsToClient()
-  })
-
-  useEffect(() => {
-    if (!isFetching && data) {
-      const budgetsFormatted = formatBudgetsFromApi(data.budgets)
-      setBudgets([...budgetsFormatted].sort((a, b) => b.storeProfile.rating - a.storeProfile.rating));
-      // const uniqueModelsD = [...new Set(data.map((item: any) => item.props.solicitation.props.form.props.phoneForm.model).filter((model: any) => typeof model === "string")
-      // )] as string[];
-      // setUniqueModels(uniqueModelsD)
-    }
-  }, [isFetching, data])
+  const { budgets, distances, isLoading, setBudgets } = useGetBudgetsToClient()
 
   function onOrderChange(orderStatus: string) {
     switch (orderStatus) {
@@ -31,12 +13,12 @@ export function ClientBudgetsList() {
         break
       case 'distance':
         setBudgets([...budgets].sort((a, b) => {
-          const distanceA = data.distances.filter((item: { storeProfileId: string }) => {
+          const distanceA = distances.filter((item: { storeProfileId: string }) => {
             if (item.storeProfileId === a.storeProfile.id) {
               return item
             }
           })[0].distance
-          const distanceB = data.distances.filter((item: { storeProfileId: string }) => {
+          const distanceB = distances.filter((item: { storeProfileId: string }) => {
             if (item.storeProfileId === b.storeProfile.id) {
               return item
             }
@@ -55,31 +37,16 @@ export function ClientBudgetsList() {
     }
   }
 
-  // function onFilterChange(filter: string) {
-  //   if (filter !== 'default') return setBudgets([...budgets].filter((item) => item.solicitation.form.phoneForm.model === filter));
-  //   return refetch()
-  // }
   const [selectedRow, setSelectedRow] = useState<number>()
+
   return <>
     {!isLoading ? (
       <>
-        <div className="flex justify-center">
-          <Panel className="font-extrabold  max-w-[1200px] w-full">
+        <div className="flex justify-center mt-10">
+          <Panel className="font-bold  max-w-[1200px] w-full">
             <div className="flex flex-row">
-              <Text className="text-3xl text-black dark:text-white" as="h1">Orçamentos recebidos</Text>
+              <Text className="text-3xl text-black dark:text-white flex flex-row gap-5 items-center" as="h1"><IconBill />Orçamentos recebidos</Text>
               <div className="ml-auto" />
-              {/* <select onClick={(e) => onFilterChange(e.currentTarget.value)} className="form-select !border-none bg-black form-select-lg text-white mr-5">
-                <option value="default">
-                  Filtrar por celular
-                </option>
-                {uniqueModels && uniqueModels.length > 0 ? uniqueModels.map((item) => {
-                  return (
-                    <option value={item}>
-                      {item}
-                    </option>
-                  )
-                }) : ''}
-              </select> */}
               <select onClick={(e) => onOrderChange(e.currentTarget.value)} className="form-select !border-none text-dark dark:bg-black form-select-lg dark:text-white">
                 <option value="rating">
                   Loja com mais notas
@@ -97,9 +64,9 @@ export function ClientBudgetsList() {
             </div>
             <div className="border-b border-b-[#323b45] mt-5 mt-10" />
             {
-              budgets.length > 0 ?
+              budgets.length > 0 && distances.length > 0 ?
                 budgets.map((budget, key) => {
-                  const store = (data.distances.filter((distance: { distance: number, storeProfileId: string }) => distance.storeProfileId === budget.storeProfile.id))
+                  const store = (distances.filter((distance) => distance.storeProfileId === budget.storeProfile.id))
                   return (
                     <>
                       <div onClick={() => setSelectedRow(key)} className={`hover:bg-[#5f577426] ${selectedRow === key && '!bg-[#5f577426]'}`}><BudgetRow distance={store[0].distance} budget={budget} /></div>

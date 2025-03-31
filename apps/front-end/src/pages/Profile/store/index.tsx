@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useGetStoreProfileById } from "../../../hooks/profile/useGetLocationByProfileId";
-import { StoreProfileMain } from "../../../components/Profiles/store/new";
+import { StoreProfileMain } from "../../../components/Profiles/store";
 import { useGetStoreContacts } from "../../../hooks/profile/useGetStoreContacts";
 import { StoreProfileLocation } from "../../../components/Profiles/store/components/Location";
 import { useGetStoreSocials } from "../../../hooks/profile/useGetStoreSocials";
@@ -23,10 +23,9 @@ export function StoreProfile() {
         <>
           <StoreProfileMain
             distance={distance}
-            startWorkTime="08h"
-            endWorkTime="17h"
+            workingTime={storeProfile.workingTime}
             name={storeProfile.name}
-            qualities={['Possui entregas', 'Rápidos Orçamentos', 'Responde rápido', 'Trabalhamos com Apple também']}
+            tags={storeProfile.tags}
             rating={storeProfile.rating}
             storeProfileImg={storeProfile.profileImg}
             wppNum={contacts.wppNum}

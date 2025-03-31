@@ -5,7 +5,7 @@ export function Api() {
   if (!api) {
     const token = localStorage.getItem('accessToken')
     api = axios.create({
-      baseURL: window.location.hostname === 'localhost' ? 'https://nest-domain-driven-design.fly.dev/' : 'https://nest-domain-driven-design.fly.dev/',
+      baseURL: window.location.hostname === 'localhost' ? 'http://localhost:3001/' : 'https://nest-domain-driven-design.fly.dev/',
       headers: {
         Authorization: token ? 'Bearer ' + token : ''
       }

@@ -7,10 +7,10 @@ import { getWppLink } from "../../../../utils/get-wpp-link";
 export function StoreResume({ storeProfile, showMarket, distance }: { distance: number, showMarket?: boolean, storeProfile: StoreProfileType }) {
   return (
     <>
-      <Panel className="min-w-[300px] p-4">
-        <Text className="text-black dark:text-white text-5xl mt-4 font-extrabold " as="h1">Loja</Text>
+      <Panel className="min-w-[300px]">
+        <Text className="text-black dark:text-white text-4xl font-bold flex flex-row gap-5 items-center" as="h1"><IconStore className="w-[30px] h-[30px]" />Loja</Text>
         <HSeparator />
-        <div className="font-extrabold flex flex-row gap-5 mt-5">
+        <div className="font-bold flex flex-row gap-5 mt-5">
           <div className="w-[100px] max-h-[80px] ">
             <img width="100" height="100" src={storeProfile.profileImg} className="rounded-3xl" />
           </div>

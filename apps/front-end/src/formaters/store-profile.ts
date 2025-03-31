@@ -13,6 +13,8 @@ export function formatStoreProfile(storeProfile: StoreProfileFromApi): StoreProf
     createdAt: storeProfile.props.createdAt,
     updatedAt: storeProfile.props.updatedAt,
     rating: storeProfile.props.rating,
+    tags: storeProfile.props.tags,
+    workingTime: storeProfile.props.workingTime
   }
 }
 

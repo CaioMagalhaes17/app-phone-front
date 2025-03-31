@@ -5,7 +5,7 @@ import { useGetStoreContacts } from "../../../../hooks/profile/useGetStoreContac
 import { useGetStoreSocials } from "../../../../hooks/profile/useGetStoreSocials"
 import { useGetStoreFeedbacks } from "../../../../hooks/profile/useGetStoreFeedbacks"
 import { useGetBudgets } from "../../../../hooks/budgets/useGetBudgets"
-import { StoreProfileMain } from "../../../../components/Profiles/store/new"
+import { StoreProfileMain } from "../../../../components/Profiles/store"
 import { StoreProfileServices } from "../../../../components/Profiles/store/components/Services"
 import { StoreProfileLocation } from "../../../../components/Profiles/store/components/Location"
 import { StoreFeedbacks } from "../../../../components/Profiles/store/components/Feedbacks"
@@ -32,10 +32,9 @@ export function StoreProfileOwner() {
       {!isLoading && feedbacks && contacts ? (
         <>
           <StoreProfileMain
-            startWorkTime="08h"
-            endWorkTime="17h"
+            workingTime={storeInfos.workingTime}
             name={storeInfos.name}
-            qualities={['Possui entregas', 'Rápidos Orçamentos', 'Responde rápido', 'Trabalhamos com Apple também']}
+            tags={storeInfos.tags}
             rating={storeInfos.rating}
             storeProfileImg={storeInfos.profileImg}
             wppNum={contacts.wppNum}

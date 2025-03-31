@@ -9,14 +9,17 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateStore } from "../../../../api/user/store/update-profile";
 import Swal from "sweetalert2";
 import { EditGeolocation } from "../../../../api/geolocation/edit-geolocation";
+import { TagsModal } from "./components/TagsModal";
+import { storeTags } from "../../../../constants/store-tags";
+import { FieldValues, useForm } from "react-hook-form";
 
 
 export function EditStoreProfile() {
+  const { handleSubmit, register, formState: { errors } } = useForm()
   const { storeInfos, isMapLoaded, setStoreInfos } = useStore()
   const [clintLocation, setLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [selectedAddress, setSelectedAddress] = useState<string>("")
   const client = useQueryClient()
-
   const { mutateAsync: editGeoLocation } = useMutation({
     mutationFn: EditGeolocation
   })
@@ -28,11 +31,35 @@ export function EditStoreProfile() {
   function onPhotoEdit() {
     const open = document.getElementById('openModal')
     open?.click()
-    console.log(open)
   }
 
-  async function saveAddress() {
-    await editProfile({ address: selectedAddress }, {
+  async function handleSave(data: FieldValues) {
+    if (selectedAddress !== "") {
+      await editProfile({ address: selectedAddress }, {
+        onSuccess: async () => {
+          Swal.fire({
+            icon: 'success',
+            title: 'Endereço alterado com sucesso!'
+          })
+          if (clintLocation) {
+            setStoreInfos({
+              ...storeInfos,
+              address: selectedAddress,
+              location: {
+                latitude: clintLocation.lat,
+                longitude: clintLocation.lng,
+              },
+            })
+            await editGeoLocation({ longitude: clintLocation?.lng, latitude: clintLocation?.lat })
+          }
+
+          client.refetchQueries({ queryKey: ['get-solicitations'] })
+          client.refetchQueries({ queryKey: ['get-geolocation'] })
+        }
+      })
+    }
+    console.log(`${data.startTime} - ${data.endTime}`)
+    await editProfile({ name: data.name, workingTime: `${data.startTime} - ${data.endTime}` }, {
       onSuccess: async () => {
         Swal.fire({
           icon: 'success',
@@ -41,21 +68,43 @@ export function EditStoreProfile() {
         if (clintLocation) {
           setStoreInfos({
             ...storeInfos,
-            address: selectedAddress,
-            location: {
-              latitude: clintLocation.lat,
-              longitude: clintLocation.lng,
-            },
+            name: data.name,
+            workingTime: `${data.startTime} - ${data.endTime}`
           })
-          await editGeoLocation({ longitude: clintLocation?.lng, latitude: clintLocation?.lat })
-        }
 
-        client.refetchQueries({ queryKey: ['get-solicitations'] })
-        client.refetchQueries({ queryKey: ['get-geolocation'] })
+        }
       }
     })
   }
 
+  const workTimes = [
+    '00:00',
+    '01:00',
+    '02:00',
+    '03:00',
+    '04:00',
+    '05:00',
+    '06:00',
+    '07:00',
+    '08:00',
+    '09:00',
+    '10:00',
+    '11:00',
+    '12:00',
+    '13:00',
+    '14:00',
+    '15:00',
+    '16:00',
+    '17:00',
+    '18:00',
+    '19:00',
+    '20:00',
+    '21:00',
+    '22:00',
+    '23:00',
+  ]
+
+  const [inicio, fim] = storeInfos.workingTime.split(" - ");
   return (
     <>
       <ul className="flex font-semibold p-2 border-b border-[#191e3a] flex-row mb-5 whitespace-nowrap overflow-y-auto">
@@ -81,20 +130,41 @@ export function EditStoreProfile() {
                   <span className="text-white text-lg font-bold flex flex-row gap-2 items-center"><IconPencil /> Editar</span>
                 </div>
               </div>
-              <div className="text-dark dark:text-white w-full flex flex-col text-lg">
+              <form onSubmit={handleSubmit(handleSave)} className="text-dark dark:text-white w-full flex flex-col text-lg">
                 <div className="w-full  gap-5 flex-row flex">
                   <div className="w-full">
                     <Text as="span">Nome</Text>
-                    <Input type="text" placeholder="Nome" />
+                    <Input type="text" placeholder="Nome" {...register('name', { required: true })} defaultValue={storeInfos.name} />
+                    {errors.name && (<p className="font-bold text-danger text-sm text-left">Campo Obrigatório*</p>)}
                   </div>
                   <div className="w-full">
                     <Text as="span">Horário de funcionamento</Text>
                     <div className="flex flex-row items-center gap-5">
-                      <Input placeholder="dasdas" />
+                      <select defaultValue={inicio} {...register('startTime', { required: true })} className="w-full">
+                        {workTimes.map((item) => (
+                          <option value={item}>{item}</option>
+                        ))}
+                      </select>
                       até
-                      <Input placeholder="dasdas" />
+                      <select defaultValue={fim} {...register('endTime', { required: true })} className="w-full">
+                        {workTimes.map((item) => (
+                          <option value={item}>{item}</option>
+                        ))}
+                      </select>
                     </div>
+                    {errors.startTime || errors.endTime ? (<p className="font-bold text-danger text-sm text-left">Campo Obrigatório*</p>) : ''}
                   </div>
+                </div>
+                <div className="mt-10 mb-10">
+                  <div className="flex text-sm flex-row flex-wrap gap-2 text-white">
+                    {storeInfos.tags.map((tag) => {
+                      const tagName = storeTags.filter((item) => item.id === tag)[0]
+                      return (
+                        <button className={`text-dark dark:text-white border rounded-xl p-1`}>{tagName.name}</button>
+                      )
+                    })}
+                  </div>
+                  <Button onClick={() => document.getElementById('openTagModal')?.click()} className="btn-primary mt-5">Alterar Caracteristicas</Button>
                 </div>
                 <div className="mt-auto" />
                 <div className="mb-10 flex flex-col">
@@ -104,11 +174,14 @@ export function EditStoreProfile() {
                       <Input type="text" defaultValue={storeInfos.address} placeholder="Endereço" />
                     </AutoCompleteAdapter>
                   )}
-                  <Button onClick={() => saveAddress()} className="ml-auto btn-outline-primary flex flex-row gap-2 mt-2"><IconSave />Salvar Endereço</Button>
+                  <Button type="submit" className="ml-auto btn-outline-primary flex flex-row gap-2 mt-2"><IconSave />Salvar</Button>
                 </div>
-              </div>
+
+              </form>
+
 
             </div>
+
 
             <div className="border-b border-b-[#323b45] mt-10 mb-5" />
             <StoreContact />
@@ -116,6 +189,7 @@ export function EditStoreProfile() {
             <StoreSocials />
           </div>
         </Panel >
+        <TagsModal tags={storeInfos.tags} />
         <UploadProfile />
       </div >
     </>

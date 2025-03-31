@@ -45,6 +45,8 @@ type StoreInfos = {
   updatedAt: string
   userId: string
   rating: number
+  tags: string[]
+  workingTime: string
   subscriptionPlanId: string
   location: {
     latitude: number,
@@ -109,6 +111,8 @@ const useStore = create<StateManager>((set, get) => {
       updatedAt: '',
       userId: '',
       rating: 0,
+      tags: [],
+      workingTime: '',
       subscriptionPlanId: '',
       location: {
         latitude: 0,
