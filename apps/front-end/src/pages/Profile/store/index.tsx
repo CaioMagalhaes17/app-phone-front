@@ -30,6 +30,7 @@ export function StoreProfile() {
             storeProfileImg={storeProfile.profileImg}
             wppNum={contacts.wppNum}
           />
+          <div className="mb-[80px]" />
           <StoreProfileServices storeProfileImg={storeProfile.profileImg} />
           <div className="max-w-[1242px] ml-auto mr-auto">
             <StoreProfileLocation

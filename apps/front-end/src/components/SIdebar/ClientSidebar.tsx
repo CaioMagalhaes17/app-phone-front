@@ -22,10 +22,10 @@ export function ClientSidebar() {
             </div>
           </AccordionTrigger>
           <AccordionContent className="hover:text-black dark:hover:text-white">
-            <button onClick={() => navigate('/solicitations/create')} className="ml-5 font-bold hover:underline text-lg text-dark dark:text-[#c4c4c4] flex flex-row gap-2">
+            <Link to='/solicitations/create' className="ml-5 font-bold hover:underline text-lg text-dark dark:text-[#c4c4c4] flex flex-row gap-2">
               <IconSend />
               Solicitar Orçamento
-            </button>
+            </Link>
           </AccordionContent>
           <AccordionContent className="text-black dark:text-white">
             <Link to="/budgets/list" className="ml-5 font-bold hover:underline text-lg dark:text-[#c4c4c4] text-dark flex flex-row gap-2">

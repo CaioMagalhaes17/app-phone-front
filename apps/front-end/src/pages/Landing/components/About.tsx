@@ -3,9 +3,9 @@ import { IconWhatsApp, Panel, Text } from "@app/ui";
 export function About() {
   return (
     <>
-      <Panel className="dark:!bg-[#060818] font-extrabold flex flex-col items-center justify-center !shadow-none">
-        <div id="about" className="mb-5 max-w-[1100px] w-full">
-          <Text className="text-5xl text-black dark:text-white" as="h1">Sobre Nós</Text>
+      <Panel className="dark:!bg-[#060818] font-bold flex flex-col items-center justify-center !shadow-none">
+        <div id="about" className="mb-5 max-w-[1200px] w-full">
+          <Text className="text-4xl text-black dark:text-white" as="h1">Sobre Nós</Text>
           <div className="flex flex-col p-4">
             <Text className="text-xl dark:text-white-dark text-dark" as="span">O Ponto dos celulares nasceu da minha própria necessidade. Meu nome é Caio Magalhães de Faria, sou o fundador e desenvolvedor deste projeto, e tudo começou quando eu ainda estava na escola.</Text>
             <Text className="text-xl dark:text-white-dark text-dark mt-5" as="span">Tive um problema com meu celular e não fazia ideia de quanto custaria o conserto. Além disso, minha rotina era corrida, eu não tinha tempo para ir de loja em loja buscando orçamentos, e, sem um celular funcionando, também não conseguia entrar em contato com as assistências.</Text>

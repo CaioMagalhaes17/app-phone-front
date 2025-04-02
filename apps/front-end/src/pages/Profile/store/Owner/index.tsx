@@ -39,6 +39,7 @@ export function StoreProfileOwner() {
             storeProfileImg={storeInfos.profileImg}
             wppNum={contacts.wppNum}
           />
+          <div className="mb-[80px]" />
           <StoreProfileServices storeProfileImg={storeInfos.profileImg} />
           <HSeparator />
 

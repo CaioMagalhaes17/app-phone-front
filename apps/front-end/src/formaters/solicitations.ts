@@ -31,6 +31,7 @@ export function formatSolicitationForm(form: {
     deliveryPreference: form.props.deliveryPreference,
     timePreference: form.props.timePreference,
     details: form.props.details,
+    solicitationImgs: form.props.solicitationImgs
   }
 }
 
@@ -85,7 +86,10 @@ export function getTimePreferenceColor(timePreference: string) {
 
 export function formatTimePreference(timePreference: string) {
   if (timePreference === 'urgent') return 'Urgente'
-  if (timePreference === 'normal') return 'Normal'
+  if (timePreference === 'twoOr5days') return 'De 2 a 5 dias'
+  if (timePreference === 'moreThan1week') return 'Mais de 1 semana'
+  if (timePreference === 'normal') return 'Sem prazo'
+
 
 }
 

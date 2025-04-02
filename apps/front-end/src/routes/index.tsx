@@ -6,7 +6,7 @@ import StoreLogin from "../pages/Authentication/store/StoreLogin";
 import StoreSignUp from "../pages/Authentication/store/StoreSignup";
 import { ProtectedRoute } from "./ProtectedRoutes";
 import ClientMapSearch from "../pages/Map/Search";
-import { SolicitationsCreate } from "../pages/Solicitations/client/Create";
+import { CreateSolicitation } from "../pages/Solicitations/client/Create";
 import { SolicitationsList } from "../pages/Solicitations/client/List";
 import { SolicitationDetails } from "../pages/Solicitations/client/Details";
 import Error404 from "../pages/404Page";
@@ -20,7 +20,6 @@ import { EditStoreProfile } from "../pages/Profile/store/Edit";
 import { StoreFeedbacksList } from "../pages/Profile/store/Feedbacks";
 import { ClientBudgetsList } from "../pages/Budgets/client/List";
 import { StoreProfile } from "../pages/Profile/store";
-import { DirectSolicitationsCreate } from "../pages/Solicitations/client/Create/direct-solicitation";
 import { BudgetDetails } from "../pages/Budgets/client/Details";
 import { UserConfigurations } from "../pages/Configurations/client";
 import { UserStoreConfigurations } from "../pages/Configurations/store";
@@ -64,11 +63,7 @@ export const routes: RouteObject[] = [
       },
       {
         path: '/solicitations/create',
-        element: <SolicitationsCreate />
-      },
-      {
-        path: '/solicitations/create/:id',
-        element: <DirectSolicitationsCreate />
+        element: <CreateSolicitation />
       },
       {
         path: '/solicitations',

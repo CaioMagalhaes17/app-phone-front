@@ -4,7 +4,7 @@ export default function PricingTable() {
   const plans = [
     {
       name: "Básico",
-      price: "R$49,00/mês",
+      price: "R$29,00/mês",
       features: [
         "Benefício 1 do plano básico",
         "Benefício 2 do plano básico",
@@ -13,7 +13,7 @@ export default function PricingTable() {
     },
     {
       name: "Médio",
-      price: "R$69,00/mês",
+      price: "R$49,00/mês",
       features: [
         "Benefício 1 do plano médio",
         "Benefício 2 do plano médio",
@@ -22,7 +22,7 @@ export default function PricingTable() {
     },
     {
       name: "Premium",
-      price: "R$99,00/mês",
+      price: "R$69,00/mês",
       features: [
         "Benefício 1 do plano premium",
         "Benefício 2 do plano premium",
@@ -32,15 +32,15 @@ export default function PricingTable() {
   ];
 
   return (
-    <div id="plans" className="flex font-extrabold flex-col items-center justify-center p-6">
-      <h2 className="text-5xl text-black dark:text-white mb-8">Planos para Lojas/Assistências técnicas</h2>
+    <div id="plans" className="flex font-bold flex-col items-center justify-center p-6">
+      <h2 className="text-4xl text-black dark:text-white mb-8">Planos para Lojas/Assistências técnicas</h2>
       <div className="grid md:grid-cols-3 gap-6">
         {plans.map((plan, index) => (
           <div
             key={index}
             className="bg-white rounded-xl p-6 dark:bg-black text-center sombra transition-all"
           >
-            <h3 className="text-3xl font-extrabold dark:text-white text-black">{plan.name}</h3>
+            <h3 className="text-3xl font-bold dark:text-white text-black">{plan.name}</h3>
             <p className="text-xl font-bold text-green mt-2">{plan.price}</p>
             <ul className="mt-4 space-y-2 text-gray-600 dark:text-white-dark">
               {plan.features.map((feature, i) => (

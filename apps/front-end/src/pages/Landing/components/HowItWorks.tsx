@@ -1,13 +1,13 @@
-import { Panel, Text } from "@app/ui";
+import { IconHelpCircle, Panel, Text } from "@app/ui";
 import { useState } from "react";
 
 export function HowItWorks() {
   const [closeClientTutorial, setCloseClientTutorial] = useState(false)
   const [closeStoreTutorial, setCloseStoreTutorial] = useState(false)
   return (
-    <Panel className="dark:!bg-[#060818] font-extrabold flex flex-col items-center justify-center !shadow-none">
-      <div id="howItWorks" className="mb-5 max-w-[1000px] w-full">
-        <Text className="text-5xl text-black dark:text-white" as="h1">Como funciona</Text>
+    <Panel className="dark:!bg-[#060818] font-bold flex flex-col items-center justify-center !shadow-none">
+      <div id="howItWorks" className="mb-5 max-w-[1200px] w-full">
+        <Text className="text-4xl text-black dark:text-white flex flex-row gap-2" as="h1"><IconHelpCircle className="w-[40px] h-[40px]" /> Como funciona</Text>
 
         <div className="flex flex-col p-4">
           <Text className="text-2xl" as="span">Nosso sistema foi criado para facilitar a busca pelo melhor orçamento para o conserto do seu celular. Com poucos passos, você encontra a melhor opção sem precisar sair de casa.</Text>

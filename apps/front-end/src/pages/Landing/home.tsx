@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { HowItWorks } from "./components/HowItWorks";
 import PricingTable from "./components/Plans";
 import { About } from "./components/About";
+import { StoreProfileServices } from "../../components/Profiles/store/components/Services";
+import { pokemon } from "../../constants/images";
 
 export function LandingHome() {
   const navigate = useNavigate()
@@ -77,16 +79,20 @@ export function LandingHome() {
           </div>
           <img className="rounded-xl" src="/teste.png" />
         </Panel>
-        <div className="flex justify-center">
-          <HSeparator className="border-b-black w-[80%]" />
+        <div className="flex justify-center mb-10">
+          <HSeparator className="w-[80%]" />
+        </div>
+        <StoreProfileServices storeProfileImg={pokemon} />
+        <div className="flex justify-center mb-10">
+          <HSeparator className="w-[80%]" />
         </div>
         <HowItWorks />
         <div className="flex justify-center">
-          <HSeparator className="border-b-black w-[80%]" />
+          <HSeparator className="w-[80%]" />
         </div>
         <PricingTable />
-        <div className="flex justify-center">
-          <HSeparator className="border-b-black w-[80%]" />
+        <div className="flex justify-center mb-10">
+          <HSeparator className="w-[80%]" />
         </div>
         <About />
       </DefaultLanding>

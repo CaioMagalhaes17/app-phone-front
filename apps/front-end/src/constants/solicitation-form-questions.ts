@@ -326,8 +326,16 @@ export const finalQuestions = [
         text: 'Urgente'
       },
       {
+        optionId: 'twoOr5days',
+        text: 'De 2 a 5 dias'
+      },
+      {
+        optionId: 'moreThan1week',
+        text: 'Mais de 1 semana'
+      },
+      {
         optionId: 'normal',
-        text: 'Normal'
+        text: 'Sem prazo'
       },
     ]
   },
@@ -475,6 +483,8 @@ export type BatteryFormType = {
 export function getStepTwoAnswersByForm(topic: string, questionsObj: DisplayFormType | BatteryFormType) {
   if (questionsObj) {
     if (topic === 'battery' && 'battery-A' in questionsObj) {
+      console.log(questionsObj)
+      console.log((batteryQuestions[5].options.filter((option) => option.optionId === questionsObj['battery-F']))[0], 'nigghu')
       const answersFormated = [
         {
           question: batteryQuestions[0].question,

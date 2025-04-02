@@ -8,13 +8,14 @@ export type GoogleMapsProps = {
     lat: number
     lng: number,
   }
+  zoom?: number
   children?: React.ReactNode
   mapStyle: React.CSSProperties
   onClick?: () => void
 }
 
 
-export function GoogleMaps({ initialPosition, children, mapStyle, onClick }: GoogleMapsProps) {
+export function GoogleMaps({ initialPosition, children, mapStyle, onClick, zoom }: GoogleMapsProps) {
   const mapStyles = [
     {
       featureType: "poi", // Points of Interest
@@ -43,7 +44,7 @@ export function GoogleMaps({ initialPosition, children, mapStyle, onClick }: Goo
       onClick={onClick}
       mapContainerStyle={mapStyle}
       center={initialPosition}
-      zoom={13}
+      zoom={zoom || 13}
       options={{ styles: mapStyles, disableDefaultUI: true }}
     >
       {children}

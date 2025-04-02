@@ -5,7 +5,6 @@ import { ProblemFormStep, } from "./Steps/StepTwo";
 import { PhoneFormStep, } from "./Steps/StepThree";
 import { FinalsQuestions, } from "./Steps/StepFor";
 import { FieldValues } from "react-hook-form";
-import { MapStep, } from "./Steps/StepFive";
 
 import { BatteryFormType, DisplayFormType, PhoneFormType, ProblemTopicType, SolicitationFormProps } from "../../../../types/solicitation";
 import { StoreProfileType } from "../../../../types/store-profile";
@@ -98,10 +97,8 @@ export function SolicitationForm({ steps, handleSendForm, customMap, storeProfil
             {activeTab === 1 && <TopicFormStep setActiveTab={setActiveTab} topic={topic} setTopic={setTopic} />}
             {activeTab === 2 && <ProblemFormStep stepTwoInfos={stepTwoInfos} onSubmit={handleStepTwoSubmit} setActiveTab={setActiveTab} topicSelected={topic} />}
             {activeTab === 3 && <PhoneFormStep stepThreeInfos={stepThreeInfos} onSubmit={handleStepThreeSubmit} setActiveTab={setActiveTab} />}
-            {activeTab === 4 && (
-              customMap && storeProfile ? (<DirectSolicitationMap setActiveTab={setActiveTab} storeProfile={storeProfile} />) : (<MapStep setActiveTab={setActiveTab} />)
-            )}
-            {activeTab === 5 && <FinalsQuestions onSubmit={handleStepFourSubmit} stepFourInfos={stepFourInfos} setActiveTab={setActiveTab} />}
+
+            {activeTab === 4 && <FinalsQuestions onSubmit={handleStepFourSubmit} stepFourInfos={stepFourInfos} setActiveTab={setActiveTab} />}
           </div>
         </Panel>
       </div>

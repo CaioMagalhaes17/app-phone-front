@@ -1,7 +1,7 @@
 import { GoogleAutoComplete, GoogleAutoCompleteProps, GoogleCirceProps, GoogleCircle, GoogleInfoWindow, GoogleInfoWindowProps, GoogleMaps, GoogleMapsProps, GoogleMarker, GoogleMarkerProps } from "./lib/GoogleMap";
 
-export function MapAdapter({ onClick, initialPosition, children, mapStyle }: GoogleMapsProps) {
-  return <GoogleMaps onClick={onClick} mapStyle={mapStyle} initialPosition={initialPosition}>{children}</GoogleMaps>
+export function MapAdapter(props: GoogleMapsProps) {
+  return <GoogleMaps {...props}>{props.children}</GoogleMaps>
 }
 
 export function MarkAdapter({ position, onClick, icon }: GoogleMarkerProps) {

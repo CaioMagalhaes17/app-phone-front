@@ -9,7 +9,7 @@ export function StoreItem({ profileImg, name, rating, distance, onClick }: { onC
           <img width="100" height="100" src={profileImg} className="rounded-3xl" />
         </div>
         <div className="flex w-full flex-col">
-          <Text className="flex text-ellipsis gap-5 items-center text-center text-black dark:text-white text-lg" as="span">
+          <Text className="flex text-ellipsis gap-5 items-center text-center text-dark dark:text-white text-lg" as="span">
             {name.length > 23 ? (name.slice(0, -(name.length - 20)) + '...') : name}
           </Text>
           <div className="flex flex-row mb-2">
