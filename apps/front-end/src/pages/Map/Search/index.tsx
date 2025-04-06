@@ -59,13 +59,13 @@ export default function ClientMapSearch() {
   }
   return (
     <>
-      <div className="p-4 max-h-[750px] max-w-[1250px] mr-auto font-bold ml-auto mt-10">
+      <div className="p-4 max-h-[750px] rounded-xl sombra max-w-[1350px] mr-auto font-bold ml-auto mt-10">
         <div className="flex flex-row">
-          <Text className="text-4xl font-bold flex flex-row gap-5 text-black dark:text-white items-center " as="h1"><IconStreetMap width="40px" height="40px" />Lojas Próximas</Text>
+          <Text className="text-4xl font-bold flex flex-row gap-5 text-dark dark:text-white items-center " as="h1"><IconStreetMap width="40px" height="40px" />Lojas Próximas</Text>
           <Button onClick={() => navigate('/map/edit')} className="btn-outline-primary flex flex-row gap-2 ml-auto"><IconPencil />Editar Localização</Button>
         </div>
         <HSeparator className="mb-5" />
-        <div className="flex relative max-h-[650px] h-full gap-5 ">
+        <Panel className="p-2 rounded-xl  flex relative max-h-[650px] h-full gap-5 ">
           <Panel className="flex flex-col gap-2 p-4 items-center w-[540px] overflow-y-auto scrollable">
             {selectedStore ? (
               <>
@@ -230,7 +230,7 @@ export default function ClientMapSearch() {
               )
             }
           </Panel>
-        </div>
+        </Panel>
       </div>
 
     </>

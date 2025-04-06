@@ -4,8 +4,9 @@ import { AppleModelsSelect } from "../Create/Phone-Details/AppleModelsSelect"
 import { FieldErrors, FieldValues, UseFormRegister, UseFormSetValue, UseFormWatch } from "react-hook-form"
 import { SearchModelsInput } from "../Create/Phone-Details/SearchModelsInput"
 import { useState } from "react"
+import { PhoneFormType } from "../../../../types/solicitation"
 
-export function PhoneForm({ register, errors, watch, setValue }: { setValue: UseFormSetValue<FieldValues>, register: UseFormRegister<FieldValues>, errors: FieldErrors<FieldValues>, watch: UseFormWatch<FieldValues> }) {
+export function PhoneForm({ defaultValue, register, errors, watch, setValue, }: { defaultValue?: PhoneFormType, setValue: UseFormSetValue<FieldValues>, register: UseFormRegister<FieldValues>, errors: FieldErrors<FieldValues>, watch: UseFormWatch<FieldValues> }) {
   const questions = phoneQuestions
   const [searchModel, setSearchModel] = useState("");
   return (
@@ -21,7 +22,7 @@ export function PhoneForm({ register, errors, watch, setValue }: { setValue: Use
                   <Text className="text-dark dark:text-white text-xl" as="span">{question.question}</Text>
                   {
                     question.options.length > 0 ? (
-                      <select {...register(question.questionId, { required: true })} className="text-dark dark:bg-black dark:text-white">
+                      <select defaultValue={defaultValue && defaultValue[question.questionId]} {...register(question.questionId, { required: true })} className="text-dark dark:bg-black dark:text-white">
                         <option value="">Escolher</option>
                         {question.options.map((option) => {
                           return (

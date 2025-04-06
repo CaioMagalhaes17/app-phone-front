@@ -1,15 +1,13 @@
 import useStore from "../../../../state"
-import { Button, HSeparator, IconPencil, IconShoppingBag } from "@app/ui"
+import { Button, IconPencil, IconShoppingBag } from "@app/ui"
 import { useNavigate } from "react-router-dom"
 import { useGetStoreContacts } from "../../../../hooks/profile/useGetStoreContacts"
 import { useGetStoreSocials } from "../../../../hooks/profile/useGetStoreSocials"
 import { useGetStoreFeedbacks } from "../../../../hooks/profile/useGetStoreFeedbacks"
 import { useGetBudgets } from "../../../../hooks/budgets/useGetBudgets"
-import { StoreProfileMain } from "../../../../components/Profiles/store"
-import { StoreProfileServices } from "../../../../components/Profiles/store/components/Services"
-import { StoreProfileLocation } from "../../../../components/Profiles/store/components/Location"
-import { StoreFeedbacks } from "../../../../components/Profiles/store/components/Feedbacks"
-import { StoreProfileBudgets } from "../../../../components/Profiles/store/components/Budgets"
+
+import { StoreProfileComponent } from "../../../../components/Profiles/store"
+import { pokemon } from "../../../../constants/images"
 
 export function StoreProfileOwner() {
   const navigate = useNavigate()
@@ -19,7 +17,28 @@ export function StoreProfileOwner() {
   const { socials } = useGetStoreSocials()
   const { feedbacks } = useGetStoreFeedbacks(storeInfos.id, { page: '1', limit: '1' })
   const { budgets, isLoading } = useGetBudgets({ page: '1', limit: '3' })
-
+  const services = [
+    {
+      serviceImg: pokemon,
+      serviceName: 'Troca de Baterias',
+      topic: 'battery'
+    },
+    {
+      serviceImg: pokemon,
+      serviceName: 'Troca de Tela',
+      topic: 'display'
+    },
+    {
+      serviceImg: pokemon,
+      serviceName: 'Troca de Baterias',
+      topic: 'battery'
+    },
+    {
+      serviceImg: pokemon,
+      serviceName: 'Troca de Tela',
+      topic: 'display'
+    }
+  ]
   return (
     <>
       <ul className="flex font-semibold flex-row whitespace-nowrap overflow-y-auto">
@@ -30,37 +49,7 @@ export function StoreProfileOwner() {
         </li>
       </ul>
       {!isLoading && feedbacks && contacts ? (
-        <>
-          <StoreProfileMain
-            workingTime={storeInfos.workingTime}
-            name={storeInfos.name}
-            tags={storeInfos.tags}
-            rating={storeInfos.rating}
-            storeProfileImg={storeInfos.profileImg}
-            wppNum={contacts.wppNum}
-          />
-          <div className="mb-[80px]" />
-          <StoreProfileServices storeProfileImg={storeInfos.profileImg} />
-          <HSeparator />
-
-          <div className="max-w-[1242px] ml-auto mr-auto">
-            <StoreProfileLocation
-              address={storeInfos.address}
-              contacts={contacts}
-              lat={storeInfos.location.latitude}
-              lng={storeInfos.location.longitude}
-              storeProfileImg={storeInfos.profileImg}
-              storeSocials={socials}
-              isOwner={false}
-            />
-          </div>
-          <HSeparator />
-
-          <div className="gap-5 flex mt-10 flex-row max-w-[1242px] ml-auto mr-auto">
-            <StoreFeedbacks storeId={storeInfos.id} feedbacks={feedbacks} canShowRateStore={true} />
-            <StoreProfileBudgets budgets={budgets} isOwner={false} />
-          </div>
-        </>
+        <StoreProfileComponent services={services} budgets={budgets} contacts={contacts} feedbacks={feedbacks} socials={socials} storeInfos={storeInfos} />
       ) : ''}
     </>
   )

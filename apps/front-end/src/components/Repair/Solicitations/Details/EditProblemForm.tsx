@@ -1,14 +1,14 @@
 import { Button, IconSave, IconX, Panel, Text } from "@app/ui";
 import { formatTopic } from "../../../../formaters/solicitations";
 import { useEffect, useState } from "react";
-import { BatteryFormType, DisplayFormType, ProblemTopicType } from "../../../../types/solicitation";
+import { ProblemFormType, ProblemTopicType } from "../../../../types/solicitation";
 import { FieldValues, useForm } from "react-hook-form";
 import { avaliableTopics, getQuestionsByTopic } from "../../../../constants/solicitation-form-questions";
 import Swal from "sweetalert2";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { EditSolicitation } from "../../../../api/repair/solicitation/edit-solicitation";
 
-export function EditProblemForm({ topic, solicitationId, setEditMode }: { setEditMode: React.Dispatch<React.SetStateAction<boolean>>, solicitationId: string, topic: string, problemForm: BatteryFormType | DisplayFormType }) {
+export function EditProblemForm({ topic, solicitationId, setEditMode }: { setEditMode: React.Dispatch<React.SetStateAction<boolean>>, solicitationId: string, topic: string, problemForm: ProblemFormType }) {
   const client = useQueryClient()
   const { register, watch, handleSubmit } = useForm()
   const [problemQuestions, setProblemQuestions] = useState<{
@@ -29,7 +29,7 @@ export function EditProblemForm({ topic, solicitationId, setEditMode }: { setEdi
   const { mutateAsync } = useMutation({
     mutationKey: ['edit-solicitation'],
     mutationFn: ({ data, solicitationId }: {
-      data: { problemTopic: ProblemTopicType, problemForm: BatteryFormType | DisplayFormType }; solicitationId: string
+      data: { problemTopic: ProblemTopicType, problemForm: ProblemFormType }; solicitationId: string
     }) =>
       EditSolicitation({ form: { problemTopic: data.problemTopic, problemForm: data.problemForm } }, solicitationId)
   });
@@ -65,7 +65,7 @@ export function EditProblemForm({ topic, solicitationId, setEditMode }: { setEdi
     }
   }
 
-  function editForm(editData: { problemTopic: ProblemTopicType, problemForm: BatteryFormType | DisplayFormType }) {
+  function editForm(editData: { problemTopic: ProblemTopicType, problemForm: ProblemFormType }) {
     Swal.fire({
       titleText: 'Editar solicitação?',
       icon: 'question',

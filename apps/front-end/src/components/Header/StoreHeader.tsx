@@ -29,7 +29,9 @@ export function StoreHeader() {
       description: "",
       createdAt: "",
       updatedAt: "",
-      userId: ""
+      userId: "",
+      tags: [],
+      workingTime: ""
     })
     localStorage.removeItem('accessToken')
     navigate('/store/login')
@@ -53,7 +55,7 @@ export function StoreHeader() {
               <DropdownMenuTrigger>
                 <div className="flex flex-row items-center">
                   <div className="w-[60px]">
-                    <img width="50" height="50" src={storeInfos.profileImg} className="rounded-3xl" />
+                    <img width="50" height="50" src={storeInfos.profileImg} className="sombra rounded-3xl" />
                   </div>
                   <Text className="text-dark dark:text-white font-bold text-xl" as="h1">{storeInfos?.name}</Text>
                 </div>

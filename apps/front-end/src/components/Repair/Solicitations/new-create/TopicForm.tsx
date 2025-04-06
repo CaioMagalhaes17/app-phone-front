@@ -2,8 +2,7 @@ import { Button, HSeparator, IconSettings, Panel, Text } from "@app/ui";
 import { pokemon } from "../../../../constants/images";
 import { ProblemTopicType } from "../../../../types/solicitation";
 
-export function TopicForm({ handleSelectTopic, selectedTopic }: { selectedTopic: string, handleSelectTopic: (topic: ProblemTopicType) => void }) {
-
+export function TopicForm({ handleSelectTopic, selectedTopic }: { selectedTopic?: string, handleSelectTopic: (topic: ProblemTopicType) => void }) {
   const servies: { topicImg: string, topicName: string, topicId: ProblemTopicType }[] = [
     {
       topicImg: pokemon,
@@ -17,8 +16,8 @@ export function TopicForm({ handleSelectTopic, selectedTopic }: { selectedTopic:
     },
     {
       topicImg: pokemon,
-      topicName: 'Troca de Baterias',
-      topicId: 'display'
+      topicName: 'Vidro do celular',
+      topicId: 'glass'
     },
     {
       topicImg: pokemon,

@@ -12,7 +12,7 @@ export function PhoneFormComponent({ solicitationId, phoneForm, isOwner, canEdit
       {!editMode ? (
         <Panel className="w-full font-bold">
           <div className="flex flex-row">
-            <Text className="text-black dark:text-white text-2xl" as="h1">Sobre o celular:</Text>
+            <Text className="text-dark dark:text-white text-2xl" as="h1">Sobre o celular:</Text>
             <div className="mr-auto" />
             {canEdit && isOwner ? (<Button onClick={() => setEditMode(true)} className="btn-primary"><IconPencil /></Button>) : ''}
           </div>

@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query"
 import { GetSolicitations } from "../../../../api/repair/solicitation/get-client-solicitations"
 import { Solicitation } from "../../../../types/solicitation"
 import { formatPhoneBrand, formatSolicitations, formatTopic, getStatusColor } from "../../../../formaters/solicitations"
-import { Button } from "@app/ui"
+import { Button, IconUser } from "@app/ui"
 import { useNavigate } from "react-router-dom"
 import dayjs from "dayjs"
 import { useEffect, useState } from "react"
@@ -97,9 +97,12 @@ export function SolicitationsList() {
     <>
       {!isLoading && (
         <>
-          <BasicTable sortStatus={sortStatus} onSortStatusChange={onSortChange()} columns={columns} records={solicitations} title="Suas solicitações">
+          <div className="w-[1200px] mr-auto ml-auto mt-5 sombra p-4 rounded-xl">
+            <BasicTable icon={<IconUser className="w-[30px] h-[30px]" />} sortStatus={sortStatus} onSortStatusChange={onSortChange()} columns={columns} records={solicitations} title="Suas solicitações">
 
-          </BasicTable>
+            </BasicTable>
+          </div>
+
         </>
       )}
     </>

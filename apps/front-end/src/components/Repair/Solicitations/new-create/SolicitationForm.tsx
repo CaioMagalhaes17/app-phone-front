@@ -1,39 +1,40 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Button, HSeparator, IconBill, IconPhone, IconSend, IconSettings, IconWarning, Panel, Text } from "@app/ui";
+import { Button, HSeparator, IconBill, IconPhone, IconSend, IconSettings, IconUser, IconWarning, Panel, Text } from "@app/ui";
 import { TopicForm } from "./TopicForm";
 import { useState } from "react";
 import { ProblemForm } from "./ProblemForm";
-import { getQuestionsByTopic } from "../../../../constants/solicitation-form-questions";
 import { PhoneForm } from "./PhoneForm";
 import { MapStep } from "./Map";
 import { FinalForm } from "./FinalForm";
 import { FieldValues, useForm } from "react-hook-form";
 import { formatPhoneBrand, formatTimePreference, formatTopic } from "../../../../formaters/solicitations";
 import { ProblemTopicType, SolicitationFormProps } from "../../../../types/solicitation";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
-export function SolicitationForm({ createSolicitation }: { createSolicitation: (data: SolicitationFormProps) => Promise<void> }) {
-
+export function SolicitationForm({ createSolicitation, isAuthenticated }: { isAuthenticated: boolean, createSolicitation?: (data: SolicitationFormProps) => Promise<void> }) {
+  const stored = localStorage.getItem('partialForm');
+  let partialProblemForm
+  if (stored) {
+    partialProblemForm = JSON.parse(stored)
+  }
+  console.log(partialProblemForm)
   const [searchParams, setSearchParams] = useSearchParams({
     topic: '',
+    directSolicitation: ''
   })
-  const questions = getQuestionsByTopic(searchParams.get('topic') || 'battery')
   const { register, watch, formState: { errors }, handleSubmit, setValue, setError } = useForm()
   const [solicitationImgs, setSolicitationImgs] = useState<string[]>([]);
-
+  const navigate = useNavigate()
   function handleSelectTopic(topic: ProblemTopicType) {
     setSearchParams((prev) => {
       prev.set('topic', topic)
       return prev
     })
   }
+
   async function onSubmit(data: FieldValues) {
-    if (data.model === '') {
-      setError('model', { type: 'required' })
-    }
     let problemForm: any
-    console.log()
     if (searchParams.get('topic') === 'display') {
       problemForm = {
         "display-A": data["display-A"],
@@ -54,21 +55,53 @@ export function SolicitationForm({ createSolicitation }: { createSolicitation: (
         "battery-F": data['battery-F'],
       }
     }
-    await createSolicitation({
-      deliveryPreference: data.deliveryPreference,
-      details: data.details,
-      phoneForm: {
-        brand: data.brand,
-        model: data.model,
-        previousRepair: data.previousRepair,
-        originalHardware: data.originalHardware,
-        usageTime: data.usageTime
-      },
-      problemForm,
-      problemTopic: searchParams.get('topic') as ProblemTopicType,
-      solicitationImgs: solicitationImgs,
-      timePreference: data.timePreference,
-    })
+    if (searchParams.get('topic') === 'glass') {
+      problemForm = {
+        "glass-A": data['glass-A'],
+        "glass-B": data['glass-B'],
+        "glass-C": data['glass-C'],
+        "glass-D": data['glass-D'],
+        "glass-E": data['glass-E'],
+        "glass-F": data['glass-F'],
+      }
+    }
+    if (!isAuthenticated) {
+      const formData = {
+        phoneForm: {
+          brand: data.brand,
+          model: data.model,
+          previousRepair: data.previousRepair,
+          originalHardware: data.originalHardware,
+          usageTime: data.usageTime
+        },
+        problemTopic: searchParams.get('topic') as ProblemTopicType,
+        problemForm
+      };
+
+      localStorage.setItem('partialForm', JSON.stringify(formData));
+      navigate('/login?redirect=/solicitations/create?topic=' + searchParams.get('topic') as ProblemTopicType)
+    }
+    if (createSolicitation) {
+      if (data.model === '') {
+        setError('model', { type: 'required' })
+      }
+
+      await createSolicitation({
+        deliveryPreference: data.deliveryPreference,
+        details: data.details,
+        phoneForm: {
+          brand: data.brand,
+          model: data.model,
+          previousRepair: data.previousRepair,
+          originalHardware: data.originalHardware,
+          usageTime: data.usageTime
+        },
+        problemForm,
+        problemTopic: searchParams.get('topic') as ProblemTopicType,
+        solicitationImgs: solicitationImgs,
+        timePreference: data.timePreference,
+      })
+    }
   }
 
   return (
@@ -76,14 +109,24 @@ export function SolicitationForm({ createSolicitation }: { createSolicitation: (
       <div className="mb-5 max-w-[1400px] w-full ml-auto mr-auto font-bold ">
         <div className="flex flex-row gap-5">
           <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col w-[1000px] gap-10">
-            <TopicForm selectedTopic={searchParams.get('topic') || ''} handleSelectTopic={handleSelectTopic} />
-            <ProblemForm errors={errors} register={register} topic={searchParams.get('topic') || ''} questions={questions} />
-            <PhoneForm register={register} watch={watch} errors={errors} setValue={setValue} />
-            <MapStep />
-            <FinalForm setSolicitationImgs={setSolicitationImgs} solicitationImgs={solicitationImgs} register={register} errors={errors} />
-            <Button type="submit" className="btn-primary flex flex-row gap-5 items-center"><IconSend />Enviar solicitação de conserto</Button>
+            <TopicForm selectedTopic={searchParams.get('topic') || partialProblemForm?.problemTopic} handleSelectTopic={handleSelectTopic} />
+            <ProblemForm errors={errors} register={register} topic={searchParams.get('topic') || ''} defaultValue={partialProblemForm?.problemForm} />
+            <PhoneForm register={register} watch={watch} errors={errors} setValue={setValue} defaultValue={partialProblemForm?.phoneForm} />
+            {
+              isAuthenticated ? (
+                <>
+                  <MapStep />
+                  <FinalForm setSolicitationImgs={setSolicitationImgs} solicitationImgs={solicitationImgs} register={register} errors={errors} />
+                  <Button type="submit" className="btn-primary flex flex-row gap-5 items-center"><IconSend />Enviar solicitação de conserto</Button>
+                </>
+              ) : (
+                <>
+                  <Button type="submit" className="btn-primary flex flex-row gap-5 items-center"><IconUser />Login/Cadastro para continuar</Button>
+                </>
+              )
+            }
           </form>
-          <Panel className="sticky top-[10px] self-start sombra bg-white dark:bg-black  text-lg p-4 rounded-xl w-[400px] h-[220px]">
+          <Panel className="sticky top-[10px] self-start sombra bg-white dark:bg-black  text-lg p-4 rounded-xl w-[400px] h-[320px]">
             <Text className="text-3xl text-dark dark:text-white flex flex-row gap-5 items-center" as="h1"><IconBill />Resumo</Text>
             <HSeparator className="mt-2 mb-2" />
             <div className="flex text-dark dark:text-white flex-row items-center gap-2 mb-5">
@@ -92,11 +135,15 @@ export function SolicitationForm({ createSolicitation }: { createSolicitation: (
             </div>
             <div className="flex text-dark dark:text-white flex-row items-center gap-2 mb-5">
               <IconPhone />
-              Celular: {<span className="font-extrabold">{formatPhoneBrand(watch('brand'))} {watch('model')} </span>}
+              Celular: {<span className="font-extrabold">{partialProblemForm ? formatPhoneBrand(partialProblemForm?.phoneForm.brand) : formatPhoneBrand(watch('brand'))} {partialProblemForm ? partialProblemForm?.phoneForm.model : watch('model')} </span>}
             </div>
-            <div className="flex text-dark dark:text-white flex-row items-center gap-2">
+            <div className="flex text-dark dark:text-white flex-row items-center gap-2 mb-5">
               <IconWarning />
               Prazo: {<span className="font-extrabold">{formatTimePreference(watch('timePreference'))} </span>}
+            </div>
+            <div className="flex text-dark dark:text-white flex-row items-center gap-2">
+              <IconSend />
+              Para: {searchParams.get('directSolicitation') !== '' ? 'Todas as Lojas mais próximas' : 'Nome da loja'}
             </div>
           </Panel>
         </div>

@@ -11,7 +11,8 @@ export function PublicRoutes() {
     '/signup',
     '/store/signup',
     '/chooseProfileType/login',
-    '/chooseProfileType/signup'
+    '/chooseProfileType/signup',
+    '/landing/solicitations/create'
   ]
   useEffect(() => {
     const asyncCheckAuth = async () => {
@@ -25,7 +26,10 @@ export function PublicRoutes() {
 
   async function checkAuth() {
     const response = await checkUserAuth()
+    console.log('dsaindiosandaiosndsaio')
     if (response?.data.response === 'ok') {
+      console.log('3124123132')
+
       navigate(response?.data.isStore ? '/store/dashboard' : '/dashboard')
     }
   }

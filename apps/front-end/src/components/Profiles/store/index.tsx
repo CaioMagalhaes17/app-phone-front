@@ -1,70 +1,61 @@
-import {
-  Button, IconMap, IconSearch, IconWhatsApp, Input, Text
-} from "@app/ui"
-import { Star } from "lucide-react"
-import { Link } from "react-router-dom"
-import { getWppLink } from "../../../utils/get-wpp-link"
-import { storeTags } from "../../../constants/store-tags"
+import { HSeparator } from "@app/ui";
+import { StoreProfileBudgets } from "./components/Budgets";
+import { StoreFeedbacks } from "./components/Feedbacks";
+import { StoreProfileLocation } from "./components/Location";
+import { StoreServicesGrid } from "./components/Services";
+import { StoreProfileMain } from "./components/MainPanel";
+import { StoreContacts, StoreProfileType, StoreSocialsType } from "../../../types/store-profile";
+import { FeedbackType } from "../../../types/feedback";
+import { BudgetType } from "../../../types/budget";
+import { useNavigate } from "react-router-dom";
 
-
-export function StoreProfileMain({ name, workingTime, distance, rating, storeProfileImg, wppNum, tags }: {
-  name: string,
+export function StoreProfileComponent({ storeInfos, contacts, socials, budgets, feedbacks, distance, services }: {
   distance?: number,
-  rating: number,
-  tags?: string[]
-  storeProfileImg: string
-  workingTime?: string
-  wppNum: string
+  storeInfos: StoreProfileType & {
+    location: { latitude: number, longitude: number }
+  },
+  feedbacks: FeedbackType[]
+  budgets: [] | BudgetType[]
+  contacts: StoreContacts
+  socials: StoreSocialsType[] | null
+  services: {
+    serviceImg: string;
+    serviceName: string;
+    topic: string
+  }[]
 }) {
+  const navigate = useNavigate()
   return (
     <>
-      <div className="flex items-center justify-center">
-        <div className="flex flex-col">
-          <img className="sombra rounded-xl" src="https://static.ifood-static.com.br/image/upload//capa/bb23fc4b-f872-44cf-b3da-caf4b8bce4d4/202408251237_WKJY@2x.png" />
-          <div className="mt-7 flex flex-row items-center font-bold gap-5">
-            <img width={'130px'} height={'130px'} src={storeProfileImg} className="rounded-3xl sombra" />
-            <div className="flex flex-col">
-              <Text className="text-5xl text-black dark:text-white" as="h1">{name}</Text>
-              <Text className="text-xl text-white-dark" as="h1">{workingTime}</Text>
-              {distance && (
-                <Text className="text-white-dark" as="span">Distância: {Math.floor(distance) >= 1000 ? `${Math.floor(Math.floor(distance) / 1000)} km` : `${Math.floor(distance)} m`}</Text>
-              )}
-            </div>
-            <div className="flex flex-row mb-[50px]">
-              {[...Array(5)].map((_, index) => (
-                <Star
-                  height={'100px'}
-                  width={'25'}
-                  key={index}
-                  className={index < rating ? "fill-yellow-500 text-yellow-500" : "fill-none text-gray-300"}
-                  size={16}
-                />
-              ))}
-            </div>
-            <div className="ml-auto" />
-            <div className="flex flex-col">
-              <div className="flex gap-5 flex-row">
-                <div className="ml-auto" />
-                <Button onClick={() => document.getElementById('location')?.scrollIntoView({ behavior: "smooth" })} className="btn-outline-primary flex flex-row gap-2"><IconMap />Localização</Button>
-                <Link target="_blank" to={getWppLink('storeProfile', wppNum)} className="btn btn-green flex flex-row gap-2"><IconWhatsApp />Chamar no Whatsapp</Link>
-              </div>
-              <div className="flex text-sm flex-row flex-wrap gap-2 mt-5 text-white max-w-[500px]">
-                {tags && tags.map((tag) => {
-                  const tagName = storeTags.filter((item) => item.id === tag)[0]
-                  return (
-                    <button className={`text-dark dark:text-white border rounded-xl p-1`}>{tagName.name}</button>
-                  )
-                })}
-              </div>
-            </div>
-          </div>
-          <div className=" mt-5 relative">
-            <Input value={''} type="text" placeholder="Procure por acessórios, celulares, serviços..." className="w-full !ps-10 bg-[#c4c4c4] dark:bg-[#c4c4c4] border-white-dark placeholder:text-black placeholder:dark:text-white-dark" />
-            <span className="absolute start-4 top-1/2 -translate-y-1/2">
-              <IconSearch className="text-black dark:text-white" />
-            </span>
-          </div>
-        </div>
+      <StoreProfileMain
+        distance={distance}
+        workingTime={storeInfos.workingTime}
+        name={storeInfos.name}
+        tags={storeInfos.tags}
+        rating={storeInfos.rating}
+        storeProfileImg={storeInfos.profileImg}
+        wppNum={contacts.wppNum}
+      />
+      <div className="mb-[80px]" />
+      <StoreServicesGrid services={services} title="Contratar serviço" onServiceClick={(topic) => navigate('/solicitations/create?topic=' + topic)} />
+      <HSeparator />
+
+      <div className="max-w-[1242px] ml-auto mr-auto">
+        <StoreProfileLocation
+          address={storeInfos.address}
+          contacts={contacts}
+          lat={storeInfos.location.latitude}
+          lng={storeInfos.location.longitude}
+          storeProfileImg={storeInfos.profileImg}
+          storeSocials={socials}
+          isOwner={false}
+        />
+      </div>
+      <HSeparator />
+
+      <div className="gap-5 flex mt-10 flex-row max-w-[1242px] ml-auto mr-auto">
+        <StoreFeedbacks storeId={storeInfos.id} feedbacks={feedbacks} canShowRateStore={true} />
+        <StoreProfileBudgets budgets={budgets} isOwner={false} />
       </div>
     </>
   )

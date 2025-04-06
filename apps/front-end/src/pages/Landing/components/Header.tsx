@@ -1,17 +1,16 @@
 import { Button, Header, Text, VSeparator } from "@app/ui";
 import { ChooseTheme } from "../../../components/Header/ChooseTheme";
 import { useNavigate } from "react-router-dom";
+import { scrollToSection } from "../../../utils/scroll-to";
 
 export function LandingHeader() {
   const navigate = useNavigate()
-  const scrollToSection = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  };
+
   return (
     <>
       <Header className="">
         <div className="font-extrabold h-[80px] shadow-md relative flex w-full items-center px-5 py-2.5 dark:bg-black dark:border-b-[#323b45]">
-          <div className={`horizontal-logo flex justify-between items-center mr-2`}>
+          <div onClick={() => navigate('/')} className={`horizontal-logo flex justify-between items-center mr-2`}>
             <img className="h-[40px]" src="/phone.png" />
             <Text className="text-3xl text-black dark:text-[#c4c4c4] font-extrabold " as="h1">Ponto dos celulares</Text>
           </div>

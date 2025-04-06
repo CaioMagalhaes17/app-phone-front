@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { MapPinSvg } from "../../../constants/svg-icons";
 import { useGetStoresInsideClientRadius } from "../../../hooks/geolocation/useGetStoresInsideClientRadius";
 import { StoresInsideRadiusType } from "../../../types/stores";
+import { StoreServicesGrid } from "../../../components/Profiles/store/components/Services";
+import { pokemon } from "../../../constants/images";
 
 export function Home() {
   const navigate = useNavigate()
@@ -25,75 +27,98 @@ export function Home() {
   }
 
   const [selectedStore, setSelectedStore] = useState<StoresInsideRadiusType>()
-
+  const services = [
+    {
+      serviceImg: pokemon,
+      serviceName: 'Troca de Baterias',
+      topic: 'battery'
+    },
+    {
+      serviceImg: pokemon,
+      serviceName: 'Troca de Tela',
+      topic: 'display'
+    },
+    {
+      serviceImg: pokemon,
+      serviceName: 'Troca de Baterias',
+      topic: 'battery'
+    },
+    {
+      serviceImg: pokemon,
+      serviceName: 'Troca de Tela',
+      topic: 'display'
+    }
+  ]
   return (
     <>
       <div className="flex mt-10 justify-center ">
-        <div className="min-h-[450px] max-w-[1000px] w-full">
-          <div className="flex flex-row items-center gap-10 justify-center text-center ">
-            <div className="flex-col">
-              <h1 className="text-5xl font-extrabold text-black dark:text-white mb-4">
-                Facilitando serviços de assistência a celulares
-              </h1>
+        <div className="min-h-[360px] max-w-[1100px] w-full">
+          <div className="mb-5 w-full">
+            <div className="flex flex-row items-center gap-10 justify-center text-center ">
+              <div className="flex-col">
+                <h1 className="text-5xl font-extrabold text-black dark:text-white mb-4">
+                  Facilitando serviços de assistência a celulares
+                </h1>
 
-              <label className="text-md flex items-center gap-2 block">
-                <input
-                  type="checkbox"
-                  className="form-checkbox rounded-full"
-                  checked
-                  disabled
-                  style={{ backgroundColor: 'currentcolor' }}
-                />
-                <p className="text-lg font-extrabold max-w-2xl mb-2">
-                  Envie orçamentos para todas as lojas mais próximas de você!
-                </p>
-              </label>
+                <label className="text-md flex items-center gap-2 block">
+                  <input
+                    type="checkbox"
+                    className="form-checkbox rounded-full"
+                    checked
+                    disabled
+                    style={{ backgroundColor: 'currentcolor' }}
+                  />
+                  <p className="text-lg text-dark dark:text-white-dark font-extrabold mb-2">
+                    Solicite orçamentos para todas as lojas mais próximas de você, sem sair de casa!
+                  </p>
+                </label>
 
-              <label className="text-md flex items-center gap-2 block">
-                <input
-                  type="checkbox"
-                  className="form-checkbox rounded-full"
-                  checked
-                  disabled
-                  style={{ backgroundColor: 'currentcolor' }}
-                />
-                <p className="text-lg font-extrabold max-w-2xl mb-2">
-                  Deixe uma nota no perfil da loja para o serviço contratado!
-                </p>
-              </label>
+                <label className="text-md flex items-center gap-2 block">
+                  <input
+                    type="checkbox"
+                    className="form-checkbox rounded-full"
+                    checked
+                    disabled
+                    style={{ backgroundColor: 'currentcolor' }}
+                  />
+                  <p className="text-lg text-dark dark:text-white-dark font-extrabold max-w-2xl mb-2">
+                    Procure por produtos e acessórios de celulares!
+                  </p>
+                </label>
 
-              <label className="text-md flex items-center gap-2 block">
-                <input
-                  type="checkbox"
-                  className="form-checkbox rounded-full"
-                  checked
-                  disabled
-                  style={{ backgroundColor: 'currentcolor' }}
-                />
-                <p className="text-lg font-extrabold max-w-2xl mb-2">
-                  Escolha o melhor preço!
-                </p>
-              </label>
-              <div className="flex gap-5 flex-row w-full">
-                <Button className="btn-primary flex flex-row gap-5 text-xl ml-auto mr-auto mt-10">
-                  <IconSend />
-                  Enviar orçamento
-                </Button>
-                <Button className="flex flex-row gap-5 btn-outline-primary text-xl ml-auto mr-auto mt-10">
-                  <IconSearch />
-                  Procurar lojas próximas
-                </Button>
+                <label className="text-md flex items-center gap-2 block">
+                  <input
+                    type="checkbox"
+                    className="form-checkbox rounded-full"
+                    checked
+                    disabled
+                    style={{ backgroundColor: 'currentcolor' }}
+                  />
+                  <p className="text-lg text-dark dark:text-white-dark font-extrabold max-w-2xl mb-2">
+                    Escolha o melhor preço!
+                  </p>
+                </label>
+
+                <div className="flex gap-5 flex-row w-full">
+                  <Button onClick={() => navigate('/signup')} className="btn-primary flex flex-row gap-5 text-xl ml-auto mr-auto mt-10">
+                    <IconSend />
+                    Solicitar orçamento
+                  </Button>
+                  <Button onClick={() => navigate('/signup')} className="flex flex-row gap-5 btn-outline-primary text-xl ml-auto mr-auto mt-10">
+                    <IconSearch />
+                    Procurar lojas próximas
+                  </Button>
+                </div>
+
               </div>
-
-            </div>
-            <div className="flex-col">
-              <img className="h-full w-full" src={'https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/390.png'} />
+              <div className="flex-col">
+                <img className="h-full w-full" src={'https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/390.png'} />
+              </div>
             </div>
           </div>
-          <div className="border-b border-b-[#323b45] w-[50%] ml-auto mr-auto mt-10" />
         </div>
-
       </div>
+      <StoreServicesGrid services={services} title="Manutenção em celulares" onServiceClick={(topic) => navigate('/solicitations/create?topic=' + topic)} />
       <div className=" w-full flex justify-center items-center">
         <div className="flex flex-col w-full max-w-[1200px]">
           <div className="flex flex-row mb-4 gap-5">

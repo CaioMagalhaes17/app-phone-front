@@ -1,106 +1,70 @@
-import { IconFacebook, IconInstagram, IconWhatsApp, Panel, Text } from "@app/ui";
-import { Star } from "lucide-react";
-import { StoreSocialsType } from "../../../../types/store-profile";
-import { Link } from "react-router-dom";
-import { formatSocialColor } from "../../../../formaters/store-profile";
+import {
+  Button, IconMap, IconSearch, IconWhatsApp, Input, Text
+} from "@app/ui"
+import { Star } from "lucide-react"
+import { Link } from "react-router-dom"
+import { getWppLink } from "../../../../utils/get-wpp-link"
+import { storeTags } from "../../../../constants/store-tags"
 
-export interface StoreMainPainelProps {
-  rating: number,
+
+export function StoreProfileMain({ name, workingTime, distance, rating, storeProfileImg, wppNum, tags }: {
   name: string,
-  storeSocials: StoreSocialsType[] | null
+  distance?: number,
+  rating: number,
+  tags?: string[]
   storeProfileImg: string
-  distance?: number
-}
-
-export function MainPainel({ rating, name, storeSocials, storeProfileImg, distance }: StoreMainPainelProps) {
+  workingTime?: string
+  wppNum: string
+}) {
   return (
     <>
-      <Panel className="">
-        <div className="max-w-[1200px] mr-auto ml-auto flex flex-row gap-5">
-          <div className="w-[350px] flex flex-col gap-2 ">
-            <img width={'260px'} height={'260px'} src={storeProfileImg} className="rounded-3xl" />
-          </div>
-          <div className="p-2 flex w-full text-left text-lg font-extrabold text-white gap-5 flex-col">
-            <div className="flex flex-row gap-5">
-              <Text className="text-black dark:text-white font-extrabold text-3xl" as="span">{name}</Text>
-              <div className="flex flex-row gap-2">
-                {
-                  storeSocials?.map((item) => {
-                    return (
-                      <>
-                        <Link to={item.link} target="_blank" className={`btn btn-${formatSocialColor(item.type)} ${item.type === 'instagram' && 'bg-[linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)]'} rounded-full`}>
-                          {item.type === 'whatsapp' && <IconWhatsApp />}
-                          {item.type === 'instagram' && <IconInstagram />}
-                          {item.type === 'facebook' && <IconFacebook />}
-                        </Link >
-                      </>
-                    )
-                  })
-                }
-              </div>
+      <div className="flex items-center justify-center">
+        <div className="flex flex-col">
+          <img className="sombra rounded-xl" src="https://static.ifood-static.com.br/image/upload//capa/bb23fc4b-f872-44cf-b3da-caf4b8bce4d4/202408251237_WKJY@2x.png" />
+          <div className="mt-7 flex flex-row items-center font-bold gap-5">
+            <img width={'130px'} height={'130px'} src={storeProfileImg} className="rounded-3xl sombra" />
+            <div className="flex flex-col">
+              <Text className="text-4xl text-dark dark:text-white" as="h1">{name}</Text>
+              <Text className="text-xl text-white-dark" as="h1"><span className="text-green">Aberto</span> ({workingTime})</Text>
               {distance && (
-                <Text className="text-dark dark:text-white ml-auto" as="span">Distância: {Math.floor(distance) >= 1000 ? `${Math.floor(Math.floor(distance) / 1000)} km` : `${Math.floor(distance)} m`}</Text>
+                <Text className="text-white-dark" as="span">Distância: {Math.floor(distance) >= 1000 ? `${Math.floor(Math.floor(distance) / 1000)} km` : `${Math.floor(distance)} m`}</Text>
               )}
             </div>
-            <div className="border-b border-b-[#323b45] " />
-            <Text className="text-white-dark font-extrabold text-xl" as="span">Aberta/Fechada</Text>
-            <div className="flex flex-row">{[...Array(5)].map((_, index) => (
-              <Star
-                key={index}
-                className={index < rating ? "fill-yellow-500 text-yellow-500" : "fill-none text-gray-300"}
-                size={32}
-              />
-            ))}</div>
-            <div className="border-b border-b-[#323b45] " />
-            <div className="flex flex-row gap-5 text-dark dark:text-white">
-              <label className="text-md flex items-center gap-2 block">
-                <input
-                  type="checkbox"
-                  className="form-checkbox rounded-full"
-                  checked
-                  disabled
-                  style={{ backgroundColor: 'currentcolor' }}
+            <div className="flex flex-row mb-[30px]">
+              {[...Array(5)].map((_, index) => (
+                <Star
+                  width={'20'}
+                  key={index}
+                  className={index < rating ? "fill-yellow-500 text-yellow-500" : "fill-none text-gray-300"}
+                  size={16}
                 />
-                <span className="font-extrabold">Possui entregas</span>
-              </label>
-              <label className="text-md flex items-center gap-2 block">
-                <input
-                  type="checkbox"
-                  className="form-checkbox rounded-full"
-                  checked
-                  disabled
-                  style={{ backgroundColor: 'currentcolor' }}
-                />
-                <span className="font-extrabold">Rápidos orçamentos</span>
-              </label>
-              <label className="text-md flex items-center gap-2 block">
-                <input
-                  type="checkbox"
-                  className="form-checkbox rounded-full"
-                  checked
-                  disabled
-                  style={{ backgroundColor: 'currentcolor' }}
-                />
-                <span className="font-extrabold">Rápidos orçamentos</span>
-              </label>
-              <label className="text-md flex items-center gap-2 block">
-                <input
-                  type="checkbox"
-                  className="form-checkbox rounded-full"
-                  checked
-                  disabled
-                  style={{ backgroundColor: 'currentcolor' }}
-                />
-                <span className="font-extrabold">Rápidos orçamentos</span>
-              </label>
+              ))}
             </div>
-            <div className="flex flex-row gap-5">
-
+            <div className="ml-auto" />
+            <div className="flex flex-col">
+              <div className="flex gap-5 flex-row">
+                <div className="ml-auto" />
+                <Button onClick={() => document.getElementById('location')?.scrollIntoView({ behavior: "smooth" })} className="btn-outline-primary flex flex-row gap-2"><IconMap />Localização</Button>
+                <Link target="_blank" to={getWppLink('storeProfile', wppNum)} className="btn btn-green flex flex-row gap-2"><IconWhatsApp />Chamar no Whatsapp</Link>
+              </div>
+              <div className="flex text-sm flex-row flex-wrap gap-2 mt-5 text-white max-w-[500px]">
+                {tags && tags.map((tag) => {
+                  const tagName = storeTags.filter((item) => item.id === tag)[0]
+                  return (
+                    <button className={`text-dark dark:text-white border rounded-xl p-1`}>{tagName.name}</button>
+                  )
+                })}
+              </div>
             </div>
           </div>
-
+          <div className=" mt-5 relative">
+            <Input value={''} type="text" placeholder="Procure por acessórios, celulares, serviços..." className="w-full !ps-10 bg-[#c4c4c4] dark:bg-[#c4c4c4] border-white-dark placeholder:text-black placeholder:dark:text-white-dark" />
+            <span className="absolute start-4 top-1/2 -translate-y-1/2">
+              <IconSearch className="text-black dark:text-white" />
+            </span>
+          </div>
         </div>
-      </Panel>
+      </div>
     </>
   )
 }

@@ -58,12 +58,11 @@ export function EditStoreProfile() {
         }
       })
     }
-    console.log(`${data.startTime} - ${data.endTime}`)
     await editProfile({ name: data.name, workingTime: `${data.startTime} - ${data.endTime}` }, {
       onSuccess: async () => {
         Swal.fire({
           icon: 'success',
-          title: 'Endereço alterado com sucesso!'
+          title: 'Perfil atualizado com sucesso!'
         })
         if (clintLocation) {
           setStoreInfos({
@@ -164,7 +163,7 @@ export function EditStoreProfile() {
                       )
                     })}
                   </div>
-                  <Button onClick={() => document.getElementById('openTagModal')?.click()} className="btn-primary mt-5">Alterar Caracteristicas</Button>
+                  <Button type="button" onClick={() => document.getElementById('openTagModal')?.click()} className="btn-primary mt-5">Alterar Caracteristicas</Button>
                 </div>
                 <div className="mt-auto" />
                 <div className="mb-10 flex flex-col">

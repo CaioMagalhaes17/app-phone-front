@@ -1,9 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { AxiosError } from "axios"
 import { Api } from "../../axios";
 import { handleAxiosErrors } from "../../errors";
-import { Solicitation } from "../../../types/solicitation";
 
-export async function EditSolicitation(solicitationPayload: Partial<Solicitation>, solicitationId: string) {
+export async function EditSolicitation(solicitationPayload: any, solicitationId: string) {
   try {
     const response = await Api().put('/repair/solicitation/' + solicitationId, solicitationPayload)
     return response

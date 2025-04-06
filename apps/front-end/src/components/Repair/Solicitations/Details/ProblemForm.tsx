@@ -1,24 +1,23 @@
 import { Button, IconPencil, Panel, Text } from "@app/ui";
 import { useEffect, useState } from "react";
-import { BatteryFormType, DisplayFormType } from "../../../../types/solicitation";
+import { ProblemFormType } from "../../../../types/solicitation";
 import { getStepTwoAnswersByForm } from "../../../../constants/solicitation-form-questions";
 import { getAnswerColor } from "../../../../formaters/solicitations";
 import { EditProblemForm } from "./EditProblemForm";
 
-export function ProblemFormComponent({ topic, problemForm, canEdit, solicitationId }: { solicitationId: string, canEdit: boolean, problemForm: BatteryFormType | DisplayFormType, topic: string }) {
+export function ProblemFormComponent({ topic, problemForm, canEdit, solicitationId }: { solicitationId: string, canEdit: boolean, problemForm: ProblemFormType, topic: string }) {
   const [formattedProblem, setFormattedProblem] = useState<{ question: string, answer: string }[]>([])
   const [editMode, setEditMode] = useState(false)
   useEffect(() => {
     setFormattedProblem(getStepTwoAnswersByForm(topic, problemForm))
   }, [problemForm])
-  console.log(formattedProblem)
   return (
     <>
       {formattedProblem.length > 0 && (
         !editMode ? (
           <Panel className="w-full font-bold">
             <div className="flex flex-row">
-              <Text className="text-black dark:text-white text-2xl" as="h1">Sobre o problema:</Text>
+              <Text className="text-dark dark:text-white text-2xl" as="h1">Sobre o problema:</Text>
               <div className="mr-auto" />
               {canEdit && (<Button onClick={() => setEditMode(true)} className="btn-primary"><IconPencil /></Button>)}
             </div>

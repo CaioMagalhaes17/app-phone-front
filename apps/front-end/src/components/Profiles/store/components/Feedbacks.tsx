@@ -8,7 +8,7 @@ export function StoreFeedbacks({ feedbacks, storeId, canShowRateStore }: { canSh
   return (
     <Panel className="w-full font-bold">
       <div className="flex flex-row">
-        <Text className="text-2xl text-black  flex flex-row gap-2 dark:text-white items-center" as="h1"><IconChat />Avaliações</Text>
+        <Text className="text-2xl text-dark  flex flex-row gap-2 dark:text-white items-center" as="h1"><IconChat />Avaliações</Text>
         <div className="ml-auto" />
         <Link to={`/store-feedbacks/${storeId}`} className="btn mr-5 btn-outline-primary">Ver todas</Link>
         {canShowRateStore && (<CreateFeedback storeName="teste" storeId={storeId} />)}

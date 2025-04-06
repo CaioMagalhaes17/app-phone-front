@@ -4,11 +4,34 @@ import { useNavigate } from "react-router-dom";
 import { HowItWorks } from "./components/HowItWorks";
 import PricingTable from "./components/Plans";
 import { About } from "./components/About";
-import { StoreProfileServices } from "../../components/Profiles/store/components/Services";
+import { StoreServicesGrid } from "../../components/Profiles/store/components/Services";
 import { pokemon } from "../../constants/images";
+import { scrollToSection } from "../../utils/scroll-to";
 
 export function LandingHome() {
   const navigate = useNavigate()
+  const services = [
+    {
+      serviceImg: pokemon,
+      serviceName: 'Troca de Baterias',
+      topic: 'battery'
+    },
+    {
+      serviceImg: pokemon,
+      serviceName: 'Troca de Tela',
+      topic: 'display'
+    },
+    {
+      serviceImg: pokemon,
+      serviceName: 'Troca de vidro',
+      topic: 'glass'
+    },
+    {
+      serviceImg: pokemon,
+      serviceName: 'Troca de Tela',
+      topic: 'display'
+    }
+  ]
   return (
     <>
       <DefaultLanding>
@@ -60,7 +83,7 @@ export function LandingHome() {
                 </label>
 
                 <div className="flex gap-5 flex-row w-full">
-                  <Button onClick={() => navigate('/signup')} className="btn-primary flex flex-row gap-5 text-xl ml-auto mr-auto mt-10">
+                  <Button onClick={() => scrollToSection('services')} className="btn-primary flex flex-row gap-5 text-xl ml-auto mr-auto mt-10">
                     <IconSend />
                     Solicitar orçamento
                   </Button>
@@ -75,14 +98,13 @@ export function LandingHome() {
                 <img className="h-full w-full" src={'https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/390.png'} />
               </div>
             </div>
-            <div className="border-b border-b-[#323b45] w-[50%] ml-auto mr-auto mt-10" />
           </div>
           <img className="rounded-xl" src="/teste.png" />
         </Panel>
-        <div className="flex justify-center mb-10">
+        <div id="services" className="flex justify-center mb-10">
           <HSeparator className="w-[80%]" />
         </div>
-        <StoreProfileServices storeProfileImg={pokemon} />
+        <StoreServicesGrid services={services} title="Manutenção em celulares" onServiceClick={(topic) => navigate('/landing/solicitations/create?topic=' + topic)} />
         <div className="flex justify-center mb-10">
           <HSeparator className="w-[80%]" />
         </div>

@@ -17,7 +17,7 @@ export function FinalFormComponent({ deliveryPreference, timePreference, details
       {!editMode ? (
         <Panel className="w-full font-bold mt-6">
           <div className="flex flex-row">
-            <Text className="text-black dark:text-white  text-2xl" as="h1">Considerações finais:</Text>
+            <Text className="text-dark dark:text-white  text-2xl" as="h1">Considerações finais:</Text>
             <div className="mr-auto" />
             {canEdit && (<Button onClick={() => setEditMode(true)} className="btn-primary"><IconPencil /></Button>)}
           </div>

@@ -122,39 +122,42 @@ export function StoreSolicitationDetails() {
       <Button onClick={() => navigate(-1)} className="btn-outline-primary flex flex-row gap-2"><IconArrowBackward /> </Button>
       {!isLoading && !budgetLoading && solicitationData ? (
         <div className="max-w-[1200px] mx-auto">
-          <Text className="text-black dark:text-white font-bold text-5xl flex flex-row gap-5 items-center" as="h1"><IconSmartphone />Formulário do problema</Text>
-          <HSeparator className="mb-10" />
-          <div className="flex flex-row">
-            <div className="flex flex-col gap-2">
-              <Text className="text-black dark:text-white font-bold text-5xl" as="h1">Defeito em <span className="">{formatTopic(solicitationData?.form.problemTopic)}</span></Text>
-              <div>
-                <Text className="font-bold text-xl" as="h1">{formatPhoneBrand(solicitationData.form.phoneForm.brand)} - {solicitationData.form.phoneForm.model}</Text>
-                {budgetData.length === 0 && (<Text className={`font-bold text-md mt-2 text-${getStatusColor(solicitationData.status)}`} as="h1">{solicitationData.status}</Text>)}
-              </div>
-            </div>
-            <div className="mr-auto" />
-            {budgetData.length === 0 ? (<ReturnBudget handleSave={handleSave} />) :
-              <Panel className="bg-whte rounded-md p-5 sombra flex flex-col font-bold gap-2 h-full w-[500px]">
-                <div className="flex flex-row">
-                  <Text className="text-lg  text-dark dark:text-white" as="span">Orçamento retornado</Text>
-                  <div className="mr-auto" />
-                  <Button onClick={() => handleDeleteBudget()} className="btn-danger">Excluir orçamento</Button>
+          <Panel className="sombra p-4 rounded-xl">
+            <Text className="text-dark dark:text-white font-bold text-3xl flex flex-row gap-5 items-center" as="h1"><IconSmartphone />Formulário do problema</Text>
+            <HSeparator className="mb-10" />
+            <div className="flex flex-row">
+              <div className="flex flex-col gap-2">
+                <Text className="text-dark dark:text-white font-bold text-3xl" as="h1">Defeito em <span className="">{formatTopic(solicitationData?.form.problemTopic)}</span></Text>
+                <div>
+                  <Text className="font-bold text-xl" as="h1">{formatPhoneBrand(solicitationData.form.phoneForm.brand)} - {solicitationData.form.phoneForm.model}</Text>
+                  {budgetData.length === 0 && (<Text className={`font-bold text-md mt-2 text-${getStatusColor(solicitationData.status)}`} as="h1">{solicitationData.status}</Text>)}
                 </div>
-                <Text className="text-lg flex flex-row gap-5 text-green" as="span">{budgetData[0].props.startValue} <span className="text-black dark:text-white">até</span> {budgetData[0].props.endValue}</Text>
-                <textarea value={budgetData[0].props.details} disabled className="placeholder:text-white-dark w-full h-full rounded-md border px-4 py-2 text-sm font-semibold !outline-none focus:border-primary focus:ring-transparent border-[#17263c] dark:bg-[#121e32] text-dark dark:text-white-dark focus:border-primary" />
-              </Panel>
-            }
-          </div>
-          <div className="mt-10 flex flex-row gap-6 w-full">
-            <ProblemForm solicitationId={solicitationData.id} topic={solicitationData.form.problemTopic} problemForm={solicitationData.form.problemForm} />
-            <PhoneForm solicitationId={solicitationData.id} phoneForm={solicitationData.form.phoneForm} />
-          </div>
-          <FinalForm solicitationId={solicitationData.id} deliveryPreference={solicitationData.form.deliveryPreference} timePreference={solicitationData.form.timePreference} details={solicitationData.form.details} />
-          <HSeparator />
-          {solicitationData.form.solicitationImgs.length > 0 && (
-            <SolicitationImages images={solicitationData.form.solicitationImgs} />
-          )}
+              </div>
+              <div className="mr-auto" />
+              {budgetData.length === 0 ? (<ReturnBudget handleSave={handleSave} />) :
+                <Panel className="bg-whte rounded-md p-5 sombra flex flex-col font-bold gap-2 h-full w-[500px]">
+                  <div className="flex flex-row">
+                    <Text className="text-lg  text-dark dark:text-white" as="span">Orçamento retornado</Text>
+                    <div className="mr-auto" />
+                    <Button onClick={() => handleDeleteBudget()} className="btn-danger">Excluir orçamento</Button>
+                  </div>
+                  <Text className="text-lg flex flex-row gap-5 text-green" as="span">{budgetData[0].props.startValue} <span className="text-black dark:text-white">até</span> {budgetData[0].props.endValue}</Text>
+                  <textarea value={budgetData[0].props.details} disabled className="placeholder:text-white-dark w-full h-full rounded-md border px-4 py-2 text-sm font-semibold !outline-none focus:border-primary focus:ring-transparent border-[#17263c] dark:bg-[#121e32] text-dark dark:text-white-dark focus:border-primary" />
+                </Panel>
+              }
+            </div>
+            <div className="mt-10 flex flex-row gap-6 w-full">
+              <ProblemForm solicitationId={solicitationData.id} topic={solicitationData.form.problemTopic} problemForm={solicitationData.form.problemForm} />
+              <PhoneForm solicitationId={solicitationData.id} phoneForm={solicitationData.form.phoneForm} />
+            </div>
+            <FinalForm solicitationId={solicitationData.id} deliveryPreference={solicitationData.form.deliveryPreference} timePreference={solicitationData.form.timePreference} details={solicitationData.form.details} />
+            <HSeparator />
+            {solicitationData.form.solicitationImgs.length > 0 && (
+              <SolicitationImages images={solicitationData.form.solicitationImgs} />
+            )}
+          </Panel>
         </div>
+
       ) : ''}
     </>
   )

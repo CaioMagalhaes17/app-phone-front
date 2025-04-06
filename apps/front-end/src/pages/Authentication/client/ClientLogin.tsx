@@ -2,7 +2,7 @@ import { Button, IconLockDots, IconMail, IconPhone, Input, Text } from "@app/ui"
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { login } from "../../../api/user/login";
 
 interface LoginForm {
@@ -11,6 +11,10 @@ interface LoginForm {
 }
 
 export default function ClientLogin() {
+  const [searchParams] = useSearchParams({
+    redirect: '',
+  })
+
   const [useEmail, setUseEmail] = useState<boolean>(true)
   const { register, formState: { errors }, handleSubmit } = useForm()
 
@@ -26,14 +30,15 @@ export default function ClientLogin() {
     const response = await mutateAsync(data as LoginForm);
     localStorage.setItem('accessToken', response.token)
     localStorage.setItem('isStore', 'false')
+    if (searchParams.get('redirect') !== '') {
+      return window.location.replace(searchParams.get('redirect') || '/dashboard')
+    }
     window.location.replace('/dashboard')
   };
   return (
     <>
       <div className="absolute inset-0 dark:bg-black">
-
       </div>
-
       <div className="relative font-extrabold flex min-h-screen items-center justify-center bg-cover bg-center bg-no-repeat px-6 py-10 sm:px-16">
         <div className="relative w-full max-w-[570px] rounded-md p-2">
           <div className="relative flex flex-col justify-center rounded-md border-2 dark:border-black dark:bg-dark px-6 py-10">
@@ -105,7 +110,7 @@ export default function ClientLogin() {
 
               <div className="text-center text-dark dark:text-white mb-5">
                 Não possui uma conta?&nbsp;
-                <Link to="/signup" className="uppercase text-primary underline transition">
+                <Link to={`${searchParams.get('redirect') !== '' ? "/signup?redirect=" + searchParams.get('redirect') : "/signup"}`} className="uppercase text-primary underline transition">
                   Cadastrar
                 </Link>
               </div>

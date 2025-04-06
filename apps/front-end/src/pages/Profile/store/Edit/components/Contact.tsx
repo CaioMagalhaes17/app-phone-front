@@ -1,5 +1,5 @@
 import ReactInputMask from 'react-input-mask'
-import { Button, IconOldPhone, IconPencil, IconPhone, IconWhatsApp, Input, Text } from "@app/ui";
+import { Button, IconOldPhone, IconPencil, IconWhatsApp, Input, Text } from "@app/ui";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { FieldValues, useForm } from "react-hook-form";
 import { UpdateStoreContacts } from '../../../../../api/user/store/update-contact';

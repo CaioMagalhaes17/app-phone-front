@@ -70,7 +70,7 @@ const useStore = create<StateManager>((set, get) => {
         document.querySelector('body')?.classList.remove('dark')
       }
     },
-    closeSidebar: false,
+    closeSidebar: true,
     setCloseSidebar: (closeSidebar: boolean) => {
       set({
         closeSidebar

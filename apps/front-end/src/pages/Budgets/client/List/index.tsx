@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { IconBill, Panel, Text } from "@app/ui"
+import { HSeparator, IconBill, Panel, Text } from "@app/ui"
 import { BudgetRow } from "./components/BudgetRow"
 import { useGetBudgetsToClient } from "../../../../hooks/budgets/useGetBudgetsToClient"
 
@@ -43,9 +43,9 @@ export function ClientBudgetsList() {
     {!isLoading ? (
       <>
         <div className="flex justify-center mt-10">
-          <Panel className="font-bold  max-w-[1200px] w-full">
+          <Panel className="sombra rounded-xl p-4 font-bold  max-w-[1200px] w-full">
             <div className="flex flex-row">
-              <Text className="text-3xl text-black dark:text-white flex flex-row gap-5 items-center" as="h1"><IconBill />Orçamentos recebidos</Text>
+              <Text className="text-3xl text-dark dark:text-white flex flex-row gap-5 items-center" as="h1"><IconBill />Orçamentos recebidos</Text>
               <div className="ml-auto" />
               <select onClick={(e) => onOrderChange(e.currentTarget.value)} className="form-select !border-none text-dark dark:bg-black form-select-lg dark:text-white">
                 <option value="rating">
@@ -62,7 +62,7 @@ export function ClientBudgetsList() {
                 </option>
               </select>
             </div>
-            <div className="border-b border-b-[#323b45] mt-5 mt-10" />
+            <HSeparator />
             {
               budgets.length > 0 && distances.length > 0 ?
                 budgets.map((budget, key) => {

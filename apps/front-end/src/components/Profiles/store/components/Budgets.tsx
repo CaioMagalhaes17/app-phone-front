@@ -9,11 +9,9 @@ export interface StoreProfileBudgetProps {
   isOwner?: boolean
 }
 export function StoreProfileBudgets({ budgets, isOwner }: StoreProfileBudgetProps) {
-  console.log(budgets)
   function getMainQuestion(problemForm: { [x: string]: string; }) {
     if (budgets.length > 0) {
       if ('display-A' in problemForm) {
-        console.log(problemForm["display-A"])
         const result = displayQuestions[0].options.find((item) => item.optionId === problemForm["display-A"])
         if (result) return result.text
       }
@@ -29,7 +27,7 @@ export function StoreProfileBudgets({ budgets, isOwner }: StoreProfileBudgetProp
         {budgets.length > 0 ? (
           <>
             <div className="flex flex-row">
-              <Text className="text-2xl text-black dark:text-white flex flex-row gap-2 items-center" as="h1"><IconClock />Ultimos Orçamentos</Text>
+              <Text className="text-2xl text-dark dark:text-white flex flex-row gap-2 items-center" as="h1"><IconClock />Ultimos Orçamentos</Text>
               {isOwner ? <Link to="/store/budget/list" className="btn ml-auto btn-primary flex flex-row gap-2"><IconPlus /> Ver todas</Link>
                 : <Link to={`/solicitations/create/${budgets[0].storeProfile.id}`} className="btn ml-auto btn-primary flex flex-row gap-2"><IconSend /> Solicitar Conserto</Link>}
 
@@ -59,7 +57,7 @@ export function StoreProfileBudgets({ budgets, isOwner }: StoreProfileBudgetProp
         ) : (
           <>
             <div className="flex flex-row">
-              <Text className="text-2xl text-black dark:text-white" as="h1">Ultimos Orçamentos</Text>
+              <Text className="text-2xl text-dark dark:text-white" as="h1">Ultimos Orçamentos</Text>
             </div>
             <HSeparator />
             <div className="mt-10 h-[200px]">

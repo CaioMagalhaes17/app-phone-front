@@ -2,7 +2,7 @@ import { Button, IconLockDots, IconMail, IconPhone, IconUser, Input, Text } from
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { signup } from "../../../api/user/signup";
 
 export default function ClientSignUp() {
@@ -10,6 +10,9 @@ export default function ClientSignUp() {
   const { register, handleSubmit, formState: { errors }, setError } = useForm()
   const { mutateAsync } = useMutation({
     mutationFn: signup
+  })
+  const [searchParams] = useSearchParams({
+    redirect: '',
   })
   async function onSubmit(data: FieldValues) {
     localStorage.removeItem('accessToken')
@@ -28,6 +31,9 @@ export default function ClientSignUp() {
     })
     localStorage.setItem('accessToken', response.token)
     localStorage.setItem('isStore', 'false')
+    if (searchParams.get('redirect') !== '') {
+      return window.location.replace(searchParams.get('redirect') || '/dashboard')
+    }
     window.location.replace('/dashboard')
   }
 

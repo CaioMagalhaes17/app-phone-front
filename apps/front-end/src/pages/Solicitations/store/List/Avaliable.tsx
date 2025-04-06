@@ -41,9 +41,9 @@ export function AvaliableSolicitations() {
       {!isLoading && avaliableSolicitations ? (
         <>
           <div className="flex justify-center">
-            <Panel className="font-bold  max-w-[1200px] w-full">
+            <Panel className="font-bold  max-w-[1200px] sombra mt-5 p-4 rounded-xl w-full">
               <div className="flex flex-row">
-                <Text className="text-3xl text-black dark:text-white flex flex-row gap-5 items-center" as="h1"><IconBill />Defeitos esperando retorno</Text>
+                <Text className="text-3xl text-dark dark:text-white flex flex-row gap-5 items-center" as="h1"><IconBill />Defeitos esperando retorno</Text>
                 <div className="ml-auto" />
                 <select onClick={(e) => onOrderChange(e.currentTarget.value)} className="form-select !border-none dark:bg-black form-select-lg text-black dark:text-white">
                   <option value="desc">

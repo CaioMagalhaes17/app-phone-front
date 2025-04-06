@@ -13,9 +13,11 @@ export function MapStep() {
   const { clientInfos, setClientInfos, isMapLoaded } = useStore()
   const [clintLocation, setLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [radius, setRadius] = useState<number>(0)
+  const [selectedAddress, setSelectedAddress] = useState<string>("")
+  console.log(selectedAddress)
   const client = useQueryClient()
-
   const [selectedStore, setSelectedStore] = useState<StoresInsideRadiusType | null>()
+
 
 
   const { mutateAsync } = useMutation({
@@ -95,7 +97,7 @@ export function MapStep() {
     <>
       <Panel className="sombra p-4 rounded-xl flex relative w-full h-[500px] gap-10">
         <div className="flex flex-col items-center w-[530px]">
-          <h1 className="font-bold text-dark dark:text-white text-3xl flex flex-row mr-auto gap-5 items-center"><IconStreetMap width="40px" height="40px" />Localização</h1>
+          <h1 className="font-bold text-dark dark:text-white text-xl flex flex-row mr-auto gap-2 items-center"><IconStreetMap width="40px" height="40px" />Procurar por lojas próximas</h1>
           <HSeparator className="w-full mt-2 mb-2 " />
           <div className="text-left p-4">
             <Button onClick={() => getBrowserLocation()} className="btn-primary w-full"><IconMap />Usar localização exata do dispositivo</Button>
@@ -105,7 +107,7 @@ export function MapStep() {
             <Text className="font-bold text-xl" as="span">Escrever endereço</Text>
             <div className="flex gap-2 flex-row w-full">
               {isMapLoaded && (
-                <AutoCompleteAdapter setLocation={setLocation}>
+                <AutoCompleteAdapter setSelectedAddress={setSelectedAddress} setLocation={setLocation}>
                   <Input type="text" className="w-full" placeholder="Endereço" />
                 </AutoCompleteAdapter>
               )}

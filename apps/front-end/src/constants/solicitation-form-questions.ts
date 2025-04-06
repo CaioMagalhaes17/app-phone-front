@@ -1,5 +1,107 @@
 import { ProblemTopicType } from "../types/solicitation"
 
+export const glassQuestions = [
+  {
+    questionId: 'glass-A',
+    question: 'Qual problema sobre o vidro do celular se encaixa com o seu?',
+    options: [
+      {
+        optionId: 'glass-A-1',
+        text: 'O vidro está trincado'
+      },
+      {
+        optionId: 'glass-A-2',
+        text: 'O vidro está arranhado'
+      },
+      {
+        optionId: 'glass-A-3',
+        text: 'O vidro está se soltando'
+      },
+    ]
+  },
+  {
+    questionId: 'glass-B',
+    question: 'Quando o problema começou?',
+    options: [
+      {
+        optionId: 'glass-B-1',
+        text: 'Hoje'
+      },
+      {
+        optionId: 'glass-B-2',
+        text: 'Menos de uma semana'
+      },
+      {
+        optionId: 'glass-A-3',
+        text: 'Mais de uma semana'
+      },
+    ]
+  },
+  {
+    questionId: 'glass-C',
+    question: 'O celular está ligando?',
+    options: [
+      {
+        optionId: 'glass-C-1',
+        text: 'Sim'
+      },
+      {
+        optionId: 'glass-C-2',
+        text: 'Não'
+      },
+    ]
+  },
+  {
+    questionId: 'glass-D',
+    question: 'O problema no vidro afeta outras funções?',
+    options: [
+      {
+        optionId: 'glass-D-1',
+        text: 'Sim'
+      },
+      {
+        optionId: 'glass-D-2',
+        text: 'Não'
+      },
+    ]
+  },
+  {
+    questionId: 'glass-E',
+    question: 'O vidro já foi trocado anteriormente?',
+    options: [
+      {
+        optionId: 'glass-E-1',
+        text: 'Sim'
+      },
+      {
+        optionId: 'glass-E-2',
+        text: 'Não'
+      },
+      {
+        optionId: 'glass-E-3',
+        text: 'Não sei'
+      },
+    ]
+  },
+  {
+    questionId: 'glass-F',
+    question: 'Se houve troca, a nova tela é original?',
+    options: [
+      {
+        optionId: 'glass-F-1',
+        text: 'Sim'
+      },
+      {
+        optionId: 'glass-F-2',
+        text: 'Não'
+      },
+      {
+        optionId: 'glass-F-3',
+        text: 'Não sei'
+      },
+    ]
+  }
+]
 export const batteryQuestions = [
   {
     questionId: 'battery-A',
@@ -226,7 +328,12 @@ export const displayQuestions = [
   },
 ]
 
-export const phoneQuestions = [
+export type PhoneQuestionsType = {
+  questionId: 'brand' | 'model' | 'previousRepair' | 'originalHardware' | 'usageTime',
+  question: string, options: { optionId: string, text: string }[]
+}[]
+
+export const phoneQuestions: PhoneQuestionsType = [
   {
     questionId: 'brand',
     question: 'Qual a marca do celular?',
@@ -454,12 +561,14 @@ export const xiaomiModels = [
 export function getQuestionsByTopic(topic: string) {
   if (topic === 'battery') return batteryQuestions
   if (topic === 'display') return displayQuestions
+  if (topic === 'glass') return glassQuestions
   return displayQuestions
 }
 
 export function getTopicFormatted(topic: string) {
   if (topic === 'battery') return 'Bateria'
   if (topic === 'display') return 'Tela'
+  if (topic === 'glass') return 'Vidro do celular'
 }
 
 type DisplayFormType = {
@@ -480,11 +589,18 @@ export type BatteryFormType = {
   "battery-F": "battery-F-1" | "battery-F-2" | "battery-F-3"
 }
 
-export function getStepTwoAnswersByForm(topic: string, questionsObj: DisplayFormType | BatteryFormType) {
+export type GlassFormType = {
+  "glass-A": "glass-A-1" | "glass-A-2" | "glass-A-3"
+  "glass-B": "glass-B-1" | "glass-B-2" | "glass-B-3"
+  "glass-C": "glass-C-1" | "glass-C-2"
+  "glass-D": "glass-D-1" | "glass-D-2"
+  "glass-E": "glass-E-1" | "glass-E-2" | "glass-E-3"
+  "glass-F": "glass-F-1" | "glass-F-2" | "glass-F-3"
+}
+
+export function getStepTwoAnswersByForm(topic: string, questionsObj: DisplayFormType | BatteryFormType | GlassFormType) {
   if (questionsObj) {
     if (topic === 'battery' && 'battery-A' in questionsObj) {
-      console.log(questionsObj)
-      console.log((batteryQuestions[5].options.filter((option) => option.optionId === questionsObj['battery-F']))[0], 'nigghu')
       const answersFormated = [
         {
           question: batteryQuestions[0].question,
@@ -538,6 +654,35 @@ export function getStepTwoAnswersByForm(topic: string, questionsObj: DisplayForm
         {
           question: displayQuestions[5].question,
           answer: questionsObj['display-F'] ? (displayQuestions[5].options.filter((option) => option.optionId === questionsObj['display-F']))[0].text : ''
+        }
+      ]
+      return answersFormated
+    }
+    if (topic === 'glass' && 'glass-A' in questionsObj) {
+      const answersFormated = [
+        {
+          question: glassQuestions[0].question,
+          answer: (glassQuestions[0].options.filter((option) => option.optionId === questionsObj['glass-A']))[0].text
+        },
+        {
+          question: glassQuestions[1].question,
+          answer: (glassQuestions[1].options.filter((option) => option.optionId === questionsObj['glass-B']))[0].text
+        },
+        {
+          question: glassQuestions[2].question,
+          answer: (glassQuestions[2].options.filter((option) => option.optionId === questionsObj['glass-C']))[0].text
+        },
+        {
+          question: glassQuestions[3].question,
+          answer: (glassQuestions[3].options.filter((option) => option.optionId === questionsObj['glass-D']))[0].text
+        },
+        {
+          question: glassQuestions[4].question,
+          answer: (glassQuestions[4].options.filter((option) => option.optionId === questionsObj['glass-E']))[0].text
+        },
+        {
+          question: glassQuestions[5].question,
+          answer: (glassQuestions[5].options.filter((option) => option.optionId === questionsObj['glass-F']))[0].text
         }
       ]
       return answersFormated

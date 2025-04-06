@@ -27,7 +27,7 @@ export function StoreProfileLocation({ lat, lng, storeSocials, contacts, storePr
     <>
       <Panel id="location" className="mt-5 font-bold">
         <div className="flex flex-row">
-          <Text className="text-3xl text-black dark:text-white flex flex-row gap-5 items-center " as="h1"><IconStreetMap height="50px" width="40px" /> Localização e Contato</Text>
+          <Text className="text-3xl text-dark dark:text-white flex flex-row gap-5 items-center " as="h1"><IconStreetMap height="50px" width="40px" /> Localização e Contato</Text>
           {isOwner && (
             <Link to="/store/map/edit" className="btn-primary btn ml-auto"><IconPencil className="mr-2" />Alterar Localização</Link>
           )}
@@ -35,10 +35,10 @@ export function StoreProfileLocation({ lat, lng, storeSocials, contacts, storePr
         <HSeparator className="mt-2" />
         <div className="flex flex-row relative h-full gap-5">
           <div style={{ borderRadius: '10px' }} className="max-w-xs flex flex-col p-4 gap-2 items-center  w-[420px]">
-            <Text className="text-black dark:text-white text-lg" as="span">{address}</Text>
+            <Text className="text-dark dark:text-white text-lg" as="span">{address}</Text>
 
-            <Text className="text-black dark:text-white mt-auto text-xl flex flex-row gap-2 items-center" as="span"><IconOldPhone />{contacts.telNum}</Text>
-            <Text className="text-black dark:text-white text-xl flex flex-row gap-2 items-center" as="span"><IconMail />{contacts.email}</Text>
+            <Text className="text-dark dark:text-white mt-auto text-xl flex flex-row gap-2 items-center" as="span"><IconOldPhone />{contacts.telNum}</Text>
+            <Text className="text-dark dark:text-white text-xl flex flex-row gap-2 items-center" as="span"><IconMail />{contacts.email}</Text>
 
             <Link target="_blank" to={getWppLink('storeProfile', contacts.wppNum)} className="btn btn-green flex flex-row gap-2 "><IconWhatsApp />Chamar no Whatsapp</Link>
             <div className="flex flex-row mt-5 gap-2">

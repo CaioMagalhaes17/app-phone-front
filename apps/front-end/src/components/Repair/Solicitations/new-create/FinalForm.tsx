@@ -1,8 +1,9 @@
 import { Button, HSeparator, IconHelpCircle, IconPlus, IconTrash, Panel, Text } from "@app/ui"
 import { finalQuestions } from "../../../../constants/solicitation-form-questions"
-import { SolicitationImgsModal } from "../Create/images-modal/SolicitationImagesModal"
+
 import Swal from "sweetalert2";
 import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
+import { SolicitationImgsModal } from "../Create/images-modal/SolicitationImagesModal";
 
 export function FinalForm({ errors, register, solicitationImgs, setSolicitationImgs }: { solicitationImgs: string[], setSolicitationImgs: React.Dispatch<React.SetStateAction<string[]>>, errors: FieldErrors<FieldValues>, register: UseFormRegister<FieldValues> }) {
   const questions = finalQuestions

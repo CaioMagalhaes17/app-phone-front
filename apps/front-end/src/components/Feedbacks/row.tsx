@@ -6,7 +6,6 @@ import { userImg } from "../../constants/images";
 
 export function FeedbackRow({ feedback }: { feedback: FeedbackType }) {
   const totalStars = 5;
-  console.log(feedback.clientProfile.name)
   return (
     <>
       <div className="max-h-[140px] mt-5 flex flex-row items-start gap-5">

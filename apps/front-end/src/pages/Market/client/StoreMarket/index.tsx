@@ -9,7 +9,6 @@ export function StoreMarket() {
   const { storeProfile, isLoading, distance } = useGetStoreProfileById(id)
   const { isLoading: isRowsLoading, rows } = useGetStoreProductsRows(id)
   const { socials } = useGetStoreSocials(id)
-  console.log('111', rows)
   return (
     <>
       {!isLoading && storeProfile && socials && !isRowsLoading && rows ? (

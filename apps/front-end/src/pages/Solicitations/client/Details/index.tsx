@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { Button, IconArrowBackward, IconDollarSignCircle, IconStore, IconX, Panel, Text } from "@app/ui";
+import { Button, HSeparator, IconArrowBackward, IconDollarSignCircle, IconStore, IconX, Panel, Text, VSeparator } from "@app/ui";
 import { formatPhoneBrand, formatTopic, getStatusColor } from "../../../../formaters/solicitations";
 import Swal from "sweetalert2";
 import { EditSolicitation } from "../../../../api/repair/solicitation/edit-solicitation";
@@ -89,57 +89,66 @@ export function SolicitationDetails() {
     <>
       {!isLoading && solicitationData ? (
         <>
-          <Button onClick={() => navigate(-1)} className="btn-outline-primary flex flex-row gap-2"><IconArrowBackward /> </Button>
-          <div className="max-w-[1200px] mx-auto">
-            <div className="flex gap-5 flex-row">
-              <Text className="text-black dark:text-white font-extrabold text-5xl" as="h1">Defeito em <span className="underline">{formatTopic(solicitationData?.form.problemTopic)}</span></Text>
-              <div className="mr-auto" />
-              {canCancelSolicitation() && (
-                <Button onClick={() => handleDeleteSolicitation()} className="btn-danger flex flex-row gap-2"><IconX />Cancelar solicitação de conserto</Button>
-              )}
+          <div className="p-4">
+            <Button onClick={() => navigate(-1)} className="btn-outline-primary flex flex-row gap-2"><IconArrowBackward /> </Button>
+            <div className="max-w-[1200px] mx-auto sombra p-4 rounded-xl">
+              <div className="flex gap-5 flex-row">
+                <Text className="text-black dark:text-white font-extrabold text-5xl" as="h1">Defeito em <span className="underline">{formatTopic(solicitationData?.form.problemTopic)}</span></Text>
+                <div className="mr-auto" />
+                {canCancelSolicitation() && (
+                  <Button onClick={() => handleDeleteSolicitation()} className="btn-danger flex flex-row gap-2"><IconX />Cancelar solicitação de conserto</Button>
+                )}
+              </div>
+              <Text className="font-extrabold text-xl" as="h1">{formatPhoneBrand(solicitationData.form.phoneForm.brand)} - {solicitationData.form.phoneForm.model}</Text>
+              <Text className={`font-extrabold text-md mt-2 text-${getStatusColor(solicitationData.status)}`} as="h1">{solicitationData.status}</Text>
+              <HSeparator />
+              <div className="mt-10 flex items-center flex-row gap-6 w-full">
+                <ProblemForm canEdit={canEdit} solicitationId={id} topic={solicitationData.form.problemTopic} problemForm={solicitationData.form.problemForm} />
+                <VSeparator className="h-[200px]" />
+                <PhoneForm canEdit={canEdit} solicitationId={id} phoneForm={solicitationData.form.phoneForm} />
+              </div>
+              <HSeparator />
+
+              <FinalForm canEdit={canEdit} solicitationId={id} deliveryPreference={solicitationData.form.deliveryPreference} timePreference={solicitationData.form.timePreference} details={solicitationData.form.details} />
+              <HSeparator />
+
+              <SolicitationImages images={solicitationData.form.solicitationImgs} />
+              {budgets.length > 0 && !budgetsLoading ?
+                (
+                  <Panel className="font-extrabold mt-6 max-w-[1200px] w-full">
+                    <div className="flex flex-row">
+                      <Text className="text-3xl text-black dark:text-white" as="h1">Orçamentos</Text>
+                      <div className="ml-auto" />
+                    </div>
+                    <div className="border-b border-b-[#323b45] mt-5 mt-10" />
+                    {budgets.map((budget) => {
+                      return (
+                        <>
+                          <div className="flex flex-row items-center gap-5">
+                            <div className="flex flex-col gap-2 mt-5 ">
+                              <img width={'100px'} height={'100px'} src={budget.storeProfile.profileImg} className="rounded-3xl" />
+                            </div>
+                            <div className="flex flex-col">
+                              <Text className="text-dark dark:text-white text-lg" as="span">{budget.storeProfile.name}</Text>
+                              <Text className="text-green" as="span">{budget.startValue} - {budget.endValue}</Text>
+                            </div>
+                            <div className="ml-auto">
+                              <Link target="_blank" rel="noopener noreferrer" to={`/store-profile/${budget.storeProfile.id}`} className="btn-primary btn flex flex-row gap-2"><IconStore />Acessar perfil da loja</Link>
+                            </div>
+                            <div className="">
+                              <Button className="btn-outline-green flex flex-row gap-2"><IconDollarSignCircle />Escolher orçamento</Button>
+                            </div>
+                          </div>
+                          <div className="border-b border-b-[#323b45] mt-5 mt-10" />
+                        </>
+                      )
+                    })}
+                  </Panel>
+                )
+                : ''}
             </div>
-            <Text className="font-extrabold text-xl" as="h1">{formatPhoneBrand(solicitationData.form.phoneForm.brand)} - {solicitationData.form.phoneForm.model}</Text>
-            <Text className={`font-extrabold text-md mt-2 text-${getStatusColor(solicitationData.status)}`} as="h1">{solicitationData.status}</Text>
-            <div className="mt-10 flex flex-row gap-6 w-full">
-              <ProblemForm canEdit={canEdit} solicitationId={id} topic={solicitationData.form.problemTopic} problemForm={solicitationData.form.problemForm} />
-              <PhoneForm canEdit={canEdit} solicitationId={id} phoneForm={solicitationData.form.phoneForm} />
-            </div>
-            <FinalForm canEdit={canEdit} solicitationId={id} deliveryPreference={solicitationData.form.deliveryPreference} timePreference={solicitationData.form.timePreference} details={solicitationData.form.details} />
-            <SolicitationImages images={solicitationData.form.solicitationImgs} />
-            {budgets.length > 0 && !budgetsLoading ?
-              (
-                <Panel className="font-extrabold mt-6 max-w-[1200px] w-full">
-                  <div className="flex flex-row">
-                    <Text className="text-3xl text-black dark:text-white" as="h1">Orçamentos</Text>
-                    <div className="ml-auto" />
-                  </div>
-                  <div className="border-b border-b-[#323b45] mt-5 mt-10" />
-                  {budgets.map((budget) => {
-                    return (
-                      <>
-                        <div className="flex flex-row items-center gap-5">
-                          <div className="flex flex-col gap-2 mt-5 ">
-                            <img width={'100px'} height={'100px'} src={budget.storeProfile.profileImg} className="rounded-3xl" />
-                          </div>
-                          <div className="flex flex-col">
-                            <Text className="text-dark dark:text-white text-lg" as="span">{budget.storeProfile.name}</Text>
-                            <Text className="text-green" as="span">{budget.startValue} - {budget.endValue}</Text>
-                          </div>
-                          <div className="ml-auto">
-                            <Link target="_blank" rel="noopener noreferrer" to={`/store-profile/${budget.storeProfile.id}`} className="btn-primary btn flex flex-row gap-2"><IconStore />Acessar perfil da loja</Link>
-                          </div>
-                          <div className="">
-                            <Button className="btn-outline-green flex flex-row gap-2"><IconDollarSignCircle />Escolher orçamento</Button>
-                          </div>
-                        </div>
-                        <div className="border-b border-b-[#323b45] mt-5 mt-10" />
-                      </>
-                    )
-                  })}
-                </Panel>
-              )
-              : ''}
           </div>
+
         </>
       ) : ''}
     </>

@@ -1,12 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HSeparator, IconHelpCircle, Panel, Text } from "@app/ui";
-import { getTopicFormatted } from "../../../../constants/solicitation-form-questions";
+import { getQuestionsByTopic, getTopicFormatted } from "../../../../constants/solicitation-form-questions";
 import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 import { convertNumbertToLetter } from "../../../../utils/convert-number-to-letter";
 import Swal from "sweetalert2";
 
-export function ProblemForm({ errors, topic, questions, register }: { errors: FieldErrors<FieldValues>, register: UseFormRegister<FieldValues>, topic: string, questions: { question: string, options: { optionId: string, text: string }[] }[] }) {
+export function ProblemForm({ defaultValue, errors, topic, register }: { defaultValue?: any, errors: FieldErrors<FieldValues>, register: UseFormRegister<FieldValues>, topic: string }) {
+  const questions = getQuestionsByTopic(topic)
   function handleFormClick() {
-    console.log('return neggr')
     if (topic === '') {
       Swal.fire({
         icon: 'info',
@@ -14,6 +15,7 @@ export function ProblemForm({ errors, topic, questions, register }: { errors: Fi
       })
     }
   }
+
   return (
     <>
       <Panel onClick={() => handleFormClick()} className={`sombra p-4 rounded-xl bg-white dark:bg-black w-full`}>
@@ -21,11 +23,12 @@ export function ProblemForm({ errors, topic, questions, register }: { errors: Fi
         <HSeparator className="mt-2 mb-2" />
         <div className={`${topic === '' ? 'pointer-events-none blur' : ''} flex flex-col gap-5 mb-5 `}>
           {questions.length > 0 && questions.map((item, i) => {
+
             return (
               <>
                 <div className="flex flex-col">
                   <Text className="text-dark dark:text-white text-xl" as="span">{item.question}</Text>
-                  <select {...register(topic + '-' + convertNumbertToLetter(i), { required: true })} className="text-dark dark:text-white dark:bg-black">
+                  <select defaultValue={defaultValue && defaultValue[item.questionId]} {...register(topic + '-' + convertNumbertToLetter(i), { required: true })} className="text-dark dark:text-white dark:bg-black">
                     <option value="">Escolher</option>
                     {item.options.map((option) => {
                       return (

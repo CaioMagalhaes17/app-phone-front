@@ -3,7 +3,7 @@ import { ClientProfileType } from "./client-profile"
 export type SolicitationFormProps = {
   solicitationImgs: string[]
   problemTopic: ProblemTopicType
-  problemForm: BatteryFormType | DisplayFormType
+  problemForm: ProblemFormType
   phoneForm: PhoneFormType
   deliveryPreference: string
   timePreference: string
@@ -20,6 +20,8 @@ export type PhoneFormType = {
   originalHardware: string
   usageTime: string
 }
+
+export type ProblemFormType = BatteryFormType | DisplayFormType | GlassFormType
 
 export type BatteryFormType = {
   "battery-A": "battery-A-1" | "battery-A-2" | "battery-A-3" | "battery-A-4"
@@ -39,7 +41,16 @@ export type DisplayFormType = {
   "display-F": "display-F-1" | "display-F-2" | "display-F-3"
 }
 
-export type ProblemTopicType = "battery" | "display"
+export type GlassFormType = {
+  "glass-A": "glass-A-1" | "glass-A-2" | "glass-A-3"
+  "glass-B": "glass-B-1" | "glass-B-2" | "glass-B-3"
+  "glass-C": "glass-C-1" | "glass-C-2"
+  "glass-D": "glass-D-1" | "glass-D-2"
+  "glass-E": "glass-E-1" | "glass-E-2" | "glass-E-3"
+  "glass-F": "glass-F-1" | "glass-F-2" | "glass-F-3"
+}
+
+export type ProblemTopicType = "battery" | "display" | 'glass'
 
 export type PhoneBrandType = 'samsung' | 'apple'
 

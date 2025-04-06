@@ -1,15 +1,15 @@
 import { Button, IconSave, IconX, Input, Panel, Text } from "@app/ui";
-import { appleModels, phoneQuestions, samsungModels, xiaomiModels } from "../../../../constants/solicitation-form-questions";
+import { appleModels, phoneQuestions, samsungModels } from "../../../../constants/solicitation-form-questions";
 import { PhoneFormType } from "../../../../types/solicitation";
 import { useEffect, useState } from "react";
 import { FieldValues, useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { EditSolicitation } from "../../../../api/repair/solicitation/edit-solicitation";
 import Swal from "sweetalert2";
-import { SearchModelsInput } from "../../../../components/Repair/Solicitations/Create/Phone-Details/SearchModelsInput";
+import { SearchModelsInput } from "../Create/Phone-Details/SearchModelsInput";
 
 export function EditPhoneForm({ solicitationId, setEditMode }: { setEditMode: React.Dispatch<React.SetStateAction<boolean>>, solicitationId: string }) {
-  const { register, handleSubmit, watch } = useForm()
+  const { register, handleSubmit, watch, formState: { errors }, setValue } = useForm()
   const [brand, setBrand] = useState('')
   const [searchModel, setSearchModel] = useState('')
   const client = useQueryClient()
@@ -118,8 +118,8 @@ export function EditPhoneForm({ solicitationId, setEditMode }: { setEditMode: Re
               return <option value={item}>{item}</option>
             })}</select></Text>)}
 
-            {brand === 'samsung' && (<Text className="font-extrabold text-lg" as="h1">Modelo - <SearchModelsInput searchModel={searchModel} setSearchModel={setSearchModel} brand={'Samsung'} phoneModels={samsungModels} /></Text>)}
-            {brand === 'xiaomi' && (<Text className="font-extrabold text-lg" as="h1">Modelo - <SearchModelsInput searchModel={searchModel} setSearchModel={setSearchModel} brand={'Xiaomi'} phoneModels={xiaomiModels} /></Text>)}
+            {brand === 'samsung' && (<Text className="font-extrabold text-lg" as="h1">Modelo - <SearchModelsInput setValue={setValue} errors={errors} register={register} searchModel={searchModel} setSearchModel={setSearchModel} brand={'Samsung'} phoneModels={samsungModels} /></Text>)}
+            {brand === 'xiaomi' && (<Text className="font-extrabold text-lg" as="h1">Modelo - <SearchModelsInput setValue={setValue} errors={errors} register={register} searchModel={searchModel} setSearchModel={setSearchModel} brand={'Samsung'} phoneModels={samsungModels} /></Text>)}
             {brand === 'custom' && (<Text className="font-extrabold text-lg" as="h1">Modelo - <Input {...register('customModel')} placeholder="Digite o modelo do aparelho" /></Text>)}
 
             <Text className="font-extrabold text-lg" as="h1">{phoneQuestions[2].question} - <select {...register(phoneQuestions[2].questionId)} className="form-select rounded dark:bg-black form-select-lg text-dark dark:text-white">{phoneQuestions[2].options.map((item) => {

@@ -4,19 +4,20 @@ import { useQuery } from "@tanstack/react-query"
 import { FetchStoresInsideClientRadius } from "../../api/geolocation/fetch-stores-inside-client-radius"
 import { formatStoresInsideRadius } from "../../formaters/stores"
 import Swal from "sweetalert2"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 
 export function useGetStoresInsideClientRadius() {
   const [stores, setNearStores] = useState<StoresInsideRadiusType[] | []>([])
   const navigate = useNavigate()
-  const { isLoading: storesLoading, data } = useQuery({
+  const { isLoading: storesLoading, data, refetch } = useQuery({
     queryKey: ['fetch-stores-inside-client-radius'],
     queryFn: FetchStoresInsideClientRadius,
   })
-
+  const location = useLocation()
   useEffect(() => {
     if (!storesLoading && data) {
-      if (data.status === 'geolocationNotFound') {
+      console.log(data)
+      if (data.status === 'geolocationNotFound' && location.pathname !== '/solicitations/create') {
         Swal.fire({
           timer: 6000,
           showCloseButton: false,
@@ -28,11 +29,12 @@ export function useGetStoresInsideClientRadius() {
         }).then(() => {
           return navigate('/map/edit')
         })
-      } else {
+      }
+      if (data.length > 0) {
         setNearStores([...formatStoresInsideRadius(data)].sort((a, b) => b.profile.rating - a.profile.rating))
       }
     }
   }, [storesLoading, data])
 
-  return { storesLoading, stores, setNearStores }
+  return { storesLoading, stores, setNearStores, refetch }
 }

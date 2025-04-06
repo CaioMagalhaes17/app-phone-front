@@ -35,6 +35,7 @@ import { UserSignUp } from "../pages/Authentication";
 import { LandingHome } from "../pages/Landing/home";
 import { PublicRoutes } from "./PublicRoutes";
 import { StorePlans } from "../pages/Plans";
+import { LandingCreateSolicitation } from "../pages/Landing/solicitation";
 
 const ClientMapEdit = React.lazy(() => import("../pages/Map/Edit/client"))
 const DefaultLayout = React.lazy(() => import("../components/DefaultLayout"))
@@ -174,6 +175,10 @@ export const routes: RouteObject[] = [
       <PublicRoutes />
     ),
     children: [
+      {
+        path: '/landing/solicitations/create',
+        element: <LandingCreateSolicitation />
+      },
       {
         path: '/signup',
         element: <ClientSignUp />

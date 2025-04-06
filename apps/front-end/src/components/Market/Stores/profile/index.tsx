@@ -1,5 +1,4 @@
 import { Button, IconArrowBackward, IconStore } from "@app/ui";
-import { MainPainel } from "../../../Profiles/store/components/MainPanel";
 import { ProductsRow } from "../../Products/row/ProductsRow";
 import { StoreProfileType, StoreSocialsType } from "../../../../types/store-profile";
 import { useNavigate } from "react-router-dom";
@@ -17,7 +16,7 @@ export type MarketStoreProfileProps = {
   rows: ProductsRowType[]
   distance?: number
 }
-export function MarketStoreProfile({ distance, storeProfile, socials, isOwner, rows }: MarketStoreProfileProps) {
+export function MarketStoreProfile({ storeProfile, isOwner, rows }: MarketStoreProfileProps) {
   const navigate = useNavigate()
   return (
     <>
@@ -28,13 +27,7 @@ export function MarketStoreProfile({ distance, storeProfile, socials, isOwner, r
             (<Button onClick={() => navigate('/store-profile/' + storeProfile.id)} className=" ml-auto btn-primary mb-2 flex flex-row gap-2"><IconStore />Ver Perfil da loja</Button>)}
 
         </div>
-        <MainPainel
-          distance={distance}
-          name={storeProfile.name}
-          rating={storeProfile.rating}
-          storeProfileImg={storeProfile.profileImg}
-          storeSocials={socials}
-        />
+
         {rows.map((row, index) => {
           return (
             <>

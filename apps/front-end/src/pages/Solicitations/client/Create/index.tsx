@@ -35,14 +35,17 @@ export function CreateSolicitation() {
     <>
 
       <div className="p-4">
-        <div className="max-w-[1400px] mr-auto ml-auto">
-          <Text className="text-3xl text-dark dark:text-white flex flex-row gap-5 items-center font-bold" as="h1"><IconSend />Solicitar Conserto</Text>
-          <HSeparator className="mb-5 mt-2" />
-        </div>
+
         {isFinished ? (
           <AfterCreated solicitationId={solicitationId} />
         ) : (
-          <SolicitationForm createSolicitation={createSolicitation} />
+          <>
+            <div className="max-w-[1400px] mr-auto ml-auto">
+              <Text className="text-3xl text-dark dark:text-white flex flex-row gap-5 items-center font-bold" as="h1"><IconSend />Solicitar Conserto</Text>
+              <HSeparator className="mb-5 mt-2" />
+            </div>
+            <SolicitationForm isAuthenticated={true} createSolicitation={createSolicitation} />
+          </>
         )}
       </div>
     </>
