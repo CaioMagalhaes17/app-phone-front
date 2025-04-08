@@ -1,4 +1,4 @@
-import { Button, HSeparator, IconArrowBackward, IconDollarSignCircle, IconPhone, IconStore, IconX, Panel, Text, VSeparator } from "@app/ui";
+import { Button, HSeparator, IconArrowBackward, IconDollarSignCircle, IconStore, IconX, Panel, Text, VSeparator } from "@app/ui";
 import { formatPhoneBrand, getStatusColor } from "../../../../formaters/solicitations";
 import { Link, useNavigate } from "react-router-dom";
 import { ProblemFormComponent } from "./ProblemForm";
