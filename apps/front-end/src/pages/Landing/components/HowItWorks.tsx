@@ -7,11 +7,11 @@ export function HowItWorks() {
   return (
     <Panel className="dark:!bg-[#060818] font-bold flex flex-col items-center justify-center !shadow-none">
       <div id="howItWorks" className="mb-5 max-w-[1200px] w-full">
-        <Text className="text-4xl text-black dark:text-white flex flex-row gap-2" as="h1"><IconHelpCircle className="w-[40px] h-[40px]" /> Como funciona</Text>
+        <Text className="text-3xl text-dark dark:text-white flex flex-row gap-2" as="h1"><IconHelpCircle className="w-[40px] h-[40px]" /> Como funciona</Text>
 
         <div className="flex flex-col p-4">
-          <Text className="text-2xl" as="span">Nosso sistema foi criado para facilitar a busca pelo melhor orçamento para o conserto do seu celular. Com poucos passos, você encontra a melhor opção sem precisar sair de casa.</Text>
-          <Text onClick={() => setCloseClientTutorial(!closeClientTutorial)} className="cursor-pointer text-dark mt-5 form-select !bg-transparent !border-none dark:text-white text-2xl" as="h1">Para pessoas com defeito no celular</Text>
+          <Text className="text-xl" as="span">Nosso sistema foi criado para facilitar a busca pelo melhor orçamento para o conserto do seu celular. Com poucos passos, você encontra a melhor opção sem precisar sair de casa.</Text>
+          <Text onClick={() => setCloseClientTutorial(!closeClientTutorial)} className="cursor-pointer text-dark mt-5 form-select !bg-transparent !border-none dark:text-white text-xl" as="h1">Para pessoas com defeito no celular</Text>
           <div className={closeClientTutorial ? 'hidden' : ''}>
             <div className="ml-5 text-left mb-2">
               <Text className="text-dark dark:text-white text-lg" as="h1">1. Defina sua Localização:</Text>
@@ -30,7 +30,7 @@ export function HowItWorks() {
               <Text className="text-lg" as="span">Após o envio, lojas dentro da sua área de busca enviarão propostas com preços e prazos para o conserto. Compare as opções e escolha a que mais se encaixa nas suas necessidades.</Text>
             </div>
           </div>
-          <Text onClick={() => setCloseStoreTutorial(!closeStoreTutorial)} className="cursor-pointer text-dark mt-5 form-select !bg-transparent !border-none dark:text-white text-2xl" as="h1">Para lojas/assistências técnicas</Text>
+          <Text onClick={() => setCloseStoreTutorial(!closeStoreTutorial)} className="cursor-pointer text-dark mt-5 form-select !bg-transparent !border-none dark:text-white text-xl" as="h1">Para lojas/assistências técnicas</Text>
           <div className={closeStoreTutorial ? 'hidden' : ''}>
             <div className="ml-5 text-left mb-2">
               <Text className="text-dark dark:text-white text-lg" as="h1">1. Crie o Perfil da Sua Loja</Text>

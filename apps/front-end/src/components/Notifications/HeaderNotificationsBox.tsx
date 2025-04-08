@@ -17,6 +17,7 @@ export function HeaderNotificationsBox() {
     client.refetchQueries({ queryKey: ['get-budgets'] })
 
   }, [newNotifications])
+  console.log(notifications)
   return (
     <>
       <DropdownMenu onOpenChange={(s) => {

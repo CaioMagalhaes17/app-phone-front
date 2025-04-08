@@ -8,6 +8,7 @@ import { StoreContacts, StoreProfileType, StoreSocialsType } from "../../../type
 import { FeedbackType } from "../../../types/feedback";
 import { BudgetType } from "../../../types/budget";
 import { useNavigate } from "react-router-dom";
+import { ProblemTopicType } from "../../../types/solicitation";
 
 export function StoreProfileComponent({ storeInfos, contacts, socials, budgets, feedbacks, distance, services }: {
   distance?: number,
@@ -19,14 +20,15 @@ export function StoreProfileComponent({ storeInfos, contacts, socials, budgets, 
   contacts: StoreContacts
   socials: StoreSocialsType[] | null
   services: {
-    serviceImg: string;
-    serviceName: string;
-    topic: string
+    topicImg: string;
+    topicName: string;
+    topicId: ProblemTopicType;
   }[]
 }) {
   const navigate = useNavigate()
   return (
     <>
+
       <StoreProfileMain
         distance={distance}
         workingTime={storeInfos.workingTime}
@@ -53,10 +55,11 @@ export function StoreProfileComponent({ storeInfos, contacts, socials, budgets, 
       </div>
       <HSeparator />
 
-      <div className="gap-5 flex mt-10 flex-row max-w-[1242px] ml-auto mr-auto">
+      <div className="gap-5 flex mt-10 flex-row max-w-[1242px] ml-auto mr-auto sombra p-4 dark:bg-black rounded-xl">
         <StoreFeedbacks storeId={storeInfos.id} feedbacks={feedbacks} canShowRateStore={true} />
         <StoreProfileBudgets budgets={budgets} isOwner={false} />
       </div>
+
     </>
   )
 }

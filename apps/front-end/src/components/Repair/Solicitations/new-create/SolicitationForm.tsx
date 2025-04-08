@@ -65,6 +65,42 @@ export function SolicitationForm({ createSolicitation, isAuthenticated }: { isAu
         "glass-F": data['glass-F'],
       }
     }
+    if (searchParams.get('topic') === 'button') {
+      problemForm = {
+        "button-A": data['button-A'],
+        "button-B": data['button-B'],
+        "button-C": data['button-C'],
+        "button-D": data['button-D'],
+        "button-E": data['button-E'],
+      }
+    }
+    if (searchParams.get('topic') === 'connectors') {
+      problemForm = {
+        "connectors-A": data['connectors-A'],
+        "connectors-B": data['connectors-B'],
+        "connectors-C": data['connectors-C'],
+        "connectors-D": data['connectors-D'],
+        "connectors-E": data['connectors-E'],
+      }
+    }
+    if (searchParams.get('topic') === 'cam') {
+      problemForm = {
+        "cam-A": data['cam-A'],
+        "cam-B": data['cam-B'],
+        "cam-C": data['cam-C'],
+        "cam-D": data['cam-D'],
+        "cam-E": data['cam-E'],
+      }
+    }
+    if (searchParams.get('topic') === 'water') {
+      problemForm = {
+        "water-A": data['water-A'],
+        "water-B": data['water-B'],
+        "water-C": data['water-C'],
+        "water-D": data['water-D'],
+        "water-E": data['water-E'],
+      }
+    }
     if (!isAuthenticated) {
       const formData = {
         phoneForm: {

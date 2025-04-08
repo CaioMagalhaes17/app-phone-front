@@ -7,7 +7,7 @@ import { MapPinSvg } from "../../../constants/svg-icons";
 import { useGetStoresInsideClientRadius } from "../../../hooks/geolocation/useGetStoresInsideClientRadius";
 import { StoresInsideRadiusType } from "../../../types/stores";
 import { StoreServicesGrid } from "../../../components/Profiles/store/components/Services";
-import { pokemon } from "../../../constants/images";
+import { services } from "../../../constants/services";
 
 export function Home() {
   const navigate = useNavigate()
@@ -27,28 +27,7 @@ export function Home() {
   }
 
   const [selectedStore, setSelectedStore] = useState<StoresInsideRadiusType>()
-  const services = [
-    {
-      serviceImg: pokemon,
-      serviceName: 'Troca de Baterias',
-      topic: 'battery'
-    },
-    {
-      serviceImg: pokemon,
-      serviceName: 'Troca de Tela',
-      topic: 'display'
-    },
-    {
-      serviceImg: pokemon,
-      serviceName: 'Troca de Baterias',
-      topic: 'battery'
-    },
-    {
-      serviceImg: pokemon,
-      serviceName: 'Troca de Tela',
-      topic: 'display'
-    }
-  ]
+
   return (
     <>
       <div className="flex mt-10 justify-center ">

@@ -2,7 +2,7 @@ import { HSeparator, IconClock, IconPlus, IconSend, Panel, Text } from "@app/ui"
 import { Link } from "react-router-dom"
 import { BudgetType } from "../../../../types/budget"
 import { formatPhoneBrand, formatTopic } from "../../../../formaters/solicitations"
-import { batteryQuestions, displayQuestions } from "../../../../constants/solicitation-form-questions";
+import { batteryQuestions, displayQuestions, getTopicImg } from "../../../../constants/solicitation-form-questions";
 
 export interface StoreProfileBudgetProps {
   budgets: [] | BudgetType[]
@@ -27,7 +27,7 @@ export function StoreProfileBudgets({ budgets, isOwner }: StoreProfileBudgetProp
         {budgets.length > 0 ? (
           <>
             <div className="flex flex-row">
-              <Text className="text-2xl text-dark dark:text-white flex flex-row gap-2 items-center" as="h1"><IconClock />Ultimos Orçamentos</Text>
+              <Text className="text-2xl text-dark dark:text-white flex flex-row gap-2 items-center" as="h1"><IconClock />Últimos Orçamentos</Text>
               {isOwner ? <Link to="/store/budget/list" className="btn ml-auto btn-primary flex flex-row gap-2"><IconPlus /> Ver todas</Link>
                 : <Link to={`/solicitations/create/${budgets[0].storeProfile.id}`} className="btn ml-auto btn-primary flex flex-row gap-2"><IconSend /> Solicitar Conserto</Link>}
 
@@ -39,7 +39,7 @@ export function StoreProfileBudgets({ budgets, isOwner }: StoreProfileBudgetProp
                 <>
                   <div className="flex flex-row items-center gap-5">
                     <div className="flex flex-col gap-2 mt-5 ">
-                      <img width={'100px'} height={'100px'} src={'https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/390.png'} className="rounded-3xl" />
+                      <img width={'100px'} height={'100px'} src={getTopicImg(budget.solicitation.form.problemTopic)} className="rounded-3xl" />
                     </div>
                     <div className="flex flex-col">
                       <Text className="text-dark dark:text-white text-lg" as="span">{formatTopic(budget.solicitation.form.problemTopic)} - {formatPhoneBrand(budget.solicitation.form.phoneForm.brand)} {budget.solicitation.form.phoneForm.model}</Text>
@@ -57,7 +57,7 @@ export function StoreProfileBudgets({ budgets, isOwner }: StoreProfileBudgetProp
         ) : (
           <>
             <div className="flex flex-row">
-              <Text className="text-2xl text-dark dark:text-white" as="h1">Ultimos Orçamentos</Text>
+              <Text className="text-2xl text-dark dark:text-white" as="h1">Últimos Orçamentos</Text>
             </div>
             <HSeparator />
             <div className="mt-10 h-[200px]">

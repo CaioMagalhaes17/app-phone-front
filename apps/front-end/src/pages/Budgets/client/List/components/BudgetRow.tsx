@@ -1,4 +1,4 @@
-import { IconArrowBackward, Text } from "@app/ui";
+import { HSeparator, IconArrowBackward, Text } from "@app/ui";
 import { BudgetType } from "../../../../../types/budget";
 import { formatPhoneBrand } from "../../../../../formaters/solicitations";
 import { Link } from "react-router-dom";
@@ -38,7 +38,7 @@ export function BudgetRow({ budget, distance }: { distance: number, budget: Budg
 
         </div >
       </div >
-      <div className="border-b border-b-[#323b45] mt-5" />
+      <HSeparator />
     </>
   )
 }

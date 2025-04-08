@@ -8,7 +8,7 @@ export function FinalFormComponent({ deliveryPreference, timePreference, details
   deliveryPreference: string
   timePreference: string
   details: string
-  canEdit: boolean
+  canEdit?: boolean
   solicitationId: string
 }) {
   const [editMode, setEditMode] = useState(false)

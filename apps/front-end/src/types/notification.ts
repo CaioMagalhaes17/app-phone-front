@@ -8,7 +8,7 @@ export type NotificationType = {
   opts?: {
     budgetId?: string,
     storeProfileImg?: string,
-    solicitationId?: string
+    solicitationId: string
   }
 }
 
