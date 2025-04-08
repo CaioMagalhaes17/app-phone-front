@@ -8,16 +8,18 @@ export function SolicitationImages({ images }: { images: string[] }) {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <>
-      <Panel className="mt-10 font-bold ">
+      <Panel className="mt-5 font-bold ">
         <div className="flex flex-col">
           <div className="flex flex-row">
-            <Text className="text-black dark:text-white text-3xl" as="h1">Imagens do Celular:</Text>
+            <Text className="text-dark dark:text-white text-2xl" as="h1">Imagens do Celular:</Text>
             <div className="ml-auto"></div>
           </div>
           <div className="flex flex-row gap-10 mt-5">
-            {images.map((image, i) =>
-              (<img onClick={() => { setIndex(i); setIsOpen(true); }} key={i} src={image} className="w-full h-[200px] cursor-pointer" />)
-            )}
+            {
+              images.length > 0 ? images.map((image, i) =>
+                (<img onClick={() => { setIndex(i); setIsOpen(true); }} key={i} src={image} className="w-full h-[200px] cursor-pointer" />)
+              ) : 'Sem imagens anexadas'
+            }
           </div>
         </div>
       </Panel>

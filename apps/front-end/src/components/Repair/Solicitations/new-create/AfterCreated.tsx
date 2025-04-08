@@ -8,12 +8,12 @@ export function AfterCreated({ solicitationId }: { solicitationId: string }) {
   const { stores, storesLoading } = useGetStoresInsideClientRadius()
   return (
     <>
-      <div className="mb-5 max-w-[1200px] w-full ml-auto mr-auto font-bold ">
+      <div className="mb-5 max-w-[1100px] w-full ml-auto mr-auto font-bold ">
         <Panel className="p-4 ">
           <div className="mb-5 w-full">
-            <div className="flex flex-row items-center gap-10 justify-center text-center ">
+            <div className="flex flex-row items-center  justify-center text-center ">
               <div className="flex-col">
-                <h1 className="text-5xl font-extrabold text-success dark:text-success mb-4">
+                <h1 className="text-5xl font-extrabold text-green mb-4">
                   Solicitação de conserto enviada com sucesso!
                 </h1>
 
@@ -38,7 +38,7 @@ export function AfterCreated({ solicitationId }: { solicitationId: string }) {
                     disabled
                     style={{ backgroundColor: 'currentcolor' }}
                   />
-                  <p onClick={() => navigate('/configurations')} className="text-lg text-dark dark:text-white-dark font-extrabold max-w-2xl mb-2">
+                  <p onClick={() => navigate('/configurations')} className="text-lg text-dark dark:text-white-dark font-extrabold max-w-xl mb-2">
                     Você pode escolher por <span className="text-primary hover:underline cursor-pointer">Receber notificações pelo WhatsApp.</span>
                   </p>
                 </label>
@@ -52,7 +52,7 @@ export function AfterCreated({ solicitationId }: { solicitationId: string }) {
                     style={{ backgroundColor: 'currentcolor' }}
                   />
                   <p onClick={() => navigate('/budgets/list')} className="text-lg text-dark dark:text-white-dark font-extrabold max-w-2xl mb-2">
-                    Acesse os orçamentos em <span className="cursor-pointer hover:underline text-primary">Reparo de celular {`>`} Orçamentos recebidos</span>
+                    Acesse os orçamentos recebidos em <span className="cursor-pointer hover:underline text-primary">Reparo de celular {`>`} Orçamentos recebidos</span>
                   </p>
                 </label>
 
@@ -76,23 +76,24 @@ export function AfterCreated({ solicitationId }: { solicitationId: string }) {
 
           </div>
         </Panel>
+        {stores && stores.length > 0 && !storesLoading ?
+          (
+            <>
+              <StoresRow title="Lojas Abertas Mais Próximas" stores={stores} />
+            </>
+          ) : (
+            <div className="font-extrabold flex flex-col gap-5 mt-10">
+              <Text className="text-center text-3xl" as="h1">Nenhuma Loja Próxima Encontrada</Text>
+              <Text as="h2" onClick={() => navigate('/map')} className="cursor-pointer hover:underline text-xl ml-auto mr-auto flex flex-row">Tente alterar o raio de pesquisa pelo menu
+                <span className="flex flex-row gap-2 ml-5">
+                  <IconStreetMap /> Mapa
+                </span>
+              </Text>
+            </div>
+          )
+        }
       </div>
-      {stores && stores.length > 0 && !storesLoading ?
-        (
-          <>
-            <StoresRow title="Lojas Abertas Mais Próximas" stores={stores} />
-          </>
-        ) : (
-          <div className="font-extrabold flex flex-col gap-5 mt-10">
-            <Text className="text-center text-3xl" as="h1">Nenhuma Loja Próxima Encontrada</Text>
-            <Text as="h2" onClick={() => navigate('/map')} className="cursor-pointer hover:underline text-xl ml-auto mr-auto flex flex-row">Tente alterar o raio de pesquisa pelo menu
-              <span className="flex flex-row gap-2 ml-5">
-                <IconStreetMap /> Mapa
-              </span>
-            </Text>
-          </div>
-        )
-      }
+
     </>
   )
 }

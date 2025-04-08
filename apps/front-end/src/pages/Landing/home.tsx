@@ -5,33 +5,12 @@ import { HowItWorks } from "./components/HowItWorks";
 import PricingTable from "./components/Plans";
 import { About } from "./components/About";
 import { StoreServicesGrid } from "../../components/Profiles/store/components/Services";
-import { pokemon } from "../../constants/images";
 import { scrollToSection } from "../../utils/scroll-to";
+import { services } from "../../constants/services";
 
 export function LandingHome() {
   const navigate = useNavigate()
-  const services = [
-    {
-      serviceImg: pokemon,
-      serviceName: 'Troca de Baterias',
-      topic: 'battery'
-    },
-    {
-      serviceImg: pokemon,
-      serviceName: 'Troca de Tela',
-      topic: 'display'
-    },
-    {
-      serviceImg: pokemon,
-      serviceName: 'Troca de vidro',
-      topic: 'glass'
-    },
-    {
-      serviceImg: pokemon,
-      serviceName: 'Troca de Tela',
-      topic: 'display'
-    }
-  ]
+
   return (
     <>
       <DefaultLanding>

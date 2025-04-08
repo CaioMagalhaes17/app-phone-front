@@ -5,7 +5,7 @@ import { GetSolicitation } from "../../api/repair/solicitation/get-solicitation"
 export function useGetSolicitationById(id: string) {
 
   const { data: solicitationData, isLoading } = useQuery<Solicitation>({
-    queryKey: ['get-solicitation'],
+    queryKey: ['get-solicitation', id],
     queryFn: () => GetSolicitation(id)
   })
 

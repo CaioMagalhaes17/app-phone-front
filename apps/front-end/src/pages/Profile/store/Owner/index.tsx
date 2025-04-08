@@ -7,7 +7,7 @@ import { useGetStoreFeedbacks } from "../../../../hooks/profile/useGetStoreFeedb
 import { useGetBudgets } from "../../../../hooks/budgets/useGetBudgets"
 
 import { StoreProfileComponent } from "../../../../components/Profiles/store"
-import { pokemon } from "../../../../constants/images"
+import { services } from "../../../../constants/services"
 
 export function StoreProfileOwner() {
   const navigate = useNavigate()
@@ -17,28 +17,7 @@ export function StoreProfileOwner() {
   const { socials } = useGetStoreSocials()
   const { feedbacks } = useGetStoreFeedbacks(storeInfos.id, { page: '1', limit: '1' })
   const { budgets, isLoading } = useGetBudgets({ page: '1', limit: '3' })
-  const services = [
-    {
-      serviceImg: pokemon,
-      serviceName: 'Troca de Baterias',
-      topic: 'battery'
-    },
-    {
-      serviceImg: pokemon,
-      serviceName: 'Troca de Tela',
-      topic: 'display'
-    },
-    {
-      serviceImg: pokemon,
-      serviceName: 'Troca de Baterias',
-      topic: 'battery'
-    },
-    {
-      serviceImg: pokemon,
-      serviceName: 'Troca de Tela',
-      topic: 'display'
-    }
-  ]
+
   return (
     <>
       <ul className="flex font-semibold flex-row whitespace-nowrap overflow-y-auto">

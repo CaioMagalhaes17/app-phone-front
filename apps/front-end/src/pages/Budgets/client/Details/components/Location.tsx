@@ -13,7 +13,7 @@ export function BudgetDetailsLocation({ budget }: { budget: BudgetType }) {
     <>
       {storeProfile && contacts ? (
         <>
-          <div className="w-[1340px] ml-auto mr-auto">
+          <div className="w-[1000px] ml-auto mr-auto">
             <StoreProfileLocation
               lat={storeProfile.location.latitude}
               lng={storeProfile.location.longitude}

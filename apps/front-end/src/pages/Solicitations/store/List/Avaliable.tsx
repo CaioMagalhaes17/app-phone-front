@@ -41,7 +41,7 @@ export function AvaliableSolicitations() {
       {!isLoading && avaliableSolicitations ? (
         <>
           <div className="flex justify-center">
-            <Panel className="font-bold  max-w-[1200px] sombra mt-5 p-4 rounded-xl w-full">
+            <Panel className="font-bold  max-w-[900px]  mt-5  rounded-xl w-full">
               <div className="flex flex-row">
                 <Text className="text-3xl text-dark dark:text-white flex flex-row gap-5 items-center" as="h1"><IconBill />Defeitos esperando retorno</Text>
                 <div className="ml-auto" />

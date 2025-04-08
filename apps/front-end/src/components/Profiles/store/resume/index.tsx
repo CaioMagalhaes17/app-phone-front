@@ -8,8 +8,8 @@ export function StoreResume({ storeProfile, showMarket, distance }: { distance: 
   return (
     <>
       <Panel className="min-w-[300px]">
-        <Text className="text-black dark:text-white text-4xl font-bold flex flex-row gap-5 items-center" as="h1"><IconStore className="w-[30px] h-[30px]" />Loja</Text>
-        <HSeparator />
+        <Text className="text-dark dark:text-white text-3xl font-bold flex flex-row gap-5 items-center" as="h1"><IconStore className="w-[30px] h-[30px]" />Loja</Text>
+        <HSeparator className="mt-6" />
         <div className="font-bold flex flex-row gap-5 mt-5">
           <div className="w-[100px] max-h-[80px] ">
             <img width="100" height="100" src={storeProfile.profileImg} className="rounded-3xl" />

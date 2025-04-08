@@ -22,7 +22,7 @@ export function StoresRow({ title, stores }: ProductsRowProps) {
   return (
     <>
       <Panel>
-        <Text as="h1" className="dark:text-white text-dark text-left text-3xl font-bold flex flex-row items-center gap-5 ml-[100px]"><IconStore />{title}</Text>
+        <Text as="h1" className="dark:text-white text-dark text-left text-2xl font-bold flex flex-row items-center gap-5 "><IconStore />{title}</Text>
         <HSeparator className="" />
         <div className="w-full p-4 font-extrabold">
           <Panel className="p-4 flex flex-row w-full justify-center gap-5">
@@ -33,8 +33,8 @@ export function StoresRow({ title, stores }: ProductsRowProps) {
               <CarouselContent>
                 {stores.map((store, index) => (
                   <>
-                    <CarouselItem key={index} className="basis-1/4">
-                      <StoreItem onClick={() => navigate('/market/store/' + store.profile.id)} distance={store.distance} name={store.profile.name} profileImg={store.profile.profileImg} rating={store.profile.rating} />
+                    <CarouselItem key={index} className="basis-1/3">
+                      <StoreItem onClick={() => navigate('/store/' + store.profile.id)} distance={store.distance} name={store.profile.name} profileImg={store.profile.profileImg} rating={store.profile.rating} />
                     </CarouselItem >
                     <VSeparator className="h-[100px]" />
                   </>

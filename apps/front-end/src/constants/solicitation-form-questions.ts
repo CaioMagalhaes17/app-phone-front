@@ -1,4 +1,5 @@
-import { ProblemTopicType } from "../types/solicitation"
+import { ProblemFormType, ProblemTopicType } from "../types/solicitation"
+import { batteryImg, brokenScreenImg, cam, connectors, glass, pokemon, water } from "./images"
 
 export const glassQuestions = [
   {
@@ -98,6 +99,173 @@ export const glassQuestions = [
       {
         optionId: 'glass-F-3',
         text: 'Não sei'
+      },
+    ]
+  }
+]
+
+export const waterQuestions = [
+
+  {
+    questionId: 'water-A',
+    question: 'Qual problema se encaixa com o seu?',
+    options: [
+      {
+        optionId: 'water-A-1',
+        text: 'Meu celular caiu na piscina, balde ou vaso sanitário'
+      },
+      {
+        optionId: 'water-A-2',
+        text: ' Meu celular molhou com café, chá ou outra bebida quente'
+      },
+      {
+        optionId: 'water-A-3',
+        text: 'Outro tipo de contato com água ou líquido (especificar no campo detalhes)'
+      },
+    ]
+  },
+  {
+    questionId: 'water-B',
+    question: 'Quando o problema começou?',
+    options: [
+      {
+        optionId: 'water-B-1',
+        text: 'Hoje'
+      },
+      {
+        optionId: 'water-B-2',
+        text: 'Menos de uma semana'
+      },
+      {
+        optionId: 'water-B-3',
+        text: 'Mais de uma semana'
+      },
+    ]
+  },
+
+
+
+  {
+    questionId: 'water-C',
+    question: 'O celular está ligando?',
+    options: [
+      {
+        optionId: 'water-C-1',
+        text: 'Sim'
+      },
+      {
+        optionId: 'water-C-2',
+        text: 'Não'
+      },
+    ]
+  },
+  {
+    questionId: 'water-D',
+    question: 'O problema com líquio afeta outras funções do celular?',
+    options: [
+      {
+        optionId: 'water-D-1',
+        text: 'Sim'
+      },
+      {
+        optionId: 'water-D-2',
+        text: 'Não'
+      },
+    ]
+  },
+  {
+    questionId: 'water-E',
+    question: 'O celular já sofreu o mesmo problema anteriormente?',
+    options: [
+      {
+        optionId: 'water-E-1',
+        text: 'Sim'
+      },
+      {
+        optionId: 'water-E-2',
+        text: 'Não'
+      },
+    ]
+  }
+]
+
+export const camQuestions = [
+
+  {
+    questionId: 'cam-A',
+    question: 'Em qual câmera está o defeito',
+    options: [
+      {
+        optionId: 'cam-A-1',
+        text: 'Frontal'
+      },
+      {
+        optionId: 'cam-A-2',
+        text: 'Traseira'
+      },
+      {
+        optionId: 'cam-A-3',
+        text: 'Frontal e traseira'
+      },
+    ]
+  },
+  {
+    questionId: 'cam-B',
+    question: 'Qual problema sobre câmera se encaixa com o seu?',
+    options: [
+      {
+        optionId: 'cam-B-1',
+        text: 'A câmera está arranhada/manchada'
+      },
+      {
+        optionId: 'cam-B-2',
+        text: 'A câmera está desfocada'
+      },
+      {
+        optionId: 'cam-B-3',
+        text: 'A câmera não funciona'
+      },
+    ]
+  },
+  {
+    questionId: 'cam-C',
+    question: 'O celular está ligando?',
+    options: [
+      {
+        optionId: 'cam-C-1',
+        text: 'Sim'
+      },
+      {
+        optionId: 'cam-C-2',
+        text: 'Não'
+      },
+    ]
+  },
+  {
+    questionId: 'cam-D',
+    question: 'O problema da câmera afeta outras funções do celular?',
+    options: [
+      {
+        optionId: 'cam-D-1',
+        text: 'Sim'
+      },
+      {
+        optionId: 'cam-D-2',
+        text: 'Não'
+      },
+    ]
+  },
+  {
+    questionId: 'cam-E',
+    question: 'A câmera já foi trocada anteriormente?',
+    options: [
+      {
+        optionId: 'cam-E-1',
+        text: 'Sim'
+      },
+      {
+        optionId: 'cam-E-2',
+        text: 'Não'
       },
     ]
   }
@@ -328,6 +496,168 @@ export const displayQuestions = [
   },
 ]
 
+export const buttonQuestions = [
+  {
+    questionId: 'button-A',
+    question: 'Qual problema sobre botões do celular se encaixa com o seu?',
+    options: [
+      {
+        optionId: 'button-A-1',
+        text: 'O botão de ligar está com defeito'
+      },
+      {
+        optionId: 'button-A-2',
+        text: 'Os botões de volume estão com defeito'
+      },
+      {
+        optionId: 'button-A-3',
+        text: 'Outro botão com defeito'
+      },
+    ]
+  },
+  {
+    questionId: 'button-B',
+    question: 'Quando o problema começou?',
+    options: [
+      {
+        optionId: 'button-B-1',
+        text: 'Hoje'
+      },
+      {
+        optionId: 'button-B-2',
+        text: 'Menos de uma semana'
+      },
+      {
+        optionId: 'button-B-3',
+        text: 'Mais de uma semana'
+      },
+    ]
+  },
+  {
+    questionId: 'button-C',
+    question: 'O celular está ligando?',
+    options: [
+      {
+        optionId: 'button-C-1',
+        text: 'Sim'
+      },
+      {
+        optionId: 'button-C-2',
+        text: 'Não'
+      },
+    ]
+  },
+  {
+    questionId: 'button-D',
+    question: 'O problema dos botões afetam outras funções do celular?',
+    options: [
+      {
+        optionId: 'button-D-1',
+        text: 'Sim'
+      },
+      {
+        optionId: 'button-D-2',
+        text: 'Não'
+      },
+    ]
+  },
+  {
+    questionId: 'button-E',
+    question: 'Os botões já foram trocados anteriormente?',
+    options: [
+      {
+        optionId: 'button-E-1',
+        text: 'Sim'
+      },
+      {
+        optionId: 'button-E-2',
+        text: 'Não'
+      },
+    ]
+  }
+]
+
+export const connectorsQuestions = [
+  {
+    questionId: 'connectors-A',
+    question: 'Qual problema sobre entradas e áudio se encaixa com o seu?',
+    options: [
+      {
+        optionId: 'connectors-A-1',
+        text: 'A entrada de carregador está com defeito'
+      },
+      {
+        optionId: 'connectors-A-2',
+        text: 'A entrada de fone está com defeito'
+      },
+      {
+        optionId: 'connectors-A-3',
+        text: 'O microfone ou alto falante está com defeito'
+      },
+    ]
+  },
+  {
+    questionId: 'connectors-B',
+    question: 'Quando o problema começou?',
+    options: [
+      {
+        optionId: 'connectors-B-1',
+        text: 'Hoje'
+      },
+      {
+        optionId: 'connectors-B-2',
+        text: 'Menos de uma semana'
+      },
+      {
+        optionId: 'connectors-A-3',
+        text: 'Mais de uma semana'
+      },
+    ]
+  },
+  {
+    questionId: 'connectors-C',
+    question: 'O celular está ligando?',
+    options: [
+      {
+        optionId: 'connectors-C-1',
+        text: 'Sim'
+      },
+      {
+        optionId: 'connectors-C-2',
+        text: 'Não'
+      },
+    ]
+  },
+  {
+    questionId: 'connectors-D',
+    question: 'O problema das entradas e aúdio afetam outras funções do celular?',
+    options: [
+      {
+        optionId: 'connectors-D-1',
+        text: 'Sim'
+      },
+      {
+        optionId: 'connectors-D-2',
+        text: 'Não'
+      },
+    ]
+  },
+  {
+    questionId: 'connectors-E',
+    question: 'Alguma entrada/alto falante já foram trocados anteriormente?',
+    options: [
+      {
+        optionId: 'connectors-E-1',
+        text: 'Sim'
+      },
+      {
+        optionId: 'connectors-E-2',
+        text: 'Não'
+      },
+    ]
+  }
+]
+
 export type PhoneQuestionsType = {
   questionId: 'brand' | 'model' | 'previousRepair' | 'originalHardware' | 'usageTime',
   question: string, options: { optionId: string, text: string }[]
@@ -421,7 +751,7 @@ export const phoneQuestions: PhoneQuestionsType = [
   },
 ]
 
-export const avaliableTopics: ProblemTopicType[] = ['battery', 'display']
+export const avaliableTopics: ProblemTopicType[] = ['battery', 'display', 'glass', 'button', 'connectors', 'cam', 'water']
 
 export const finalQuestions = [
   {
@@ -562,6 +892,11 @@ export function getQuestionsByTopic(topic: string) {
   if (topic === 'battery') return batteryQuestions
   if (topic === 'display') return displayQuestions
   if (topic === 'glass') return glassQuestions
+  if (topic === 'button') return buttonQuestions
+  if (topic === 'connectors') return connectorsQuestions
+  if (topic === 'cam') return camQuestions
+  if (topic === 'water') return waterQuestions
+
   return displayQuestions
 }
 
@@ -569,36 +904,23 @@ export function getTopicFormatted(topic: string) {
   if (topic === 'battery') return 'Bateria'
   if (topic === 'display') return 'Tela'
   if (topic === 'glass') return 'Vidro do celular'
+  if (topic === 'button') return 'Botões do celular'
+  if (topic === 'connectors') return 'Entradas e áudio'
+  if (topic === 'cam') return 'Câmera'
+  if (topic === 'water') return 'Contato com Água/Líquido'
 }
 
-type DisplayFormType = {
-  'display-A': 'display-A-1' | 'display-A-2' | 'display-A-3' | 'display-A-4'
-  'display-B': 'display-B-1' | 'display-B-2' | 'display-B-3'
-  'display-C': 'display-C-1' | 'display-C-2' | 'display-C-3'
-  'display-D': 'display-D-1' | 'display-D-2' | 'display-D-3'
-  'display-E': 'display-E-1' | 'display-E-2' | 'display-E-3'
-  'display-F': 'display-F-1' | 'display-F-2' | 'display-F-3'
+export function getTopicImg(topic: string) {
+  if (topic === 'battery') return batteryImg
+  if (topic === 'display') return brokenScreenImg
+  if (topic === 'glass') return glass
+  if (topic === 'button') return pokemon
+  if (topic === 'connectors') return connectors
+  if (topic === 'cam') return cam
+  if (topic === 'water') return water
 }
 
-export type BatteryFormType = {
-  "battery-A": "battery-A-1" | "battery-A-2" | "battery-A-3" | "battery-A-4"
-  "battery-B": "battery-B-1" | "battery-B-2" | "battery-B-3"
-  "battery-C": "battery-C-1" | "battery-C-2" | "battery-C-3"
-  "battery-D": "battery-D-1" | "battery-D-2" | "battery-D-3"
-  "battery-E": "battery-E-1" | "battery-E-2" | "battery-E-3"
-  "battery-F": "battery-F-1" | "battery-F-2" | "battery-F-3"
-}
-
-export type GlassFormType = {
-  "glass-A": "glass-A-1" | "glass-A-2" | "glass-A-3"
-  "glass-B": "glass-B-1" | "glass-B-2" | "glass-B-3"
-  "glass-C": "glass-C-1" | "glass-C-2"
-  "glass-D": "glass-D-1" | "glass-D-2"
-  "glass-E": "glass-E-1" | "glass-E-2" | "glass-E-3"
-  "glass-F": "glass-F-1" | "glass-F-2" | "glass-F-3"
-}
-
-export function getStepTwoAnswersByForm(topic: string, questionsObj: DisplayFormType | BatteryFormType | GlassFormType) {
+export function getStepTwoAnswersByForm(topic: string, questionsObj: ProblemFormType) {
   if (questionsObj) {
     if (topic === 'battery' && 'battery-A' in questionsObj) {
       const answersFormated = [
@@ -679,11 +1001,111 @@ export function getStepTwoAnswersByForm(topic: string, questionsObj: DisplayForm
         {
           question: glassQuestions[4].question,
           answer: (glassQuestions[4].options.filter((option) => option.optionId === questionsObj['glass-E']))[0].text
+        }
+      ]
+      return answersFormated
+    }
+    if (topic === 'button' && 'button-A' in questionsObj) {
+
+      const answersFormated = [
+        {
+          question: buttonQuestions[0].question,
+          answer: (buttonQuestions[0].options.filter((option) => option.optionId === questionsObj['button-A']))[0].text
         },
         {
-          question: glassQuestions[5].question,
-          answer: (glassQuestions[5].options.filter((option) => option.optionId === questionsObj['glass-F']))[0].text
-        }
+          question: buttonQuestions[1].question,
+          answer: (buttonQuestions[1].options.filter((option) => option.optionId === questionsObj['button-B']))[0].text
+        },
+        {
+          question: buttonQuestions[2].question,
+          answer: (buttonQuestions[2].options.filter((option) => option.optionId === questionsObj['button-C']))[0].text
+        },
+        {
+          question: buttonQuestions[3].question,
+          answer: (buttonQuestions[3].options.filter((option) => option.optionId === questionsObj['button-D']))[0].text
+        },
+        {
+          question: buttonQuestions[4].question,
+          answer: (buttonQuestions[4].options.filter((option) => option.optionId === questionsObj['button-E']))[0].text
+        },
+      ]
+      return answersFormated
+    }
+    if (topic === 'connectors' && 'connectors-A' in questionsObj) {
+
+      const answersFormated = [
+        {
+          question: connectorsQuestions[0].question,
+          answer: (connectorsQuestions[0].options.filter((option) => option.optionId === questionsObj['connectors-A']))[0].text
+        },
+        {
+          question: connectorsQuestions[1].question,
+          answer: (connectorsQuestions[1].options.filter((option) => option.optionId === questionsObj['connectors-B']))[0].text
+        },
+        {
+          question: connectorsQuestions[2].question,
+          answer: (connectorsQuestions[2].options.filter((option) => option.optionId === questionsObj['connectors-C']))[0].text
+        },
+        {
+          question: connectorsQuestions[3].question,
+          answer: (connectorsQuestions[3].options.filter((option) => option.optionId === questionsObj['connectors-D']))[0].text
+        },
+        {
+          question: connectorsQuestions[4].question,
+          answer: (connectorsQuestions[4].options.filter((option) => option.optionId === questionsObj['connectors-E']))[0].text
+        },
+      ]
+      return answersFormated
+    }
+    if (topic === 'cam' && 'cam-A' in questionsObj) {
+
+      const answersFormated = [
+        {
+          question: camQuestions[0].question,
+          answer: (camQuestions[0].options.filter((option) => option.optionId === questionsObj['cam-A']))[0].text
+        },
+        {
+          question: camQuestions[1].question,
+          answer: (camQuestions[1].options.filter((option) => option.optionId === questionsObj['cam-B']))[0].text
+        },
+        {
+          question: camQuestions[2].question,
+          answer: (camQuestions[2].options.filter((option) => option.optionId === questionsObj['cam-C']))[0].text
+        },
+        {
+          question: camQuestions[3].question,
+          answer: (camQuestions[3].options.filter((option) => option.optionId === questionsObj['cam-D']))[0].text
+        },
+        {
+          question: camQuestions[4].question,
+          answer: (camQuestions[4].options.filter((option) => option.optionId === questionsObj['cam-E']))[0].text
+        },
+      ]
+      return answersFormated
+    }
+    if (topic === 'water' && 'water-A' in questionsObj) {
+
+      const answersFormated = [
+        {
+          question: waterQuestions[0].question,
+          answer: (waterQuestions[0].options.filter((option) => option.optionId === questionsObj['water-A']))[0].text
+        },
+        {
+          question: waterQuestions[1].question,
+          answer: (waterQuestions[1].options.filter((option) => option.optionId === questionsObj['water-B']))[0].text
+        },
+        {
+          question: waterQuestions[2].question,
+          answer: (waterQuestions[2].options.filter((option) => option.optionId === questionsObj['water-C']))[0].text
+        },
+        {
+          question: waterQuestions[3].question,
+          answer: (waterQuestions[3].options.filter((option) => option.optionId === questionsObj['water-D']))[0].text
+        },
+        {
+          question: waterQuestions[4].question,
+          answer: (waterQuestions[4].options.filter((option) => option.optionId === questionsObj['water-E']))[0].text
+        },
       ]
       return answersFormated
     }

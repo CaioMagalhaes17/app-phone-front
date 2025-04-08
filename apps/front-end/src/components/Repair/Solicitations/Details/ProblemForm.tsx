@@ -5,7 +5,7 @@ import { getStepTwoAnswersByForm } from "../../../../constants/solicitation-form
 import { getAnswerColor } from "../../../../formaters/solicitations";
 import { EditProblemForm } from "./EditProblemForm";
 
-export function ProblemFormComponent({ topic, problemForm, canEdit, solicitationId }: { solicitationId: string, canEdit: boolean, problemForm: ProblemFormType, topic: string }) {
+export function ProblemFormComponent({ topic, problemForm, canEdit, solicitationId }: { solicitationId: string, canEdit?: boolean, problemForm: ProblemFormType, topic: string }) {
   const [formattedProblem, setFormattedProblem] = useState<{ question: string, answer: string }[]>([])
   const [editMode, setEditMode] = useState(false)
   useEffect(() => {
@@ -22,12 +22,11 @@ export function ProblemFormComponent({ topic, problemForm, canEdit, solicitation
               {canEdit && (<Button onClick={() => setEditMode(true)} className="btn-primary"><IconPencil /></Button>)}
             </div>
             <div className="flex flex-col mt-6 gap-1 mb-5 mt-10">
-              <Text className="text-dark dark:text-white text-lg" as="h1">Defeito - <span className="text-white-dark">{formattedProblem[0].answer}</span></Text>
-              <Text className="text-dark dark:text-white text-lg" as="h1">{formattedProblem[1].question} - <span className={`text-white-dark`}>{formattedProblem[1].answer}</span></Text>
-              <Text className="text-dark dark:text-white text-lg" as="h1">{formattedProblem[2].question} - <span className={getAnswerColor(formattedProblem[2].answer)}>{formattedProblem[2].answer}</span></Text>
-              <Text className="text-dark dark:text-white text-lg" as="h1">{formattedProblem[3].question} - <span className={getAnswerColor(formattedProblem[3].answer)}>{formattedProblem[3].answer}</span></Text>
-              <Text className="text-dark dark:text-white text-lg" as="h1">{formattedProblem[4].question} - <span className={getAnswerColor(formattedProblem[4].answer)}>{formattedProblem[4].answer}</span></Text>
-              <Text className="text-dark dark:text-white text-lg" as="h1">{formattedProblem[5].question} - <span className={getAnswerColor(formattedProblem[5].answer)}>{formattedProblem[5].answer}</span></Text>
+              {formattedProblem.map((item, i) => (
+                <>
+                  <Text className="text-dark dark:text-white text-lg" as="h1">{i === 0 ? 'Defeito' : item.question} - <span className={getAnswerColor(item.answer)}>{item.answer}</span></Text>
+                </>
+              ))}
             </div>
           </Panel>
         ) : (

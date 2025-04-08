@@ -1,4 +1,4 @@
-import { Button, IconMenu, IconSend, IconStreetMap, Header as UIHeader, VSeparator } from "@app/ui";
+import { Button, IconDollarSignCircle, IconMenu, IconSend, IconStreetMap, Header as UIHeader, VSeparator } from "@app/ui";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, IconLogout, IconSettings } from "@app/ui"
 import useStore from "../../state";
 import { Text } from "@app/ui"
@@ -48,6 +48,10 @@ export function ClientHeader() {
           <Button onClick={() => navigate('/map')} className="btn-outline-primary border-none flex flex-row gap-2">
             <IconStreetMap />
             Procurar por lojas próximas
+          </Button>
+          <Button onClick={() => navigate('/budgets/list')} className="btn-outline-primary border-none flex flex-row gap-2">
+            <IconDollarSignCircle />
+            Orçamentos
           </Button>
           <ChooseTheme />
           <div className="ml-5" />
