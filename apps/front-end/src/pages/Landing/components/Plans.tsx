@@ -32,7 +32,7 @@ export default function PricingTable() {
   ];
 
   return (
-    <div id="plans" className="flex font-bold flex-col items-center justify-center p-6">
+    <div id="plans" className="flex font-bold flex-col items-center justify-center p-4">
       <h2 className="text-2xl text-dark dark:text-white mb-8 flex flex-row gap-5 items-center"><IconVerified />Planos para Lojas/Assistências técnicas</h2>
       <div className="grid md:grid-cols-3 gap-6">
         {plans.map((plan, index) => (

@@ -31,6 +31,8 @@ type StateManager = {
   load: () => Promise<void>
   baseBackendUrl: string,
   setBaseBackendUrl: (baseUrl: string) => void
+  setIsMobile: (isMobile: boolean) => void
+  isMobile: boolean
 }
 
 type StoreInfos = {
@@ -151,6 +153,12 @@ const useStore = create<StateManager>((set, get) => {
     setBaseBackendUrl: (baseBackendUrl: string) => {
       set({
         baseBackendUrl
+      })
+    },
+    isMobile: false,
+    setIsMobile: (isMobile: boolean) => {
+      set({
+        isMobile
       })
     }
   }

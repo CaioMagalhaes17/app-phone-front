@@ -6,10 +6,14 @@ import useStore from './state'
 
 
 function App() {
-  const { load } = useStore()
+  const { load, setIsMobile } = useStore()
 
   useEffect(() => {
     load()
+    console.log(window.outerWidth)
+    if (window.outerWidth <= 768) {
+      setIsMobile(true)
+    }
   }, [load])
 
   return (

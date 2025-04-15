@@ -2,8 +2,8 @@ import { IconHelpCircle, Panel, Text } from "@app/ui";
 import { useState } from "react";
 
 export function HowItWorks() {
-  const [closeClientTutorial, setCloseClientTutorial] = useState(false)
-  const [closeStoreTutorial, setCloseStoreTutorial] = useState(false)
+  const [closeClientTutorial, setCloseClientTutorial] = useState(true)
+  const [closeStoreTutorial, setCloseStoreTutorial] = useState(true)
   return (
     <Panel className="dark:!bg-[#060818] font-bold flex flex-col items-center justify-center !shadow-none">
       <div id="howItWorks" className="mb-5 max-w-[1200px] w-full">
