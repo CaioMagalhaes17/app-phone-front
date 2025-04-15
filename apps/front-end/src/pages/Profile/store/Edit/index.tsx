@@ -155,7 +155,8 @@ export function EditStoreProfile() {
                   </div>
                 </div>
                 <div className="mt-10 mb-10">
-                  <div className="flex text-sm flex-row flex-wrap gap-2 text-white">
+                  Características
+                  <div className="flex mt-2 text-sm flex-row flex-wrap gap-2 text-white">
                     {storeInfos.tags.map((tag) => {
                       const tagName = storeTags.filter((item) => item.id === tag)[0]
                       return (

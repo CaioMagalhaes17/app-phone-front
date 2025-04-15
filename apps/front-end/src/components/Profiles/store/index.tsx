@@ -37,6 +37,7 @@ export function StoreProfileComponent({ storeInfos, contacts, socials, budgets, 
         rating={storeInfos.rating}
         storeProfileImg={storeInfos.profileImg}
         wppNum={contacts.wppNum}
+        storeSocials={socials}
       />
       <div className="mb-[80px]" />
       <StoreServicesGrid services={services} title="Contratar serviço" onServiceClick={(topic) => navigate('/solicitations/create?topic=' + topic)} />
@@ -55,7 +56,7 @@ export function StoreProfileComponent({ storeInfos, contacts, socials, budgets, 
       </div>
       <HSeparator />
 
-      <div className="gap-5 flex mt-10 flex-row max-w-[1242px] ml-auto mr-auto sombra p-4 dark:bg-black rounded-xl">
+      <div className="gap-5 flex mt-10 flex-row max-w-[1242px] ml-auto mr-auto  p-4 dark:bg-black rounded-xl">
         <StoreFeedbacks storeId={storeInfos.id} feedbacks={feedbacks} canShowRateStore={true} />
         <StoreProfileBudgets budgets={budgets} isOwner={false} />
       </div>

@@ -34,7 +34,7 @@ export function ClientHeader() {
       <div className="h-[80px] shadow-md relative flex w-full items-center px-5 py-2.5 dark:bg-black dark:border-b-[#323b45]">
         <button onClick={() => onMenuClick()} className="mr-5 text-black dark:text-[#c4c4c4]"><IconMenu /></button>
         <VSeparator />
-        <div className={`horizontal-logo flex justify-between items-center mr-2`}>
+        <div onClick={() => navigate('/dashboard')} className={` cursor-pointer horizontal-logo flex justify-between items-center mr-2`}>
           <img className="h-[40px]" src="/phone.png" />
           <Text className="text-3xl text-black dark:text-[#c4c4c4] font-extrabold " as="h1">Ponto dos celulares</Text>
         </div>

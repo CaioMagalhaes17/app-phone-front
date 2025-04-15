@@ -1,13 +1,15 @@
 import {
-  Button, IconMap, IconSearch, IconWhatsApp, Input, Text
+  Button, IconFacebook, IconInstagram, IconMap, IconSearch, IconWhatsApp, Input, Text
 } from "@app/ui"
 import { Star } from "lucide-react"
 import { Link } from "react-router-dom"
 import { getWppLink } from "../../../../utils/get-wpp-link"
 import { storeTags } from "../../../../constants/store-tags"
+import { formatSocialColor } from "../../../../formaters/store-profile"
+import { StoreSocialsType } from "../../../../types/store-profile"
 
 
-export function StoreProfileMain({ name, workingTime, distance, rating, storeProfileImg, wppNum, tags }: {
+export function StoreProfileMain({ name, workingTime, distance, rating, storeProfileImg, wppNum, tags, storeSocials }: {
   name: string,
   distance?: number,
   rating: number,
@@ -15,6 +17,7 @@ export function StoreProfileMain({ name, workingTime, distance, rating, storePro
   storeProfileImg: string
   workingTime?: string
   wppNum: string
+  storeSocials: StoreSocialsType[] | null
 }) {
   return (
     <>
@@ -42,10 +45,24 @@ export function StoreProfileMain({ name, workingTime, distance, rating, storePro
             </div>
             <div className="ml-auto" />
             <div className="flex flex-col">
-              <div className="flex gap-5 flex-row">
+              <div className="flex gap-5 items-center flex-row">
                 <div className="ml-auto" />
                 <Button onClick={() => document.getElementById('location')?.scrollIntoView({ behavior: "smooth" })} className="btn-outline-primary flex flex-row gap-2"><IconMap />Localização</Button>
                 <Link target="_blank" to={getWppLink('storeProfile', wppNum)} className="btn btn-green flex flex-row gap-2"><IconWhatsApp />Chamar no Whatsapp</Link>
+                <div className="flex flex-row gap-2">
+                  {
+                    storeSocials && storeSocials?.map((item) => {
+                      return (
+                        <>
+                          <Link to={item.link} target="_blank" className={`btn w-[100px] btn-${formatSocialColor(item.type)} ${item.type === 'instagram' && 'bg-[linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)]'} rounded-full`}>
+                            {item.type === 'instagram' && <IconInstagram />}
+                            {item.type === 'facebook' && <IconFacebook />}
+                          </Link >
+                        </>
+                      )
+                    })
+                  }
+                </div>
               </div>
               <div className="flex text-sm flex-row flex-wrap gap-2 mt-5 text-white max-w-[500px]">
                 {tags && tags.map((tag) => {

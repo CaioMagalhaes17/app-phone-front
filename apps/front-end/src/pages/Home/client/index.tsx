@@ -1,6 +1,6 @@
 import { InfoWindowAdapter, MapAdapter, MarkAdapter, RadiusAdapter } from "../../../adapters/Map";
 import useStore from "../../../state";
-import { Button, IconPencil, IconSearch, IconSend, Input, Text } from "@app/ui";
+import { Button, HSeparator, IconPencil, IconSearch, IconSend, IconStreetMap, Input, Text } from "@app/ui";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MapPinSvg } from "../../../constants/svg-icons";
@@ -8,6 +8,7 @@ import { useGetStoresInsideClientRadius } from "../../../hooks/geolocation/useGe
 import { StoresInsideRadiusType } from "../../../types/stores";
 import { StoreServicesGrid } from "../../../components/Profiles/store/components/Services";
 import { services } from "../../../constants/services";
+import { mainImg } from "../../../constants/images";
 
 export function Home() {
   const navigate = useNavigate()
@@ -30,7 +31,7 @@ export function Home() {
 
   return (
     <>
-      <div className="flex mt-10 justify-center ">
+      <div className="flex justify-center ">
         <div className="min-h-[360px] max-w-[1100px] w-full">
           <div className="mb-5 w-full">
             <div className="flex flex-row items-center gap-10 justify-center text-center ">
@@ -83,7 +84,7 @@ export function Home() {
                     <IconSend />
                     Solicitar orçamento
                   </Button>
-                  <Button onClick={() => navigate('/signup')} className="flex flex-row gap-5 btn-outline-primary text-xl ml-auto mr-auto mt-10">
+                  <Button onClick={() => document.getElementById('map')?.scrollIntoView({ behavior: 'smooth' })} className="flex flex-row gap-5 btn-outline-primary text-xl ml-auto mr-auto mt-10">
                     <IconSearch />
                     Procurar lojas próximas
                   </Button>
@@ -91,24 +92,25 @@ export function Home() {
 
               </div>
               <div className="flex-col">
-                <img className="h-full w-full" src={'https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/390.png'} />
+                <img className="h-[480px] w-[500px]" src={mainImg} />
               </div>
             </div>
           </div>
         </div>
       </div>
       <StoreServicesGrid services={services} title="Manutenção em celulares" onServiceClick={(topic) => navigate('/solicitations/create?topic=' + topic)} />
+      <HSeparator id="map" className="mt-5 mb-5 " />
       <div className=" w-full flex justify-center items-center">
-        <div className="flex flex-col w-full max-w-[1200px]">
+        <div className="flex flex-col w-full max-w-[1100px]">
           <div className="flex flex-row mb-4 gap-5">
             <div className="flex">
-              <Text className="text-dark dark:text-white text-3xl font-extrabold " as="h1">Assistências técnicas mais próximas</Text>
+              <Text className="text-dark dark:text-white text-2xl font-extrabold flex flex-row gap-5 items-center" as="h1"><IconStreetMap />Assistências técnicas mais próximas</Text>
             </div>
             <div className="mr-auto" />
             <Button onClick={() => navigate('/map/edit')} className="btn-primary flex flex-row gap-5"><IconPencil />Editar localização de pesquisa</Button>
             <Input type="text" className="!w-[25%]" placeholder="Pesquisar por loja" />
           </div>
-          <div className="w-full items-center justify-center">
+          <div className="w-full sombra items-center justify-center">
             {isMapLoaded && (
               <>
                 <MapAdapter mapStyle={mapStyle} initialPosition={clientInitialPosition}>

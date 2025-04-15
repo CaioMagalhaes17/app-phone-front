@@ -1,5 +1,5 @@
 import { ProblemFormType, ProblemTopicType } from "../types/solicitation"
-import { batteryImg, brokenScreenImg, cam, connectors, glass, pokemon, water } from "./images"
+import { batteryImg, brokenScreenImg, button, cam, connectors, glass, pokemon, water } from "./images"
 
 export const glassQuestions = [
   {
@@ -918,6 +918,7 @@ export function getTopicImg(topic: string) {
   if (topic === 'connectors') return connectors
   if (topic === 'cam') return cam
   if (topic === 'water') return water
+  if (topic === 'button') return button
 }
 
 export function getStepTwoAnswersByForm(topic: string, questionsObj: ProblemFormType) {

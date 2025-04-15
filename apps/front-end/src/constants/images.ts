@@ -7,4 +7,6 @@ export const glass = '/glass.png'
 export const cam = '/cam.png'
 export const water = '/water.png'
 export const connectors = '/connectors.png'
+export const button = '/buttons.png'
+export const mainImg = '/main.png'
 

@@ -7,6 +7,7 @@ import { About } from "./components/About";
 import { StoreServicesGrid } from "../../components/Profiles/store/components/Services";
 import { scrollToSection } from "../../utils/scroll-to";
 import { services } from "../../constants/services";
+import { mainImg } from "../../constants/images";
 
 export function LandingHome() {
   const navigate = useNavigate()
@@ -74,15 +75,12 @@ export function LandingHome() {
 
               </div>
               <div className="flex-col">
-                <img className="h-full w-full" src={'https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/390.png'} />
+                <img className="h-[500px] w-[500px]" src={mainImg} />
               </div>
             </div>
           </div>
-          <img className="rounded-xl" src="/teste.png" />
         </Panel>
-        <div id="services" className="flex justify-center mb-10">
-          <HSeparator className="w-[80%]" />
-        </div>
+
         <StoreServicesGrid services={services} title="Manutenção em celulares" onServiceClick={(topic) => navigate('/landing/solicitations/create?topic=' + topic)} />
         <div className="flex justify-center mb-10">
           <HSeparator className="w-[80%]" />

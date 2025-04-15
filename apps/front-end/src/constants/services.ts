@@ -1,5 +1,5 @@
 import { ProblemTopicType } from "../types/solicitation";
-import { batteryImg, brokenScreenImg, pokemon, glass, water, cam, connectors } from "./images";
+import { batteryImg, brokenScreenImg, glass, water, cam, connectors, button } from "./images";
 
 export const services: { topicImg: string, topicName: string, topicId: ProblemTopicType }[] = [
   {
@@ -18,9 +18,9 @@ export const services: { topicImg: string, topicName: string, topicId: ProblemTo
     topicId: 'glass'
   },
   {
-    topicImg: pokemon,
-    topicName: 'Defeitos em botões',
-    topicId: 'button'
+    topicImg: water,
+    topicName: 'Contato com Água/Líquido',
+    topicId: 'water'
   },
   {
     topicImg: connectors,
@@ -33,8 +33,9 @@ export const services: { topicImg: string, topicName: string, topicId: ProblemTo
     topicId: 'cam'
   },
   {
-    topicImg: water,
-    topicName: 'Contato com Água/Líquido',
-    topicId: 'water'
-  }
+    topicImg: button,
+    topicName: 'Defeitos em botões',
+    topicId: 'button'
+  },
+
 ]
