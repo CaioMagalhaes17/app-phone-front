@@ -13,6 +13,7 @@ import useStore from "../../state";
 export function LandingHome() {
   const navigate = useNavigate()
   const { isMobile } = useStore()
+  console.log('a')
   return (
     <>
       <DefaultLanding>
