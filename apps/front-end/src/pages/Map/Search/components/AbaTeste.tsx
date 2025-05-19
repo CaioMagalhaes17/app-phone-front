@@ -60,10 +60,10 @@ export function StoreSheet({ selectedStore }: { selectedStore: StoresInsideRadiu
           transform: `translateY(${window.innerHeight * 0.6}px)`,
         }}
         id="sheet"
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
+
       >
-        <div className="w-full flex justify-center py-2">
+        <div onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd} className="w-full h-10 flex justify-center py-2">
           <div className="w-12 h-1.5 bg-gray-400 rounded-full"></div>
         </div>
         <div className="p-4 ">

@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Star } from "lucide-react";
 import { useState } from "react";
 import { PostFeedback } from "../../api/feedback/create-feedback";
+import useStore from "../../state";
 
 export function CreateFeedback({ storeName, storeId }: { storeId: string, storeName: string }) {
 
@@ -21,12 +22,12 @@ export function CreateFeedback({ storeName, storeId }: { storeId: string, storeN
   }
 
   const client = useQueryClient()
-
+  const { isMobile } = useStore()
   return (
     <>
       <Dialog>
         <DialogTrigger>
-          <Button id="openModal" className="btn-primary mr-5 flex flex-row gap-2"><IconChat /> Avaliar Loja </Button>
+          <Button id="openModal" className={`${isMobile ? '!py-1 !px-1.5 !text-[11px]' : 'mr-5'} btn-primary flex flex-row gap-2`}><IconChat /> Avaliar Loja </Button>
         </DialogTrigger>
         <DialogContent className=" !z-51 font-extrabold bg-dark text-white-dark w-full">
           <DialogClose id="closeModal" className="hidden" />

@@ -10,9 +10,8 @@ export function MapSearchMobile() {
   return (
     <>
       <div className="max-w-[1350px] min-h-screen mr-auto ml-auto">
-        <div className="mt-5 flex justify-center">
-          <Text className="text-xl font-bold flex flex-row gap-5 text-dark dark:text-white items-center " as="h1">Lojas Próximas</Text>
-        </div>
+        <Text className="text-xl font-bold flex flex-row gap-5 text-dark dark:text-white mt-5 ml-5 " as="h1">Lojas Próximas</Text>
+        <HSeparator className="w-[90%] mt-1 mb-1 ml-auto mr-auto" />
         <Panel className="h-[500px] mt-5 ml-2 mr-2 sombra rounded-xl">
           {clintLocation && isMapLoaded ? (
             <MapAdapter zoom={12} onClick={() => setSelectedStore(null)} mapStyle={mapStyle} initialPosition={clintLocation}>

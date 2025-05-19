@@ -3,15 +3,16 @@ import { Star } from "lucide-react";
 import { FeedbackType } from "../../types/feedback";
 import dayjs from "dayjs";
 import { userImg } from "../../constants/images";
+import useStore from "../../state";
 
 export function FeedbackRow({ feedback }: { feedback: FeedbackType }) {
   const totalStars = 5;
+  const { isMobile } = useStore()
   return (
     <>
+      <HSeparator />
       <div className="max-h-[140px] mt-5 flex flex-row items-start gap-5">
-        <div className="w-[100px]">
-          <img width="100" height="100" src={userImg} className="rounded-3xl" />
-        </div>
+        <img src={userImg} className={`${isMobile ? 'w-[70px]' : 'w-[100px]'} rounded-3xl`} />
         <div className="flex flex-col max-w-[80%]">
           <Text className="flex flex-row gap-5 items-center text-center text-dark dark:text-white text-lg" as="span">
             {feedback.clientProfile.name}
@@ -33,7 +34,7 @@ export function FeedbackRow({ feedback }: { feedback: FeedbackType }) {
           </div>
         </div>
       </div>
-      <HSeparator />
+
     </>
   )
 }

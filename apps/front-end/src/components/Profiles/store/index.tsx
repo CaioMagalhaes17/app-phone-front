@@ -9,6 +9,8 @@ import { FeedbackType } from "../../../types/feedback";
 import { BudgetType } from "../../../types/budget";
 import { useNavigate } from "react-router-dom";
 import { ProblemTopicType } from "../../../types/solicitation";
+import useStore from "../../../state";
+import { MobileStoreProfileLocation } from "./components/mobile/LocationPanel";
 
 export function StoreProfileComponent({ storeInfos, contacts, socials, budgets, feedbacks, distance, services }: {
   distance?: number,
@@ -26,6 +28,7 @@ export function StoreProfileComponent({ storeInfos, contacts, socials, budgets, 
   }[]
 }) {
   const navigate = useNavigate()
+  const { isMobile } = useStore()
   return (
     <>
 
@@ -39,12 +42,15 @@ export function StoreProfileComponent({ storeInfos, contacts, socials, budgets, 
         wppNum={contacts.wppNum}
         storeSocials={socials}
       />
-      <div className="mb-[80px]" />
+      {!isMobile && (
+        <div className="mb-[80px]" />
+      )}
       <StoreServicesGrid services={services} title="Contratar serviço" onServiceClick={(topic) => navigate('/solicitations/create?topic=' + topic)} />
-      <HSeparator />
-
-      <div className="max-w-[1242px] ml-auto mr-auto">
-        <StoreProfileLocation
+      {!isMobile && (
+        <HSeparator />
+      )}
+      {isMobile ? (
+        <MobileStoreProfileLocation
           address={storeInfos.address}
           contacts={contacts}
           lat={storeInfos.location.latitude}
@@ -53,13 +59,36 @@ export function StoreProfileComponent({ storeInfos, contacts, socials, budgets, 
           storeSocials={socials}
           isOwner={false}
         />
-      </div>
-      <HSeparator />
+      ) : (
+        <div className="max-w-[1242px] ml-auto mr-auto">
+          <StoreProfileLocation
+            address={storeInfos.address}
+            contacts={contacts}
+            lat={storeInfos.location.latitude}
+            lng={storeInfos.location.longitude}
+            storeProfileImg={storeInfos.profileImg}
+            storeSocials={socials}
+            isOwner={false}
+          />
+        </div>
+      )}
 
-      <div className="gap-5 flex mt-10 flex-row max-w-[1242px] ml-auto mr-auto  p-4 dark:bg-black rounded-xl">
-        <StoreFeedbacks storeId={storeInfos.id} feedbacks={feedbacks} canShowRateStore={true} />
-        <StoreProfileBudgets budgets={budgets} isOwner={false} />
-      </div>
+      {!isMobile && (
+        <HSeparator />
+      )}
+
+      {!isMobile ? (
+        <div className="gap-5 flex mt-10 flex-row max-w-[1242px] ml-auto mr-auto  p-4 dark:bg-black rounded-xl">
+          <StoreFeedbacks storeId={storeInfos.id} feedbacks={feedbacks} canShowRateStore={true} />
+          <StoreProfileBudgets budgets={budgets} isOwner={false} />
+        </div>
+      ) : (
+        <div className="gap-5 flex flex-col ml-auto mr-auto  p-4 dark:bg-black rounded-xl">
+          <StoreFeedbacks storeId={storeInfos.id} feedbacks={feedbacks} canShowRateStore={true} />
+          <StoreProfileBudgets budgets={budgets} isOwner={false} />
+        </div>
+      )}
+
 
     </>
   )

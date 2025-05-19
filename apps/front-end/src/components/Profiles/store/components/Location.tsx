@@ -22,7 +22,7 @@ export function StoreProfileLocation({ lat, lng, storeSocials, contacts, storePr
     height: '100%',
     borderRadius: '10px'
   }
-  console.log(lat, lng)
+
   return (
     <>
       <Panel id="location" className="mt-5 font-bold">
