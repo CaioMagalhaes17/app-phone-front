@@ -1,11 +1,13 @@
 import { Text } from "@app/ui";
 import { Star } from "lucide-react";
+import useStore from "../../../../state";
 
 export function StoreItem({ profileImg, name, rating, distance, onClick }: { onClick: () => void, profileImg: string, name: string, rating: number, distance: number }) {
+  const { isMobile } = useStore()
   return (
     <>
       <div onClick={() => onClick()} className="cursor-pointer hover:bg-[#5a505033] font-bold flex flex-row gap-5" >
-        <div className="w-[150px] max-h-[120px] ">
+        <div className={`${isMobile ? 'w-[120px]' : 'w-[150px]'} max-h-[120px] `}>
           <img width="100" height="100" src={profileImg} className="rounded-3xl" />
         </div>
         <div className="flex w-full flex-col">
@@ -23,7 +25,7 @@ export function StoreItem({ profileImg, name, rating, distance, onClick }: { onC
             ))}
           </div>
           <div className="w-full text-left flex flex-row items-center gap-5">
-            <Text className="text-lg text-green" as="span">Aberto</Text>
+            <Text className={`${isMobile ? '' : 'text-lg'} text-green`} as="span">Aberto</Text>
             <Text className="text-dark dark:text-white ml-auto" as="span">Distância: {Math.floor(distance) >= 1000 ? `${Math.floor(Math.floor(distance) / 1000)} km` : `${Math.floor(distance)} m`}</Text>
           </div>
         </div >

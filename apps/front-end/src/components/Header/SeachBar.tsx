@@ -3,9 +3,10 @@ import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useSearchStoreProfiles } from "../../hooks/profile/useSearchStoreProfile";
 import { useSearchProducts } from "../../hooks/products/useSearchProducts";
+import useStore from "../../state";
 
 export function SearchBar() {
-
+  const { isMobile } = useStore()
   const [finishSearch, setFinishSearch] = useState(false)
   const [searchParams, setSearchParams] = useSearchParams({
     search: '',
@@ -25,9 +26,9 @@ export function SearchBar() {
 
   return (
     <>
-      <div className="ml-10 flex flex-col ">
+      <div className={`${isMobile ? '' : 'ml-10'} flex flex-col `}>
         <div className=" relative">
-          <Input value={searchParams.get('search') || ''} onChange={handleSearch} type="text" placeholder="Procure por lojas, produtos...." className="!w-[400px] !ps-10 bg-[#c4c4c4] dark:bg-[#c4c4c4] border-white-dark placeholder:text-black placeholder:dark:text-white-dark" />
+          <Input value={searchParams.get('search') || ''} onChange={handleSearch} type="text" placeholder="Procure por lojas, produtos...." className={`${!isMobile ? '!w-[400px]' : '!w-[170px]'} !ps-10 bg-[#c4c4c4] dark:bg-[#c4c4c4] border-white-dark placeholder:text-black placeholder:dark:text-white-dark`} />
           <span className="absolute start-4 top-1/2 -translate-y-1/2">
             <IconSearch className="text-black dark:text-white" />
           </span>

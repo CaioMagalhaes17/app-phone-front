@@ -9,7 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { userImg } from "../../constants/images";
 
 export function ClientHeader() {
-  const { closeSidebar, setCloseSidebar, clientInfos, setClientInfos } = useStore()
+  const { closeSidebar, setCloseSidebar, clientInfos, setClientInfos, isMobile } = useStore()
   function onMenuClick() {
     setCloseSidebar(!closeSidebar)
   }
@@ -28,62 +28,64 @@ export function ClientHeader() {
     localStorage.removeItem('accessToken')
     navigate('/login')
   }
-
   return (
     <UIHeader>
       <div className="h-[80px] shadow-md relative flex w-full items-center px-5 py-2.5 dark:bg-black dark:border-b-[#323b45]">
         <button onClick={() => onMenuClick()} className="mr-5 text-black dark:text-[#c4c4c4]"><IconMenu /></button>
         <VSeparator />
-        <div onClick={() => navigate('/dashboard')} className={` cursor-pointer horizontal-logo flex justify-between items-center mr-2`}>
-          <img className="h-[40px]" src="/phone.png" />
-          <Text className="text-3xl text-black dark:text-[#c4c4c4] font-extrabold " as="h1">Ponto dos celulares</Text>
+        <div onClick={() => navigate('/dashboard')} className={` cursor-pointer horizontal-logo flex justify-between items-center gap-2`}>
+          <img className={`${isMobile ? 'h-[20px]' : 'h-[40px]'}`} src="/phone.png" />
+          <Text className={`${!isMobile ? 'text-3xl' : 'text-md'}  text-black dark:text-[#c4c4c4] font-extrabold`} as="h1">Ponto dos celulares</Text>
         </div>
-        <SearchBar />
-        <div className="mr-auto" />
-        <div className="flex flex-row ">
-          <Button onClick={() => navigate('/solicitations/create')} className="btn-outline-primary border-none flex flex-row gap-2">
-            <IconSend />
-            Solicitar Conserto
-          </Button>
-          <Button onClick={() => navigate('/map')} className="btn-outline-primary border-none flex flex-row gap-2">
-            <IconStreetMap />
-            Procurar por lojas próximas
-          </Button>
-          <Button onClick={() => navigate('/budgets/list')} className="btn-outline-primary border-none flex flex-row gap-2">
-            <IconDollarSignCircle />
-            Orçamentos
-          </Button>
-          <ChooseTheme />
-          <div className="ml-5" />
-          <HeaderNotificationsBox />
-          <VSeparator className="ml-5" />
-          <DropdownMenu onOpenChange={(s) =>
-            setCloseSidebar(!s)
-          } >
-            <DropdownMenuTrigger>
-              <div className="flex flex-row items-center">
-                <div className="w-[60px]">
-                  <img width="50" height="50" src={userImg} className="sombra rounded-3xl" />
+        <>
+          <SearchBar />
+          <div className="mr-auto" />
+          <div className="flex flex-row ">
+            <Button onClick={() => navigate('/solicitations/create')} className="btn-outline-primary border-none flex flex-row gap-2">
+              <IconSend />
+              Solicitar Conserto
+            </Button>
+            <Button onClick={() => navigate('/map')} className="btn-outline-primary border-none flex flex-row gap-2">
+              <IconStreetMap />
+              Procurar por lojas próximas
+            </Button>
+            <Button onClick={() => navigate('/budgets/list')} className="btn-outline-primary border-none flex flex-row gap-2">
+              <IconDollarSignCircle />
+              Orçamentos
+            </Button>
+            <ChooseTheme />
+            <div className="ml-5" />
+            <HeaderNotificationsBox />
+            <VSeparator className="ml-5" />
+            <DropdownMenu onOpenChange={(s) =>
+              setCloseSidebar(!s)
+            } >
+              <DropdownMenuTrigger>
+                <div className="flex flex-row items-center">
+                  <div className="w-[60px]">
+                    <img width="50" height="50" src={userImg} className="sombra rounded-3xl" />
+                  </div>
+                  <Text className="text-black dark:text-[#c4c4c4] font-bold text-xl" as="h1">{clientInfos?.name}</Text>
                 </div>
-                <Text className="text-black dark:text-[#c4c4c4] font-bold text-xl" as="h1">{clientInfos?.name}</Text>
-              </div>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="bg-[#d9d9d963] dark:bg-black mt-5 font-extrabold">
-              <DropdownMenuItem className="flex flex-row gap-2 text-dark dark:text-white">
-                <Link to="/configurations" className=" flex flex-row gap-2">
-                  <IconSettings />
-                  Configurações
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem className="text-danger">
-                <button className="flex" onClick={() => handleLogout()}>
-                  <IconLogout className="mr-2 rotate-90" />
-                  Sair
-                </button>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="bg-[#d9d9d963] dark:bg-black mt-5 font-extrabold">
+                <DropdownMenuItem className="flex flex-row gap-2 text-dark dark:text-white">
+                  <Link to="/configurations" className=" flex flex-row gap-2">
+                    <IconSettings />
+                    Configurações
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem className="text-danger">
+                  <button className="flex" onClick={() => handleLogout()}>
+                    <IconLogout className="mr-2 rotate-90" />
+                    Sair
+                  </button>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
+        </>
+
       </div>
     </UIHeader>
   )

@@ -11,6 +11,7 @@ import { FieldValues, useForm } from "react-hook-form";
 import { formatPhoneBrand, formatTimePreference, formatTopic } from "../../../../formaters/solicitations";
 import { ProblemTopicType, SolicitationFormProps } from "../../../../types/solicitation";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import useStore from "../../../../state";
 
 export function SolicitationForm({ createSolicitation, isAuthenticated }: { isAuthenticated: boolean, createSolicitation?: (data: SolicitationFormProps) => Promise<void> }) {
   const stored = localStorage.getItem('partialForm');
@@ -139,12 +140,12 @@ export function SolicitationForm({ createSolicitation, isAuthenticated }: { isAu
       })
     }
   }
-
+  const { isMobile } = useStore()
   return (
     <>
       <div className="mb-5 max-w-[1400px] w-full ml-auto mr-auto font-bold ">
-        <div className="flex flex-row gap-5">
-          <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col w-[1000px] gap-10">
+        <div className={`flex ${isMobile ? 'flex-col' : 'flex-row'} gap-5`}>
+          <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col max-w-[1000px] gap-10">
             <TopicForm selectedTopic={searchParams.get('topic') || partialProblemForm?.problemTopic} handleSelectTopic={handleSelectTopic} />
             <ProblemForm errors={errors} register={register} topic={searchParams.get('topic') || ''} defaultValue={partialProblemForm?.problemForm} />
             <PhoneForm register={register} watch={watch} errors={errors} setValue={setValue} defaultValue={partialProblemForm?.phoneForm} />
@@ -162,7 +163,7 @@ export function SolicitationForm({ createSolicitation, isAuthenticated }: { isAu
               )
             }
           </form>
-          <Panel className="sticky top-[10px] self-start sombra bg-white dark:bg-black  text-lg p-4 rounded-xl w-[400px] h-[320px]">
+          <Panel className="sticky top-[10px] self-start sombra bg-white dark:bg-black  text-lg p-4 rounded-xl w-[342px] h-[320px]">
             <Text className="text-3xl text-dark dark:text-white flex flex-row gap-5 items-center" as="h1"><IconBill />Resumo</Text>
             <HSeparator className="mt-2 mb-2" />
             <div className="flex text-dark dark:text-white flex-row items-center gap-2 mb-5">

@@ -6,7 +6,7 @@ import { Sidebar } from "./SIdebar"
 import useStore from "../state"
 
 export default function DefaultLayout() {
-  const { closeSidebar } = useStore()
+  const { closeSidebar, isMobile } = useStore()
   return (
     <>
       <Box className={` leftbar-game-icon vertical font-extrabold full main-section antialiased relative font-nunito text-sm font-normal`}>
@@ -17,7 +17,7 @@ export default function DefaultLayout() {
               <Sidebar />
               <Suspense>
                 <Box className="hidden shadow-3xl shadow-4xl teste-default bg-success bg-warning bg-danger text-warning text-success text-danger text-primary" />
-                <Box data-overlap="false" id="page-container" style={{ left: closeSidebar ? '0px' : '305px' }} className="animate__fadeIn animate__animated page-container scrollable">
+                <Box data-overlap="false" id="page-container" style={{ left: closeSidebar || isMobile ? '0px' : '305px' }} className="animate__fadeIn animate__animated page-container scrollable">
                   <Outlet />
                 </Box>
               </Suspense>

@@ -12,7 +12,7 @@ export function LandingHeader() {
     <>
       <Header className="">
         <div className="font-extrabold h-[80px] shadow-md relative flex w-full items-center px-5 py-2.5 dark:bg-black dark:border-b-[#323b45]">
-          <div onClick={() => navigate('/')} className={`horizontal-logo flex justify-between items-center mr-2`}>
+          <div onClick={() => navigate('/')} className={`horizontal-logo flex justify-between items-center mr-2 w-full`}>
             <img className="h-[40px]" src="/phone.png" />
             <Text className={`${isMobile ? 'text-lg' : 'text-3xl'} text-black dark:text-[#c4c4c4] font-extrabold `} as="h1">Ponto dos celulares</Text>
           </div>
